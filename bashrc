@@ -88,6 +88,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias mv='mv -i'
+alias cp='cp -i'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -113,10 +115,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-PS1='\[\e[33;1m\]#\# \[\e[4;31;4m\]\u\[\e[4;31;4m\]@lazylady\[\e[0;1m\] \A : \[\e[36;01m\] \w \[\e[32;5m\]\$\[\e[0;37;3m\] '
+PS1='\[\e[33;1m\]#\# \[\e[4;31;4m\]\u\[\e[4;31;4m\]@lazylady\[\e[0;1m\]\A\[\e[36;01m\] \w \[\e[32;5m\]\$\[\e[0;37;3m\] '
 
 export TERM="screen-256color"
 
 export ARCH=arm
 export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-none-linux-gnueabi-
 export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-toolchain/bin:$PATH
+
