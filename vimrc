@@ -1,7 +1,33 @@
-" -----------------  Author: PWE
-" -----------------  Email: dicksonliuming@gmail.com
-" -----------------  Date: 2016-07-14
+" ====================================================================="
+"
+"   -- Maintainer --
+"   ----------------  Author: PWE
+"   ----------------  Email: dicksonliuming@gmail.com
+"
+"   ----------------  Version: 1.0
+"   ----------------  Date: 2016-07-14
+"
+"
+"   -- Brief --
+"   这个配置文件包含了所有我使用的vim所应该有的配置，包括通用配置、插件、
+"   快捷键映射、外部配置文件引用、自定义快捷键等。
+"   在第一次使用时，需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
+"   用的插件，然后运行"PluginInstall"来安装插件。
+"
+"   When you first use this .vimrc, you should find the part named
+"   \"Vundle\" in it. And then comment plugins you don't needed and
+"   uncomment the needed. Finally, run \"PluginInstall" to instll Plugins.
+"
+"   -- Contents --
+"
+"   1. 全部自定义快捷键说明；   1. Total description of all custom shortcut keys.
+"   2. 通用设置；               2. General setup.
+"   3. 括号&&引号自动补全；     3. Auto pair.
+"   4. Vundle环境配置与插件配置；   4. Environment deployment of Vundle and Plugins.
+"   5. 部分语言添加补全字典；   5. Dictionary of some language.
+"   6. 自定义快捷键；           6. Custom shortcut keys.
 
+" ========== Description of Custom shortcut keys 自定义快捷键说明 ==========="
 " ---------- Ctrl系按键 ----------
 "
 " Ctrl + H                   --光标移当前行行首       [插入模式]
@@ -11,58 +37,31 @@
 
 " ---------- Leader系按键 ----------
 "
-" \c                         --复制至公共剪贴板       [仅选择模式]
-" \a                         --复制所有至公共剪贴板   [Normal模式可用]
-" \v                         --从公共剪贴板粘贴       [全模式可用]
+" <Leader>c                  --复制至公共剪贴板       [仅选择模式]
+" <Leader>a                  --复制所有至公共剪贴板   [Normal模式可用]
+" <Leader>v                  --从公共剪贴板粘贴       [全模式可用]
 "
-" \rr                        --一键编译&&运行         [全模式可用]
-" \rb                        --一键去除所有尾部空白   [全模式可用]
-" \rm                        --一键去除^M字符         [全模式可用]
-" \rt                        --一键替换全部Tab为空格  [全模式可用]
-" \ra                        --一键清理当前代码文件   [Normal模式可用]
+" <Leader>rb                 --一键去除所有尾部空白   [全模式可用]
+" <Leader>rm                 --一键去除^M字符         [全模式可用]
+" <Leader>rt                 --一键替换全部Tab为空格  [全模式可用]
+" <Leader>ra                 --一键清理当前代码文件   [Normal模式可用]
 "
-" \ww                        --打开Vimwiki主页
-" \wa                        --一键编译所有Vimwiki源文件
-" \nt                        --打开/关闭NERDTree文件树窗口
-" \tl                        --打开/关闭Tags窗口
+" <Leader>nt                 --打开/关闭NERDTree文件树窗口
 "
-" \be                        --打开BufExplorer窗口    [独立显示] [Normal模式可用]
-" \bs                        --打开BufExplorer窗口    [分割显示] [Normal模式可用]
-" \bv                        --打开BufExplorer窗口    [边栏显示] [Normal模式可用]
+" <Leader>bb                 --按=号对齐代码          [Normal模式可用]
+" <Leader>bn                 --自定义对齐             [Normal模式可用]
 "
-" \fe                        --打开/关闭文件编码窗口  [Normal模式可用]
-" \mp                        --生成Promptline脚本文件 [Normal模式可用]
+" <Leader>ev                 --编辑当前所使用的Vim配置文件
 "
-" \gi                        --开启或关闭GitGutter    [Normal模式可用]
-" \gd                        --打开Git文件对比模式    [Normal模式可用] [竖直]
-" \gs                        --打开Git文件对比模式    [Normal模式可用] [水平]
-" \gl                        --查看Git提交日志        [Normal模式可用]
+" <Leader>sw                 --自动切换对应的源文件和头文件  [VIM-FSWITCH]
 "
-" \il                        --显示/关闭对齐线        [Normal模式可用]
-" \bb                        --按=号对齐代码          [Normal模式可用]
-" \bn                        --自定义对齐             [Normal模式可用]
-" \th                        --一键生成与当前编辑文件同名的HTML文件 [不输出行号]
-" \ev                        --编辑当前所使用的Vim配置文件
+" <Leader>/                  --取消搜索后的单词高亮
 "
-" \cc                        --添加行注释             [NERD_commenter]
-" \cm                        --添加块注释             [NERD_commenter]
-" \cs                        --添加SexStyle块注释     [NERD_commenter]
-" \cu                        --取消注释               [NERD_commenter]
+" <Leader>cc                 --给当前行或选定模块添加注释  [nerd commenter]
+" <Leader>cu                 --给当前行或选定模块取消注释  [nerd commenter]
 "
-" \php                       --一键切换到PHP语法高亮
-" \ruby                      --一键切换到Ruby语法高亮
-" \eruby                     --一键切换到eRuby语法高亮
-" \js                        --一键切换到JavaScript语法高亮
-" \css                       --一键切换到CSS语法高亮
-" \html                      --一键切换到HTML语法高亮
-
 " ---------- 补全命令 ----------
 "
-" Ctrl + P                   --缓冲区补全             [插入模式]
-" Ctrl + U                   --全能补全               [插入模式]
-" Tab键                      --语法结构补全           [插入模式] [snipMate插件]
-" Ctrl + Y + ,               --HTML标签补全           [插入模式] [emmet插件]
-
 " ---------- 格式化命令 ----------
 "
 " ==                         --缩进当前行
@@ -73,9 +72,6 @@
 " u [小写]                   --单步复原               [非插入模式]
 " U [大写]                   --整行复原               [非插入模式]
 " Ctrl + R                   --反撤消                 [非插入模式]
-"
-" \pcf                       --格式化当前PHP文件              [Normal模式] [php-cs-fixer插件]
-" \pcd                       --格式化当前目录下的所有PHP文件  [Normal模式] [php-cs-fixer插件]
 "
 " ---------- 查看命令 ----------
 "
@@ -88,8 +84,6 @@
 " *                          --向后搜索当前光标所在字符
 " ?                          --向前搜索
 " /                          --向后搜索
-"
-" Ctrl + P                   --在当前工程目录搜索文件 [Normal模式] [ctrlp插件] [此插件功能颇多，具体可查看其文档]
 "
 " ---------- 跳转命令 ----------
 "
@@ -175,19 +169,20 @@
 " zj                         --向下移动到后一个折叠的开始处
 " zk                         --向上移动到前一个折叠的结束处
 "
-" ---------- Vimwiki [Vim中的wiki/blog系统] ----------------
 "
-" 链接：[[链接地址|链接描述]]
-" 图片：{{图片地址||属性1="属性值" 属性2="属性值"}}
-" 代码：{{{语言名 代码 }}}，如 {{{C++ 代码 }}}
-"
-" ---------- 其他常用内建命令 ------------------------------
+
+" ======================= General setup 通用配置 =========================="
 "
 :se ff=unix                " --更改文件格式，可选 unix、dos、mac
-:se ft=cpp               "  --更改文件语法着色模式
+:se ft=c               "  --更改文件语法着色模式
 
+" ------------ 定义快捷键前缀，即<Leader> = \" --------------
+let mapleader="\\"
 
-" 判断操作系统类型
+" ------------ 让配置变更立即生效，而不需要重启.vimrc" ------------
+autocmd BufWritePost .vimrc source .vimrc
+
+" ------------ 判断操作系统类型 -------------
 if(has('win32') || has('win64'))
     let g:isWIN = 1
     let g:isMAC = 0
@@ -201,7 +196,7 @@ else
     endif
 endif
 
-" 判断是否处于GUI界面
+" ------------ 判断是否处于GUI界面 -------------
 if has('gui_running')
     let g:isGUI = 1
 else
@@ -209,11 +204,67 @@ else
 endif
 
 
-" 设置通用缩进策略
-set shiftwidth=4
-set tabstop=4
+" ------------ 设置着色模式和字体 -------------
+set background=dark
+if g:isWIN
+    colorscheme molokai
+    set guifont=Monaco:h11
+elseif g:isMAC
+    colorscheme molokai
+    set guifont=Monaco:h14
+else
+    colorscheme molokai
+    set guifont=Monaco\ 14
+endif
 
-" 根据后缀名指定文件类型
+" ------------- 基本配置 --------------
+set backspace=2              " 设置退格键可用
+set autoindent               " 自动对齐
+set ai!                      " 设置自动缩进
+set smartindent              " 智能自动缩进
+set relativenumber           " 开启相对行号
+set nu!                      " 显示行号
+set ruler                    " 右下角显示光标位置的状态行
+set incsearch                " 开启实时搜索功能
+set hlsearch                 " 开启高亮显示结果
+" set nowrapscan               " 搜索到文件两端时不重新搜索
+set nocompatible             " 关闭兼容模式
+set hidden                   " 允许在有未保存的修改时切换缓冲区
+set autochdir                " 设定文件浏览器目录为当前目录
+" set foldmethod=indent        " 选择代码折叠类型，基于缩进进行代码折叠
+set foldmethod=syntax        " 选择代码折叠类型，基于语法进行代码折叠
+set foldlevel=100            " 禁止自动折叠
+" set nofoldenable           " 启动vim时关闭折叠代码
+set laststatus=2             " 开启状态栏信息
+set cmdheight=1              " 命令行的高度，默认为1，这里设为2
+set autoread                 " 当文件在外部被修改时自动更新该文件
+set nobackup                 " 不生成备份文件
+set noswapfile               " 不生成交换文件
+set list                     " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
+set ignorecase               " 搜索时大小写不敏感"
+set wildmenu                 " vim 自身命令行模式智能补全"
+set listchars=tab:\~\ ,trail:.
+set showmatch               " 显示括号配对情况
+"set nowrap                  " 禁止代码自动折行
+
+set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行"
+
+" ------------- 设置通用缩进策略 --------------
+set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
+set tabstop=4                   " 设置编辑时制表符占用空格数"
+set shiftwidth=4                " 设置格式化时制表符占用空格数"
+set softtabstop=4               " 让vim把连续数量的空格视为一个制表符"
+
+if has("syntax")
+    syntax enable            " 打开语法高亮
+    syntax on                " 允许用指定语法高亮配色方案替换默认方案
+endif
+filetype on                  " 开启文件类型侦测
+filetype indent on           " 针对不同的文件类型采用不同的缩进格式
+filetype plugin on           " 针对不同的文件类型加载对应的插件
+filetype plugin indent on    " 针对不同的文件类型加载对应的插件缩进
+
+" -------------- 根据后缀名指定文件类型 ---------------
 au BufRead,BufNewFile *.h        setlocal ft=c
 au BufRead,BufNewFile *.i        setlocal ft=c
 au BufRead,BufNewFile *.m        setlocal ft=objc
@@ -233,56 +284,7 @@ au BufRead,BufNewFile http*.conf setlocal ft=apache
 au BufRead,BufNewFile nginx.conf setlocal ft=nginx
 au BufRead,BufNewFile *.ini      setlocal ft=dosini
 
-
-" 设置着色模式和字体
-if g:isWIN
-    colorscheme molokai
-    set guifont=Monaco:h11
-elseif g:isMAC
-    colorscheme molokai
-    set guifont=Monaco:h14
-else
-    colorscheme molokai
-    set guifont=Monaco\ 14
-endif
-
-set backspace=2              " 设置退格键可用
-set autoindent               " 自动对齐
-set ai!                      " 设置自动缩进
-set smartindent              " 智能自动缩进
-set relativenumber           " 开启相对行号
-set nu!                      " 显示行号
-set ruler                    " 右下角显示光标位置的状态行
-set incsearch                " 开启实时搜索功能
-set hlsearch                 " 开启高亮显示结果
-" set nowrapscan               " 搜索到文件两端时不重新搜索
-set nocompatible             " 关闭兼容模式
-set hidden                   " 允许在有未保存的修改时切换缓冲区
-set autochdir                " 设定文件浏览器目录为当前目录
-set foldmethod=indent        " 选择代码折叠类型
-set foldlevel=100            " 禁止自动折叠
-set laststatus=2             " 开启状态栏信息
-set cmdheight=1              " 命令行的高度，默认为1，这里设为2
-set autoread                 " 当文件在外部被修改时自动更新该文件
-set nobackup                 " 不生成备份文件
-set noswapfile               " 不生成交换文件
-set list                     " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
-set listchars=tab:\~\ ,trail:.
-set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
-set showmatch               " 显示括号配对情况
-
-set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行"
-
-
-if has("syntax")
-    syntax on                    " 开启文件类型侦测
-endif
-syntax enable                " 打开语法高亮
-filetype indent on           " 针对不同的文件类型采用不同的缩进格式
-filetype plugin on           " 针对不同的文件类型加载对应的插件
-filetype plugin indent on    " 启用自动补全
-
-" 设置文件编码和文件格式
+" -------------- 设置文件编码和文件格式 ---------------
 set fenc=utf-8
 set encoding=utf-8
 set fileencodings=utf-8,gbk,cp936,latin-1
@@ -295,7 +297,7 @@ if g:isWIN
     language messages zh_CN.utf-8
 endif
 
-"打开vim，自动定位到上次最后变更的位置"
+" -------------- 打开vim，自动定位到上次最后变更的位置 ---------------
 if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
 endif
@@ -321,7 +323,7 @@ endif
 
 set cursorline
 
-" ======= 引号 && 括号自动匹配 ======= "
+" =============== Auto Pair 引号 && 括号自动匹配 ===================== "
 
 inoremap ( <c-r>=AutoPair('(', ')')<CR>
 inoremap ) <c-r>=ClosePair(')')<CR>
@@ -362,225 +364,84 @@ function! SamePair(char)
 endf
 
 
-" 加载pathogen插件管理器
- execute pathogen#infect()
+" ==== Environment deployment of Vundle and Plugins Vundle ============= "
+" ==== 环境配置以及插件 ===== "
+" 在命令行模式下输入：
+" PluginInstall         " 安装下边罗列出的所有插件
+" PluginClean           " 清除下边注释或未罗列但在系统中存在的插件
+" PluginUpdate          " 更新下边罗列出的所有插件
 
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
 
-" 针对部分语言加减指定字符的单词属性
-au FileType clojure        set iskeyword-=.
-au FileType clojure        set iskeyword-=>
-au FileType perl,php       set iskeyword-=.
-au FileType perl,php       set iskeyword-=$
-au FileType perl,php       set iskeyword-=-
-au FileType ruby           set iskeyword+=!
-au FileType ruby           set iskeyword+=?
-au FileType css,scss,less  set iskeyword+=.
-au FileType css,scss,less  set iskeyword+=#
-au FileType css,scss,less  set iskeyword+=-
-au FileType nginx          set iskeyword-=/
-au FileType nginx          set iskeyword-=.
-au FileType nginx          set iskeyword-=:
+" Vundle 管理的插件必须位于 vundle#begin() 和 vundle#end() 之间"
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+"Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
+Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
+Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
+Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
+"Plugin 'kshenoy/vim-signature'              " vim书签所在行增加标志
+Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
+Plugin 'scrooloose/nerdtree'                " 工程目录管理
+Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
+Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
+Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
+call vundle#end()
 
+filetype plugin indent on
+filetype on
 
-" 针对部分语言添加字典补全
-au FileType c          call AddCDict()
-au FileType cpp        call AddCPPDict()
-au FileType java       call AddJavaDict()
-au FileType lua        call AddLuaDict()
-au FileType perl       call AddPerlDict()
-au FileType php        call AddPHPDict()
-au FileType python     call AddPythonDict()
-au FileType ruby       call AddRubyDict()
-au FileType javascript call AddJavaScriptDict()
-au FileType coffee     call AddJavaScriptDict()
-au FileType typescript call AddJavaScriptDict()
-au FileType ls         call AddJavaScriptDict()
-au FileType css        call AddCSSDict()
-au FileType scss       call AddCSSDict()
-au FileType less       call AddCSSDict()
+" ---- 插件配置选项 ----"
+" Plugin: vim-powerline (https://github.com/Lokaltog/vim-powerline)"
+" 加入powerline状态栏"
+let g:Powerline_colorscheme='solarized256'
+"
+" Plugin: Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
+" 缩进配对指示插件
+let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
+let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
+let g:indent_guides_guide_size=1               " 色块宽度
+" 快捷键<Leader>i开关缩进可视化
+nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=darkgrey
 
-function AddCDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/c.txt
-    else
-        set dict+=~/.vim/dict/c.txt
-    endif
-    set complete+=k
-endfunction
+" Plugin: vim-fswitch (https://github.com/derekwyatt/vim-fswitch)"
+" 源文件与头文件快速切换插件
+nmap <silent> <Leader>sw :FSHere<cr>
 
-function AddCPPDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/c.txt
-        set dict+=$VIM/vimfiles/dict/cpp-stdlib.txt
-        set dict+=$VIM/vimfiles/dict/cpp-boost.txt
-    else
-        set dict+=~/.vim/dict/c.txt
-        set dict+=~/.vim/dict/cpp-stdlib.txt
-        set dict+=~/.vim/dict/cpp-boost.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddJavaDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/java.txt
-    else
-        set dict+=~/.vim/dict/java.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddLuaDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/lua.txt
-    else
-        set dict+=~/.vim/dict/lua.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddPerlDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/perl.txt
-    else
-        set dict+=~/.vim/dict/perl.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddPHPDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/php.txt
-        set dict+=$VIM/vimfiles/dict/wordpress/*.txt
-    else
-        set dict+=~/.vim/dict/php.txt
-        set dict+=~/.vim/dict/wordpress/*.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddPythonDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/python.txt
-    else
-        set dict+=~/.vim/dict/python.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddRubyDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/ruby.txt
-    else
-        set dict+=~/.vim/dict/ruby.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddJavaScriptDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/javascript.txt
-        set dict+=$VIM/vimfiles/dict/javascript_libs/*.txt
-    else
-        set dict+=~/.vim/dict/javascript.txt
-        set dict+=~/.vim/dict/javascript_libs/*.txt
-    endif
-    set complete+=k
-endfunction
-
-function AddCSSDict()
-    if g:isWIN
-        set dict+=$VIM/vimfiles/dict/css.txt
-    else
-        set dict+=~/.vim/dict/css.txt
-    endif
-    set complete+=k
-endfunction
-
-" 开启部分语法高亮的非默认特性
-let g:cpp_class_scope_highlight           = 1  " 高亮C++ class scope
-let g:cpp_experimental_template_highlight = 1  " 高亮C++ template functions
-let g:go_auto_type_info                   = 0  " 关闭Go语言自动显示类型信息 [默认就是关闭的，此处用于方便需要时开启]
-let g:go_def_mapping_enabled              = 0  " 关闭Go语言对gd的绑定
-let g:go_highlight_operators              = 1  " 开启Go语言操作符高亮
-let g:go_highlight_functions              = 1  " 开启Go语言函数名高亮
-let g:go_highlight_methods                = 1  " 开启Go语言方法名高亮
-let g:go_highlight_structs                = 1  " 开启Go语言结构体名高亮
-let g:haskell_enable_quantification       = 1  " 开启Haskell高亮 forall
-let g:haskell_enable_recursivedo          = 1  " 开启Haskell高亮 mdo and rec
-let g:haskell_enable_arrowsyntax          = 1  " 开启Haskell高亮 proc
-let g:haskell_enable_pattern_synonyms     = 1  " 开启Haskell高亮 pattern
-let g:haskell_enable_typeroles            = 1  " 开启Haskell高亮 type roles
-let g:haskell_enable_static_pointers      = 1  " 开启Haskell高亮 static
-let g:python_highlight_all                = 1  " 开启Python的所有高亮
-
-" 设置部分语i插件的特性
-let g:smarty_left_delimiter  = '{{'            " 设置Smarty标签左界定符
-let g:smarty_right_delimiter = '}}'            " 设置Smarty标签右界定符
-
-" BufExplorer         文件缓冲浏览器
-let g:bufExplorerSortBy = 'name'               " 按文件名排序
-
-" TagBar              tags标签浏览器
-let g:tagbar_sort = 0                          " 关闭排序     [也就是按标签本身在文件中的位置排序]
-let g:tagbar_show_linenumbers = -1             " 显示行号     [使用全局关于行号的默认配置]
-let g:tagbar_autopreview = 1                   " 开启自动预览 [随着光标在标签上的移动，顶部会出现一个实时的预览窗口]
-
-" snipMate            Tab智能补全
-let g:snips_author = 'Ruchee'
-if g:isWIN
-    let g:snippets_dir = $VIM.'/snippets/'
-else
-    let g:snippets_dir = '~/.vim/snippets/'
-endif
-let g:snipMate                                  = {}
-" 不使用插件自带的默认继承
-let g:snipMate.no_default_aliases               = 1
-" 同名同描述补全开启覆盖，只取最后一个生效
-let g:snipMate.override                         = 1
-" 使用旧版解析器
-let g:snipMate.snippet_version                  = 0
-" 设置补全项之间的继承关系，比如 C语言补全继承C++的补全
-let g:snipMate.scope_aliases                    = {}
-let g:snipMate.scope_aliases['c']               = 'cpp'
-let g:snipMate.scope_aliases['objc']            = 'cpp,objc'
-let g:snipMate.scope_aliases['racket']          = 'scheme,racket'
-let g:snipMate.scope_aliases['typescript']      = 'javascript,typescript'
-let g:snipMate.scope_aliases['javascript.jsx']  = 'javascript,jsx'
-let g:snipMate.scope_aliases['eelixir']         = 'html,eelixir'
-let g:snipMate.scope_aliases['smarty']          = 'html,smarty'
-let g:snipMate.scope_aliases['blade']           = 'html,blade'
-let g:snipMate.scope_aliases['volt']            = 'html,volt'
-let g:snipMate.scope_aliases['html.twig']       = 'html,twig'
-let g:snipMate.scope_aliases['jinja.twig']      = 'html,twig'
-let g:snipMate.scope_aliases['htmldjango.twig'] = 'html,twig'
-let g:snipMate.scope_aliases['htmldjango']      = 'html,htmldjango'
-let g:snipMate.scope_aliases['jinja']           = 'html,jinja'
-let g:snipMate.scope_aliases['ruby']            = 'ruby,rails'
-let g:snipMate.scope_aliases['eruby']           = 'html,eruby'
-let g:snipMate.scope_aliases['jst']             = 'html,jst'
-let g:snipMate.scope_aliases['mustache']        = 'html,mustache'
-let g:snipMate.scope_aliases['handlebars']      = 'html,mustache'
-let g:snipMate.scope_aliases['scss']            = 'css,scss'
-let g:snipMate.scope_aliases['less']            = 'css,less'
-let g:snipMate.scope_aliases['xhtml']           = 'html'
-let g:snipMate.scope_aliases['html']            = 'blaze,html'
-
+" Plugin: nerdtree (https://github.com/scrooloose/nerdtree)"
 " NERDTree            树形文件浏览器
 let g:NERDTreeShowHidden = 1                   " 显示隐藏文件
+let NERDTreeWinSize=32                          " 设置子窗口宽度
+let NERDTreeWinPos="right"                      " 设置子窗口位置
+let NERDTreeMinimalUI=1                         " 子窗口不显示冗余帮助信息
+let NERDTreeAutoDeleteBuffer=1                  " 删除文件时自动删除对应buffer
+nmap <leader>nt :NERDTree<cr>               " \nt 打开/关闭文件树窗口快捷键
 
-" NERD_commenter      注释处理插件
+" Plugin: nerdcommenter (https://github.com/scrooloose/nerdcommenter)"
+" NERDcommenter      注释处理插件
 let NERDSpaceDelims = 1                        " 自动添加前置空格
 
-" indentLine          显示对齐线
-let g:indentLine_enabled    = 0                " 默认关闭
-let g:indentLine_char       = '┆'             " 设置对齐线字符
-let g:indentLine_color_term = 239              " 设置非GUI线条颜色
-let g:indentLine_color_gui  = '#A4E57E'        " 设置GUI线条颜色
+" Plugin: Ultisnips (https://github.com/honza/vim-snipets)"
+" 自动补全插件
+let g:UltiSnipsSnippetDirectories=["mysnippets"]
+" UltiSnips模板补全快捷键与YCM快捷键有冲突，所以重新设定"
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
-" AirLine             彩色状态栏
-let g:airline_theme           = 'badwolf'      " 设置主题
-let g:airline_powerline_fonts = 0              " 关闭自定义字体
+" Plugin: MiniBufExplorer (https://github.com/fholgado/minibufexpl.vim)"
+" 多文件编辑buffer标签
+map <leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
+map <S-m> :MBEbf<cr>                  " 正向遍历buffer标签
+
+hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
+let g:did_minibufexplorer_syntax_inits = 1
+
+" ====未处理的部分===="
 
 " GitGutter           Git辅助插件
 let g:gitgutter_enabled               = 1      " 默认不开启
@@ -604,10 +465,6 @@ else
 endif
 let g:syntastic_c_compiler_options = '-std=c11 -Wall'
 let g:syntastic_cpp_compiler_options = '-std=c++14 -Wall'
-let g:syntastic_elixir_checkers = ['elixir']
-let g:syntastic_enable_elixir_checker = 1
-let g:syntastic_perl_checkers = ['perl']
-let g:syntastic_enable_perl_checker = 1
 let g:syntastic_python_python_exec = 'python3'
 " 自定义指定后缀的文件不开启语法检查
 au BufRead,BufNewFile *.min.js exec ':SyntasticToggleMode'
@@ -615,23 +472,7 @@ au BufRead,BufNewFile *.min.js exec ':SyntasticToggleMode'
 " javascript-libraries-syntax                    指定需要高亮的JS库
 let g:used_javascript_libs = 'jquery,requirejs,underscore,backbone,angularjs,angularui,angularuirouter,react,flux,handlebars'
 
-" php-cs-fixer                                   格式化PHP代码
-let g:php_cs_fixer_level = 'symfony'           " 使用Symfony推荐的代码风格
-let g:php_cs_fixer_config = 'default'          " 使用默认配置
-let g:php_cs_fixer_php_path = 'php'            " 指定PHP可执行文件的路径
-let g:php_cs_fixer_enable_default_mapping = 1  " 使用插件默认的快捷键
-let g:php_cs_fixer_dry_run = 0                 " 只提示需要格式化的位置，不执行格式化 [0为不开启]
-
-" vim-ruby                                       Ruby代码补全 [默认只在Mac平台下开启，其他平台请确认Vim有编译+ruby选项，然后修改此处配置以开启使用]
-if g:isMAC
-    let g:rubycomplete_buffer_loading = 1
-    let g:rubycomplete_classes_in_global = 1
-    let g:rubycomplete_rails = 1
-    let g:rubycomplete_load_gemfile = 1
-endif
-
-
-" ======= 自定义快捷键 ======= "
+" ==================== Custom shortcut key 自定义快捷键 =================== "
 
 "关闭方向健"
 map <Left> <Nop>
@@ -664,18 +505,22 @@ imap <c-u> <c-x><c-o>
 " Ctrl + H            光标移当前行行首[插入模式]、切换左窗口[Normal模式]
 imap <c-h> <esc>I
 map <c-h> <c-w><c-h>
+noremap <C-Left> <C-w>h
 
 " Ctrl + J            光标移下一行行首[插入模式]、切换下窗口[Normal模式]
 imap <c-j> <esc><down>I
 map <c-j> <c-w><c-j>
+noremap <C-Down> <C-w>j
 
 " Ctrl + K            光标移上一行行尾[插入模式]、切换上窗口[Normal模式]
 imap <c-k> <esc><up>A
 map <c-k> <c-w><c-k>
+noremap <C-Up> <C-w>k
 
 " Ctrl + L            光标移当前行行尾[插入模式]、切换右窗口[Normal模式]
 imap <c-l> <esc>A
 map <c-l> <c-w><c-l>
+noremap <C-Right> <C-w>l
 
 " \c                  复制至公共剪贴板
 vmap <leader>c "+y
@@ -694,8 +539,6 @@ nmap <leader>bb :Tab /=<cr>
 " \bn                 自定义对齐    [Tabular插件]
 nmap <leader>bn :Tab /
 
-" \nt                 打开/关闭文件树窗口，在左侧栏显示 [NERDTree插件]
-nmap <leader>nt :NERDTree<cr>
 
 " \il                 显示/关闭对齐线 [indentLine插件]
 nmap <leader>il :IndentLinesToggle<cr>
@@ -734,15 +577,15 @@ vmap <leader>rm <esc>:%s/<c-v><c-m>//g<cr>
 " \rt                 一键替换全部Tab为空格
 func! RemoveTabs()
     if &shiftwidth == 2
-        exec '%s/	/  /g'
+        exec '%s/    /  /g'
     elseif &shiftwidth == 4
-        exec '%s/	/    /g'
+        exec '%s/    /    /g'
     elseif &shiftwidth == 6
-        exec '%s/	/      /g'
+        exec '%s/    /      /g'
     elseif &shiftwidth == 8
-        exec '%s/	/        /g'
+        exec '%s/    /        /g'
     else
-        exec '%s/	/ /g'
+        exec '%s/    / /g'
     end
 endfunc
 
@@ -753,11 +596,6 @@ vmap <leader>rt <esc>:call RemoveTabs()<cr>
 " \ra                 一键清理当前代码文件
 nmap <leader>ra <esc>\rt<esc>\rb<esc>gg=G<esc>gg<esc>
 
-" \th                 一键生成与当前编辑文件同名的HTML文件 [不输出行号]
-imap <leader>th <esc>:set nonumber<cr>:set norelativenumber<cr><esc>:TOhtml<cr><esc>:w %:r.html<cr><esc>:q<cr>:set number<cr>:set relativenumber<cr>
-nmap <leader>th <esc>:set nonumber<cr>:set norelativenumber<cr><esc>:TOhtml<cr><esc>:w %:r.html<cr><esc>:q<cr>:set number<cr>:set relativenumber<cr>
-vmap <leader>th <esc>:set nonumber<cr>:set norelativenumber<cr><esc>:TOhtml<cr><esc>:w %:r.html<cr><esc>:q<cr>:set number<cr>:set relativenumber<cr>
-
 " \wa                 一键编译所有Vimwiki源文件
 imap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
 nmap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
@@ -765,18 +603,6 @@ vmap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
 
 " \ev                 编辑当前所使用的Vim配置文件
 nmap <leader>ev <esc>:e $MYVIMRC<cr>
-
-" \php                一键切换到PHP语法高亮
-imap <leader>php <esc>:se ft=php<cr>li
-nmap <leader>php <esc>:se ft=php<cr>
-
-" \ruby                一键切换到Ruby语法高亮
-imap <leader>ruby <esc>:se ft=ruby<cr>li
-nmap <leader>ruby <esc>:se ft=ruby<cr>
-
-" \eruby                一键切换到eRuby语法高亮
-imap <leader>eruby <esc>:se ft=eruby<cr>li
-nmap <leader>eruby <esc>:se ft=eruby<cr>
 
 " \js                 一键切换到JavaScript语法高亮
 imap <leader>js <esc>:se ft=javascript<cr>li
@@ -786,35 +612,7 @@ nmap <leader>js <esc>:se ft=javascript<cr>
 imap <leader>css <esc>:se ft=css<cr>li
 nmap <leader>css <esc>:se ft=css<cr>
 
-" \html               一键切换到HTML语法高亮
-imap <leader>html <esc>:se ft=html<cr>li
-nmap <leader>html <esc>:se ft=html<cr>
-
-
-" ======= Vimwiki ======= "
-
-let g:vimwiki_w32_dir_enc     = 'utf-8' " 设置编码
-let g:vimwiki_use_mouse       = 1       " 使用鼠标映射
-" 声明可以在 wiki 里面使用的 HTML 标签
-let g:vimwiki_valid_html_tags = 'p,a,img,b,i,s,u,sub,sup,br,hr,div,del,code,red,center,left,right,h1,h2,h3,h4,h5,h6,pre,code,script,style,span'
-
-let blog = {}
-if g:isWIN
-    let blog.path          = 'D:/Ruchee/Files/mysite/wiki/'
-    let blog.path_html     = 'D:/Ruchee/Files/mysite/html/'
-    let blog.template_path = 'D:/Ruchee/Files/mysite/templates/'
-else
-    let blog.path          = '~/mysite/wiki/'
-    let blog.path_html     = '~/mysite/html/'
-    let blog.template_path = '~/mysite/templates/'
-endif
-let blog.template_default  = 'site'
-let blog.template_ext      = '.html'
-let blog.auto_export       = 1
-let g:vimwiki_list         = [blog]
-
-
-" ======= 加载自定义工程配置文件 ======= "
+" =========================== 加载自定义工程配置文件 ======================== "
 
 if g:isWIN
     if filereadable($VIM.'/_self.vim')
@@ -827,7 +625,3 @@ else
     end
 end
 
-" 加入powerline状态栏，需要python支持 "
-set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
-set laststatus=2
-set t_Co=256
