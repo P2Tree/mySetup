@@ -46,7 +46,7 @@
 " <Leader>rt                 --一键替换全部Tab为空格  [全模式可用]
 " <Leader>ra                 --一键清理当前代码文件   [Normal模式可用]
 "
-" <Leader>nt                 --打开/关闭NERDTree文件树窗口
+" <Leader>nt                 --打开/关闭文件树窗口    [nerd tree]
 "
 " <Leader>bb                 --按=号对齐代码          [Normal模式可用]
 " <Leader>bn                 --自定义对齐             [Normal模式可用]
@@ -59,6 +59,8 @@
 "
 " <Leader>cc                 --给当前行或选定模块添加注释  [nerd commenter]
 " <Leader>cu                 --给当前行或选定模块取消注释  [nerd commenter]
+"
+" <Leader>bl                 --开启多文件标签  [MiniBufExplorer]
 "
 " ---------- 补全命令 ----------
 "
@@ -437,6 +439,7 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 " 多文件编辑buffer标签
 map <leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
 map <S-m> :MBEbf<cr>                  " 正向遍历buffer标签
+map <S-n> :MBEbb<cr>                    " 反向遍历buffer标签
 
 hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
 let g:did_minibufexplorer_syntax_inits = 1
@@ -569,48 +572,21 @@ imap <leader>rb <esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
 nmap <leader>rb :let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
 vmap <leader>rb <esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
 
-" \rm                 一键去除字符
+" \rm                 一键去除windows字符^M
 imap <leader>rm <esc>:%s/<c-v><c-m>//g<cr>
 nmap <leader>rm :%s/<c-v><c-m>//g<cr>
 vmap <leader>rm <esc>:%s/<c-v><c-m>//g<cr>
 
 " \rt                 一键替换全部Tab为空格
-func! RemoveTabs()
-    if &shiftwidth == 2
-        exec '%s/    /  /g'
-    elseif &shiftwidth == 4
-        exec '%s/    /    /g'
-    elseif &shiftwidth == 6
-        exec '%s/    /      /g'
-    elseif &shiftwidth == 8
-        exec '%s/    /        /g'
-    else
-        exec '%s/    / /g'
-    end
-endfunc
-
-imap <leader>rt <esc>:call RemoveTabs()<cr>
-nmap <leader>rt :call RemoveTabs()<cr>
-vmap <leader>rt <esc>:call RemoveTabs()<cr>
+imap <leader>rt <esc>:retab<cr>
+nmap <leader>rt :retab<cr>
+vmap <leader>rt <esc>:retab<cr>
 
 " \ra                 一键清理当前代码文件
 nmap <leader>ra <esc>\rt<esc>\rb<esc>gg=G<esc>gg<esc>
 
-" \wa                 一键编译所有Vimwiki源文件
-imap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
-nmap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
-vmap <leader>wa <esc>\ww<esc>:VimwikiAll2HTML<cr>:qa<cr>
-
 " \ev                 编辑当前所使用的Vim配置文件
 nmap <leader>ev <esc>:e $MYVIMRC<cr>
-
-" \js                 一键切换到JavaScript语法高亮
-imap <leader>js <esc>:se ft=javascript<cr>li
-nmap <leader>js <esc>:se ft=javascript<cr>
-
-" \css                一键切换到CSS语法高亮
-imap <leader>css <esc>:se ft=css<cr>li
-nmap <leader>css <esc>:se ft=css<cr>
 
 " =========================== 加载自定义工程配置文件 ======================== "
 
