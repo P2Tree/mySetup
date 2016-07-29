@@ -84,12 +84,34 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
+# some more aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias mv='mv -i'
 alias cp='cp -i'
+
+mkdir -p /tmp/trash
+alias rm=trash
+alias r=trash
+alias rl='ls /tmp/trash'
+alias ur=undelfile
+
+undelfile()
+{
+    mv -i /tmp/trash/$@ ./
+}
+
+trash()
+{
+    mv $@ /tmp/trash/
+}
+
+cleartrash()
+{
+    read -p "clear sure? [y/n]" confirm
+    [ $confirm == 'y' ] || [ $confirm == 'Y' ] && /usr/bin/rm -rf /tmp/trash/*
+}
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

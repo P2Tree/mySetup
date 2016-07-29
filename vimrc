@@ -35,6 +35,20 @@
 " Ctrl + K                   --光标移上一行行尾       [插入模式]
 " Ctrl + L                   --光标移当前行行尾       [插入模式]
 
+" Ctrl + ]                   --转到函数定义           [ctags跳转]
+" Ctrl + T                   --返回调用函数           [ctags跳转]
+
+" Ctrl + O                   --跳到上一个编辑位置     [Normal模式]
+" Ctrl + I                   --跳回下一个编辑位置     [Normal模式]
+"
+" ---------- Shift系按键 ----------
+"
+" Shift + >>                 --当前行缩进增加一个单位  [Normal]
+" Shift + <<                 --当前行缩进减少一个单位  [Normal]
+"
+" Shift + n                  --切换多文件标签         [ultisnips]
+" Shift + m                  --切换多文件标签         [ultisnips]
+" 
 " ---------- Leader系按键 ----------
 "
 " <Leader>c                  --复制至公共剪贴板       [仅选择模式]
@@ -59,11 +73,19 @@
 "
 " <Leader>cc                 --给当前行或选定模块添加注释  [nerd commenter]
 " <Leader>cu                 --给当前行或选定模块取消注释  [nerd commenter]
+" <Leader>cm                 --使用一个复合行注释整个代码块 [nerd commenter]
+" <Leader>ci                 --反转当前行的注释，若有注释则取消，若没有则注释
+" <Leader>cy                 --使用C通用注释 [nerd commenter]
+" <Leader>c$                 --注释当前光标处到行尾的内容  [nerd commenter]
+" <Leader>cA                 --为当前行在行尾添加注释 [nerd commenter]
+" <Leader>ca                 --切换注释标记风格 [nerd commenter]
 "
 " <Leader>bl                 --开启多文件标签  [MiniBufExplorer]
 "
 " ---------- 补全命令 ----------
 "
+" <Leader><Tab>              --补全snips脚本   [ultisnips]
+" 
 " ---------- 格式化命令 ----------
 "
 " ==                         --缩进当前行
@@ -89,11 +111,6 @@
 "
 " ---------- 跳转命令 ----------
 "
-" Ctrl + ]                   --转到函数定义           [ctags跳转]
-" Ctrl + T                   --返回调用函数           [ctags跳转]
-
-" Ctrl + O                   --跳到上一个编辑位置     [Normal模式]
-" Ctrl + I                   --跳回下一个编辑位置     [Normal模式]
 
 " 0 or ^ or $                --跳至 行首 or 第一个非空字符 or 行尾
 " %                          --在匹配的括号间跳跃
@@ -146,6 +163,8 @@
 " cs"<p>                      --将外围的双引号变成HTML标签对 [surround.vim插件]
 " cst"                        --将外围的界定符变成双引号     [surround.vim插件]
 " ds"                         --删除外围的双引号定界符       [surround.vim插件]
+" <                           --可视化模式下整块代码左移一个tab位
+" >                           --可视化模式下整块代码右移一个rab位
 "
 " ---------- 文本比较 ----------
 "
@@ -182,7 +201,7 @@
 let mapleader="\\"
 
 " ------------ 让配置变更立即生效，而不需要重启.vimrc" ------------
-autocmd BufWritePost .vimrc source .vimrc
+"autocmd BufWritePost .vimrc source .vimrc
 
 " ------------ 判断操作系统类型 -------------
 if(has('win32') || has('win64'))
@@ -382,7 +401,7 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
 Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
-Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
+" Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
 Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
 "Plugin 'kshenoy/vim-signature'              " vim书签所在行增加标志
 Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
@@ -425,7 +444,12 @@ nmap <leader>nt :NERDTree<cr>               " \nt 打开/关闭文件树窗口�
 
 " Plugin: nerdcommenter (https://github.com/scrooloose/nerdcommenter)"
 " NERDcommenter      注释处理插件
-let NERDSpaceDelims = 1                        " 自动添加前置空格
+let g:NERDSpaceDelims = 1                        " 自动添加前置空格
+let g:NERDCompactSexyComs = 1                    " 美化多行注释下的紧凑语法
+let g:NERDefaultAlign = 1                        " 注释在评论行的最左边而不是跟随代码缩进
+let g:NERDAltDelims_c = 1                        " 使用c的分隔符作为默认备用分隔符
+let g:NERDCustomDelimiters = { 'c': { 'left': '/*', 'right': '*/'} }   " 用户定义
+let g:NERDCommentEmptyLines = 1                  " 允许注释空行
 
 " Plugin: Ultisnips (https://github.com/honza/vim-snipets)"
 " 自动补全插件
@@ -437,12 +461,17 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 " Plugin: MiniBufExplorer (https://github.com/fholgado/minibufexpl.vim)"
 " 多文件编辑buffer标签
-map <leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
-map <S-m> :MBEbf<cr>                  " 正向遍历buffer标签
-map <S-n> :MBEbb<cr>                    " 反向遍历buffer标签
+let g:miniBufExplBuffersNeeded = 1      " 最少有一个buffer时自动开启标签页
+let g:miniBufExplCycleArround = 1           " 允许循环遍历所有标签页
+let g:miniBufExplShowBufNumber = 1      " 取消标签页名称上的数字编号
+map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
+map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
+map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
+map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
 
 hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
-let g:did_minibufexplorer_syntax_inits = 1
+"let g:did_minibufexplorer_syntax_inits = 1
+
 
 " ====未处理的部分===="
 
@@ -458,22 +487,6 @@ let g:gitgutter_sign_modified_removed = '->'   " 自定义既修改又删除指�
 " Syntastic           语法检查
 let g:syntastic_check_on_open = 1              " 默认开启
 let g:syntastic_mode_map      = { 'mode': 'active', 'passive_filetypes': ['html', 'xhtml'] }
-" 自定义编译器和编译参数
-if g:isWIN
-    let g:syntastic_c_compiler = 'gcc'
-    let g:syntastic_cpp_compiler = 'g++'
-else
-    let g:syntastic_c_compiler = 'gcc'
-    let g:syntastic_cpp_compiler = 'g++'
-endif
-let g:syntastic_c_compiler_options = '-std=c11 -Wall'
-let g:syntastic_cpp_compiler_options = '-std=c++14 -Wall'
-let g:syntastic_python_python_exec = 'python3'
-" 自定义指定后缀的文件不开启语法检查
-au BufRead,BufNewFile *.min.js exec ':SyntasticToggleMode'
-
-" javascript-libraries-syntax                    指定需要高亮的JS库
-let g:used_javascript_libs = 'jquery,requirejs,underscore,backbone,angularjs,angularui,angularuirouter,react,flux,handlebars'
 
 " ==================== Custom shortcut key 自定义快捷键 =================== "
 
@@ -488,6 +501,10 @@ nnoremap k gk
 nnoremap gk k
 nnoremap j gj
 nnoremap gj j
+
+" 增加一行但不进入插入模式"
+nnoremap to o<Esc>
+nnoremap tO O<Esc>
 
 "关闭上次搜索的高亮"
 noremap <silent><leader>/ :nohls<CR>
@@ -536,13 +553,6 @@ imap <leader>v <esc>"+p
 nmap <leader>v "+p
 vmap <leader>v "+p
 
-" \bb                 按=号对齐代码 [Tabular插件]
-nmap <leader>bb :Tab /=<cr>
-
-" \bn                 自定义对齐    [Tabular插件]
-nmap <leader>bn :Tab /
-
-
 " \il                 显示/关闭对齐线 [indentLine插件]
 nmap <leader>il :IndentLinesToggle<cr>
 
@@ -587,6 +597,9 @@ nmap <leader>ra <esc>\rt<esc>\rb<esc>gg=G<esc>gg<esc>
 
 " \ev                 编辑当前所使用的Vim配置文件
 nmap <leader>ev <esc>:e $MYVIMRC<cr>
+
+" \mm
+nmap <leader>mm :!./autoftp.sh<cr>
 
 " =========================== 加载自定义工程配置文件 ======================== "
 
