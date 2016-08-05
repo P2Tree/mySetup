@@ -233,7 +233,7 @@ if g:isWIN
 elseif g:isMAC
     colorscheme molokai
     set guifont=Monaco:h14
-else
+else " 终端模式
     colorscheme molokai
     set guifont=Monaco\ 14
 endif
@@ -269,6 +269,12 @@ set showmatch               " 显示括号配对情况
 "set nowrap                  " 禁止代码自动折行
 
 set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行"
+
+set cursorline              " 高亮光标当前行
+set cursorcolumn            " 高亮光标当前列
+"配置高亮当前行样式
+hi CursorLine   cterm=underline ctermbg=darkred ctermfg=white
+"hi CursorColumn cterm=NONE  ctermbg=lightmagenta ctermfg=white " 配置高亮当前列样式
 
 " ------------- 设置通用缩进策略 --------------
 set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
@@ -323,7 +329,7 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
 endif
 
-" 使用GUI界面时的设置
+" -------------- 使用GUI界面时的设置 ---------------------------------
 if g:isGUI
     " 启动时自动最大化窗口
     if g:isWIN
@@ -341,8 +347,6 @@ if g:isGUI
     set cursorline           " 高亮突出当前行
     " set cursorcolumn       " 高亮突出当前列
 endif
-
-set cursorline
 
 " =============== Auto Pair 引号 && 括号自动匹配 ===================== "
 
@@ -599,7 +603,7 @@ nmap <leader>ra <esc>\rt<esc>\rb<esc>gg=G<esc>gg<esc>
 nmap <leader>ev <esc>:e $MYVIMRC<cr>
 
 " \mm
-nmap <leader>mm :!./autoftp.sh<cr>
+nmap <leader>mm :!../make !../make install<cr>
 
 " =========================== 加载自定义工程配置文件 ======================== "
 
