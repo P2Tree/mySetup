@@ -30,16 +30,19 @@
 " ========== Description of Custom shortcut keys 自定义快捷键说明 ==========="
 " ---------- Ctrl系按键 ----------
 "
-" Ctrl + H                   --光标移当前行行首       [插入模式]
-" Ctrl + J                   --光标移下一行行首       [插入模式]
-" Ctrl + K                   --光标移上一行行尾       [插入模式]
-" Ctrl + L                   --光标移当前行行尾       [插入模式]
-
 " Ctrl + ]                   --转到函数定义           [ctags跳转]
 " Ctrl + T                   --返回调用函数           [ctags跳转]
 
 " Ctrl + O                   --跳到上一个编辑位置     [Normal模式]
 " Ctrl + I                   --跳回下一个编辑位置     [Normal模式]
+"
+" Ctrl + u                   --向上滚屏               [Normal模式]
+" Ctrl + d                   --向下滚屏               [Normal模式]
+" Ctrl + j                   --重映射 向下滚屏        [Normal模式]
+" Ctrl + k                   --重映射 向上滚屏        [Normal模式]
+"
+" Ctrl + h                   --切换到左边文件标签     [标签页插件]
+" Ctrl + l                   --切换到右边文件标签     [标签页插件]
 "
 " ---------- Shift系按键 ----------
 "
@@ -413,6 +416,7 @@ Plugin 'scrooloose/nerdtree'                " 工程目录管理
 Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
 Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
+Plugin 'takac/vim-hardtime'                 " 改变基本的光标移动习惯
 call vundle#end()
 
 filetype plugin indent on
@@ -472,10 +476,15 @@ map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
 map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
 map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
 map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
+map <C-h> <Leader>bn
+map <C-l> <Leader>bm
 
 hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
 "let g:did_minibufexplorer_syntax_inits = 1
 
+" Plugin: vim-hardtime (https://github.com/takac/vim-hardtime)"
+" 帮助替换光标简单移动的插件"
+let g:hardtime_default_on = 1
 
 " ====未处理的部分===="
 
@@ -495,10 +504,14 @@ let g:syntastic_mode_map      = { 'mode': 'active', 'passive_filetypes': ['html'
 " ==================== Custom shortcut key 自定义快捷键 =================== "
 
 "关闭方向健"
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+imap <Left> <Nop>
+imap <Right> <Nop>
+imap <Up> <Nop>
+imap <Down> <Nop>
 
 "交换上下行切换的物理切换与逻辑切换"
 nnoremap k gk
@@ -526,25 +539,11 @@ vmap <c-]> g<c-]>
 " Ctrl + U            简化全能补全按键
 imap <c-u> <c-x><c-o>
 
-" Ctrl + H            光标移当前行行首[插入模式]、切换左窗口[Normal模式]
-imap <c-h> <esc>I
-map <c-h> <c-w><c-h>
-noremap <C-Left> <C-w>h
+" Ctrl + J            向下滚屏
+map <c-j> <c-d>
 
-" Ctrl + J            光标移下一行行首[插入模式]、切换下窗口[Normal模式]
-imap <c-j> <esc><down>I
-map <c-j> <c-w><c-j>
-noremap <C-Down> <C-w>j
-
-" Ctrl + K            光标移上一行行尾[插入模式]、切换上窗口[Normal模式]
-imap <c-k> <esc><up>A
-map <c-k> <c-w><c-k>
-noremap <C-Up> <C-w>k
-
-" Ctrl + L            光标移当前行行尾[插入模式]、切换右窗口[Normal模式]
-imap <c-l> <esc>A
-map <c-l> <c-w><c-l>
-noremap <C-Right> <C-w>l
+" Ctrl + K            向上滚屏
+map <c-k> <c-u>
 
 " \c                  复制至公共剪贴板
 vmap <leader>c "+y
