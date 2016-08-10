@@ -104,7 +104,8 @@ undelfile()
 
 trash()
 {
-    mv $@ /tmp/trash/
+    filename=$@_`date "+%Y%m%d-%H:%M:%S"` 
+    mv $@ /tmp/trash/$filename
 }
 
 cleartrash()

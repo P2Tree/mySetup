@@ -49,9 +49,6 @@
 " Shift + >>                 --当前行缩进增加一个单位  [Normal]
 " Shift + <<                 --当前行缩进减少一个单位  [Normal]
 "
-" Shift + n                  --切换多文件标签         [ultisnips]
-" Shift + m                  --切换多文件标签         [ultisnips]
-" 
 " ---------- Leader系按键 ----------
 "
 " <Leader>c                  --复制至公共剪贴板       [仅选择模式]
@@ -88,7 +85,7 @@
 " ---------- 补全命令 ----------
 "
 " <Leader><Tab>              --补全snips脚本   [ultisnips]
-" 
+"
 " ---------- 格式化命令 ----------
 "
 " ==                         --缩进当前行
@@ -160,19 +157,8 @@
 " yf字符                     --复制本行内容，直到遇到第一个指定字符 [包括该字符]
 " vf字符                     --选中本行内容，直到遇到第一个指定字符 [包括该字符]
 "
-" XT 和 XF 是 Xt/Xf 的反方向操作
-"
-" cs'"                        --将外围的单引号变成双引号     [surround.vim插件]
-" cs"<p>                      --将外围的双引号变成HTML标签对 [surround.vim插件]
-" cst"                        --将外围的界定符变成双引号     [surround.vim插件]
-" ds"                         --删除外围的双引号定界符       [surround.vim插件]
 " <                           --可视化模式下整块代码左移一个tab位
 " >                           --可视化模式下整块代码右移一个rab位
-"
-" ---------- 文本比较 ----------
-"
-" dp                         --将当前文件所在差异行替换到对比文件 [give]
-" do                         --将对比文件所在差异行替换到当前文件 [get]
 "
 " ---------- 便捷操作 ----------
 "
@@ -200,11 +186,23 @@
 :se ff=unix                " --更改文件格式，可选 unix、dos、mac
 :se ft=c               "  --更改文件语法着色模式
 
+:set sessionoptions-=curdir
+:set sessionoptions+=sesdir
+map <Leader>vi :call SetSession()<cr>
+
+function! SetSession()
+    if !exists("./session.vim")
+        mksession session.vim
+        mksession sessionx.vim
+        echo "Please complete sessionx.vim"
+    endif
+endfunction
+        
 " ------------ 定义快捷键前缀，即<Leader> = \" --------------
 let mapleader="\\"
 
 " ------------ 让配置变更立即生效，而不需要重启.vimrc" ------------
-"autocmd BufWritePost .vimrc source .vimrc
+autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " ------------ 判断操作系统类型 -------------
 if(has('win32') || has('win64'))
@@ -243,35 +241,41 @@ endif
 
 " ------------- 基本配置 --------------
 set backspace=2              " 设置退格键可用
+set whichwrap+=<,>,h,l       " 配合退格键使用
 set autoindent               " 自动对齐
 set ai!                      " 设置自动缩进
 set smartindent              " 智能自动缩进
 set relativenumber           " 开启相对行号
 set nu!                      " 显示行号
 set ruler                    " 右下角显示光标位置的状态行
-set incsearch                " 开启实时搜索功能
+set incsearch                " 开启实时搜索功能，搜索时可以实时匹配
 set hlsearch                 " 开启高亮显示结果
+set ignorecase               " 搜索时大小写不敏感"
+set smartcase                " 如果搜索内容中包含大写字母，则不使用ignorecase
 " set nowrapscan               " 搜索到文件两端时不重新搜索
-set nocompatible             " 关闭兼容模式
+set nocompatible             " 关闭vi兼容模式
 set hidden                   " 允许在有未保存的修改时切换缓冲区
 set autochdir                " 设定文件浏览器目录为当前目录
 " set foldmethod=indent        " 选择代码折叠类型，基于缩进进行代码折叠
 set foldmethod=syntax        " 选择代码折叠类型，基于语法进行代码折叠
 set foldlevel=100            " 禁止自动折叠
 " set nofoldenable           " 启动vim时关闭折叠代码
+set foldenable               " 启动vim时打开折叠代码
 set laststatus=2             " 开启状态栏信息
 set cmdheight=1              " 命令行的高度，默认为1，这里设为2
 set autoread                 " 当文件在外部被修改时自动更新该文件
 set nobackup                 " 不生成备份文件
 set noswapfile               " 不生成交换文件
 set list                     " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
-set ignorecase               " 搜索时大小写不敏感"
 set wildmenu                 " vim 自身命令行模式智能补全"
 set listchars=tab:\~\ ,trail:.
 set showmatch               " 显示括号配对情况
 "set nowrap                  " 禁止代码自动折行
+set history=700             " 设置vim历史记录最大条目数
+"set magic
+set mat=4                   " 光标闪烁以及闪烁频率
 
-set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行"
+set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行 set so=7
 
 set cursorline              " 高亮光标当前行
 set cursorcolumn            " 高亮光标当前列
@@ -284,6 +288,7 @@ set expandtab                " 将Tab自动转化成空格 [需要输入真正�
 set tabstop=4                   " 设置编辑时制表符占用空格数"
 set shiftwidth=4                " 设置格式化时制表符占用空格数"
 set softtabstop=4               " 让vim把连续数量的空格视为一个制表符"
+set smarttab                    " 按一次backspace就删除整个tab"
 
 if has("syntax")
     syntax enable            " 打开语法高亮
@@ -298,28 +303,19 @@ filetype plugin indent on    " 针对不同的文件类型加载对应的插件�
 au BufRead,BufNewFile *.h        setlocal ft=c
 au BufRead,BufNewFile *.i        setlocal ft=c
 au BufRead,BufNewFile *.m        setlocal ft=objc
-au BufRead,BufNewFile *.di       setlocal ft=d
 au BufRead,BufNewFile *.ss       setlocal ft=scheme
-au BufRead,BufNewFile *.lsp      setlocal ft=newlisp
-au BufRead,BufNewFile *.cl       setlocal ft=lisp
-au BufRead,BufNewFile *.phpt     setlocal ft=php
-au BufRead,BufNewFile *.inc      setlocal ft=php
-au BufRead,BufNewFile *.sql      setlocal ft=mysql
-au BufRead,BufNewFile *.tpl      setlocal ft=smarty
 au BufRead,BufNewFile *.txt      setlocal ft=txt
 au BufRead,BufNewFile *.log      setlocal ft=conf
 au BufRead,BufNewFile hosts      setlocal ft=conf
 au BufRead,BufNewFile *.conf     setlocal ft=dosini
-au BufRead,BufNewFile http*.conf setlocal ft=apache
-au BufRead,BufNewFile nginx.conf setlocal ft=nginx
 au BufRead,BufNewFile *.ini      setlocal ft=dosini
 
 " -------------- 设置文件编码和文件格式 ---------------
 set fenc=utf-8
-set encoding=utf-8
-set fileencodings=utf-8,gbk,cp936,latin-1
-set fileformat=unix
-set fileformats=unix,mac,dos
+set encoding=utf-8                          " 设置内部编码"
+set fileencodings=utf-8,gbk,cp936,latin-1   " 设置支持的文件编码"
+set fileformat=unix                         " 设置新文件的EOL格式"
+set fileformats=unix,mac,dos                " 给出文件的EOL格式类型"
 
 if g:isWIN
     source $VIMRUNTIME/delmenu.vim
@@ -328,9 +324,8 @@ if g:isWIN
 endif
 
 " -------------- 打开vim，自动定位到上次最后变更的位置 ---------------
-if has("autocmd")
-    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
-endif
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
+set viminfo^=%          " 关闭时记录buffer信息
 
 " -------------- 使用GUI界面时的设置 ---------------------------------
 if g:isGUI
@@ -409,6 +404,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
 Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
 " Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
+Plugin 'Yggdroot/indentLine'                " 缩进指示
 Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
 "Plugin 'kshenoy/vim-signature'              " vim书签所在行增加标志
 Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
@@ -429,13 +425,19 @@ let g:Powerline_colorscheme='solarized256'
 "
 " Plugin: Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
 " 缩进配对指示插件
-let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
-let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
-let g:indent_guides_guide_size=1               " 色块宽度
+" let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
+" let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
+" let g:indent_guides_guide_size=1               " 色块宽度
 " 快捷键<Leader>i开关缩进可视化
-nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
+" nmap <silent> <Leader>i <Plug>IndentGuidesToggle
+" hi IndentGuidesOdd  ctermbg=black
+" hi IndentGuidesEven ctermbg=darkgrey
+
+" Plugin: indentLine (https://github.com/Yggdroot/indentLine)"
+" 缩进指示插件
+let g:indentLine_color_term = 239
+let g:indentLine_char = '|'
+let g:indentLine_enabled = 1
 
 " Plugin: vim-fswitch (https://github.com/derekwyatt/vim-fswitch)"
 " 源文件与头文件快速切换插件
@@ -452,6 +454,13 @@ nmap <leader>nt :NERDTree<cr>               " \nt 打开/关闭文件树窗口�
 
 " Plugin: nerdcommenter (https://github.com/scrooloose/nerdcommenter)"
 " NERDcommenter      注释处理插件
+" 以下为插件默认快捷键，其中的说明是以C/C++为例的
+" <Leader>ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
+" <Leader>cm 以一个 /* */ 注释选中行(选中区域所在行)，再输入则称重复注释
+" <Leader>cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释
+" <Leader>cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */
+" <Leader>ca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
+" <Leader>cA 行尾注释
 let g:NERDSpaceDelims = 1                        " 自动添加前置空格
 let g:NERDCompactSexyComs = 1                    " 美化多行注释下的紧凑语法
 let g:NERDefaultAlign = 1                        " 注释在评论行的最左边而不是跟随代码缩进
@@ -486,6 +495,10 @@ hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GU
 " 帮助替换光标简单移动的插件"
 let g:hardtime_default_on = 1
 
+" ====暂时留存===="
+" Ctrl + U            简化全能补全按键 omni插件
+"
+imap <c-u> <c-x><c-o>
 " ====未处理的部分===="
 
 " GitGutter           Git辅助插件
@@ -536,8 +549,11 @@ nnoremap U <C-r>
 nmap <c-]> g<c-]>
 vmap <c-]> g<c-]>
 
-" Ctrl + U            简化全能补全按键
-imap <c-u> <c-x><c-o>
+" 插入模式 Ctrl + hjkl  向上下左右移动一格
+imap <c-h> <Left>
+imap <c-j> <Down>
+imap <c-k> <Up>
+imap <c-l> <Right>
 
 " Ctrl + J            向下滚屏
 map <c-j> <c-d>
@@ -555,9 +571,6 @@ nmap <leader>a <esc>ggVG"+y<esc>
 imap <leader>v <esc>"+p
 nmap <leader>v "+p
 vmap <leader>v "+p
-
-" \il                 显示/关闭对齐线 [indentLine插件]
-nmap <leader>il :IndentLinesToggle<cr>
 
 " \tl                 打开/关闭Tags窗口，在右侧栏显示 [Tagbar插件]
 nmap <leader>tl :TagbarToggle<cr><c-w><c-l>
@@ -596,10 +609,11 @@ nmap <leader>rt :retab<cr>
 vmap <leader>rt <esc>:retab<cr>
 
 " \ra                 一键清理当前代码文件
-nmap <leader>ra <esc>\rt<esc>\rb<esc>gg=G<esc>gg<esc>
+nmap <leader>ra <esc><Leader>rt<esc><Leader>rb<esc><Leader>rm<esc>gg=G<esc>
 
 " \ev                 编辑当前所使用的Vim配置文件
-nmap <leader>ev <esc>:e $MYVIMRC<cr>
+nmap <silent> <Leader>ev <esc>:e $MYVIMRC<cr>
+nmap <silent> <Leader>es <esc>:source $MYVIMRC<cr>
 
 " \mm
 nmap <leader>mm :!../make !../make install<cr>
