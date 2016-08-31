@@ -1,3 +1,4 @@
+" ------------ 让配置变更立即生效，而不需要重启.vimrc" ------------
 " ====================================================================="
 "
 "   -- Maintainer --
@@ -11,21 +12,25 @@
 "   -- Brief --
 "   这个配置文件包含了所有我使用的vim所应该有的配置，包括通用配置、插件、
 "   快捷键映射、外部配置文件引用、自定义快捷键等。
-"   在第一次使用时，需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
+"   如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
+"       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"   然后需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
 "   用的插件，然后运行"PluginInstall"来安装插件。
 "
-"   When you first use this .vimrc, you should find the part named
-"   \"Vundle\" in it. And then comment plugins you don't needed and
+"   When you first use this .vimrc, you should enter this command in your
+"   shell:
+"       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"   and then, find the part named \"Vundle\" in it and comment plugins you don't needed and
 "   uncomment the needed. Finally, run \"PluginInstall" to instll Plugins.
 "
 "   -- Contents --
 "
-"   1. 全部自定义快捷键说明；   1. Total description of all custom shortcut keys.
-"   2. 通用设置；               2. General setup.
-"   3. 括号&&引号自动补全；     3. Auto pair.
-"   4. Vundle环境配置与插件配置；   4. Environment deployment of Vundle and Plugins.
-"   5. 部分语言添加补全字典；   5. Dictionary of some language.
-"   6. 自定义快捷键；           6. Custom shortcut keys.
+"   1. mark: a 快捷键说明；   1. Total description of all custom shortcut keys.
+"   2. mark: g 通用设置；               2. General setup.
+"   3. mark: p 括号&&引号自动补全；     3. Auto pair.
+"   4. mark: v Vundle环境配置与插件配置；   4. Environment deployment of Vundle and Plugins.
+"   5. mark: k 自定义快捷键；           6. Custom shortcut keys.
+"   6. mark: m 编译相关；               7. about make
 
 " ========== Description of Custom shortcut keys 自定义快捷键说明 ==========="
 " ---------- Ctrl系按键 ----------
@@ -38,18 +43,27 @@
 "
 " Ctrl + u                   --向上滚屏               [Normal模式]
 " Ctrl + d                   --向下滚屏               [Normal模式]
-" Ctrl + j                   --重映射 向下滚屏        [Normal模式]
-" Ctrl + k                   --重映射 向上滚屏        [Normal模式]
 "
-" Ctrl + h                   --切换到左边文件标签     [标签页插件]
-" Ctrl + l                   --切换到右边文件标签     [标签页插件]
+" Ctrl + h                   --切换到左边的分屏窗口
+" Ctrl + l                   --切换到右边的分屏窗口
+" Ctrl + k                   --切换到上边的分屏窗口
+" Ctrl + j                  --切换到下边的分屏窗口
+"
+" Ctrl + o                  --返回光标上次停留位置，另外''也可以实现返回，但只能返回一次
+"
+" Ctrl + e                  --向下翻滚页面一行，光标不移动
+" Ctrl + y                  --向上翻滚页面一行，光标不移动
 "
 " ---------- Shift系按键 ----------
 "
 " Shift + >>                 --当前行缩进增加一个单位  [Normal]
 " Shift + <<                 --当前行缩进减少一个单位  [Normal]
+" Shift + j                   --重映射 向下滚屏        [Normal模式]
+" Shift + k                   --重映射 向上滚屏        [Normal模式]
 "
 " ---------- Leader系按键 ----------
+"  你可以输入 :map <Leader> 比如：:map ,
+"  来打印出所有以<Leader>键开头的键盘映射
 "
 " <Leader>c                  --复制至公共剪贴板       [仅选择模式]
 " <Leader>a                  --复制所有至公共剪贴板   [Normal模式可用]
@@ -60,10 +74,9 @@
 " <Leader>rt                 --一键替换全部Tab为空格  [全模式可用]
 " <Leader>ra                 --一键清理当前代码文件   [Normal模式可用]
 "
-" <Leader>nt                 --打开/关闭文件树窗口    [nerd tree]
+" <Leader>nt                 --打开/关闭文件树窗口    [nerdtree]
 "
 " <Leader>bb                 --按=号对齐代码          [Normal模式可用]
-" <Leader>bn                 --自定义对齐             [Normal模式可用]
 "
 " <Leader>ev                 --编辑当前所使用的Vim配置文件
 "
@@ -80,7 +93,20 @@
 " <Leader>cA                 --为当前行在行尾添加注释 [nerd commenter]
 " <Leader>ca                 --切换注释标记风格 [nerd commenter]
 "
-" <Leader>bl                 --开启多文件标签  [MiniBufExplorer]
+" <Leader>bl                 --开启或关闭多文件标签  [MiniBufExplorer]
+" <Leader>bn                 --切换到下一个文件标签  [MiniBufExplorer]
+" <Leader>bm                 --切换到上一个文件标签  [MiniBufExplorer]
+" <Leader>bd                 --关闭当前页文件标签    [MiniBufExplorer]
+"
+" <Leader>sf                 --查找光标所在单词在工程中其他出现位置 ·[CtrlSF]
+"
+" <Leader>tl                --打开或关闭taglist窗口  [taglist]
+" <Leader>tg                --跳转到当前光标所在处tag对应的定义处   [taglist]
+" <Leader>tr                --跳回到上一个tag列表所在位置           [taglist]
+"
+" ---------- 功能键位 ----------
+"
+" <F5>                      --刷新ctags缓存
 "
 " ---------- 补全命令 ----------
 "
@@ -184,24 +210,31 @@
 " ======================= General setup 通用配置 =========================="
 "
 :se ff=unix                " --更改文件格式，可选 unix、dos、mac
-:se ft=c               "  --更改文件语法着色模式
+:se filetype=c               "  --更改文件语法着色模式
 
-:set sessionoptions-=curdir
-:set sessionoptions+=sesdir
-map <Leader>vi :call SetSession()<cr>
-
-function! SetSession()
-    if !exists("./session.vim")
-        mksession session.vim
-        mksession sessionx.vim
-        echo "Please complete sessionx.vim"
-    endif
-endfunction
-        
 " ------------ 定义快捷键前缀，即<Leader> = \" --------------
-let mapleader="\\"
+let mapleader=","
 
-" ------------ 让配置变更立即生效，而不需要重启.vimrc" ------------
+" ------------- 保存与恢复工作环境状态 ----------------
+" set sessionoptions="blank,buffer,globals,localoptions,tabpages,sesdir,folds,help,options,resize,winpos,winsize"
+set sessionoptions-=curdir              " 去除绝对路径
+set sessionoptions+=sesdir              " 增加相对路径
+set undodir=~/.undo_history/
+set undofile
+
+" \ss 保存当前工作环境
+map <Leader>ss :MBEClose<cr> :mksession! ~/session.vim<cr> :wviminfo! ~/vim.viminfo<cr>
+" \rs 恢复工作环境
+map <Leader>rs :source ~/session.vim<cr> :rviminfo ~/vim.viminfo<cr> :MBEOpen<cr>
+" 由于minibufexpl与这里保存文档状态有bug冲突，导致文档状态也保存了minibufexpl的状态"
+
+" 在当前程序工程根路径下添加新文件workspace.vim，并添加如下代码，工程路径替换为当前路径"
+" set path+=.,,~/projcet/
+if filereadable("workspace.vim")
+    source workspace.vim
+endif
+
+
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " ------------ 判断操作系统类型 -------------
@@ -240,13 +273,14 @@ else " 终端模式
 endif
 
 " ------------- 基本配置 --------------
+set autowrite               " 自动保存"
 set backspace=2              " 设置退格键可用
 set whichwrap+=<,>,h,l       " 配合退格键使用
-set autoindent               " 自动对齐
-set ai!                      " 设置自动缩进
+set autoindent!                      " 设置自动缩进
 set smartindent              " 智能自动缩进
+set cindent                 " c/c++缩进模式
 set relativenumber           " 开启相对行号
-set nu!                      " 显示行号
+set number!                      " 显示行号
 set ruler                    " 右下角显示光标位置的状态行
 set incsearch                " 开启实时搜索功能，搜索时可以实时匹配
 set hlsearch                 " 开启高亮显示结果
@@ -261,8 +295,8 @@ set foldmethod=syntax        " 选择代码折叠类型，基于语法进行代�
 set foldlevel=100            " 禁止自动折叠
 " set nofoldenable           " 启动vim时关闭折叠代码
 set foldenable               " 启动vim时打开折叠代码
-set laststatus=2             " 开启状态栏信息
-set cmdheight=1              " 命令行的高度，默认为1，这里设为2
+set laststatus=2             " 开启状态栏信息，2为总显示最后一个窗口的状态行，1则为窗口数多于一个的时候显示最后一个窗口的状态行，0为不显示最后一个窗口的状态行
+set cmdheight=2              " 命令行的高度，默认为1，这里设为2
 set autoread                 " 当文件在外部被修改时自动更新该文件
 set nobackup                 " 不生成备份文件
 set noswapfile               " 不生成交换文件
@@ -270,11 +304,12 @@ set list                     " 显示特殊字符，其中Tab使用高亮~代替
 set wildmenu                 " vim 自身命令行模式智能补全"
 set listchars=tab:\~\ ,trail:.
 set showmatch               " 显示括号配对情况
-"set nowrap                  " 禁止代码自动折行
+set nowrap                  " 禁止代码自动折行
 set history=700             " 设置vim历史记录最大条目数
 "set magic
 set mat=4                   " 光标闪烁以及闪烁频率
 
+"set scroll=5                " 指定翻页时的行数，默认不设置则为半页
 set scrolloff=7             " 上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行 set so=7
 
 set cursorline              " 高亮光标当前行
@@ -282,6 +317,8 @@ set cursorcolumn            " 高亮光标当前列
 "配置高亮当前行样式
 hi CursorLine   cterm=underline ctermbg=darkred ctermfg=white
 "hi CursorColumn cterm=NONE  ctermbg=lightmagenta ctermfg=white " 配置高亮当前列样式
+set showcmd                 " 命令行显示输入的命令
+set showmode                " 命令行显示vim当前模式中
 
 " ------------- 设置通用缩进策略 --------------
 set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
@@ -290,6 +327,7 @@ set shiftwidth=4                " 设置格式化时制表符占用空格数"
 set softtabstop=4               " 让vim把连续数量的空格视为一个制表符"
 set smarttab                    " 按一次backspace就删除整个tab"
 
+" ------------- 文件类型检测与语法开关"
 if has("syntax")
     syntax enable            " 打开语法高亮
     syntax on                " 允许用指定语法高亮配色方案替换默认方案
@@ -325,7 +363,6 @@ endif
 
 " -------------- 打开vim，自动定位到上次最后变更的位置 ---------------
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
-set viminfo^=%          " 关闭时记录buffer信息
 
 " -------------- 使用GUI界面时的设置 ---------------------------------
 if g:isGUI
@@ -389,6 +426,9 @@ endf
 
 " ==== Environment deployment of Vundle and Plugins Vundle ============= "
 " ==== 环境配置以及插件 ===== "
+" 如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
+" `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"
 " 在命令行模式下输入：
 " PluginInstall         " 安装下边罗列出的所有插件
 " PluginClean           " 清除下边注释或未罗列但在系统中存在的插件
@@ -406,24 +446,28 @@ Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
 " Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
 Plugin 'Yggdroot/indentLine'                " 缩进指示
 Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
-"Plugin 'kshenoy/vim-signature'              " vim书签所在行增加标志
 Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
-Plugin 'scrooloose/nerdtree'                " 工程目录管理
+Plugin 'scrooloose/nerdtree'                " 工程目录管理，替代vim中固定的newtrw插件，功能一样
 Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
 Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
-Plugin 'takac/vim-hardtime'                 " 改变基本的光标移动习惯
+"Plugin 'jlanzarotta/bufexplorer'            " 辅助实现文件buffer显示，和minibufexpl.vim一样的功能，为了省地方，选择列minibufexpl.vim
+Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack
+Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
+Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 call vundle#end()
 
 filetype plugin indent on
 filetype on
 
-" ---- 插件配置选项 ----"
-" Plugin: vim-powerline (https://github.com/Lokaltog/vim-powerline)"
+" ---------- 插件配置选项 ----------"
+" 可以通过搜索：Plugin:[plugin name]来全文快速查找插件配置
+
+" Plugin:vim-powerline (https://github.com/Lokaltog/vim-powerline)"
 " 加入powerline状态栏"
 let g:Powerline_colorscheme='solarized256'
 "
-" Plugin: Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
+" Plugin:Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
 " 缩进配对指示插件
 " let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
 " let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
@@ -433,34 +477,44 @@ let g:Powerline_colorscheme='solarized256'
 " hi IndentGuidesOdd  ctermbg=black
 " hi IndentGuidesEven ctermbg=darkgrey
 
-" Plugin: indentLine (https://github.com/Yggdroot/indentLine)"
+" Plugin:indentLine (https://github.com/Yggdroot/indentLine)"
 " 缩进指示插件
 let g:indentLine_color_term = 239
 let g:indentLine_char = '|'
 let g:indentLine_enabled = 1
 
-" Plugin: vim-fswitch (https://github.com/derekwyatt/vim-fswitch)"
+" Plugin:vim-fswitch (https://github.com/derekwyatt/vim-fswitch)"
 " 源文件与头文件快速切换插件
 nmap <silent> <Leader>sw :FSHere<cr>
+" 跳转到同一工程路径下的另一个目录下寻找对应项
+autocmd! BufEnter *.c let b:fswitchdst = 'h' | let b:fswitchlocs = '../inc'
+autocmd! BufEnter *.h let b:fswitchdst = 'c' | let b:fswitchlocs = '../src'
 
-" Plugin: nerdtree (https://github.com/scrooloose/nerdtree)"
+" Plugin:nerdtree (https://github.com/scrooloose/nerdtree)"
 " NERDTree            树形文件浏览器
+" o 打开/关闭光标所在目录
+" t 在新tab中打开文件或目录，并跳转
+" T 在新tab中打开文件或目录，并不跳转
+" p 跳转到父节点
+" P 跳转到根节点
+" q 关闭nerdtree窗口
+" \nt 打开/关闭文件树窗口快捷键
+nmap <leader>nt :NERDTree<cr>
 let g:NERDTreeShowHidden = 1                   " 显示隐藏文件
-let NERDTreeWinSize=32                          " 设置子窗口宽度
+let NERDTreeWinSize=25                          " 设置子窗口宽度
 let NERDTreeWinPos="right"                      " 设置子窗口位置
 let NERDTreeMinimalUI=1                         " 子窗口不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1                  " 删除文件时自动删除对应buffer
-nmap <leader>nt :NERDTree<cr>               " \nt 打开/关闭文件树窗口快捷键
 
-" Plugin: nerdcommenter (https://github.com/scrooloose/nerdcommenter)"
+" Plugin:nerdcommenter (https://github.com/scrooloose/nerdcommenter)"
 " NERDcommenter      注释处理插件
 " 以下为插件默认快捷键，其中的说明是以C/C++为例的
-" <Leader>ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
-" <Leader>cm 以一个 /* */ 注释选中行(选中区域所在行)，再输入则称重复注释
-" <Leader>cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释
-" <Leader>cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */
-" <Leader>ca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
-" <Leader>cA 行尾注释
+" \ci 以每行一个 /* */ 注释选中行(选中区域所在行)，再输入则取消注释
+" \cm 以一个 /* */ 注释选中行(选中区域所在行)，再输入则称重复注释
+" \cc 以每行一个 /* */ 注释选中行或区域，再输入则称重复注释
+" \cu 取消选中区域(行)的注释，选中区域(行)内至少有一个 /* */
+" \cca 在/*...*/与//这两种注释方式中切换（其它语言可能不一样了）
+" \cA 行尾注释
 let g:NERDSpaceDelims = 1                        " 自动添加前置空格
 let g:NERDCompactSexyComs = 1                    " 美化多行注释下的紧凑语法
 let g:NERDefaultAlign = 1                        " 注释在评论行的最左边而不是跟随代码缩进
@@ -468,7 +522,7 @@ let g:NERDAltDelims_c = 1                        " 使用c的分隔符作为默�
 let g:NERDCustomDelimiters = { 'c': { 'left': '/*', 'right': '*/'} }   " 用户定义
 let g:NERDCommentEmptyLines = 1                  " 允许注释空行
 
-" Plugin: Ultisnips (https://github.com/honza/vim-snipets)"
+" Plugin:Ultisnips (https://github.com/honza/vim-snipets)"
 " 自动补全插件
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 " UltiSnips模板补全快捷键与YCM快捷键有冲突，所以重新设定"
@@ -476,29 +530,110 @@ let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
-" Plugin: MiniBufExplorer (https://github.com/fholgado/minibufexpl.vim)"
+" Plugin:MiniBufExplorer (https://github.com/fholgado/minibufexpl.vim)"
 " 多文件编辑buffer标签
+" 该插件现在仍不完善，会与常用功能发生冲突，会出现意外自动关闭等情况
+" 除下边插件快捷键之外，使用系统快捷键也可以方便调用，如
+" :b 1 或 :buffer 1      切换到对应数字的buffer页，1可以替换为其他数字
+" :files                 列出所有当前打开的buffer
+" :bn                    切换到上一个buffer
+" :bp                    切换到下一个buffer
+" :bd 1                  关闭对应数字的buffer页，1可以替换为其他数字，不加数字为关闭当前buffer
 let g:miniBufExplBuffersNeeded = 1      " 最少有一个buffer时自动开启标签页
 let g:miniBufExplCycleArround = 1           " 允许循环遍历所有标签页
 let g:miniBufExplShowBufNumber = 1      " 取消标签页名称上的数字编号
+let g:miniBufExplorerAutoStart = 1      " 自动打开，0为关闭，1为打开
+let g:miniBufExplorerMoreThanOne = 0    " 控制不允许打开多于一个的minibufexplorer窗口
 map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
 map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
 map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
 map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
-map <C-h> <Leader>bn
-map <C-l> <Leader>bm
-
 hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
 "let g:did_minibufexplorer_syntax_inits = 1
 
-" Plugin: vim-hardtime (https://github.com/takac/vim-hardtime)"
-" 帮助替换光标简单移动的插件"
-let g:hardtime_default_on = 1
+" Plugin:ctrlsf (https://github.com/dyng/ctrlsf.vim)"
+" 强大的工程目录名称搜索内容查找插件
+" 需要系统安装ack, ubuntu下为sudo apt-get install ack-grep
+" 进入ctrlsf后的基本操作：
+" p 打开当前选中匹配项，但不关闭ctrlsf窗口"
+" q 关闭ctrlsf窗口，不进行匹配"
+" <enter> 打开当前选中匹配项，并关闭ctrlsf窗口"
+" \sf 搜索快捷键, 速记 ctrl's''f'
+nnoremap <Leader>sf :wa<cr> :CtrlSF<cr>
+" 默认搜索路径为工程目录，工程目录的确认是寻找最近的.git .hg .svn .bzr _darcs"
+let g:ctrlsf_default_root = 'project'
 
-" ====暂时留存===="
-" Ctrl + U            简化全能补全按键 omni插件
-"
-imap <c-u> <c-x><c-o>
+" Plugin:vim-signature (https://github.com/kshenoy/vim-signature)"
+" 辅助标签使用的插件，如标签显示，添加标签等
+let g:SignatureMap = {
+            \ 'Leader'             :  "m",
+            \ 'PlaceNextMark'      :  "m,",
+            \ 'ToggleMarkAtLine'   :  "m.",
+            \ 'PurgeMarksAtLine'   :  "m-",
+            \ 'DeleteMark'         :  "dm",
+            \ 'PurgeMarks'         :  "mda",
+            \ 'PurgeMarkers'       :  "m<BS>",
+            \ 'GotoNextLineAlpha'  :  "']",
+            \ 'GotoPrevLineAlpha'  :  "'[",
+            \ 'GotoNextSpotAlpha'  :  "`]",
+            \ 'GotoPrevSpotAlpha'  :  "`[",
+            \ 'GotoNextLineByPos'  :  "]'",
+            \ 'GotoPrevLineByPos'  :  "['",
+            \ 'GotoNextSpotByPos'  :  "mn",
+            \ 'GotoPrevSpotByPos'  :  "mp",
+            \ 'GotoNextMarker'     :  "[+",
+            \ 'GotoPrevMarker'     :  "[-",
+            \ 'GotoNextMarkerAny'  :  "]=",
+            \ 'GotoPrevMarkerAny'  :  "[=",
+            \ 'ListLocalMarks'     :  "ms",
+            \ 'ListLocalMarkers'   :  "m?"
+            \ }
+
+" Plugin:taglist.vim (https://github.com/vim-script/taglist.vim)"
+" 用于显示tag的辅助插件，需要系统中有ctags支持
+" :TlistOpen 用于打开taglist窗口
+" :TlistClose 用于关闭taglist窗口，直接输入q也可以关闭窗口
+" :TlistToggle 若打开则关闭，若关闭则打开
+" <space> 显示光标下的tag的原型定义
+" o 在一个新打开的窗口中显示光标下的tag
+" x taglist窗口放大或缩小
+" + 打开一个折叠，用zo也可以
+" - 关闭一个折叠，用zc也可以
+" × 打开所有折叠，用zR也可以
+" = 关闭所有折叠，用zM也可以
+" [[ 跳到前一个文件
+" ]] 跳到后一个文件
+" q 关闭taglist窗口
+" \tl                 打开/关闭Tags窗口，在右侧栏显示 [Tagbar插件]
+nmap <leader>tl :TlistToggle<cr>
+nmap <leader>tg <esc><c-]>
+nmap <leader>tr <esc><c-t>
+map <F5> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr><cr> :TlistUpdate<cr>
+imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr><cr> :TlistUpdate<cr>
+set tags=tags
+set tags+=tags;/
+set tags+=./tags "添加当前路径下的tags文件
+
+let Tlist_Ctags_Cmd = '/usr/bin/ctags'      " 如果ctags在PATH路径下，可以不设置该项
+"let Tlist_Show_One_File = 1                 " 不允许同时显示多个文件的tag，只显示当前文件的
+let Tlist_Exit_OnlyWindow = 1               " 如果taglist窗口是最后一个窗口，则退出vim
+let Tlist_Use_Right_Window = 1              " 在右侧窗口中显示taglist窗口
+"let Tlist_Auto_Open = 1                    " 启动vim时，自动打开taglist窗口
+let Tlist_GainFocus_On_ToggleOpen = 1       " 当使用:TlistToggle打开taglist窗口时，自动跳转到taglist窗口
+let Tlist_Close_On_Select = 1              " 选择了tag后自动关闭taglist窗口
+let Tlist_File_Fold_Auto_Close = 1          " 当同时显示多个文件中的tag时，可只显示当前文件tag，其他的tag都折叠起来
+let Tlist_Process_File_Always = 1           " 始终解析文件中的tag，而不管taglist是否打开
+"let Tlist_Use_Horiz_Window = 1             " 设置taglist横向显示
+
+
+" Plugin:newtrw插件"
+" 已经成为vim中的固定插件，文件浏览器，与nerdtree作用一样
+" :Explore 纵向打开文件浏览器"
+" :Sexplore 横向打开文件浏览器"
+" \fe 打开文件浏览器
+"nmap <silent> <Leader>fe :Sexplore!<cr>
+"let g:netrw_winsize = 30                    " 设置文件浏览器宽度
+
 " ====未处理的部分===="
 
 " GitGutter           Git辅助插件
@@ -514,6 +649,13 @@ let g:gitgutter_sign_modified_removed = '->'   " 自定义既修改又删除指�
 let g:syntastic_check_on_open = 1              " 默认开启
 let g:syntastic_mode_map      = { 'mode': 'active', 'passive_filetypes': ['html', 'xhtml'] }
 
+
+"
+
+" Ctrl + U            简化全能补全按键 omni插件
+"
+"imap <c-u> <c-x><c-o>
+
 " ==================== Custom shortcut key 自定义快捷键 =================== "
 
 "关闭方向健"
@@ -525,6 +667,12 @@ imap <Left> <Nop>
 imap <Right> <Nop>
 imap <Up> <Nop>
 imap <Down> <Nop>
+
+" Ctrl + hjkl 改为切换窗口键"
+map <c-h> <esc><c-w>h
+map <c-l> <esc><c-w>l
+map <c-k> <esc><c-w>k
+map <c-j> <esc><c-w>j
 
 "交换上下行切换的物理切换与逻辑切换"
 nnoremap k gk
@@ -539,6 +687,10 @@ nnoremap tO O<Esc>
 "关闭上次搜索的高亮"
 noremap <silent><leader>/ :nohls<CR>
 
+" 保证缩进调整后，还是选中状态"
+vnoremap < <gv
+vnoremap > >gv
+
 "没有权限时保存"
 cmap w!! w !sudo tee >/dev/null %
 
@@ -549,17 +701,11 @@ nnoremap U <C-r>
 nmap <c-]> g<c-]>
 vmap <c-]> g<c-]>
 
-" 插入模式 Ctrl + hjkl  向上下左右移动一格
-imap <c-h> <Left>
-imap <c-j> <Down>
-imap <c-k> <Up>
-imap <c-l> <Right>
+" Shift + J            向下滚屏 8行
+map <s-j> <esc>8j<cr>
 
-" Ctrl + J            向下滚屏
-map <c-j> <c-d>
-
-" Ctrl + K            向上滚屏
-map <c-k> <c-u>
+" Shift + K            向上滚屏 8行
+map <s-k> <esc>8k<cr>
 
 " \c                  复制至公共剪贴板
 vmap <leader>c "+y
@@ -571,12 +717,6 @@ nmap <leader>a <esc>ggVG"+y<esc>
 imap <leader>v <esc>"+p
 nmap <leader>v "+p
 vmap <leader>v "+p
-
-" \tl                 打开/关闭Tags窗口，在右侧栏显示 [Tagbar插件]
-nmap <leader>tl :TagbarToggle<cr><c-w><c-l>
-
-" \fe                 打开文件编码窗口，在右侧栏显示 [FencView插件]
-nmap <leader>fe :FencView<cr>
 
 " \mp                 生成Promptline脚本文件，用于个性化终端操作 [Promptline插件 ]
 nmap <leader>mp :!rm ~/backup/.promptline<cr><esc>:PromptlineSnapshot ~/backup/.promptline airline<cr>
@@ -613,21 +753,18 @@ nmap <leader>ra <esc><Leader>rt<esc><Leader>rb<esc><Leader>rm<esc>gg=G<esc>
 
 " \ev                 编辑当前所使用的Vim配置文件
 nmap <silent> <Leader>ev <esc>:e $MYVIMRC<cr>
-nmap <silent> <Leader>es <esc>:source $MYVIMRC<cr>
 
-" \mm
-nmap <leader>mm :!../make !../make install<cr>
-
-" =========================== 加载自定义工程配置文件 ======================== "
-
-if g:isWIN
-    if filereadable($VIM.'/_self.vim')
-        source $VIM/_self.vim
-    end
-else
-    if filereadable($HOME.'/.self.vim')
-        source /usr/share/vim/vimrc
-        source $HOME/.self.vim
-    end
-end
-
+" ========================== about make 编译相关 ======================================= "
+" 在程序工程目录下的workspace.vim中，需要编写如下命令，其中的路径要填写为当前程序路径"
+" \mm 使用make编译当前工程
+" \mc 使用make clean清空当前工程
+" \mi 使用make install安装当前工程二进制文件
+"nnoremap <silent> <Leader>mm :wa<cr> :make -C ~/project/<cr> :cw<cr>
+"nnoremap <silent> <Leader>mc :make clean -C ~/project/<cr> :cw<cr>
+"nnoremap <silent> <Leader>mi :make install -C ~/project/<cr> :cw<cr>
+" 注意，若向使:cw正常跳转到出错文件，需要将make输出信息设置为英文，如在.bashrc中添加:
+" export LANGUAGE=en_US.UTF-8
+" \mp 上一项错误项
+" \mn 下一项错误项
+noremap <Leader>mp :cp<cr>
+noremap <Leader>mn :cn<cr>
