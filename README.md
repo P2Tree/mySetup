@@ -6,3 +6,10 @@ Because some of setting about vimrc in termial is distinguish with Gvim in deskt
 I also set my bashrc in this repo, you can delete it if you don't need it.
 
 molokai.vim is my favourite theme in vim.
+
+- mv `vim/` to your home directory and rename it with `.vim/`;
+
+- mv `vimrc` to your home directory and rename it with `.vimrc`;
+
+- if you like, you can mv `bashrc` to your home directory and rename it with `.bashrc`, replace your old `.bashrc` and then `source .bashrc` of it;
+

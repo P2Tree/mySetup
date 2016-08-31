@@ -90,29 +90,8 @@ alias la='ls -A'
 alias l='ls -CF'
 alias mv='mv -i'
 alias cp='cp -i'
-
-mkdir -p /tmp/trash
-alias rm=trash
-alias r=trash
-alias rl='ls /tmp/trash'
-alias ur=undelfile
-
-undelfile()
-{
-    mv -i /tmp/trash/$@ ./
-}
-
-trash()
-{
-    filename=$@_`date "+%Y%m%d-%H:%M:%S"` 
-    mv $@ /tmp/trash/$filename
-}
-
-cleartrash()
-{
-    read -p "clear sure? [y/n]" confirm
-    [ $confirm == 'y' ] || [ $confirm == 'Y' ] && /usr/bin/rm -rf /tmp/trash/*
-}
+alias rm='rm -i'    # in default remove a directory will be confirmed every files in the directory, 
+                    # if you are not willing to entry 'y' in every files, you can use `sudo rm filename` to achieve;
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -144,5 +123,6 @@ export TERM="screen-256color"
 
 export ARCH=arm
 export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-none-linux-gnueabi-
-export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-toolchain/bin:$PATH
+export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin:/home/pwe/forlinx/uboot2015-04/tools:$PATH
 
+export LANGUAGE=en_US.UTF-8
