@@ -12,11 +12,15 @@
 "   -- Brief --
 "   这个配置文件包含了所有我使用的vim所应该有的配置，包括通用配置、插件、
 "   快捷键映射、外部配置文件引用、自定义快捷键等。
-"   在第一次使用时，需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
+"   如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
+"       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"   然后需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
 "   用的插件，然后运行"PluginInstall"来安装插件。
 "
-"   When you first use this .vimrc, you should find the part named
-"   \"Vundle\" in it. And then comment plugins you don't needed and
+"   When you first use this .vimrc, you should enter this command in your
+"   shell:
+"       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"   and then, find the part named \"Vundle\" in it and comment plugins you don't needed and
 "   uncomment the needed. Finally, run \"PluginInstall" to instll Plugins.
 "
 "   -- Contents --
@@ -379,49 +383,12 @@ if g:isGUI
     " set cursorcolumn       " 高亮突出当前列
 endif
 
-" =============== Auto Pair 引号 && 括号自动匹配 ===================== "
-
-inoremap ( <c-r>=AutoPair('(', ')')<CR>
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { <c-r>=AutoPair('{', '}')<CR>
-inoremap } <c-r>=ClosePair('}')<CR>
-inoremap [ <c-r>=AutoPair('[', ']')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap " <c-r>=SamePair('"')<CR>
-inoremap ' <c-r>=SamePair("'")<CR>
-inoremap ` <c-r>=SamePair('`')<CR>
-
-function! AutoPair(open, close)
-    let line = getline('.')
-    if col('.') > strlen(line) || line[col('.') - 1] == ' '
-        return a:open.a:close."\<ESC>i"
-    else
-        return a:open
-    endif
-endf
-
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
-
-function! SamePair(char)
-    let line = getline('.')
-    if col('.') > strlen(line) || line[col('.') - 1] == ' '
-        return a:char.a:char."\<ESC>i"
-    elseif line[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
-
-
 " ==== Environment deployment of Vundle and Plugins Vundle ============= "
+" [COMETOVUNDLE]
 " ==== 环境配置以及插件 ===== "
+" 如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
+" `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+"
 " 在命令行模式下输入：
 " PluginInstall         " 安装下边罗列出的所有插件
 " PluginClean           " 清除下边注释或未罗列但在系统中存在的插件
@@ -448,7 +415,9 @@ Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
 Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
-Plugin 'terryma/vim-multiple-cursors'       " 同时操作多行，即多光标操作
+Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
+"Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
+"Plugin 'scrooloose/syntastic'              " 语法检查插件，由YCM代替，暂时屏蔽
 call vundle#end()
 
 filetype plugin indent on
@@ -628,6 +597,10 @@ let Tlist_Process_File_Always = 1           " 始终解析文件中的tag，而�
 "nmap <silent> <Leader>fe :Sexplore!<cr>
 "let g:netrw_winsize = 30                    " 设置文件浏览器宽度
 
+" Plugin:Syntastic插件"
+" Syntastic           语法检查
+" let g:syntastic_check_on_open = 1              " 默认开启
+
 " ====未处理的部分===="
 
 " GitGutter           Git辅助插件
@@ -639,9 +612,6 @@ let g:gitgutter_sign_modified         = '>'    " 自定义修改指示符
 let g:gitgutter_sign_removed          = '-'    " 自定义删除指示符
 let g:gitgutter_sign_modified_removed = '->'   " 自定义既修改又删除指示符
 
-" Ctrl + U            简化全能补全按键 omni插件
-"
-"imap <c-u> <c-x><c-o>
 
 " ==================== Custom shortcut key 自定义快捷键 =================== "
 
