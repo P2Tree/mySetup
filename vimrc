@@ -383,47 +383,6 @@ if g:isGUI
     " set cursorcolumn       " 高亮突出当前列
 endif
 
-" =============== Auto Pair 引号 && 括号自动匹配 ===================== "
-
-inoremap ( <c-r>=AutoPair('(', ')')<CR>
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap { <c-r>=AutoPair('{', '}')<CR>
-inoremap } <c-r>=ClosePair('}')<CR>
-inoremap [ <c-r>=AutoPair('[', ']')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap " <c-r>=SamePair('"')<CR>
-inoremap ' <c-r>=SamePair("'")<CR>
-inoremap ` <c-r>=SamePair('`')<CR>
-
-function! AutoPair(open, close)
-    let line = getline('.')
-    if col('.') > strlen(line) || line[col('.') - 1] == ' '
-        return a:open.a:close."\<ESC>i"
-    else
-        return a:open
-    endif
-endf
-
-function! ClosePair(char)
-    if getline('.')[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
-
-function! SamePair(char)
-    let line = getline('.')
-    if col('.') > strlen(line) || line[col('.') - 1] == ' '
-        return a:char.a:char."\<ESC>i"
-    elseif line[col('.') - 1] == a:char
-        return "\<Right>"
-    else
-        return a:char
-    endif
-endf
-
-
 " ==== Environment deployment of Vundle and Plugins Vundle ============= "
 " ==== 环境配置以及插件 ===== "
 " 如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
@@ -455,6 +414,8 @@ Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
 Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
+Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
+"Plugin 'tpope/vim-surround'                 "" 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
 call vundle#end()
 
 filetype plugin indent on
