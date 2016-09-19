@@ -418,6 +418,7 @@ Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
 "Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
 "Plugin 'scrooloose/syntastic'              " 语法检查插件，由YCM代替，暂时屏蔽
+Plugin 'ctrlpvim/ctrlp.vim'                 " 文件模糊搜索插件，可以用来替换command-Tnnk
 call vundle#end()
 
 filetype plugin indent on
@@ -588,6 +589,23 @@ let Tlist_File_Fold_Auto_Close = 1          " 当同时显示多个文件中的t
 let Tlist_Process_File_Always = 1           " 始终解析文件中的tag，而不管taglist是否打开
 "let Tlist_Use_Horiz_Window = 1             " 设置taglist横向显示
 
+" Plugin:ctrlp插件"
+" 文件模糊搜索，可以搜索文件、buffer、mru、tag等
+" 原始为kien/ctrlp，使用改进版ctrlpvim/ctrlp.vim
+" 
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPMRU<cr>
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \}
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_bottom = 1
+let g:ctrlp_max_height = 15
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_mruf_max = 500
+let g:ctrlp_follow_symlinks = 1
 
 " Plugin:newtrw插件"
 " 已经成为vim中的固定插件，文件浏览器，与nerdtree作用一样
