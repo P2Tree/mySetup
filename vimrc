@@ -54,6 +54,10 @@
 " Ctrl + e                  --向下翻滚页面一行，光标不移动
 " Ctrl + y                  --向上翻滚页面一行，光标不移动
 "
+" Ctrl + n                  --多光标选中与当前光标字段相同的下一个字段 [vim-multiple-cursors]
+" Ctrl + p                  --多光标选中与当前光标字段相同的上一个字段 [vim-multiple-cursors]
+" Ctrl + x                  --取消当前多光标选中的字段 [vim-multiple-cursors]
+"
 " ---------- Shift系按键 ----------
 "
 " Shift + >>                 --当前行缩进增加一个单位  [Normal]
@@ -104,13 +108,14 @@
 " <Leader>tg                --跳转到当前光标所在处tag对应的定义处   [taglist]
 " <Leader>tr                --跳回到上一个tag列表所在位置           [taglist]
 "
-" ---------- 功能键位 ----------
-"
-" <F5>                      --刷新ctags缓存
-"
-" ---------- 补全命令 ----------
+" <Leader>p                 --快速查找文件目录下的文件  [ctrlp.vim]
 "
 " <Leader><Tab>              --补全snips脚本   [ultisnips]
+"
+" ---------- 功能键位 ----------
+"
+" <F5>
+" --刷新ctags缓存，在工程目录下使用tag类插件需要用到，如taglist
 "
 " ---------- 格式化命令 ----------
 "
@@ -394,6 +399,7 @@ endif
 " PluginClean           " 清除下边注释或未罗列但在系统中存在的插件
 " PluginUpdate          " 更新下边罗列出的所有插件
 
+
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -412,13 +418,17 @@ Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
 Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
 "Plugin 'jlanzarotta/bufexplorer'            " 辅助实现文件buffer显示，和minibufexpl.vim一样的功能，为了省地方，选择列minibufexpl.vim
-Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack
+Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack，替代grep.vim和ack.vim插件
+"Plugin 'mileszs/ack.vim'                   " 文件内容查找，由ctrlsf替代，暂时屏蔽
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
-"Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
+Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
 "Plugin 'scrooloose/syntastic'              " 语法检查插件，由YCM代替，暂时屏蔽
 Plugin 'ctrlpvim/ctrlp.vim'                 " 文件模糊搜索插件，可以用来替换command-Tnnk
+Plugin 'terryma/vim-multiple-cursors'       " 多光标操作插件
+
+
 call vundle#end()
 
 filetype plugin indent on
@@ -426,6 +436,13 @@ filetype on
 
 " ---------- 插件配置选项 ----------"
 " 可以通过搜索：Plugin:[plugin name]来全文快速查找插件配置
+"
+" # 部分插件需要系统软件的支持，罗列在这里：
+" ctrlsf 插件需要系统安装有 ack, sudo apt-get install ack-grep
+" Ultisnips 插件需要系统.vim文件夹中设置好 snips脚本
+" taglist 插件需要系统安装有 ctags，sudo apt-get install ctags，并且在使用前在工程中创建ctags标签文件
+" YCM 插件需要系统的支持，TODO
+
 
 " Plugin:vim-powerline (https://github.com/Lokaltog/vim-powerline)"
 " 加入powerline状态栏"
@@ -486,8 +503,11 @@ let g:NERDAltDelims_c = 1                        " 使用c的分隔符作为默�
 let g:NERDCustomDelimiters = { 'c': { 'left': '/*', 'right': '*/'} }   " 用户定义
 let g:NERDCommentEmptyLines = 1                  " 允许注释空行
 
-" Plugin:Ultisnips (https://github.com/honza/vim-snipets)"
+" Plugin:Ultisnips (https://github.com/SirVer/ultisnips)
 " 自动补全插件
+" TODO:mysnippets需要备份，或者：
+" 在安装插件后，在目录`~/.vim/bundle/ultisnips/`下，新建目录`mysnippets`，在该目录下手动下载snippets
+" 下载地址：https://github.com/honza/vim-snippets
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 " UltiSnips模板补全快捷键与YCM快捷键有冲突，所以重新设定"
 let g:UltiSnipsExpandTrigger="<leader><tab>"
@@ -554,7 +574,8 @@ let g:SignatureMap = {
             \ }
 
 " Plugin:taglist.vim (https://github.com/vim-script/taglist.vim)"
-" 用于显示tag的辅助插件，需要系统中有ctags支持
+" 用于显示tag的辅助插件
+" 需要系统中有ctags支持，准确的说是exuberant ctags支持，现在的ctags默认即为exuberant ctags
 " :TlistOpen 用于打开taglist窗口
 " :TlistClose 用于关闭taglist窗口，直接输入q也可以关闭窗口
 " :TlistToggle 若打开则关闭，若关闭则打开
@@ -606,6 +627,15 @@ let g:ctrlp_max_height = 15
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_mruf_max = 500
 let g:ctrlp_follow_symlinks = 1
+
+" Plugin:vim-multiple-cursors插件
+" 多光标操作插件
+" 选中多个相同字段后，需要按c进入替换状态
+let g:multi_cursor_usr_default_mapping=0
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 " Plugin:newtrw插件"
 " 已经成为vim中的固定插件，文件浏览器，与nerdtree作用一样
