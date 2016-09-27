@@ -505,7 +505,7 @@ let g:NERDCommentEmptyLines = 1                  " 允许注释空行
 
 " Plugin:Ultisnips (https://github.com/SirVer/ultisnips)
 " 自动补全插件
-" TODO:mysnippets需要备份，或者：
+" ~/.vim/bundle/ultisnips/mysnippets需要备份，或者：
 " 在安装插件后，在目录`~/.vim/bundle/ultisnips/`下，新建目录`mysnippets`，在该目录下手动下载snippets
 " 下载地址：https://github.com/honza/vim-snippets
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
