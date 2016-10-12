@@ -58,6 +58,8 @@
 " Ctrl + p                  --多光标选中与当前光标字段相同的上一个字段 [vim-multiple-cursors]
 " Ctrl + x                  --取消当前多光标选中的字段 [vim-multiple-cursors]
 "
+" Ctrl + Tab                --切换到下一个buffer [airline]
+" Ctrl + Shift + Tab        --切换到上一个buffer [airline]
 " ---------- Shift系按键 ----------
 "
 " Shift + >>                 --当前行缩进增加一个单位  [Normal]
@@ -97,10 +99,10 @@
 " <Leader>cA                 --为当前行在行尾添加注释 [nerd commenter]
 " <Leader>ca                 --切换注释标记风格 [nerd commenter]
 "
-" <Leader>bl                 --开启或关闭多文件标签  [MiniBufExplorer]
-" <Leader>bn                 --切换到下一个文件标签  [MiniBufExplorer]
-" <Leader>bm                 --切换到上一个文件标签  [MiniBufExplorer]
-" <Leader>bd                 --关闭当前页文件标签    [MiniBufExplorer]
+" "<Leader>bl                 --开启或关闭多文件标签  [MiniBufExplorer]
+" "<Leader>bn                 --切换到下一个文件标签  [MiniBufExplorer]
+" "<Leader>bm                 --切换到上一个文件标签  [MiniBufExplorer]
+" "<Leader>bd                 --关闭当前页文件标签    [MiniBufExplorer]
 "
 " <Leader>sf                 --查找光标所在单词在工程中其他出现位置 ·[CtrlSF]
 "
@@ -407,7 +409,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 "Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
+"Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
+Plugin 'vim-airline/vim-airline'            " vim下美观智能任务栏，取代vim-powerline，同时可取代minibufexpl
 Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
 " Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
 Plugin 'Yggdroot/indentLine'                " 缩进指示
@@ -416,8 +419,8 @@ Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，�
 Plugin 'scrooloose/nerdtree'                " 工程目录管理，替代vim中固定的newtrw插件，功能一样
 Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
-Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
-"Plugin 'jlanzarotta/bufexplorer'            " 辅助实现文件buffer显示，和minibufexpl.vim一样的功能，为了省地方，选择列minibufexpl.vim
+"Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
+"Plugin 'jlanzarotta/bufexplorer'            " 辅助实现文件buffer显示，和minibufexpl.vim一样的功能，为了省地方，选择minibufexpl.vim
 Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack，替代grep.vim和ack.vim插件
 "Plugin 'mileszs/ack.vim'                   " 文件内容查找，由ctrlsf替代，暂时屏蔽
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
@@ -446,8 +449,22 @@ filetype on
 
 " Plugin:vim-powerline (https://github.com/Lokaltog/vim-powerline)"
 " 加入powerline状态栏"
-let g:Powerline_colorscheme='solarized256'
+"let g:Powerline_colorscheme='solarized256'
 "
+" Plugin:vim-airline (https://github.com/vim-airline/vim-airline)"
+" 加入airline状态栏
+"let g:airline_powerline_fonts=1 " 字体
+let g:airline#extensions#tabline#enabled=1      " 下边两行为打开tagline功能，方便查看buffer和切换
+let g:airline#extensions#tabline#buffer_nr_show=1
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-s-tab> :bp<CR>
+let g:airline#extensions#whitespace#enabled=0   " 下边两行为关闭状态栏空白符号计数显示
+let g:airline#extensions#whitespace#symbol='!'
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" "
 " Plugin:Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
 " 缩进配对指示插件
 " let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
@@ -523,16 +540,16 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 " :bn                    切换到上一个buffer
 " :bp                    切换到下一个buffer
 " :bd 1                  关闭对应数字的buffer页，1可以替换为其他数字，不加数字为关闭当前buffer
-let g:miniBufExplBuffersNeeded = 1      " 最少有一个buffer时自动开启标签页
-let g:miniBufExplCycleArround = 1           " 允许循环遍历所有标签页
-let g:miniBufExplShowBufNumber = 1      " 取消标签页名称上的数字编号
-let g:miniBufExplorerAutoStart = 1      " 自动打开，0为关闭，1为打开
-let g:miniBufExplorerMoreThanOne = 0    " 控制不允许打开多于一个的minibufexplorer窗口
-map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
-map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
-map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
-map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
-hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
+" let g:miniBufExplBuffersNeeded = 1      " 最少有一个buffer时自动开启标签页
+" let g:miniBufExplCycleArround = 1           " 允许循环遍历所有标签页
+" let g:miniBufExplShowBufNumber = 1      " 取消标签页名称上的数字编号
+" let g:miniBufExplorerAutoStart = 1      " 自动打开，0为关闭，1为打开
+" let g:miniBufExplorerMoreThanOne = 0    " 控制不允许打开多于一个的minibufexplorer窗口
+" map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
+" map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
+" map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
+" map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
+" hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
 "let g:did_minibufexplorer_syntax_inits = 1
 
 " Plugin:ctrlsf (https://github.com/dyng/ctrlsf.vim)"
