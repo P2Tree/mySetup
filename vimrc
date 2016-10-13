@@ -16,12 +16,13 @@
 "       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 "   然后需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
 "   用的插件，然后运行"PluginInstall"来安装插件。
-"
-"   When you first use this .vimrc, you should enter this command in your
-"   shell:
-"       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-"   and then, find the part named \"Vundle\" in it and comment plugins you don't needed and
-"   uncomment the needed. Finally, run \"PluginInstall" to instll Plugins.
+"   如果VIM是用编译的方法安装，需要在安装后对VIM的环境变量做配置，常规的配置
+"   应该是在/etc/profile中加入：
+"       ```
+"       export VIM=/etc/vim
+"       export VIMRUNTIME=/usr/local/share/vim/vim80
+"       ```
+"       然后source /etc/profile
 "
 "   -- Contents --
 "
