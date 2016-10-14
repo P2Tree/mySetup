@@ -126,5 +126,3 @@ export CROSS_COMPILE=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multil
 export PATH=/opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin:/home/pwe/forlinx/uboot2015-04/tools:$PATH
 
 export LANGUAGE=en_US.UTF-8
-
-source /opt/ros/indigo/setup.bash
