@@ -29,20 +29,17 @@ if [ $1 = "bashrc" ]; then
 fi
 
 if [ $1 = "vimrc" ]; then
-	sudo mv ~/.vimrc ~/.vimrc.bak
-	sudo mv ~/.vim/ ~/.vimbak/
+	mv ~/.vimrc ~/.vimrc.bak
+	mv ~/.vim/ ~/.vimbak/
 	echo "old vimrc and .vim folder backup in vimrc.bak and vimbak/."
-	sudo cp ./vimrc ~/.vimrc
-	sudo cp -r ./vim/ ~/.vim/
+	cp ./vimrc ~/.vimrc
+	cp -r ./vim/ ~/.vim/
 	echo "vimrc and vim folder install down."
 	exit 1
 fi
 
 if [ $1 = "sources" ]; then
-	sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-	echo "old sources.list backup in sources.list.bak."
-	sudo cp ./sources.list_of_ubuntu /etc/apt/sources.list
-	echo "sources.list install done."
+	echo "Please install sources.list file by yourself, be attention to your system version"
 	exit 1
 fi
 
