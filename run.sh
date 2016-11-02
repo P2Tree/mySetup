@@ -20,10 +20,10 @@ if [ $# -gt 1 ]; then
 fi
 
 if [ $1 = "bashrc" ]; then
-	sudo mv ~/.bashrc ~/.bashrc.bak
+	mv ~/.bashrc ~/.bashrc.bak
 	echo "old bashrc backup in bashrc.bak."
-	sudo cp ./bashrc ~/.bashrc
-	sudo cp -r ./shells/ ~/.shells/
+	cp ./bashrc ~/.bashrc
+	cp -r ./shells/ ~/.shells/
 	echo "bashrc and shells folder install down."
 	exit 1
 fi
