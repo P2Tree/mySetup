@@ -59,8 +59,7 @@
 " Ctrl + p                  --多光标选中与当前光标字段相同的上一个字段 [vim-multiple-cursors]
 " Ctrl + x                  --取消当前多光标选中的字段 [vim-multiple-cursors]
 "
-" Ctrl + Tab                --切换到下一个buffer [airline]
-" Ctrl + Shift + Tab        --切换到上一个buffer [airline]
+" Shift + Tab                --切换到下一个buffer [airline]
 " ---------- Shift系按键 ----------
 "
 " Shift + >>                 --当前行缩进增加一个单位  [Normal]
@@ -114,6 +113,16 @@
 " <Leader>p                 --快速查找文件目录下的文件  [ctrlp.vim]
 "
 " <Leader><Tab>              --补全snips脚本   [ultisnips]
+"
+" --以下这几个是插件：easymotion的快捷键，参见后边插件配置部分说明
+" <Leader><Leader>w
+" <Leader><Leader>b
+" <Leader><Leader>s
+" <Leader><Leader>h
+" <Leader><Leader>l
+" <Leader><Leader>j
+" <Leader><Leader>k
+" <Leader><Leader>.
 "
 " ---------- 功能键位 ----------
 "
@@ -427,11 +436,13 @@ Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，�
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
-Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
+"Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
 "Plugin 'scrooloose/syntastic'              " 语法检查插件，由YCM代替，暂时屏蔽
 Plugin 'ctrlpvim/ctrlp.vim'                 " 文件模糊搜索插件，可以用来替换command-Tnnk
 Plugin 'terryma/vim-multiple-cursors'       " 多光标操作插件
-
+"Plugin 'Valloric/YouCompleteMe'            " 不是我不装这个神器，我这儿网速渣，clang下载太慢，每次配置系统后，实在是没太多时间配置这一个插件，只能曲线救国
+Plugin 'scrooloose/syntastic'               " 语法检查插件，最新的YouCompleteMe也集成了这个插件
+Plugin 'Lokaltog/vim-easymotion'            " 快速移动插件
 
 call vundle#end()
 
@@ -457,8 +468,7 @@ filetype on
 "let g:airline_powerline_fonts=1 " 字体
 let g:airline#extensions#tabline#enabled=1      " 下边两行为打开tagline功能，方便查看buffer和切换
 let g:airline#extensions#tabline#buffer_nr_show=1
-nnoremap <C-tab> :bn<CR>
-nnoremap <C-s-tab> :bp<CR>
+nnoremap <s-tab> :bn<CR>
 let g:airline#extensions#whitespace#enabled=0   " 下边两行为关闭状态栏空白符号计数显示
 let g:airline#extensions#whitespace#symbol='!'
 if !exists('g:airline_symbols')
@@ -663,9 +673,56 @@ let g:multi_cursor_quit_key='<Esc>'
 "nmap <silent> <Leader>fe :Sexplore!<cr>
 "let g:netrw_winsize = 30                    " 设置文件浏览器宽度
 
-" Plugin:Syntastic插件"
+" Plugin:Syntastic插件(https://github.com/scrooloose/syntastic.git)"
 " Syntastic           语法检查
-" let g:syntastic_check_on_open = 1              " 默认开启
+" 语法检查是自动启动的
+" <leader>s  打开错误界面
+" <leader>sn 错误界面的下一条位置
+" <leader>sp 错误界面的上一条位置
+nnoremap <Leader>s :call ToggleErrors()<cr>
+nnoremap <Leader>sn :lnext<cr>
+nnoremap <Leader>sp :lprevious<cr>
+"关于开关配置
+let g:syntastic_error_symbol='>>'
+let g:syntastic_warning_symbol='>'
+let g:syntastic_check_on_open=1             "默认开启
+let g:syntastic_check_on_wq=0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_python_checkers=['pyflakes']    "使用pyflakes，速度比pylint快
+let g:syntastic_javascript_checkers=['jsl','jshint']
+let g:syntastic_html_checkers=['tidy','jshint']
+"修改背景高亮色，适应主题
+highlight SyntasticErrorSign guifg=white guibg=black
+"关于错误列表
+let g:syntastic_always_populate_loc_list=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_loc_list_height=5
+function! ToggleErrors()
+    let old_last_winnr=winnr('$')
+    lclose
+    if old_last_winnr==winnr('$')
+        "打开错误界面
+        Errors
+    endif
+endfunction
+
+" Plugin:vim-easymotion插件 (https://github.com/Lokaltog/vim-easymotion.git)
+" 可以变换一些位置的字母为高亮特殊字符，然后直接跳转
+" <Leader><Leader>w  向下跳转到指定字符处
+" <Leader><Leader>b  向上跳转到指定字符处
+" <Leader><Leader>s  指定搜索一个字符，将附近所有该字符重新变换，直接跳转
+" <Leader><Leader>j   向下跳转到指定字符所在行行首
+" <Leader><Leader>k  向上跳转到指定字符所在行行首
+" <Leader><Leader>h  光标所在行光标之前的单词跳转
+" <Leader><Leader>l  光标所在行光标之后的单词跳转
+" <Leader><Leader>.  重复上一个跳转
+let g:EasyMotion_smartcase=1
+map <Leader><Leader>h <Plug>(easymotion-linebackward)
+map <Leader><Leader>j <Plug>(easymotion-j)
+map <Leader><Leader>k <Plug>(easymotion-k)
+map <Leader><Leader>l <Plug>(easymotion-lineforward)
+map <Leader><Leader>. <Plug>(easymotion-repeat)
+
 
 " ====未处理的部分===="
 
@@ -740,9 +797,6 @@ nmap <leader>a <esc>ggVG"+y<esc>
 imap <leader>v <esc>"+p
 nmap <leader>v "+p
 vmap <leader>v "+p
-
-" \mp                 生成Promptline脚本文件，用于个性化终端操作 [Promptline插件 ]
-nmap <leader>mp :!rm ~/backup/.promptline<cr><esc>:PromptlineSnapshot ~/backup/.promptline airline<cr>
 
 " \gi                 开启或关闭GitGutter [GitGutter插件]
 nmap <leader>gi :GitGutterToggle<cr>:GitGutterSignsToggle<cr>:GitGutterLineHighlightsToggle<cr>

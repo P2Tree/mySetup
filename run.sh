@@ -20,20 +20,20 @@ if [ $# -gt 1 ]; then
 fi
 
 if [ $1 = "bashrc" ]; then
-	sudo mv ~/.bashrc ~/.bashrc.bak
+	mv ~/.bashrc ~/.bashrc.bak
 	echo "old bashrc backup in bashrc.bak."
-	sudo cp ./bashrc ~/.bashrc
-	sudo cp -r ./shells/ ~/.shells/
+	cp ./bashrc ~/.bashrc
+	cp -r ./shells/ ~/.shells/
 	echo "bashrc and shells folder install down."
 	exit 1
 fi
 
 if [ $1 = "vimrc" ]; then
-	sudo mv ~/.vimrc ~/.vimrc.bak
-	sudo mv ~/.vim/ ~/.vimbak/
+	mv ~/.vimrc ~/.vimrc.bak
+	mv ~/.vim/ ~/.vimbak/
 	echo "old vimrc and .vim folder backup in vimrc.bak and vimbak/."
-	sudo cp ./vimrc ~/.vimrc
-	sudo cp -r ./vim/ ~/.vim/
+	cp ./vimrc ~/.vimrc
+	cp -r ./vim/ ~/.vim/
 	echo "vimrc and vim folder install down."
 	exit 1
 fi

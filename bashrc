@@ -16,10 +16,10 @@ export NICKNAME="PWE"
 
 # Distribute bashrc into smaller, more specific files
 
-source ~/bashrc/shells/defaults
-source ~/bashrc/shells/functions
-source ~/bashrc/shells/alias
-source ~/bashrc/shells/prompt   # Fancy prompt with time and current working dir
+source ~/.shells/defaults
+source ~/.shells/functions
+source ~/.shells/alias
+source ~/.shells/prompt   # Fancy prompt with time and current working dir
 
 # Welcome message
 echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
