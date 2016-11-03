@@ -39,10 +39,7 @@ if [ $1 = "vimrc" ]; then
 fi
 
 if [ $1 = "sources" ]; then
-	sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-	echo "old sources.list backup in sources.list.bak."
-	sudo cp ./sources.list_of_ubuntu /etc/apt/sources.list
-	echo "sources.list install done."
+	echo "Please install sources.list file by yourself, be attention to your system version"
 	exit 1
 fi
 
