@@ -50,6 +50,8 @@
 " Ctrl + k                   --切换到上边的分屏窗口
 " Ctrl + j                  --切换到下边的分屏窗口
 "
+" Ctrl + d                  --关闭当前标签窗口，如果只剩最后一个，则退出vim
+"
 " Ctrl + o                  --返回光标上次停留位置，另外''也可以实现返回，但只能返回一次
 "
 " Ctrl + e                  --向下翻滚页面一行，光标不移动
@@ -99,10 +101,18 @@
 " <Leader>cA                 --为当前行在行尾添加注释 [nerd commenter]
 " <Leader>ca                 --切换注释标记风格 [nerd commenter]
 "
+" 这几个关于miniBufExplorer的快捷键暂时用不了，因为不再启用这个插件，由airline替代
+" 功能键由其他几个替代，如后
 " "<Leader>bl                 --开启或关闭多文件标签  [MiniBufExplorer]
 " "<Leader>bn                 --切换到下一个文件标签  [MiniBufExplorer]
 " "<Leader>bm                 --切换到上一个文件标签  [MiniBufExplorer]
 " "<Leader>bd                 --关闭当前页文件标签    [MiniBufExplorer]
+"
+" "<Shift-Tab>              --向前轮询切换每一个标签
+"
+" 
+" "<Leader>vsp                --将当前所在标签文件复制并左右分割
+" "<Leader>sp               --将当前所在标签文件复制并上下分割
 "
 " <Leader>sf                 --查找光标所在单词在工程中其他出现位置 ·[CtrlSF]
 "
@@ -753,6 +763,16 @@ map <c-h> <esc><c-w>h
 map <c-l> <esc><c-w>l
 map <c-k> <esc><c-w>k
 map <c-j> <esc><c-w>j
+
+map <c-d> <esc><c-w>q
+
+" Ctrl + vsp 为将当前窗口左右复制分割
+" Ctrl + sp 为将当前窗口上下复制分割
+map <Leader>vsp <esc><c-w>v
+map <Leader>sp <esc><c-w>s
+" 另外备注：
+" 打开新文件并左右分割：:vsp filename
+" 打开新文件并上下分割：:sp filename
 
 "交换上下行切换的物理切换与逻辑切换"
 nnoremap k gk
