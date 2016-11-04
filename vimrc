@@ -110,7 +110,6 @@
 "
 " "<Shift-Tab>              --向前轮询切换每一个标签
 "
-" 
 " "<Leader>vsp                --将当前所在标签文件复制并左右分割
 " "<Leader>sp               --将当前所在标签文件复制并上下分割
 "
@@ -133,6 +132,9 @@
 " <Leader><Leader>j
 " <Leader><Leader>k
 " <Leader><Leader>.
+"
+" <Leader>yf                --跳转到当前光标所在关键词定义或声明处  [YouCompleteMe]
+" <Leader>yd                --打开错误界面  [YouCompleteMe]
 "
 " ---------- 功能键位 ----------
 "
@@ -447,11 +449,10 @@ Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签�
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
 "Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
-"Plugin 'scrooloose/syntastic'              " 语法检查插件，由YCM代替，暂时屏蔽
 Plugin 'ctrlpvim/ctrlp.vim'                 " 文件模糊搜索插件，可以用来替换command-Tnnk
 Plugin 'terryma/vim-multiple-cursors'       " 多光标操作插件
-"Plugin 'Valloric/YouCompleteMe'            " 不是我不装这个神器，我这儿网速渣，clang下载太慢，每次配置系统后，实在是没太多时间配置这一个插件，只能曲线救国
-Plugin 'scrooloose/syntastic'               " 语法检查插件，最新的YouCompleteMe也集成了这个插件
+Plugin 'Valloric/YouCompleteMe'            " 
+"Plugin 'scrooloose/syntastic'               " 语法检查插件，最新的YouCompleteMe也集成了这个插件
 Plugin 'Lokaltog/vim-easymotion'            " 快速移动插件
 
 call vundle#end()
@@ -466,7 +467,7 @@ filetype on
 " ctrlsf 插件需要系统安装有 ack, sudo apt-get install ack-grep
 " Ultisnips 插件需要系统.vim文件夹中设置好 snips脚本
 " taglist 插件需要系统安装有 ctags，sudo apt-get install ctags，并且在使用前在工程中创建ctags标签文件
-" YCM 插件需要系统的支持，TODO
+" YCM 插件需要系统的支持，需要系统vim支持python，注意不是python3，需要clang支持，是唯一需要编译才可以运行的插件
 
 
 " Plugin:vim-powerline (https://github.com/Lokaltog/vim-powerline)"
@@ -683,38 +684,75 @@ let g:multi_cursor_quit_key='<Esc>'
 "nmap <silent> <Leader>fe :Sexplore!<cr>
 "let g:netrw_winsize = 30                    " 设置文件浏览器宽度
 
-" Plugin:Syntastic插件(https://github.com/scrooloose/syntastic.git)"
+" Plugin:YouCompleteMe插件 (https://github.com/Valloric/YouCompleteMe)"
+" 自动补全，定义跳转，语法检查插件
+" 安装说明：
+"       - 1.通过.vimrc中`PluginInstall`下载插件，需要一定的时间
+"       - 2.开始安装插件: （需要一定时间）
+"           ```
+"               cd ~/.vim/bundle/YouCompleteMe
+"               git submodule update --init --recursive
+"               ./install.py --clang-completer
+"           ```
+"           其中的`--clang-completer`是c-family语言支持，如果需要c#补全，需要另外加`--omnisharp-completer`
+"           如果系统中已经有clang，加上`--system-libclang`
+"       - 3.安装完成后，可能找不到c-family支持的东西，需要在`~/.vim/bundle/YouCompleteMe`中链接
+"           `~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/`
+"           ```
+"               cd ~/.vim/bundle/YouCompleteMe
+"               ln -s ./third_party/ycmd/cpp/
+"           ```
+"       - 4.可能需要配置`~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py`，实现一些特性
+"           我在我的repo中增加了我的ycm_extra_conf.py，直接替换即可
+"       -
+"       5.参考的网页：
+"           [1](http://blog.miskcoo.com/2015/12/vim-plugin-youcompleteme)
+"           [2](http://blog.jobbole.com/58978)
+"
+" <leader>yf    跳转到定义或者跳转到声明
+" <leader>yd    打开错误信息界面
+" <Ctrl>o       返回跳转
+" <Ctrl>i       撤销返回跳转，这两条与vim的系统跳转控制是一致的
+nnoremap <Leader>yf :YcmCompleter GoToDefinitionElseDeclaration<cr>
+nmap <Leader>yd :YcmDiags<cr>
+let g:ycm_key_invoke_completion= '<C-a>'    " 主动调用补全，对于一些c/c++全局函数，是不会自动补全的，需要主动补全
+let g:ycm_global_ycm_extra_conf='/home/pwe/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_error_symbol='>>'
+let g:ycm_warning_symbol='>*'
+
+" Plugin:syntastic插件(https://github.com/scrooloose/syntastic)"
 " Syntastic           语法检查
+" 由YouCompleteMe功能代替
 " 语法检查是自动启动的
 " <leader>s  打开错误界面
 " <leader>sn 错误界面的下一条位置
 " <leader>sp 错误界面的上一条位置
-nnoremap <Leader>s :call ToggleErrors()<cr>
-nnoremap <Leader>sn :lnext<cr>
-nnoremap <Leader>sp :lprevious<cr>
+"nnoremap <Leader>s :call ToggleErrors()<cr>
+"nnoremap <Leader>sn :lnext<cr>
+"nnoremap <Leader>sp :lprevious<cr>
 "关于开关配置
-let g:syntastic_error_symbol='>>'
-let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=1             "默认开启
-let g:syntastic_check_on_wq=0
-let g:syntastic_enable_highlighting=1
-let g:syntastic_python_checkers=['pyflakes']    "使用pyflakes，速度比pylint快
-let g:syntastic_javascript_checkers=['jsl','jshint']
-let g:syntastic_html_checkers=['tidy','jshint']
+"let g:syntastic_error_symbol='>>'
+"let g:syntastic_warning_symbol='>'
+"let g:syntastic_check_on_open=1             "默认开启
+"let g:syntastic_check_on_wq=0
+"let g:syntastic_enable_highlighting=1
+"let g:syntastic_python_checkers=['pyflakes']    "使用pyflakes，速度比pylint快
+"let g:syntastic_javascript_checkers=['jsl','jshint']
+"let g:syntastic_html_checkers=['tidy','jshint']
 "修改背景高亮色，适应主题
-highlight SyntasticErrorSign guifg=white guibg=black
+"highlight SyntasticErrorSign guifg=white guibg=black
 "关于错误列表
-let g:syntastic_always_populate_loc_list=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_loc_list_height=5
-function! ToggleErrors()
-    let old_last_winnr=winnr('$')
-    lclose
-    if old_last_winnr==winnr('$')
-        "打开错误界面
-        Errors
-    endif
-endfunction
+"let g:syntastic_always_populate_loc_list=0
+"let g:syntastic_auto_loc_list=0
+"let g:syntastic_loc_list_height=5
+"function! ToggleErrors()
+"    let old_last_winnr=winnr('$')
+"    lclose
+"    if old_last_winnr==winnr('$')
+"        "打开错误界面
+"        Errors
+"    endif
+"endfunction
 
 " Plugin:vim-easymotion插件 (https://github.com/Lokaltog/vim-easymotion.git)
 " 可以变换一些位置的字母为高亮特殊字符，然后直接跳转
