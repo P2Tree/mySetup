@@ -23,8 +23,7 @@ if [ $1 = "bashrc" ]; then
 	mv ~/.bashrc ~/.bashrc.bak
 	echo "old bashrc backup in bashrc.bak."
 	cp ./bashrc ~/.bashrc
-	cp -r ./shells/ ~/.shells/
-	echo "bashrc and shells folder install down."
+	echo "bashrc install down."
 	exit 1
 fi
 
