@@ -29,11 +29,13 @@ fi
 
 if [ $1 = "vimrc" ]; then
 	mv ~/.vimrc ~/.vimrc.bak
-	mv ~/.vim/ ~/.vimbak/
-	echo "old vimrc and .vim folder backup in vimrc.bak and vimbak/."
 	cp ./vimrc ~/.vimrc
-	cp -r ./vim/ ~/.vim/
-	echo "vimrc and vim folder install down."
+	echo "vimrc install down."
+    read -p "Do you want to install .vim/ folder? [y/n]" confirmInstall_vim
+    if [ $confirmInstall_vim -eq "y" -a $confirmInstall_vim -eq "Y" ]
+        mv ~/.vim/ ~/.vimbak/
+        cp -r ./vim/ ~/.vim/
+        echo "vim folder install down."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     echo "vim plugin: Vundle install down."
     echo "you should be install other plugins in .vimrc with comand: PluginInstall"
