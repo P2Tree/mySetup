@@ -36,7 +36,7 @@ if [ $1 = "vimrc" ]; then
         mv ~/.vim/ ~/.vimbak/
         cp -r ./vim/ ~/.vim/
         echo "vim folder install down."
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> /dev/null
     echo "vim plugin: Vundle install down."
     echo "you should be install other plugins in .vimrc with comand: PluginInstall"
 	exit 1
