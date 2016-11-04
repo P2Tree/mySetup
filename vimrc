@@ -546,7 +546,9 @@ let g:NERDCommentEmptyLines = 1                  " 允许注释空行
 " 自动补全插件
 " ~/.vim/bundle/ultisnips/mysnippets需要备份，或者：
 " 在安装插件后，在目录`~/.vim/bundle/ultisnips/`下，新建目录`mysnippets`，在该目录下手动下载snippets
-" 下载地址：https://github.com/honza/vim-snippets
+" 下载地址：https://github.com/honza/vim-snippets，可以直接输入:
+" `wget https://raw.githubusercontent/honza/vim-snippets/c.snippets`下载，c.snippets可以换成其他语言
+" 另外，我在我的repo中提供了一些snippets
 let g:UltiSnipsSnippetDirectories=["mysnippets"]
 " UltiSnips模板补全快捷键与YCM快捷键有冲突，所以重新设定"
 let g:UltiSnipsExpandTrigger="<leader><tab>"
@@ -637,7 +639,6 @@ imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<cr><cr> :Tli
 set tags=tags
 set tags+=tags;/
 set tags+=./tags "添加当前路径下的tags文件
-
 let Tlist_Ctags_Cmd = '/usr/bin/ctags'      " 如果ctags在PATH路径下，可以不设置该项
 "let Tlist_Show_One_File = 1                 " 不允许同时显示多个文件的tag，只显示当前文件的
 let Tlist_Exit_OnlyWindow = 1               " 如果taglist窗口是最后一个窗口，则退出vim
@@ -652,7 +653,6 @@ let Tlist_Process_File_Always = 1           " 始终解析文件中的tag，而�
 " Plugin:ctrlp插件"
 " 文件模糊搜索，可以搜索文件、buffer、mru、tag等
 " 原始为kien/ctrlp，使用改进版ctrlpvim/ctrlp.vim
-" 
 let g:ctrlp_map = '<leader>p'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<cr>
@@ -715,10 +715,20 @@ let g:multi_cursor_quit_key='<Esc>'
 " <Ctrl>i       撤销返回跳转，这两条与vim的系统跳转控制是一致的
 nnoremap <Leader>yf :YcmCompleter GoToDefinitionElseDeclaration<cr>
 nmap <Leader>yd :YcmDiags<cr>
-let g:ycm_key_invoke_completion= '<C-a>'    " 主动调用补全，对于一些c/c++全局函数，是不会自动补全的，需要主动补全
+"回车即选中当前项
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 let g:ycm_global_ycm_extra_conf='/home/pwe/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_error_symbol='>>'
 let g:ycm_warning_symbol='>*'
+let g:ycm_seed_identifiers_with_syntax=1    "语法关键字补全
+"let g:ycm_confirm_extra_conf=0             "打开vim不再询问是否加载ycm_extra_conf.py
+let g:ycm_key_invoke_completion= '<C-a>'    " 主动调用补全，对于一些c/c++全局函数，是不会自动补全的，需要主动补全
+"let g:ycm_key_list_select_completion=['<Down>']     "选择列表中选择某个项
+let g:ycm_key_list_previous_completion=['<Up>']     "选择列表中选择前边一个项
+let g:ycm_complete_in_comments=1            "在注释输入中也能补全
+let g:ycm_complete_in_strings=1             "在字符串输入中也能补全
+let g:ycm_collect_identifiers_from_comments_and_strings=0   "注释和字符串中的内容不收录到补全
+set completeopt=longest,menu                "让补全菜单行为与一般ide一致
 
 " Plugin:syntastic插件(https://github.com/scrooloose/syntastic)"
 " Syntastic           语法检查
