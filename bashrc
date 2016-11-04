@@ -222,7 +222,7 @@ export smoothblue="\[\033[1;38;5;111m\]"
 export iceblue="\[\033[1;38;5;45m\]"
 export turqoise="\[\033[1;38;5;50m\]"
 export smoothgreen="\[\033[1;38;5;42m\]"
-export defaultcolor="\e[0m"
+export defaultcolor="\[\e[0m\]"
 
 # my PS1
 PS1="${yellow}#\# ${red}\u@lazylady${white}-\A${blue} \w ${green}\$ ${defaultcolor}"
