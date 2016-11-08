@@ -37,7 +37,8 @@ import ycm_core
 flags = [
 '-Wall',
 '-Wextra',
-#'-Werror',
+'-Werror',
+'-Weverything',
 #'-Wc++98-compat',
 '-Wno-long-long',
 '-Wno-variadic-macros',
@@ -54,6 +55,7 @@ flags = [
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
 '-std=c++11',
+'-O0',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
@@ -66,10 +68,16 @@ flags = [
 '/usr/include',
 '-isystem',
 '/usr/local/include',
-#'-isystem',
-#'/Library/Developer/CommandLineTools/usr/include',
-#'-isystem',
-#'/Library/Developer/CommandLineTools/usr/bin/../lib/c++/v1',
+'-isystem',
+'/Library/Developer/CommandLineTools/usr/include',
+'-isystem',
+'/Library/Developer/CommandLineTools/usr/bin/../lib/c++/v1',
+'-isystem'
+'/usr/include/c++/',
+'-isystem',
+'/usr/include/c++/5.4.0',
+'-isystem',
+'/usr/include/i386-linux-gnu/c++/5.4.0',
 #'-isystem',
 # This path will only work on OS X, but extra paths that don't exist are not
 # harmful
@@ -80,7 +88,7 @@ flags = [
 '../llvm/tools/clang/include',
 '-I',
 '.',
-#'-I',
+'-I',
 './ClangCompleter',
 #'-isystem',
 #'./tests/gmock/gtest',
@@ -183,10 +191,10 @@ def FlagsForFile( filename, **kwargs ):
     # NOTE: This is just for YouCompleteMe; it's highly likely that your project
     # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
     # ycm_extra_conf IF YOU'RE NOT 100% SURE YOU NEED IT.
-    try:
-      final_flags.remove( '-stdlib=libc++' )
-    except ValueError:
-      pass
+    #try:
+    #  final_flags.remove( '-stdlib=libc++' )
+    #except ValueError:
+    #  pass
   else:
     relative_to = DirectoryOfThisScript()
     final_flags = MakeRelativePathsInFlagsAbsolute( flags, relative_to )

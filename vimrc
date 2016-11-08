@@ -316,7 +316,7 @@ set hlsearch                 " 开启高亮显示结果
 set ignorecase               " 搜索时大小写不敏感"
 set smartcase                " 如果搜索内容中包含大写字母，则不使用ignorecase
 " set nowrapscan               " 搜索到文件两端时不重新搜索
-set nocompatible             " 关闭vi兼容模式
+set nocompatible             " 关闭vi兼容模式，避免之前版本的一些bug
 set hidden                   " 允许在有未保存的修改时切换缓冲区
 set autochdir                " 设定文件浏览器目录为当前目录
 " set foldmethod=indent        " 选择代码折叠类型，基于缩进进行代码折叠
@@ -334,7 +334,7 @@ set wildmenu                 " vim 自身命令行模式智能补全"
 set listchars=tab:\~\ ,trail:.
 set showmatch               " 显示括号配对情况
 set nowrap                  " 禁止代码自动折行
-set history=700             " 设置vim历史记录最大条目数
+set history=100             " 设置vim历史记录最大条目数
 "set magic
 set mat=4                   " 光标闪烁以及闪烁频率
 
@@ -716,7 +716,7 @@ let g:multi_cursor_quit_key='<Esc>'
 nnoremap <Leader>yf :YcmCompleter GoToDefinitionElseDeclaration<cr>
 nmap <Leader>yd :YcmDiags<cr>
 "回车即选中当前项
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
 let g:ycm_global_ycm_extra_conf='/home/pwe/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_error_symbol='>>'
 let g:ycm_warning_symbol='>*'
@@ -729,6 +729,8 @@ let g:ycm_complete_in_comments=1            "在注释输入中也能补全
 let g:ycm_complete_in_strings=1             "在字符串输入中也能补全
 let g:ycm_collect_identifiers_from_comments_and_strings=0   "注释和字符串中的内容不收录到补全
 set completeopt=longest,menu                "让补全菜单行为与一般ide一致
+
+let g:clang_user_options='-I... || exit 0'
 
 " Plugin:syntastic插件(https://github.com/scrooloose/syntastic)"
 " Syntastic           语法检查
@@ -812,7 +814,7 @@ map <c-l> <esc><c-w>l
 map <c-k> <esc><c-w>k
 map <c-j> <esc><c-w>j
 
-map <c-d> <esc><c-w>q
+map <c-d> :bdelete<cr>
 
 " Ctrl + vsp 为将当前窗口左右复制分割
 " Ctrl + sp 为将当前窗口上下复制分割
@@ -865,18 +867,6 @@ nmap <leader>a <esc>ggVG"+y<esc>
 imap <leader>v <esc>"+p
 nmap <leader>v "+p
 vmap <leader>v "+p
-
-" \gi                 开启或关闭GitGutter [GitGutter插件]
-nmap <leader>gi :GitGutterToggle<cr>:GitGutterSignsToggle<cr>:GitGutterLineHighlightsToggle<cr>
-
-" \gd                 打开Git文件对比模式 [竖直] [GitGutter插件]
-nmap <leader>gd :Gdiff<cr>
-
-" \gs                 打开Git文件对比模式 [水平] [GitGutter插件]
-nmap <leader>gs :Gsdiff<cr>
-
-" \gl                 查看Git提交日志 [gitv插件]
-nmap <leader>gl :Gitv<cr>
 
 " \rb                 一键去除所有尾部空白
 imap <leader>rb <esc>:let _s=@/<bar>:%s/\s\+$//e<bar>:let @/=_s<bar>:nohl<cr>
