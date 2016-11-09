@@ -509,6 +509,8 @@ nmap <silent> <Leader>sw :FSHere<cr>
 " 跳转到同一工程路径下的另一个目录下寻找对应项
 autocmd! BufEnter *.c let b:fswitchdst = 'h' | let b:fswitchlocs = '../inc'
 autocmd! BufEnter *.h let b:fswitchdst = 'c' | let b:fswitchlocs = '../src'
+autocmd! BufEnter *.cpp let b:fswitchdst = 'hpp' | let b:fswitchlocs = '../inc'
+autocmd! BufEnter *.hpp let b:fswitchdst = 'cpp' | let b:fswitchlocs = '../src'
 
 " Plugin:nerdtree (https://github.com/scrooloose/nerdtree)"
 " NERDTree            树形文件浏览器
