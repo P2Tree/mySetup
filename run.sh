@@ -28,16 +28,27 @@ if [ $1 = "bashrc" ]; then
 fi
 
 if [ $1 = "vimrc" ]; then
-	mv ~/.vimrc ~/.vimrc.bak
+    if [ -f ~/.vimrc ];then
+    	mv ~/.vimrc ~/.vimrc.bak
+    fi
 	cp ./vimrc ~/.vimrc
 	echo "vimrc install down."
     read -p "Do you want to install .vim/ folder? [y/n]" confirmInstall_vim
-    if [ $confirmInstall_vim -eq "y" -a $confirmInstall_vim -eq "Y" ]
-        mv ~/.vim/ ~/.vimbak/
+    if [ $confirmInstall_vim = "y" ] || [ $confirmInstall_vim = "Y" ]; then
+        if [ -d ~/.vim/ ];then
+            mv ~/.vim/ ~/.vimbak/
+        else
+            echo "~/.vim/ folder is already existed"
+        fi
         cp -r ./vim/ ~/.vim/
         echo "vim folder install down."
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> /dev/null
-    echo "vim plugin: Vundle install down."
+    fi
+    if [ -f ~/.vim/bundle/Vundle.vim ];then
+        git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> /dev/null
+        echo "vim plugin: Vundle install down."
+    else
+        echo "vim plugin: Vundle is already installed"
+    fi
     echo "you should be install other plugins in .vimrc with comand: PluginInstall"
 	exit 1
 fi
