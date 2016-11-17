@@ -51,6 +51,9 @@ if [ $1 = "vimrc" ]; then
     else
         echo "vim plugin: Vundle is already installed"
     fi
+    # install some other softwares for vim plugins: ctags ack
+    sudo apt-get install exuberant-ctags
+    sudo apt-get install ack-grep
     echo "you should be install other plugins in .vimrc with comand: PluginInstall"
 	exit 1
 fi
