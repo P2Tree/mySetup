@@ -256,14 +256,14 @@ endif
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " ------------ 判断操作系统类型 -------------
-if(has('win32') || has('win64'))
+if(has('win32') || has('win64')) "is windows
     let g:isWIN = 1
     let g:isMAC = 0
 else
-    if system('uname') =~ 'Darwin'
+    if system('uname') =~ 'Darwin' "is MAC
         let g:isWIN = 0
         let g:isMAC = 1
-    else
+    else    " none of above
         let g:isWIN = 0
         let g:isMAC = 0
     endif
@@ -293,6 +293,7 @@ else " 终端模式
     colorscheme molokai
     set guifont=Monaco\ 14
 endif
+
 
 " ------------- 基本配置 --------------
 set autowrite               " 自动保存"
@@ -374,6 +375,7 @@ au BufRead,BufNewFile *.ini      setlocal ft=dosini
 set fenc=utf-8
 set encoding=utf-8                          " 设置内部编码"
 set fileencodings=utf-8,gbk,cp936,latin-1   " 设置支持的文件编码"
+set ambiwidth=double
 set fileformat=unix                         " 设置新文件的EOL格式"
 set fileformats=unix,mac,dos                " 给出文件的EOL格式类型"
 
@@ -578,7 +580,7 @@ let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 " p 打开当前选中匹配项，但不关闭ctrlsf窗口"
 " q 关闭ctrlsf窗口，不进行匹配"
 " <enter> 打开当前选中匹配项，并关闭ctrlsf窗口"
-" \sf 搜索快捷键, 速记 ctrl's''f'
+" <Leader>sf 搜索快捷键, 速记 ctrl's''f'
 nnoremap <Leader>sf :wa<cr> :CtrlSF<cr>
 " 默认搜索路径为工程目录，工程目录的确认是寻找最近的.git .hg .svn .bzr _darcs"
 let g:ctrlsf_default_root = 'project'
@@ -690,7 +692,7 @@ let g:multi_cursor_quit_key='<Esc>'
 "               ./install.py --clang-completer
 "           ```
 "           其中的`--clang-completer`是c-family语言支持，如果需要c#补全，需要另外加`--omnisharp-completer`
-"           如果系统中已经有clang，加上`--system-libclang`
+"           如果系统中已经有clang(需要clang版本为3.9.0或以上，否则会出错)，加上`--system-libclang`
 "       - 3.安装完成后，可能找不到c-family支持的东西，需要在`~/.vim/bundle/YouCompleteMe`中链接
 "           `~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/`
 "           ```

@@ -75,9 +75,9 @@ flags = [
 '-isystem'
 '/usr/include/c++/',
 '-isystem',
-'/usr/include/c++/5.4.0',
+'/usr/include/c++/4.8',
 '-isystem',
-'/usr/include/i386-linux-gnu/c++/5.4.0',
+'/usr/include/i386-linux-gnu/c++/4.8',
 #'-isystem',
 # This path will only work on OS X, but extra paths that don't exist are not
 # harmful
