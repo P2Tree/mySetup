@@ -425,30 +425,36 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " Vundle 管理的插件必须位于 vundle#begin() 和 vundle#end() 之间"
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-"Plugin 'altercation/vim-colors-solarized'
+"  powerline这个插件暂时由airline取代
 "Plugin 'Lokaltog/vim-powerline'             " vim下美观智能的任务栏
 Plugin 'vim-airline/vim-airline'            " vim下美观智能任务栏，取代vim-powerline，同时可取代minibufexpl
 Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
-" Plugin 'nathanaelkane/vim-indent-guides'    " 缩进配对指示
 Plugin 'Yggdroot/indentLine'                " 缩进指示
 Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
 Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
 Plugin 'scrooloose/nerdtree'                " 工程目录管理，替代vim中固定的newtrw插件，功能一样
 Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
+"  minibufexpl.vim这个插件由airline取代，暂不再使用
 "Plugin 'fholgado/minibufexpl.vim'           " 多文件编辑buffer标签
-"Plugin 'jlanzarotta/bufexplorer'            " 辅助实现文件buffer显示，和minibufexpl.vim一样的功能，为了省地方，选择minibufexpl.vim
 Plugin 'dyng/ctrlsf.vim'                    " 工程目录下的内容查找，基于ack，替代grep.vim和ack.vim插件
+"  ack.vim这个插件由ctrlsf取代，不再使用
 "Plugin 'mileszs/ack.vim'                   " 文件内容查找，由ctrlsf替代，暂时屏蔽
 Plugin 'kshenoy/vim-signature'              " 文件书签辅助，显示书签等功能
 Plugin 'vim-scripts/taglist.vim'            " 辅助实现tag显示
 Plugin 'jiangmiao/auto-pairs'               " 括号自动补全插件
+"  surround这个插件暂时由auto-pairs取代
 "Plugin 'tpope/vim-surround'                " 括号自动补全插件，由auto-pairs取代，但匹配修改括号等操作还是要surround来完成，暂用不到
 Plugin 'ctrlpvim/ctrlp.vim'                 " 文件模糊搜索插件，可以用来替换command-Tnnk
 Plugin 'terryma/vim-multiple-cursors'       " 多光标操作插件
-Plugin 'Valloric/YouCompleteMe'            " 
+Plugin 'Valloric/YouCompleteMe'            " 比较难安装的一个插件
+"  syntastic这个插件由于在最新的YouCompleteMe中已经集成，所以不再使用
 "Plugin 'scrooloose/syntastic'               " 语法检查插件，最新的YouCompleteMe也集成了这个插件
 Plugin 'Lokaltog/vim-easymotion'            " 快速移动插件
+Plugin 'vim-scripts/DoxygenToolkit.vim'     " 可以通过快捷键快速添加doxygen注释
+Plugin 'othree/xml.vim'                     " xml file helper
+"  clang-format这个插件由于clang-format未调通，所以没有安装
+" Plugin 'rhysd/vim-clang-format'             " 格式化代码格式，通过clang-format
 
 call vundle#end()
 
@@ -480,17 +486,6 @@ let g:airline#extensions#whitespace#symbol='!'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
-
-" "
-" Plugin:Indent Guides (https://github.com/nathanaelkane/vim-indent-guides)"
-" 缩进配对指示插件
-" let g:indent_guides_enable_on_vim_startup=1     " 随vim自启动
-" let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
-" let g:indent_guides_guide_size=1               " 色块宽度
-" 快捷键<Leader>i开关缩进可视化
-" nmap <silent> <Leader>i <Plug>IndentGuidesToggle
-" hi IndentGuidesOdd  ctermbg=black
-" hi IndentGuidesEven ctermbg=darkgrey
 
 " Plugin:indentLine (https://github.com/Yggdroot/indentLine)"
 " 缩进指示插件
@@ -551,27 +546,6 @@ let g:UltiSnipsSnippetDirectories=["mysnippets"]
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-
-" Plugin:MiniBufExplorer (https://github.com/fholgado/minibufexpl.vim)"
-" 多文件编辑buffer标签
-" 该插件现在仍不完善，会与常用功能发生冲突，会出现意外自动关闭等情况
-" 除下边插件快捷键之外，使用系统快捷键也可以方便调用，如
-" :b 1 或 :buffer 1      切换到对应数字的buffer页，1可以替换为其他数字
-" :files                 列出所有当前打开的buffer
-" :bn                    切换到上一个buffer
-" :bp                    切换到下一个buffer
-" :bd 1                  关闭对应数字的buffer页，1可以替换为其他数字，不加数字为关闭当前buffer
-" let g:miniBufExplBuffersNeeded = 1      " 最少有一个buffer时自动开启标签页
-" let g:miniBufExplCycleArround = 1           " 允许循环遍历所有标签页
-" let g:miniBufExplShowBufNumber = 1      " 取消标签页名称上的数字编号
-" let g:miniBufExplorerAutoStart = 1      " 自动打开，0为关闭，1为打开
-" let g:miniBufExplorerMoreThanOne = 0    " 控制不允许打开多于一个的minibufexplorer窗口
-" map <Leader>bl :MBEToggle<cr>           " 显示/隐藏minibufexplorer窗口
-" map <Leader>bm :MBEbn<cr>               " 正向遍历buffer标签
-" map <Leader>bn :MBEbp<cr>               " 反向遍历buffer标签
-" map <Leader>bd :MBEbd<cr>               " 关闭当前标签页
-" hi MBEVisibleActiveNormal   ctermfg=150 ctermbg=fg " 配置颜色,如果是在GUI下，需要将ctermfg ctermbg改为guifg guibg
-"let g:did_minibufexplorer_syntax_inits = 1
 
 " Plugin:ctrlsf (https://github.com/dyng/ctrlsf.vim)"
 " 强大的工程目录名称搜索内容查找插件
@@ -779,6 +753,44 @@ map <Leader><Leader>j <Plug>(easymotion-j)
 map <Leader><Leader>k <Plug>(easymotion-k)
 map <Leader><Leader>l <Plug>(easymotion-lineforward)
 map <Leader><Leader>. <Plug>(easymotion-repeat)
+
+" Plugin:DoxygenToolkit插件 (https://github.com/vim-scripts/DoxygenToolkit.vim)
+" 可以快捷键自动添加doxygen注释
+let g:DoxygenToolkit_briefTag_funcName = "yes"
+" let g:DoxygenToolkit_commentType = "C++"
+" let g:DoxygenToolkit_startCommentBlock = "/// "
+" let g:DoxygenToolkit_interCommentBlock = "/// "
+let g:DoxygenToolkit_briefTag_pre = "\\brief   "
+let g:DoxygenToolkit_templateParamTag_pre = "\\tparam  "
+let g:DoxygenToolkit_paramTag_pre = "\\param   "
+let g:DoxygenToolkit_returnTag = "\\return  "
+let g:DoxygenToolkit_throwTag_pre = "\\throw   " " @exception is also valid
+let g:DoxygenToolkit_fileTag = "\\file    "
+let g:DoxygenToolkit_dateTag = "\\date    "
+let g:DoxygenToolkit_authorTag = "\\author  "
+let g:DoxygenToolkit_versionTag = "\\version "
+let g:DoxygenToolkit_blockTag = "\\name    "
+let g:DoxygenToolkit_classTag = "\\class   "
+let g:DoxygenToolkit_authorName = "S-PWE, dicksonliuming@gmail.com"
+
+let g:Doxygen_enhanced_color = 1
+
+" " Plugin:vim-clang-format (https://github.com/rhysd/vim-clang-format)
+" " 需要有clang-format的支持，3.4或更新版本，现在该功能已经集成到clang中，故安装clang即可
+" let g:clang_format#style_options = {
+            " \ "AccessModifierOffset" : -4,
+            " \ "AllowShortIfStatementsOnASingleLine" : "true",
+            " \ "AlwaysBreakTemplateDeclarations" : "true",
+            " \ "Standard" : "C++11"}
+" 
+" " map to <Leader>ff in c++ code
+" autocmd FileType c,cpp,objc nnoremap <buffer><Leader>ff :<C-u>ClangFormat<CR>
+" autocmd FileType c,cpp,objc vnoremap <buffer><Leader>ff :ClangFormat<CR>
+" " Toggle auto formatting
+" nmap <Leader>fc :ClangFormatAutoToggle<CR>
+" " Auto-enabling auto-formatting
+" autocmd FileType c,cpp,objc ClangFormatAutoEnable
+" let g:clang_format#command='clang-format-3.7'
 
 
 " ====未处理的部分===="
