@@ -253,7 +253,7 @@ if filereadable("workspace.vim")
 endif
 
 
-autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd bufwritepost .vimrc source ~/.vimrc
 
 " ------------ 判断操作系统类型 -------------
 if(has('win32') || has('win64')) "is windows
@@ -361,15 +361,18 @@ filetype plugin on           " 针对不同的文件类型加载对应的插件
 filetype plugin indent on    " 针对不同的文件类型加载对应的插件缩进
 
 " -------------- 根据后缀名指定文件类型 ---------------
-au BufRead,BufNewFile *.h        setlocal ft=c
-au BufRead,BufNewFile *.i        setlocal ft=c
-au BufRead,BufNewFile *.m        setlocal ft=objc
-au BufRead,BufNewFile *.ss       setlocal ft=scheme
-au BufRead,BufNewFile *.txt      setlocal ft=txt
-au BufRead,BufNewFile *.log      setlocal ft=conf
-au BufRead,BufNewFile hosts      setlocal ft=conf
-au BufRead,BufNewFile *.conf     setlocal ft=dosini
-au BufRead,BufNewFile *.ini      setlocal ft=dosini
+autocmd BufRead,BufNewFile *.h        setlocal ft=c
+autocmd BufRead,BufNewFile *.i        setlocal ft=c
+autocmd BufRead,BufNewFile *.m        setlocal ft=objc
+autocmd BufRead,BufNewFile *.ss       setlocal ft=scheme
+autocmd BufRead,BufNewFile *.txt      setlocal ft=txt
+autocmd BufRead,BufNewFile *.log      setlocal ft=conf
+autocmd BufRead,BufNewFile hosts      setlocal ft=conf
+autocmd BufRead,BufNewFile *.conf     setlocal ft=dosini
+autocmd BufRead,BufNewFile *.ini      setlocal ft=dosini
+autocmd BufRead,BufNewFile CMakeLists.txt setlocal ft=cmake
+autocmd BufRead,BufNewFile *.cmake setlocal ft=cmake
+autocmd BufRead,BufNewFile *.launch setlocal ft=xml
 
 " -------------- 设置文件编码和文件格式 ---------------
 set fenc=utf-8
@@ -455,6 +458,7 @@ Plugin 'vim-scripts/DoxygenToolkit.vim'     " 可以通过快捷键快速添加d
 Plugin 'othree/xml.vim'                     " xml file helper
 "  clang-format这个插件由于clang-format未调通，所以没有安装
 " Plugin 'rhysd/vim-clang-format'             " 格式化代码格式，通过clang-format
+Plugin 'taketwo/vim-ros'                    " used to develop ros
 
 call vundle#end()
 
@@ -702,6 +706,11 @@ let g:ycm_collect_identifiers_from_comments_and_strings=0   "注释和字符串�
 set completeopt=longest,menu                "让补全菜单行为与一般ide一致
 
 let g:clang_user_options='-I... || exit 0'
+
+let g:ycm_semantic_triggers={
+\   'roslaunch' : ['="', '$(', '/'],
+\   'rosmsg,rossrv,rosaction' : ['re!^', '/'],
+\}
 
 " Plugin:syntastic插件(https://github.com/scrooloose/syntastic)"
 " Syntastic           语法检查
