@@ -31,18 +31,18 @@ fi
 
 if [ $1 = "vimrc" ]; then
     if [ -f ~/.vimrc ];then
-    	mv ~/.vimrc ~/.vimrc.bak
+    	mv -f ~/.vimrc ~/.vimrc.bak
     fi
-	cp ./vimrc ~/.vimrc
+	cp -f ./vimrc ~/.vimrc
 	echo "vimrc install down."
     read -p "Do you want to install .vim/ folder? [y/n]" confirmInstall_vim
     if [ $confirmInstall_vim = "y" ] || [ $confirmInstall_vim = "Y" ]; then
         if [ -d ~/.vim/ ];then
-            mv ~/.vim/ ~/.vimbak/
-        else
-            echo "~/.vim/ folder is already existed"
+            echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
+            cp -frp ~/.vim/ ~/.vimbak/
+            rm -rf ~/.vim/
         fi
-        cp -r ./vim/ ~/.vim/
+        cp -frp ./vim/ ~/.vim/
         echo "vim folder install down."
     fi
     if [ -f ~/.vim/bundle/Vundle.vim ];then
@@ -52,9 +52,12 @@ if [ $1 = "vimrc" ]; then
         echo "vim plugin: Vundle is already installed"
     fi
     # install some other softwares for vim plugins: ctags ack
-    sudo apt-get install exuberant-ctags
-    sudo apt-get install ack-grep
-    echo "you should be install other plugins in .vimrc with comand: PluginInstall"
+    echo "Install ctags into system..."
+    sudo apt-get install exuberant-ctags >> /dev/null
+    echo "Install ack-grep into system..."
+    sudo apt-get install ack-grep >> /dev/null
+    echo "Done!"
+    echo "You should be install other plugins in .vimrc with comand: PluginInstall"
 	exit 1
 fi
 
@@ -65,7 +68,18 @@ if [ $1 = "vimrc-make" ];then
         cd ~
         git clone https://github.com/vim/vim.git
         cd vim
-        ./configure --with-features=huge --enable-multibyte --enable-rubyinterp --enable--pythoninterp=yes --with-python-config-dir=/usr/lib/python2.7/config --enable-python3interp=yes --with-python3-config-dir=/usr/lib/python3.5/config --enable-perlinterp --enable-luainterp --enable-gui=gtk2 --enable-cscope --prefix=/usr
+        ./configure --with-features=huge \
+                    --enable-multibyte \
+                    --enable-rubyinterp \
+                    --enable-pythoninterp \
+                    --with-python-config-dir=/usr/lib/python2.7/config/ \
+                    --enable-python3interp \
+                    --with-python3-config-dir=/usr/lib/python3.5/config/ \
+                    --enable-perlinterp \
+                    --enable-luainterp \
+                    --enable-gui=gtk2 \
+                    --enable-cscope \
+                    --prefix=/usr
         make VIMRUNTIMEDIR=/usr/share/vim/vim80
         sudo make install
     fi
