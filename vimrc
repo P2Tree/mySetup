@@ -61,6 +61,8 @@
 " Ctrl + p                  --多光标选中与当前光标字段相同的上一个字段 [vim-multiple-cursors]
 " Ctrl + x                  --取消当前多光标选中的字段 [vim-multiple-cursors]
 "
+" Ctrl + u                  --将之前输入的一串字符转换为大写，完美解决不按capslock键输入一串大写字符的问题，也完美取代capslock
+" 
 " Shift + Tab                --切换到下一个buffer [airline]
 " ---------- Shift系按键 ----------
 "
@@ -343,6 +345,9 @@ hi CursorLine   cterm=underline ctermbg=darkred ctermfg=white
 set showcmd                 " 命令行显示输入的命令
 set showmode                " 命令行显示vim当前模式中
 
+set mouse=a                 " 启动鼠标操作，启用的唯一原因是，给不会vim的同事在本人电脑上看代码用
+" set mouse-=a              " 关闭鼠标操作
+
 " ------------- 设置通用缩进策略 --------------
 set expandtab                " 将Tab自动转化成空格 [需要输入真正的Tab键时，使用 Ctrl+V + Tab]
 set tabstop=4                   " 设置编辑时制表符占用空格数"
@@ -434,7 +439,7 @@ Plugin 'vim-airline/vim-airline'            " vim下美观智能任务栏，取�
 Plugin 'octol/vim-cpp-enhanced-highlight'   " c++ 增强高亮插件
 Plugin 'Yggdroot/indentLine'                " 缩进指示
 Plugin 'derekwyatt/vim-fswitch'             " 源文件与头文件快速切换
-Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
+" Plugin 'lilydjwg/fcitx.vim'                 " 插入模式是中文输入后，返回命令模式自动切换回英文
 Plugin 'scrooloose/nerdtree'                " 工程目录管理，替代vim中固定的newtrw插件，功能一样
 Plugin 'scrooloose/nerdcommenter'           " 自动开关注释
 Plugin 'SirVer/ultisnips'                   " 模板补全插件 替代snipmate
@@ -859,11 +864,19 @@ noremap <silent><leader>/ :nohls<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" 自动跳转到粘贴文本的最后
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
 "没有权限时保存"
 cmap w!! w !sudo tee >/dev/null %
 
 "改变撤销后反撤销的键位"
 nnoremap U <C-r>
+
+" 将之前输入的一串字符转换为大写，完美替换[CapsLock]
+inoremap <C-u> <esc>gUiwea
 
 " Ctrl + ]            多选择跳转
 nmap <c-]> g<c-]>
