@@ -39,10 +39,10 @@ if [ $1 = "vimrc" ]; then
     if [ $confirmInstall_vim = "y" ] || [ $confirmInstall_vim = "Y" ]; then
         if [ -d ~/.vim/ ];then
             echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
-            cp -frp ~/.vim/ ~/.vimbak/
+            cp -rf ~/.vim/* ~/.vimbak/
             rm -rf ~/.vim/
         fi
-        cp -frp ./vim/ ~/.vim/
+        cp -rf ./vim/* ~/.vim/
         echo "vim folder install down."
     fi
     if [ -f ~/.vim/bundle/Vundle.vim ];then
@@ -57,7 +57,9 @@ if [ $1 = "vimrc" ]; then
     echo "Install ack-grep into system..."
     sudo apt-get install ack-grep >> /dev/null
     echo "Done!"
-    echo "You should be install other plugins in .vimrc with comand: PluginInstall"
+    echo "After then: "
+    echo " 1. You should be install other plugins in .vimrc with comand: PluginInstall"
+    echo " 2. You should be compiler YouCompleteMe plugin in ~/.vim/bundle/YouCompleteMe folder, and run ./install.py"
 	exit 1
 fi
 
