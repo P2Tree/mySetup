@@ -23,6 +23,7 @@
 "       export VIMRUNTIME=/usr/local/share/vim/vim80
 "       ```
 "       然后source /etc/profile
+"   还需要在bashrc中配置$VIM, $VIMRUNTIME
 "
 "   -- Contents --
 "
@@ -228,7 +229,7 @@
 "
 
 " ======================= General setup 通用配置 =========================="
-"
+" 
 :se ff=unix                " --更改文件格式，可选 unix、dos、mac
 :se filetype=c               "  --更改文件语法着色模式
 
@@ -253,7 +254,6 @@ map <Leader>rs :source ~/session.vim<cr> :rviminfo ~/vim.viminfo<cr> :MBEOpen<cr
 if filereadable("workspace.vim")
     source workspace.vim
 endif
-
 
 autocmd bufwritepost .vimrc source ~/.vimrc
 
@@ -387,11 +387,11 @@ set ambiwidth=double
 set fileformat=unix                         " 设置新文件的EOL格式"
 set fileformats=unix,mac,dos                " 给出文件的EOL格式类型"
 
-if g:isWIN
+" if g:isWIN
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
     language messages zh_CN.utf-8
-endif
+" endif
 
 " -------------- 打开vim，自动定位到上次最后变更的位置 ---------------
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
@@ -405,14 +405,14 @@ if g:isGUI
     "winpos 20 20            " 指定窗口出现的位置，坐标原点在屏幕左上角
     "set lines=20 columns=90 " 指定窗口大小，lines为高度，columns为宽度
     set guioptions+=c        " 使用字符提示框
-    set guioptions-=m        " 隐藏菜单栏
-    set guioptions-=T        " 隐藏工具栏
-    set guioptions-=L        " 隐藏左侧滚动条
-    set guioptions-=r        " 隐藏右侧滚动条
-    set guioptions-=b        " 隐藏底部滚动条
-    set showtabline=0        " 隐藏Tab栏
+    " set guioptions-=m        " 隐藏菜单栏
+    " set guioptions-=T        " 隐藏工具栏
+    " set guioptions-=L        " 隐藏左侧滚动条
+    " set guioptions-=r        " 隐藏右侧滚动条
+    " set guioptions-=b        " 隐藏底部滚动条
+    " set showtabline=0        " 隐藏Tab栏
     set cursorline           " 高亮突出当前行
-    " set cursorcolumn       " 高亮突出当前列
+    set cursorcolumn       " 高亮突出当前列
 endif
 
 " ==== Environment deployment of Vundle and Plugins Vundle ============= "

@@ -33,6 +33,7 @@ alias se='sudo gvim'
 alias e='gvim'
 alias smi='sudo make install'
 alias l='ls -CF'
+alias vi='vim'
 
 # Cool colors for man pages
 alias man="TERMINFO=~/.terminfo TERM=mostlike LESS=C PAGER=less man"
@@ -91,6 +92,8 @@ HISTFILESIZE=2000000
 export PATH=$HOME/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export EDITOR='gvim' ALTERNATE_EDITOR='vim' VISUAL='gvim'
+export VIM=/usr/bin/vim/
+export VIMRUNTIME=/usr/share/vim/vim80/
 export TERM=xterm-256color
 
 # Bash History
@@ -103,9 +106,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # General UI
 force_color_prompt=yes
-
-# Vim key-bindings
-set -o vi
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -228,15 +228,19 @@ export defaultcolor="\[\e[0m\]"
 PS1="${yellow}#\# ${red}\u@lazylady${white}-\A${blue} \w ${green}\$ ${defaultcolor}"
 
 # ======= 5. USER =======
+
+# Parrot
 ROSMAT=~/Parrot/RollingSpiderEdu/MIT_MatlabToolbox
 
+# ROS
 source /opt/ros/indigo/setup.bash
 source ~/catkin_ws/devel/setup.bash
 export ROS_HOSTNAME=192.168.1.11
 export ROS_MASTER_URI=http://192.168.1.43:11311
-
-alias minipc='~/ssh_minipc'
 alias makeros='~/catkin_ws/catkin_make.sh $1'
+
+# SSH
+alias minipc='~/ssh_minipc'
 
 # System environment path
 export PATH=$PATH:$ROSMAT/bin:$ROSMAT/bin/utils:$ROSMAT/bin/firmware
