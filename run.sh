@@ -2,11 +2,11 @@
 
 using() {
     echo "USAGE:"
-	echo "      ./run.sh bashrc	    :backup and install bashrc in ~/" 
-	echo "      ./run.sh vimrc	    :backup and install vimrc with .vim folder in ~/"
-    echo "      ./run.sh vimrc-make :install vim with compile mode"
-	echo "      ./run.sh sources    :backup and install sources.list in /etc/apt/"
-	echo "      ./run.sh network    :backup and install wpa_supplicant.conf in /etc/wpa_supplicant/ and interface in /etc/network/"
+	echo "      ./run.sh bashrc	    :backup the old one and install bashrc in ~/" 
+	echo "      ./run.sh vimrc	    :backup the old one and install vimrc with .vim folder in ~/"
+    # echo "      ./run.sh vimrc-make :install vim with compile mode"
+	echo "      ./run.sh sources    :backup the old one and install sources.list in /etc/apt/"
+	echo "      ./run.sh network    :backup the old one and install wpa_supplicant.conf in /etc/wpa_supplicant/ and interface in /etc/network/"
 }
 	
 
@@ -17,14 +17,16 @@ if [ $# -eq 0 ]; then
 fi
 
 if [ $# -gt 1 ]; then
-	echo "Please input only ONE argument"
+	echo "Please input only ONE argument in the following list:"
+    using
 	exit 1
 fi
 
 if [ $1 = "bashrc" ]; then
 	mv ~/.bashrc ~/.bashrc.bak
-	echo "old bashrc backup in bashrc.bak."
-	cp ./bashrc ~/.bashrc
+	echo "old bashrc backup in ~/.bashrc.bak."
+	# cp ./bashrc ~/.bashrc
+    ln -s ./bashrc ~/.bashrc
 	echo "bashrc install down."
 	exit 1
 fi
