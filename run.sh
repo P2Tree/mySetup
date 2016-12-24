@@ -4,7 +4,7 @@ using() {
     echo "USAGE:"
 	echo "      ./run.sh bashrc	    :backup the old one and install bashrc in ~/" 
 	echo "      ./run.sh vimrc	    :backup the old one and install vimrc with .vim folder in ~/"
-    # echo "      ./run.sh vimrc-make :install vim with compile mode"
+    echo "      ./run.sh vimrc-make :install vim with compile mode"
 	echo "      ./run.sh sources    :backup the old one and install sources.list in /etc/apt/"
 	echo "      ./run.sh network    :backup the old one and install wpa_supplicant.conf in /etc/wpa_supplicant/ and interface in /etc/network/"
 }
@@ -26,7 +26,7 @@ if [ $1 = "bashrc" ]; then
 	mv ~/.bashrc ~/.bashrc.bak
 	echo "old bashrc backup in ~/.bashrc.bak."
 	# cp -f ./bashrc ~/.bashrc
-    ln -s ./bashrc ~/.bashrc
+    ln ./bashrc ~/.bashrc
 	echo "bashrc install down."
 	exit 1
 fi
@@ -36,7 +36,7 @@ if [ $1 = "vimrc" ]; then
     	mv ~/.vimrc ~/.vimrc.bak
     fi
 	# cp -f ./vimrc ~/.vimrc
-    ln -s ./vimrc ~/.vimrc
+    ln ./vimrc ~/.vimrc
 	echo "vimrc install down."
     read -p "Do you want to install .vim/ folder? [y/n]" confirmInstall_vim
     if [ $confirmInstall_vim = "y" ] || [ $confirmInstall_vim = "Y" ]; then
@@ -46,7 +46,7 @@ if [ $1 = "vimrc" ]; then
             echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
         fi
         # cp -rf ./vim/* ~/.vim/
-        ln -s ./vim/ ~/.vim/
+        ln ./vim/ ~/.vim/
         echo "vim folder install down."
     fi
     if [ ! -f ~/.vim/bundle/Vundle.vim ];then
