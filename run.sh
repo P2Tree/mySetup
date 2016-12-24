@@ -25,7 +25,7 @@ fi
 if [ $1 = "bashrc" ]; then
 	mv ~/.bashrc ~/.bashrc.bak
 	echo "old bashrc backup in ~/.bashrc.bak."
-	# cp ./bashrc ~/.bashrc
+	# cp -f ./bashrc ~/.bashrc
     ln -s ./bashrc ~/.bashrc
 	echo "bashrc install down."
 	exit 1
@@ -33,21 +33,23 @@ fi
 
 if [ $1 = "vimrc" ]; then
     if [ -f ~/.vimrc ];then
-    	mv -f ~/.vimrc ~/.vimrc.bak
+    	mv ~/.vimrc ~/.vimrc.bak
     fi
-	cp -f ./vimrc ~/.vimrc
+	# cp -f ./vimrc ~/.vimrc
+    ln -s ./vimrc ~/.vimrc
 	echo "vimrc install down."
     read -p "Do you want to install .vim/ folder? [y/n]" confirmInstall_vim
     if [ $confirmInstall_vim = "y" ] || [ $confirmInstall_vim = "Y" ]; then
         if [ -d ~/.vim/ ];then
-            echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
             cp -rf ~/.vim/* ~/.vimbak/
             rm -rf ~/.vim/
+            echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
         fi
-        cp -rf ./vim/* ~/.vim/
+        # cp -rf ./vim/* ~/.vim/
+        ln -s ./vim/ ~/.vim/
         echo "vim folder install down."
     fi
-    if [ -f ~/.vim/bundle/Vundle.vim ];then
+    if [ ! -f ~/.vim/bundle/Vundle.vim ];then
         git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim >> /dev/null
         echo "vim plugin: Vundle install down."
     else
@@ -56,11 +58,12 @@ if [ $1 = "vimrc" ]; then
     # install some other softwares for vim plugins: ctags ack
     echo "Install ctags into system..."
     sudo apt-get install exuberant-ctags >> /dev/null
+    echo "Done!"
     echo "Install ack-grep into system..."
     sudo apt-get install ack-grep >> /dev/null
     echo "Done!"
     echo "After then: "
-    echo " 1. You should be install other plugins in .vimrc with comand: PluginInstall"
+    echo " 1. You should be install other plugins in .vimrc with comand: `:PluginInstall`"
     echo " 2. You should be compiler YouCompleteMe plugin in ~/.vim/bundle/YouCompleteMe folder, and run ./install.py"
 	exit 1
 fi
@@ -97,7 +100,7 @@ if [ $1 = "sources" ]; then
 fi
 
 if [ $1 = "network" ]; then
-	echo "network section"
+	echo "network section, not complete"
 	exit 1
 fi
 
