@@ -15,7 +15,7 @@
 "   如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
 "       `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 "   然后需要找到“Vundle”部分，注释掉不需要的插件，反注释需要
-"   用的插件，然后运行"PluginInstall"来安装插件。
+"   用的插件，然后运行":PluginInstall"来安装插件。
 "   如果VIM是用编译的方法安装，需要在安装后对VIM的环境变量做配置，常规的配置
 "   应该是在/etc/profile中加入：
 "       ```
@@ -463,7 +463,7 @@ Plugin 'vim-scripts/DoxygenToolkit.vim'     " 可以通过快捷键快速添加d
 Plugin 'othree/xml.vim'                     " xml file helper
 "  clang-format这个插件由于clang-format未调通，所以没有安装
 " Plugin 'rhysd/vim-clang-format'             " 格式化代码格式，通过clang-format
-Plugin 'taketwo/vim-ros'                    " used to develop ros
+" Plugin 'taketwo/vim-ros'                    " used to develop ros
 
 call vundle#end()
 
