@@ -11,7 +11,7 @@
 [ -z "$PS1" ] && return
 
 # User Info
-export USERNAME="Dickson Liuming"
+export USERNAME="Axel"
 export NICKNAME="PWE"
 
 # Distribute bashrc into smaller, more specific parts
@@ -231,29 +231,23 @@ PS1="${yellow}#\# ${red}\u@lazylady${white}-\A${blue} \w ${green}\$ ${defaultcol
 # ======= 5. USER =======
 
 # Parrot
-ROSMAT=~/Parrot/RollingSpiderEdu/MIT_MatlabToolbox
+#ROSMAT=~/Parrot/RollingSpiderEdu/MIT_MatlabToolbox
+#export PATH=$PATH:$ROSMAT/bin:$ROSMAT/bin/utils:$ROSMAT/bin/firmware
 
 # ROS
-source /opt/ros/indigo/setup.bash
-source ~/catkin_ws/devel/setup.bash
-export ROS_HOSTNAME=192.168.1.11
-export ROS_MASTER_URI=http://192.168.1.43:11311
-alias makeros='~/catkin_ws/catkin_make.sh $1'
+#source /opt/ros/indigo/setup.bash
+#source ~/catkin_ws/devel/setup.bash
+#export ROS_HOSTNAME=192.168.1.11
+#export ROS_MASTER_URI=http://192.168.1.43:11311
+#alias makeros='~/catkin_ws/catkin_make.sh $1'
 
 # SSH
-alias minipc='~/ssh_minipc'
-
-# System environment path
-export PATH=$PATH:$ROSMAT/bin:$ROSMAT/bin/utils:$ROSMAT/bin/firmware
+#alias minipc='~/ssh_minipc'
 
 # ======= 6. MAIN =======
 # Welcome message
 echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
 echo
-# Check System with sensors, devices and memory
-echo "Hardware Information:"
-sensors  # Needs: 'sudo apt-get install lm-sensors'
-uptime   # Needs: 'sudo apt-get install lsscsi'
-lsscsi
+# Check System with memory
 free -m
 
