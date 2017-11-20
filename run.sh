@@ -46,7 +46,7 @@ if [ $1 = "vimrc" ]; then
             echo "~/.vim/ folder is already existed, backup old .vim folder to ~/.vimbak/"
         fi
         # cp -rf ./vim/* ~/.vim/
-        ln ./vim/ ~/.vim/
+        ln -s $(pwd)/vim ~/.vim
         echo "vim folder install down."
     fi
     if [ ! -f ~/.vim/bundle/Vundle.vim ];then
