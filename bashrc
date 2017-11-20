@@ -93,7 +93,7 @@ export PATH=$HOME/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export EDITOR='vim' ALTERNATE_EDITOR='vim' VISUAL='vim'
 export VIM=/usr/bin/vim/
-export VIMRUNTIME=/usr/share/vim/vim80/
+export VIMRUNTIME=/usr/share/vim/vim74/
 export TERM=xterm-256color
 
 # Bash History
