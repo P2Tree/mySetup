@@ -387,11 +387,11 @@ set ambiwidth=double
 set fileformat=unix                         " 设置新文件的EOL格式"
 set fileformats=unix,mac,dos                " 给出文件的EOL格式类型"
 
-" if g:isWIN
+if g:isWIN    " 以下的内容是用于避免中文菜单的乱码问题，默认设置为在windows系统中启用
     source $VIMRUNTIME/delmenu.vim
     source $VIMRUNTIME/menu.vim
     language messages zh_CN.utf-8
-" endif
+endif
 
 " -------------- 打开vim，自动定位到上次最后变更的位置 ---------------
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal!g'\"" | endif
