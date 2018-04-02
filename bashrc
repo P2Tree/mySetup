@@ -244,6 +244,16 @@ PS1="${yellow}#\# ${red}\u@lazylady${white}-\A${blue} \w ${green}\$ ${defaultcol
 # SSH
 #alias minipc='~/ssh_minipc'
 
+# JAVA
+export JAVA_HOME=/opt/Java/
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+
+# cbc : a kind of user defined compiler
+export CBC_HOME=/usr/local/cbc/
+export PATH=${CBC_HOME}/bin:$PATH
+
 # ======= 6. MAIN =======
 # Welcome message
 echo -ne "Good Morning, $NICKNAME! It's "; date '+%A, %B %-d %Y'
