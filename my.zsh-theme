@@ -1,13 +1,3 @@
-##################################
-#
-#  Changed by half-life.zsh-theme
-#  2018/4/2
-#  install zsh and oh-my-zsh into your linux system
-#  and then push this theme in ~/.oh-my-zsh/theme
-#  and then change ~/.zshrc with theme name of 'my'
-#
-##################################
-
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
 }
@@ -96,4 +86,4 @@ function steeef_precmd {
 }
 add-zsh-hook precmd steeef_precmd
 
-PROMPT=$' %{$yellow%}%T%{$reset_color%} %{$purple%}%n%{$reset_color%} in %B%{$limegreen%}%~%{$reset_color%}%b$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%} >%{$reset_color%} '
+PROMPT=$'%{$yellow%}%T%{$reset_color%} %{$purple%}%n%{$reset_color%} in %B%{$limegreen%}%~%{$reset_color%}%b$(ruby_prompt_info " with%{$fg[red]%} " v g "%{$reset_color%}")$vcs_info_msg_0_%{$orange%} >%{$reset_color%} '
