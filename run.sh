@@ -59,12 +59,10 @@ if [ $1 = "vimrc" ]; then
     echo "Install ctags into system..."
     sudo apt-get install exuberant-ctags >> /dev/null
     echo "Done!"
-    echo "Install ack-grep into system..."
-    sudo apt-get install ack-grep >> /dev/null
-    echo "Done!"
     echo "After then: "
     echo " 1. You should be install other plugins in .vimrc with comand: `:PluginInstall`"
-    echo " 2. You should be compiler YouCompleteMe plugin in ~/.vim/bundle/YouCompleteMe folder, and run ./install.py"
+    echo " 2. You should be install install software: ack-grep, to realize the enhanced searching function to the editor"
+    echo " 3. You should be compiler YouCompleteMe plugin in ~/.vim/bundle/YouCompleteMe folder, and run ./install.py"
 	exit 1
 fi
 
