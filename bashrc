@@ -93,7 +93,7 @@ export PATH=$HOME/scripts:$HOME/.local/bin:/usr/local/bin:$PATH
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export EDITOR='vim' ALTERNATE_EDITOR='vim' VISUAL='vim'
 export VIM=/usr/bin/vim/
-export VIMRUNTIME=/usr/share/vim/vim74/
+export VIMRUNTIME=/usr/share/vim/vim80/
 export TERM=xterm-256color
 
 # Bash History
@@ -207,6 +207,15 @@ function ..()
     done;
 }
 
+# git branch show in PS1
+function git-branch-name {
+    git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
+}
+function git-branch-prompt {
+    local branch=`git-branch-name`
+    if [ $branch ]; then printf "(%s)" $branch; fi
+}
+
 # ======= 4. prompt =======
 export black="\[\033[1;38;5;0m\]"
 export red="\[\033[1;38;5;1m\]"
@@ -226,7 +235,7 @@ export smoothgreen="\[\033[1;38;5;42m\]"
 export defaultcolor="\[\e[0m\]"
 
 # my PS1
-PS1="${yellow}#\# ${red}\u@lazylady${white}-\A${blue} \w ${green}\$ ${defaultcolor}"
+PS1="${yellow}#\# ${red}\u@lazylady${white}-\A ${smoothgreen}\$(git-branch-prompt) ${blue}\w \n${green}\$ ${defaultcolor}"
 
 # ======= 5. USER =======
 
