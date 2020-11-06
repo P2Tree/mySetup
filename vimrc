@@ -132,35 +132,20 @@
 " ------------ 定义快捷键前缀，即<Leader>" --------------
 let mapleader=","
 
-" ------------ 判断操作系统类型 -------------
-""if system is windows
-"let g:isWIN = 1
-"let g:isMAC = 0
-
-""if system is mac
-"let g:isWIN = 0
-"let g:isMAC = 1
-
-""if system is others
+" ---------- system -------------
+" Set your system, default 0 and 0 is linux
 let g:isWIN = 0
 let g:isMAC = 0
+" I think vim is better to work at a terminal,
+" and there are so many good IDEs in GUI environment with vim plugin.
+let g:isGUI = 0
 
-let g:isGUI = 0     " 只支持非GUI模式，我个人认为vim现在只用在terminal里合适，
-                    " GUI下边有无数中比它好用的编辑器，最多只需要安装vim键映射的插件
-
-
-" ------------ 设置着色模式和字体 -------------
-" 如果在~/.vim/colors/路径下已经放置了molokai.vim主题，但依然无法显示molokai主题
-" 问题可能原因是，在终端下运行，终端没有配置成256色，需要在.bashrc中增加：
-"       ` export TERM=xterm-256color `
-" 并 source .bashrc即可
-set background=dark
-""if in windows or mac GUI
-"colorscheme molokai
-"set guifont=Monaco:h14
-""if in terminal
-colorscheme molokai
-set guifont=Monaco\ 14
+" ---------- themes, font and color ----------
+" Before use custom theme, make sure your shell have used 256 color.
+" Try `echo $TERM` or use `export TERM=xterm-256color` to setting it.
+set background=dark " light
+colorscheme gruvbox " molokai
+set guifont=Source\ Code\ Pro\ 11
 
 " ------------- 基本配置 --------------
 set autowrite                   " 自动保存"

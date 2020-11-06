@@ -11,7 +11,7 @@ else
   export EDITOR='mvim'
 fi
 
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -38,12 +38,16 @@ alias dh="df -h -a -T"
 alias ds="du -sh"
 
 # auto suffix to open file:
-alias -s md="vim"
-alias -s gz="tar -xzvf"
-alias -s tar="tar -xvf"
-alias -s tgz="tar -xzvf"
-alias -s bz2="tar -xzvf"
-alias -s zip="unzip"
+alias md="vim"
+alias mvim="vim"
+alias vi="vim"
+alias gz="tar -xzvf"
+alias tar="tar -xvf"
+alias tgz="tar -xzvf"
+alias bz2="tar -xzvf"
+alias zip="unzip"
+
+
 
 # special settings for MacOS
 OS=`uname -s`
@@ -132,3 +136,6 @@ Warning: "tmux" can't work well, won't launch it!
 EOF
     fi
 fi
+
+cd
+clear

@@ -2,7 +2,33 @@
 # export PATH=$HOME:/usr/local/sbin:/usr/local:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/hanhuijie/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
+
+if [[ ! -d "$ZSH" ]]; then
+  echo "Warning: You may have to install oh-my-zsh."
+  echo "Do you need to install it now? (y/n) [y]"
+  read input
+  if [[ "$input" == Y* || "$input" == y* || -z $input ]]; then
+    cp ~/.zshrc ~/.zshrc.1
+    wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O oh-my-zsh-install.sh
+    sh oh-my-zsh-install.sh --unattended --keep-zshrc
+    if [[ $? == 1 ]]; then
+      echo "Something wrong occured when install oh-my-zsh, please try manually."
+      rm -f ~/.zshrc.1
+      rm -f oh-my-zsh-install.sh
+      return
+    fi
+    mv ~/.zshrc.1 ~/.zshrc
+    rm -f oh-my-zsh-install.sh
+
+    # install plugins
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    source ~/.zshrc
+  fi
+  return
+fi
+
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -13,7 +39,7 @@ export ZSH=/Users/hanhuijie/.oh-my-zsh
 #ZSH_THEME="jonathan"
 ZSH_THEME="refined"
 
-DEFAULT_USER="yangliuming"
+DEFAULT_USER="pwe"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -71,13 +97,13 @@ plugins=(
   python
   zsh-syntax-highlighting
   zsh-autosuggestions       # auto suggestion when input command in zsh
-  Z
+  z
 )
 
 source $ZSH/oh-my-zsh.sh
 
 # for zsh-autosuggestions
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '?' autosuggest-accept      # use ',' to hit suggest command
 
 export MANPATH="/usr/local/man:$MANPATH"
