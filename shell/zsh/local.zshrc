@@ -99,7 +99,7 @@ export PATH=$PATH:/usr/local/mysql/bin
 # for django
 #PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages/
 
-if [[ `command -v fzf` ]];then
+if [[ -f ~/.fzf.zsh ]];then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
   if [[ `command -v fd` ]];then
@@ -111,7 +111,19 @@ if [[ `command -v fzf` ]];then
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
   alias fvi='vim $(fzf)'
+
+  fkp () {
+    local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]
+    then
+      echo $pid | xargs kill -${1:-9}
+      fkp
+    fi
+  }
+
 fi
+
 
 # forbidden flow control
 stty -ixon
