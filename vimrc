@@ -661,6 +661,10 @@ let g:clang_format#auto_format = 0
 let g:clang_format#style_options = {
       \ "AccessModifierOffset" : -2 }
 
+" Plugin:vim-fswitch
+"
+nmap <silent> <Leader>sf :FSHere<cr>
+
 " Plugin:nerdtree (https://github.com/scrooloose/nerdtree)"
 " NERDTree            树形文件浏览器
 " o 打开/关闭光标所在目录
