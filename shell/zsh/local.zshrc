@@ -22,7 +22,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="vim ~/.local.zshrc"
 alias zshsource="source ~/.zshrc"
 alias envconfig="vim ~/Projects/config/env.sh"
 alias ohmyzsh="vim ~/.oh-my-zsh"
@@ -99,6 +99,11 @@ export PATH=$PATH:/usr/local/mysql/bin
 # for django
 #PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/site-packages/
 
+# for local clang and llc
+alias CLANG=~/Projects/llvm/build/bin/clang
+alias LLC=~/Projects/llvm/build/bin/llc
+
+# for fzf
 if [[ -f ~/.fzf.zsh ]];then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
