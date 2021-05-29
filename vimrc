@@ -185,7 +185,7 @@ set mat=4                       " 光标闪烁以及闪烁频率
 set lazyredraw                  " Don't update screen during macro and script execution "在宏和脚本运行时不要刷新屏幕（提高使用性能）
 
 "set scroll=5                   " 指定翻页时的行数，默认不设置则为半页
-set scrolloff=7                 " When moving the cursor scroll the screen, at least remain the 'scrolloff' lines above or below
+set scrolloff=10                 " When moving the cursor scroll the screen, at least remain the 'scrolloff' lines above or below
                                 "上下移动光标使正文滚页时，光标的上方或下方将至少始终保留的行数，默认给7行 set so=7
 
 set cursorline                  " highlight current line "高亮光标当前行
@@ -375,10 +375,12 @@ nnoremap J 8j
 nnoremap K 8k
 
 " switch to line head "光标跳转到行首
-nnoremap H 0
+nnoremap H ^
 " switch to line tail "光标跳转到行尾
-" 说明：本人每次输入$时盲选都会点到#或%，准确度不高，H和L这两个太方便了
 nnoremap L $
+
+" quit buffer file " 关闭buffer
+nnoremap <expr>q (len(getbufinfo({'buflisted':1})) == 1) ? ":q<cr>" : ":bd<cr>"
 
 " \rm remove windows ^M "去除windows字符^M
 nnoremap <leader>rm :%s/<c-v><c-m>//g<cr>
@@ -451,6 +453,13 @@ else
   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 endif
 
+fun! Redraw()
+  let l = winline()
+  let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
+  return cmd
+endf
+
+nnoremap <expr><leader>z Redraw()
 " ========================== Plugins =============================== "
 "
 " 如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
@@ -483,6 +492,7 @@ Plug 'derekwyatt/vim-fswitch'             " switch between source file and corre
 Plug 'luochen1990/rainbow'
 Plug 'othree/xml.vim'                     " xml file helper
 " Plug 'scrooloose/nerdtree'                " 工程目录管理，替代vim中固定的newtrw插件，功能一样
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 " ---------- 插件配置选项 ----------"
@@ -492,7 +502,7 @@ call plug#end()
 
 " Plugin:vim-airline (https://github.com/vim-airline/vim-airline)"
 " 加入airline状态栏
-let g:airline_powerline_fonts = 1 " 字体
+let g:airline_powerline_fonts = 0 " 字体
 let g:airline#extensions#tabline#enabled = 1  " 允许显示tabline
 let g:airline#extensions#tabline#formatter = 'unique_tail'   " tabline上的标题只显示文件名
 let g:airline#extensions#tabline#buffer_nr_show = 1    " tabline上显示buffer的标号
@@ -601,7 +611,7 @@ au Filetype tablegen let g:AutoPairs["<"] = ">"
 " Plugin:vim-gutentags (https://github.com/ludovicchabant/vim-gutentags.git)
 " 管理tags文件并自动更新
 "
-" " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 " 所生成的数据文件的名称
 let g:gutentags_ctags_tagfile = 'tags'
@@ -680,3 +690,84 @@ nmap <silent> <Leader>sf :FSHere<cr>
 " let NERDTreeWinPos="left"                      " 设置子窗口位置
 " let NERDTreeMinimalUI=1                         " 子窗口不显示冗余帮助信息
 " let NERDTreeAutoDeleteBuffer=1                  " 删除文件时自动删除对应buffer
+
+" Plugin:coc.nvim (https://github.com/neoclide/coc.nvim)
+" Conquer of completion
+"
+" You need to configure the coc-settings.json with your language server
+" Type :CocConfig to open the coc-settings.json file.
+" An example can find in https://github.com/neoclide/coc.nvim/wiki/Language-servers
+" And you need to install the language server what you selected in to your
+" system. Different language server have the different configuration.
+if version >= 800
+  set nowritebackup
+  set updatetime=300
+  set shortmess+=c
+  " Always show the signcolumn, otherwise it would shift the text each time
+  " diagnostics appear/become resolved.
+  set signcolumn=yes
+
+  " Use tab to trigger completion with characters ahead and navigate.
+  " Use command ':verbose imap <tab>' to make sure tab is not mapped by
+  " other plugin before putting this into your config.
+  inoremap <silent><expr> <TAB>
+        \ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
+        \ coc#refresh()
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  function! s:check_back_space() abort
+    let col = col('.') - 1
+      return !col || getline('.')[col - 1] =~# '\s'
+  endfunction
+
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-q> coc#refresh()
+
+  " Make <CR> auto-select the first completion item and notify coc.nvim to
+  " format on enter, <cr> could be remapped by other vim plugin
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+        \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+  " Use [g and ]g to navigate diagnostics
+  " Use :CocDiagnostics to get all diagnostics of current buffer in
+  " location list.
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+  " goto code navigation.
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+
+  function! s:show_documentation()
+    if (index(['vim', 'help'], &filetype) >= 0)
+      execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+      call CocActionAsync('doHover')
+    else
+      execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+  endfunction
+
+  " Highlight the symbol and its references when holding the cursor.
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Mappings for CocList
+  " Show all diagnostics
+  nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+  " Manage extensions
+  nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
+  " Show commands
+  nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
+  " Find symbols
+  nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
+  " Search workspace symbols
+  nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
+  " Do default action for next item
+  nnoremap <silent><nowait> <space>j :<C-u>CocNext<cr>
+  " Do default action for previous item
+  nnoremap <silent><nowait> <space>k :<C-u>CocPrev<cr>
+  " Resume latest coc list
+  nnoremap <silent><nowait> <space>p :<C-u>CocListResume<cr>
+endif
