@@ -19,14 +19,15 @@
 "   还需要在bashrc中配置$VIM, $VIMRUNTIME
 "
 "   -- Contents --
-"   输入' + mark，跳转到对应位置，如输入'a，会跳转到快捷键设置部分
+"   输入' + mark，跳转到对应位置，如输入's，会跳转到快捷键设置部分
 "   0. mark: c contents              目录
-"   1. mark: s shortcut keys list    快捷键说明
-"   2. mark: g general setting       通用设置
-"   3. mark: k shortcut keys setting 自定义快捷键
-"   4. mark: p plugins setting       插件管理与配置
+"   1. mark: g general setting       通用设置
+"   2. mark: s shortcut keys config  快捷键配置
+"   3. mark: p plugins setting       插件管理与配置
+"
+"   使用 za 可以打开/关闭折叠内容，zf100G 可以创建新的从当前行到第100行的折叠
 
-" ========== Description of Custom shortcut keys 自定义快捷键说明 ==========="
+" ========= Description of shortcut keys 常用快捷键说明 ==================="{{{
 " ---------- Ctrl系按键 ----------
 "
 " Ctrl + O                   --跳到上一个编辑位置     [Normal模式]
@@ -124,8 +125,9 @@
 " Ctrl + X                   --将当前光标所在数字自减1        [仅普通模式可用]
 " m字符       and '字符      --标记位置 and 跳转到标记位置
 " q字符 xxx q and @字符      --录制宏   and 执行宏
+"}}}
 
-" ======================= General setup 通用配置 =========================="
+" ========= General setup 通用配置 ========================================"{{{
 "
 :se ff=mac                " --更改文件格式，可选 unix、dos、mac
 
@@ -165,8 +167,8 @@ set nowrapscan                  " 搜索到文件两端时不重新搜索
 set nocompatible                " 关闭vi兼容模式，避免之前版本的一些bug
 set hidden                      " allow change buffer when current buffer is unsave "允许在有未保存的修改时切换缓冲区
 set autochdir                   " 设定文件浏览器目录为当前目录
-set foldmethod=indent           " 选择代码折叠类型，基于缩进进行代码折叠
-set foldlevel=100               " 禁止自动折叠
+set foldmethod=marker           " 选择代码折叠类型，can select: manual, indent, syntax, marker, diff, expr
+" set foldlevel=100               " 禁止自动折叠
 set foldenable                  " 启动vim时打开折叠代码
 set laststatus=2                " 开启状态栏信息，2为总显示最后一个窗口的状态行，1则为窗口数多于一个的时候显示最后一个窗口的状态行，0为不显示最后一个窗口的状态行
 set cmdheight=1                 " 命令行的高度，默认为1，这里设为2
@@ -261,6 +263,46 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 " initialize tags path
 set tags=./tags;,tags
 
+highlight ExtraWhitespace ctermbg=red guibg=red         " highlight trailing whitespace in red "高亮行末空格为红色
+match ExtraWhitespace /\s\+$/                           " match trailing whitespace "匹配行末空格
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()               " for performance
+
+" This function can delete trailing whitespace
+" "这个函数通过替换命令删除行尾空格
+func! DeleteTrailingWS()
+    exec "normal mz"
+    %s/\s\+$//ge
+    exec "normal `z"
+endfunc
+
+au BufWrite * :call DeleteTrailingWS()    " Auto delete trailing whitespace when save file "保存时自动删除行尾空格
+
+" change cursor shape and color with different mode
+" if terminal is xterm
+" if exists('$TMUX')
+  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  " let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+" else
+  " let &t_EI = "\eP\e\<Esc>]50;CursorShape=0\x7\e\\"
+  " let &t_SI = "\eP\e\<Esc>]50;CursorShape=1\x7\e\\"
+  " let &t_SR = "\eP\e\<Esc>]50;CursorShape=2\x7\e\\"
+" endif
+
+" if terminal is iterm2
+if exists('&TMUX')
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+else
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+endif
+
 " ------------- Use for LLVM -------------------
 " Set a few indentation parameters for LLVM source code style.
 " set cinoptions=:0,g0,(0,Ws,l1
@@ -300,8 +342,9 @@ au FileType c,cpp,tablegen,llvm set colorcolumn=81
 au FileType make set noexpandtab | set tabstop=8 | set shiftwidth=8
 
 " ------------- END of Use for LLVM -------------------
+"}}}
 
-" ==================== Custom shortcut key 自定义快捷键 =================== "
+" ========= shortcut key config 快捷键配置 ================================"{{{
 
 "关闭方向健"
 noremap <Left> <Nop>
@@ -413,54 +456,17 @@ nnoremap <Leader>7 :7b<cr>
 nnoremap <Leader>8 :8b<cr>
 nnoremap <Leader>9 :9b<cr>
 
-highlight ExtraWhitespace ctermbg=red guibg=red         " highlight trailing whitespace in red "高亮行末空格为红色
-match ExtraWhitespace /\s\+$/                           " match trailing whitespace "匹配行末空格
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()               " for performance
-
-" This function can delete trailing whitespace
-" "这个函数通过替换命令删除行尾空格
-func! DeleteTrailingWS()
-    exec "normal mz"
-    %s/\s\+$//ge
-    exec "normal `z"
-endfunc
-
-au BufWrite * :call DeleteTrailingWS()    " Auto delete trailing whitespace when save file "保存时自动删除行尾空格
-
-" change cursor shape and color with different mode
-" if terminal is xterm
-" if exists('$TMUX')
-  " let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  " let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-" else
-  " let &t_EI = "\eP\e\<Esc>]50;CursorShape=0\x7\e\\"
-  " let &t_SI = "\eP\e\<Esc>]50;CursorShape=1\x7\e\\"
-  " let &t_SR = "\eP\e\<Esc>]50;CursorShape=2\x7\e\\"
-" endif
-
-" if terminal is iterm2
-if exists('&TMUX')
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-else
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-endif
-
+" Update cursor position free.
+" 快捷更新光标位置，不再需要考虑当前光标位置
+nnoremap <expr><leader>z Redraw()
 fun! Redraw()
   let l = winline()
   let cmd = l * 2 <= winheight(0) + 1 ? l <= (&so + 1) ? 'zb' : 'zt' : 'zz'
   return cmd
 endf
+"}}}
 
-nnoremap <expr><leader>z Redraw()
-" ========================== Plugins =============================== "
+" ========= Plugins Settings 插件管理与配置 ==============================="{{{
 "
 " 如果你是第一次使用该vim配置文件，需要在shell中执行如下一行命令：
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -699,6 +705,8 @@ nmap <silent> <Leader>sf :FSHere<cr>
 " An example can find in https://github.com/neoclide/coc.nvim/wiki/Language-servers
 " And you need to install the language server what you selected in to your
 " system. Different language server have the different configuration.
+" By the way, nodejs and npm are still needed to support this plugin, make
+" sure they are installed in your system.
 if version >= 800
   set nowritebackup
   set updatetime=300
@@ -753,21 +761,24 @@ if version >= 800
   " Highlight the symbol and its references when holding the cursor.
   autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  " Mappings for CocList
+  " Mappings for CocList (Need to use :CocInstall coc-lists to install it first)
+  " Search files in workspace
+  nnoremap <silent><nowait> <space>f :<C-u>CocList files<cr>
+  " Search open buffers
+  nnoremap <silent><nowait> <space>b :<C-u>CocList --normal buffers<cr>
+  " Search keyword with rg or ag in workspace
+  nnoremap <silent><nowait> <space>g :<C-u>CocList grep<cr>
+  " Show changes
+  nnoremap <silent><nowait> <space>c :<C-u>CocList --normal changes<cr>
+  " Search symbols in workspace
+  nnoremap <silent><nowait> <space>s :<C-u>CocList symbols<cr>
   " Show all diagnostics
   nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
   " Manage extensions
   nnoremap <silent><nowait> <space>e :<C-u>CocList extensions<cr>
-  " Show commands
-  nnoremap <silent><nowait> <space>c :<C-u>CocList commands<cr>
   " Find symbols
   nnoremap <silent><nowait> <space>o :<C-u>CocList outline<cr>
-  " Search workspace symbols
-  nnoremap <silent><nowait> <space>s :<C-u>CocList -I symbols<cr>
-  " Do default action for next item
-  nnoremap <silent><nowait> <space>j :<C-u>CocNext<cr>
-  " Do default action for previous item
-  nnoremap <silent><nowait> <space>k :<C-u>CocPrev<cr>
   " Resume latest coc list
   nnoremap <silent><nowait> <space>p :<C-u>CocListResume<cr>
 endif
+"}}}
