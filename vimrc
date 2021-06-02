@@ -485,7 +485,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }  " coc-lists also use it
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'                 " exchanged by coc-lists
+Plug 'junegunn/fzf.vim'                 " exchanged by coc-lists
 " Plug 'airblade/vim-gitgutter'             " show git diff in the code, jump to changed code hunks
 Plug 'mhinz/vim-signify'                  " show git diff in the code, exchange vim-gitgutter
 Plug 'jiangmiao/auto-pairs'
