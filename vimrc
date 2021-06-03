@@ -551,26 +551,26 @@ let g:tagbar_compact = 1  " do not show Press F1 for help
 " you need to install fzf tool in your system and add install path to PATH
 " then you need to move fzf.vim (find in fzf source project) to your .vim/plugin folder.
 " be noticed that fzf.vim is not fzf vim plugin, but a help configure that fzf vim plugin needed.
-" nmap <Leader>f :Files<cr>
-" nmap <Leader>b :Buffers<cr>
-" nmap <Leader>t :Tags<cr>
-" nmap <Leader>o :Rg <c-r><c-w><cr>    " must be supported by rg
-" let g:fzf_buffers_jump = 1
-" let g:fzf_tags_command = 'ctags -R'
-" let g:fzf_history_dir = '~/.fzf-history'
-"
-" command! -bang -nargs=+ -complete=dir Rg
-      " \ call fzf#vim#grep(
-      " \   "rg --column --line-number --no-heading --color=always --smart-case "
-      " \   .(len(<q-args>) > 0 ? <q-args>: '""'),
-      " \   1,
-      " \   {'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]},
-      " \   <bang>0)
-"
-" command! -bang -nargs=? -complete=dir Files
-      " \ call fzf#vim#files(
-      " \   <q-args>,
-      " \   <bang>0)
+nmap <Leader>f :Files<cr>
+nmap <Leader>b :Buffers<cr>
+nmap <Leader>t :Tags<cr>
+nmap <Leader>o :Rg <c-r><c-w><cr>    " must be supported by rg
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
+let g:fzf_history_dir = '~/.fzf-history'
+
+command! -bang -nargs=+ -complete=dir Rg
+      \ call fzf#vim#grep(
+      \   "rg --column --line-number --no-heading --color=always --smart-case "
+      \   .(len(<q-args>) > 0 ? <q-args>: '""'),
+      \   1,
+      \   {'dir': system('git rev-parse --show-toplevel 2> /dev/null')[:-2]},
+      \   <bang>0)
+
+command! -bang -nargs=? -complete=dir Files
+      \ call fzf#vim#files(
+      \   <q-args>,
+      \   <bang>0)
 
 " Plugin:vim-gitgutter (https://github.com/airblade/vim-gitgutter.git)
 " 可以在代码中显示当前的修改情况，自动标记增加、删除、修改行，以及跳转到下个修改段等功能
