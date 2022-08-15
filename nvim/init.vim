@@ -55,6 +55,13 @@ noremap H ^
 noremap L $
 noremap J <C-e>
 noremap K <C-y>
+" window
+noremap <C-left> <C-w>h
+noremap <C-right> <C-w>l
+noremap <C-up> <C-w>k
+noremap <C-down> <C-w>j
+noremap <C-s> <C-w>s
+noremap <C-S> <C-w>v
 " di-highlight
 nnoremap <silent><leader>/ :nohls<CR>
 " quit window or buffer
@@ -90,15 +97,18 @@ augroup END
 
 " Cursor
 " Set cursor shape to beam instead of block,
-if exists('&TMUX')
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-else
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-endif
+" if exists('&TMUX')
+"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+" else
+"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" endif
+let &t_SI .= "\e[6 q"
+let &t_SR .= "\e[3 q"
+let &t_EI .= "\e[2 q"
 
 " Neovim
 if has("nvim")

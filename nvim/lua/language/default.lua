@@ -35,9 +35,6 @@ M.on_attach = function(client, bufnr)
   local bufopts = { silent = true, buffer = bufnr }
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "LSP: Hover" })
-  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "LSP: Signature help" })
-
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
 
@@ -46,7 +43,10 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
   vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "References" })
 
-  vim.keymap.set("n", "<leader>F", vim.lsp.buf.formatting, { buffer = bufnr, desc = "Format document" })
+  vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
+
+  vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, { buffer = bufnr, desc = "Format document" })
 
   vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
