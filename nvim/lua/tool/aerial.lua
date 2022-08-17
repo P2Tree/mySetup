@@ -4,10 +4,10 @@ if not ok then
   return
 end
 
-aerial.setup {
+aerial.setup ({
   -- Priority list of preferred backends for aerial.
   -- This can be a filetype map (see :help aerial-filetype-map)
-  backends = { "lsp", "treesitter", "markdown" },
+  backends = { "treesitter", "lsp", "markdown" },
 
   layout = {
     -- These control the width of the aerial window.
@@ -148,7 +148,14 @@ aerial.setup {
 
   -- Call this function when aerial attaches to a buffer.
   -- Useful for setting keymaps. Takes a single `bufnr` argument.
-  on_attach = nil,
+  on_attach = function(bufnr)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s', '<Cmd>AerialToggle!<CR>', { desc = "Code Outline" })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[s', '<Cmd>AerialPrev<CR>', { desc = "Jump Backward" })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']s', '<Cmd>AerialNext<CR>', { desc = "Jump Forward" })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<Cmd>AerialPrevUp<CR>', { desc = "Jump Backward Up" })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', ']]', '<Cmd>AerialNextUp<CR>', { desc = "Jump Forward Up" })
+  end,
+
 
   -- Call this function when aerial first sets symbols on a buffer.
   -- Takes a single `bufnr` argument.
@@ -230,4 +237,4 @@ aerial.setup {
     -- How long to wait (in ms) after a buffer change before updating
     update_delay = 300,
   },
-}
+})

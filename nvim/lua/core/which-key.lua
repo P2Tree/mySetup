@@ -71,10 +71,27 @@ key.setup {
 }
 
 key.register {
-  ["s"] = { name = "+hop" },
-  ["["] = { name = "+prev" },
-  ["]"] = { name = "+next" },
-  ["g"] = { name = "+goto" },
+  ["["] = {
+    name = "+prev",
+    ["d"] = { name = "diagnose" },
+    ["s"] = { name = "symbol" },
+    ["["] = { name = "upward symbol" },
+  },
+  ["]"] = {
+    name = "+next",
+    ["d"] = { name = "diagnose" },
+    ["s"] = { name = "symbol" },
+    ["]"] = { name = "upward symbol" },
+  },
+  ["g"] = {
+    name = "+goto",
+    ["d"] = { name = "defination" },
+    ["D"] = { name = "declaration" },
+    ["I"] = { name = "inplementation" },
+    ["r"] = { name = "reference" },
+  },
+  ["f"] = { name = "search" },
+
   ["<leader>"] = {
     name = "+<leader>",
     ["<leader>"] = { name = "+<localleader>" },
@@ -85,10 +102,6 @@ key.register {
     ["g"] = {
       name = "+git",
       ["d"] = { name = "+diffview" },
-    },
-    ["s"] = {
-      name = "+session",
-      ["c"] = { name = "+current" },
     },
     ["b"] = {
       name = "+buffer",

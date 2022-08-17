@@ -25,16 +25,16 @@ bufferline.setup {
     --- Please note some names can/will break the
     --- bufferline so use this at your discretion knowing that it has
     --- some limitations that will *NOT* be fixed.
-    name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
-      -- remove extension from markdown files for example
-      if buf.name:match "%.md" then
-        return vim.fn.fnamemodify(buf.name, ":t:r")
-      end
-    end,
+    -- name_formatter = function(buf) -- buf contains a "name", "path" and "bufnr"
+    --   --- remove extension from markdown files for example
+    --   if buf.name:match "%.md" then
+    --     return vim.fn.fnamemodify(buf.name, ":t:r")
+    --   end
+    -- end,
     max_name_length = 24,
     max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
     tab_size = 24,
-    diagnostics = "nvim_lsp", -- false | "nvim_lsp" | "coc",
+    diagnostics = "false", -- false | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -68,15 +68,17 @@ bufferline.setup {
   },
 }
 
-vim.keymap.set("n", "<M-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", { desc = "Go to buffer 1" })
-vim.keymap.set("n", "<M-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", { desc = "Go to buffer 2" })
-vim.keymap.set("n", "<M-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", { desc = "Go to buffer 3" })
-vim.keymap.set("n", "<M-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", { desc = "Go to buffer 4" })
-vim.keymap.set("n", "<M-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", { desc = "Go to buffer 5" })
-vim.keymap.set("n", "<M-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", { desc = "Go to buffer 6" })
-vim.keymap.set("n", "<M-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", { desc = "Go to buffer 7" })
-vim.keymap.set("n", "<M-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", { desc = "Go to buffer 8" })
-vim.keymap.set("n", "<M-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", { desc = "Go to buffer 9" })
+-- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
+-- The plugin support select buffer kind at go_to_buffer. So I use absolute buffer
+vim.keymap.set("n", "<M-1>", "<Cmd>lua require(\"bufferline\").go_to_buffer(1, true)<CR>", { desc = "Go to buffer 1" })
+vim.keymap.set("n", "<M-2>", "<Cmd>lua require(\"bufferline\").go_to_buffer(2, true)<CR>", { desc = "Go to buffer 2" })
+vim.keymap.set("n", "<M-3>", "<Cmd>lua require(\"bufferline\").go_to_buffer(3, true)<CR>", { desc = "Go to buffer 3" })
+vim.keymap.set("n", "<M-4>", "<Cmd>lua require(\"bufferline\").go_to_buffer(4, true)<CR>", { desc = "Go to buffer 4" })
+vim.keymap.set("n", "<M-5>", "<Cmd>lua require(\"bufferline\").go_to_buffer(5, true)<CR>", { desc = "Go to buffer 5" })
+vim.keymap.set("n", "<M-6>", "<Cmd>lua require(\"bufferline\").go_to_buffer(6, true)<CR>", { desc = "Go to buffer 6" })
+vim.keymap.set("n", "<M-7>", "<Cmd>lua require(\"bufferline\").go_to_buffer(7, true)<CR>", { desc = "Go to buffer 7" })
+vim.keymap.set("n", "<M-8>", "<Cmd>lua require(\"bufferline\").go_to_buffer(8, true)<CR>", { desc = "Go to buffer 8" })
+vim.keymap.set("n", "<M-9>", "<Cmd>lua require(\"bufferline\").go_to_buffer(9, true)<CR>", { desc = "Go to buffer 9" })
 
 vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
 vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })

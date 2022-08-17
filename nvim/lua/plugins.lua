@@ -422,15 +422,6 @@ return packer.startup {
     -- }}}
 
     -- Tool Integration {{{
-    use {  "kyazdani42/nvim-tree.lua",
-      config = function()
-        require "tool.tree"
-      end,
-      requires = { "kyazdani42/nvim-web-devicons" },
-      disable = false,
-      -- a substitue for neo-tree.nvim
-    }
-
     use {  "sidebar-nvim/sidebar.nvim",
       config = function()
         require "config.interface.sidebar"
@@ -451,6 +442,47 @@ return packer.startup {
         "MunifTanjim/nui.nvim",
         "s1n7ax/nvim-window-picker",
       },
+    }
+
+    use {  "kyazdani42/nvim-tree.lua",
+      config = function()
+        require "tool.tree"
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+      disable = true,
+      -- a substitue for neo-tree.nvim
+    }
+
+    use {  "nvim-telescope/telescope.nvim",
+      config = function()
+        require "tool.telescope"
+      end,
+      requires = {
+        { "nvim-lua/popup.nvim" },
+        { "nvim-lua/plenary.nvim" },
+        { "ahmedkhalf/project.nvim" },
+        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        { "nvim-telescope/telescope-hop.nvim" },
+        -- { "nvim-telescope/telescope-project.nvim" },
+        { "nvim-telescope/telescope-media-files.nvim" },
+        { "nvim-telescope/telescope-dap.nvim" },
+        { "benfowler/telescope-luasnip.nvim" },
+        { "kyzadani42/nvim-web-devicons" },
+      },
+      branch = "0.1.x",
+    }
+
+    use {  "phaazon/hop.nvim",
+      config = function()
+        require "tool.hop"
+      end,
+      branch = "v2",
+    }
+
+    use {  "mfussenegger/nvim-treehopper",
+      config = function()
+        require "tool.treehopper"
+      end,
     }
 
     use {  "stevearc/aerial.nvim",
@@ -520,83 +552,22 @@ return packer.startup {
       end,
     }
 
-    use {  "vuki656/package-info.nvim",
-      config = function()
-        require "tool.package-info"
-      end,
-      requires = "MunifTanjim/nui.nvim",
-      event = {
-        "BufRead package.json",
-        "BufRead package-lock.json",
-      },
-    }
-
-    use {  "nvim-orgmode/orgmode",
-      config = function()
-        require "tool.orgmode"
-      end,
-      disable = true,
-      -- Need reconfigre, especially keymaps
-    }
-
-    use {  "akinsho/org-bullets.nvim",
-      config = function()
-        require "tool.org-bullets"
-      end,
-      ft = { "org" },
-      diable = true,
-      -- Disable with orgmode
-    }
-    -- }}}
-
-    -- Efficiency Improvement {{{
-    use {  "nvim-telescope/telescope.nvim",
-      config = function()
-        require "efficiency.telescope"
-      end,
-      requires = {
-        { "nvim-lua/popup.nvim" },
-        { "nvim-lua/plenary.nvim" },
-        { "ahmedkhalf/project.nvim" },
-        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-        { "nvim-telescope/telescope-hop.nvim" },
-        -- { "nvim-telescope/telescope-project.nvim" },
-        { "nvim-telescope/telescope-media-files.nvim" },
-        { "nvim-telescope/telescope-dap.nvim" },
-        { "benfowler/telescope-luasnip.nvim" },
-        { "kyzadani42/nvim-web-devicons" },
-      },
-      branch = "0.1.x",
-    }
-
-    use {  "phaazon/hop.nvim",
-      config = function()
-        require "efficiency.hop"
-      end,
-      branch = "v2",
-    }
-
-    use {  "mfussenegger/nvim-treehopper",
-      config = function()
-        require "efficiency.treehopper"
-      end,
-    }
-
     use {  "kevinhwang91/vim-ibus-sw" }
 
     use {  "ethanholz/nvim-lastplace",
       config = function()
-        require "efficiency.lastplace"
+        require "tool.lastplace"
       end,
     }
 
     use {  "Shatur/neovim-session-manager",
       config = function()
-        require "efficiency.session-manager"
+        require "tool.session-manager"
       end,
       requires = {
         { "nvim-lua/plenary.nvim" },
       },
+      disable = true,
     }
 
     use {  "dstein64/vim-startuptime",
@@ -607,6 +578,17 @@ return packer.startup {
       disable = true,
     }
 
+    use {  "vuki656/package-info.nvim",
+      config = function()
+        require "tool.package-info"
+      end,
+      requires = "MunifTanjim/nui.nvim",
+      event = {
+        "BufRead package.json",
+        "BufRead package-lock.json",
+      },
+      ft = { "json" },
+    }
     -- }}}
 
     -- Debug And Run {{{
@@ -624,10 +606,6 @@ return packer.startup {
         "antoinemadec/FixCursorHold.nvim",
       },
       disable = true,
-    }
-
-    use {  "rafcamlet/nvim-luapad",
-      disable = false,
     }
 
     use {  "mfussenegger/nvim-dap",
@@ -660,6 +638,10 @@ return packer.startup {
       ft = { "python" },
     }
 
+    use {  "rafcamlet/nvim-luapad",
+      ft = { "lua" },
+    }
+
     use {  "Shatur/neovim-cmake",
       config = function()
         require "debug.cmake"
@@ -673,14 +655,11 @@ return packer.startup {
       ft = { "markdown" },
     }
 
-    use {  "jakewvincent/mkdnflow.nvim",
-      disable = true,
-    }
-
     use {  "p00f/clangd_extensions.nvim",
       config = function()
         require "language.clangd_extensions"
       end,
+      ft = { "c", "cpp" }
     }
 
     use {  "mfussenegger/nvim-jdtls",
@@ -688,19 +667,20 @@ return packer.startup {
         require "language.jdtls"
       end,
       ft = { "java" },
-      disable = true,
     }
 
     use {  "jose-elias-alvarez/typescript.nvim",
       config = function()
         require "language.typescript"
       end,
+      ft = { "typescript" },
     }
 
     use {  "b0o/SchemaStore.nvim",
       config = function()
         require "language.schema-store"
       end,
+      ft = { "json" },
     }
     -- }}}
   end,
