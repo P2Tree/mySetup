@@ -136,6 +136,9 @@ export TMOUT=1000000
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
@@ -152,7 +155,7 @@ fi
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="${EDITOR} ~/.zshrc"
+alias zshconfig="${EDITOR} ~/.local.zshrc"
 alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 alias vimconfig="${EDITOR} ~/.vimrc"
 alias zshreload="source ~/.zshrc"
@@ -161,6 +164,7 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias q="exit"
+alias ..="cd .."
 
 alias vi="nvim"
 alias vim="nvim"

@@ -4,34 +4,12 @@
 # avoiding this behavior.
 unset PATH_USER
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
-
-export TERM=xterm-256color
-
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.local.zshrc"
-alias zshsource="source ~/.zshrc"
-alias envconfig="vim ~/Projects/config/env.sh"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias vimconfig="vim ~/.vimrc"
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
-alias q="exit"
-alias ..="cd .."
 alias ll="ls -h -l"
 alias lr="ls -R"
 alias dh="df -h -a -T"
@@ -39,8 +17,6 @@ alias ds="du -sh"
 
 # auto suffix to open file:
 alias md="vim"
-alias mvim="vim"
-alias vi="vim"
 alias gz="tar -xzvf"
 alias tar="tar -xvf"
 alias tgz="tar -xzvf"
