@@ -280,7 +280,10 @@ return packer.startup {
       config = function()
         require "interface.alpha"
       end,
+      disable = true,
     }
+
+    use {  "mhinz/vim-startify" }
 
     use {  "j-hui/fidget.nvim",
       config = function()
@@ -360,7 +363,7 @@ return packer.startup {
       config = function()
         require "interface.marks"
       end,
-      disable = false, -- open for a try
+      disable = true,
       -- Disable causes the value of v:oldfiles to be messed up
     }
 
@@ -400,23 +403,20 @@ return packer.startup {
 
     use {
       -- "EdenEast/nightfox.nvim",
-      "catppuccin/nvim",
-      -- "folke/tokyonight.nvim",
       -- "navarasu/onedark.nvim",
-      -- "Mofiqul/vscode.nvim",
-      -- "Mofiqul/dracula.nvim",
-      -- "projekt0n/github-nvim-theme",
       -- "tanvirtin/monokai.nvim",
-      -- "ellisonleao/gruvbox.nvim",
       -- "shaunsingh/solarized.nvim",
       -- "shaunsingh/moonlight.nvim",
       -- "shaunsingh/nord.nvim",
-      -- commit = "d83145614e8082b24a001643f1c6c00c0ea9aaef", -- After this commit, nightfox has changed a lot
-      as = "catppuccin",
+      -- "Mofiqul/vscode.nvim",
+      -- "ellisonleao/gruvbox.nvim",
+      -- "folke/tokyonight.nvim",
+      "catppuccin/nvim",
+      -- "projekt0n/github-nvim-theme",
       config = function()
         require "interface.colorscheme"
       end,
-      run = ":CatppuccinCompile",
+      run = ":CatppuccinCompile", -- if use catppuccin/nvim
       -- requires = { "rktjmp/lush.nvim" }, -- Required by gruvbox
     }
     -- }}}
@@ -503,6 +503,14 @@ return packer.startup {
     }
 
     use {  "onsails/diaglist.nvim",
+      disable = true,
+    }
+
+    use {  "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require "tool.trouble"
+      end,
       disable = true,
     }
 
@@ -659,7 +667,7 @@ return packer.startup {
       config = function()
         require "language.clangd_extensions"
       end,
-      ft = { "c", "cpp" }
+      ft = { "c", "cpp" },
     }
 
     use {  "mfussenegger/nvim-jdtls",

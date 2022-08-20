@@ -1,29 +1,18 @@
-vim.g.tokyonight_transparent = 0
-vim.g.tokyonight_day_brightness = 0.3
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_lualine_bold = 1
-vim.g.tokyonight_sidebars = { "Outline", "packer", "aerial" }
+local theme = "catppuccin"
 
-vim.g.gruvbox_transparent_bg = 0
-vim.g.gruvbox_underline = 0
-vim.g.gruvbox_invert_selection = 0
+local ok, themeobj = pcall(require, theme)
 
-vim.g.github_sidebars = { "Outline", "packer" }
+-- local ok, nightfox = pcall(require, "nightfox")
+-- if ok then
+--   nightfox.setup {
+--     options.styles = {
+--       comments = "italic",
+--     },
+--   }
+-- end
 
-vim.g.vscode_style = "dark"
-
-local ok, nightfox = pcall(require, "nightfox")
-if ok then
-  nightfox.setup {
-    styles = {
-      comments = "italic",
-    },
-  }
-end
-
-local ok, catppuccin = pcall(require, "catppuccin")
-if ok then
-  catppuccin.setup {
+if ok and theme == "catppuccin" then
+  themeobj.setup {
     dim_inactive = {
       enabled = false,
       shade = "dark",
@@ -38,16 +27,16 @@ if ok then
     },
     styles = {
       comments = { "italic" },
-      conditionals = { "italic" },
+      conditionals = {},
       loops = {},
       functions = {},
-      keywords = {},
+      keywords = { "bold" },
       strings = {},
       variables = {},
       numbers = {},
       booleans = {},
       properties = {},
-      types = {},
+      types = { "bold" },
       operators = {},
     },
     integrations = {
@@ -75,12 +64,12 @@ if ok then
       gitsigns = true,
       telescope = true,
       nvimtree = {
-        enabled = true,
+        enabled = false,
         show_root = true,
         transparent_panel = false,
       },
       neotree = {
-        enabled = false,
+        enabled = true,
         show_root = true,
         transparent_panel = false,
       },
@@ -101,8 +90,14 @@ if ok then
       hop = true,
       notify = true,
       telekasten = false,
-      symbols_outline = true,
+      symbols_outline = false,
       mini = false,
+      navic = true,  -- also need to set highlight = true in navic setup file
+      dap = {
+        enabled = false,
+        enable_ui = false, -- nvim-dap-ui
+        -- also need to set highlight groups in dap setup file
+      }
     },
   }
 
@@ -118,7 +113,12 @@ if ok then
     command = "source <afile> | CatppuccinCompile",
   })
 
-  vim.g.catppuccin_flavour = "mocha"
+  vim.g.catppuccin_flavour = "macchiato"  -- macchiato, latte, frappe, mocha
+  -- can use vim command: Catppuccin <flavour> to switch themes on the fly
+  --
+  -- others plugins config:
+  -- in lualine setup, set options.theme = "catppuccin"
+
 end
 
-vim.cmd "colorscheme catppuccin"
+vim.cmd("colorscheme "..theme)

@@ -6,6 +6,7 @@ end
 
 kommentary.configure_language("default", {
   prefer_single_line_comments = true,
+
 })
 
 kommentary.configure_language("html", {
@@ -25,7 +26,7 @@ kommentary.configure_language("vue", {
 })
 
 vim.keymap.set({"n"}, "<leader>ci", "<Plug>kommentary_line_increase", { desc = "add comment" })
-vim.keymap.set({"v"}, "<leader>ci", "<Plug>kommentary_visual_increase", { desc = "add comment" })
+vim.keymap.set({"v"}, "<leader>ci", "<Plug>kommentary_visual_increase<C-c>", { desc = "add comment" })
 vim.keymap.set({"n"}, "<leader>cd", "<Plug>kommentary_line_decrease", { desc = "remove comment" })
-vim.keymap.set({"v"}, "<leader>cd", "<Plug>kommentary_visual_decrease", { desc = "remove comment" })
+vim.keymap.set({"v"}, "<leader>cd", "<Plug>kommentary_visual_decrease<C-c>", { desc = "remove comment" })
 

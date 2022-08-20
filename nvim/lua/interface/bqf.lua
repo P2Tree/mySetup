@@ -4,4 +4,26 @@ if not ok then
   return
 end
 
-nvim_bqf.setup {}
+nvim_bqf.setup ({
+  auto_enable = true,
+  auto_resize_height = true,  -- hightly recommended enable
+  preview = {
+    win_height = 15,
+    win_vheight = 15,
+    delay_syntax = 50,
+  },
+  func_map = {
+    openc = '<cr>',-- open and close quickfix
+    drop = 'o',  -- open with drop and close quickfix
+    open = 'O', -- open under the cursor in quickfix
+    split = 'x', -- open with vertical split
+    vsplit = 'v', -- open with horizontal split
+
+    -- has some issues to change kj keymap
+    -- default is ctrl-n and ctrl-p
+    -- prevfile = 'k', -- go to previous file
+    -- nextfile = 'j', -- go to next file
+    -- prevhist = 'h', -- go to previous quickfix list
+    -- nexthist = 'l', -- go to next quickfix list
+  }
+})

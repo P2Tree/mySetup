@@ -66,7 +66,7 @@ noremap <C-S> <C-w>v
 " di-highlight
 nnoremap <silent><leader>/ :nohls<CR>
 " quit window or buffer
-nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":q<cr>" : ":bd<cr>"
+nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ":bd<cr>"
 " delete it, not concat it
 nnoremap <leader>x "_x
 nnoremap <leader>X "_X
@@ -75,6 +75,9 @@ nnoremap <leader>dd "_dd
 nnoremap <leader>D "_D
 vnoremap <leader>d "_d
 vnoremap <leader>dd "_dd
+" indent map
+vnoremap <tab> >gv
+vnoremap <S-tab> <gv
 
 " Filetype
 autocmd BufNewFile,BufRead .clang-tidy set filetype=yaml
