@@ -15,11 +15,16 @@ vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     prefix = "●",
-    severity = vim.diagnostic.severity.WARN,
+    severity = {
+      vim.diagnostic.severity.ERROR,
+      vim.diagnostic.severity.WARN,
+      vim.diagnostic.severity.INFO,
+      vim.diagnostic.severity.HINT,
+    }
   },
   float = {
     severity_sort = true,
-    source = "if_many",
+    -- source = "if_many",
   },
   severity_sort = true,
 }
@@ -68,8 +73,13 @@ mason.setup_handlers {
   tsserver = function(server) end,
   jsonls = function(server) end,
 
+  -- sumneko_lua = function(server) end,  -- we needs some config for lua lsp
   sumneko_lua = function()
     lspconfig.sumneko_lua.setup {
+      capabilities = default.capabilities,
+      on_attach = function(client, bufnr)
+        default.on_attach(client, bufnr)
+      end,
       settings = {
         Lua = {
           runtime = {

@@ -7,11 +7,6 @@ if not ok then
   return
 end
 
-local ok, illuminate = pcall(require, "illuminate")
-if not ok then
-  vim.notify "Could not load illuminate"
-end
-
 local ok, aerial = pcall(require, "aerial")
 if not ok then
   vim.notify "Could not load aerial"
@@ -52,6 +47,7 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
   vim.keymap.set("n", "<leader>ll", vim.diagnostic.setloclist, { buffer = bufnr, desc = "Diagnostic list" })
   vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, { buffer = bufnr, desc = "Diagnostic float" })
+  vim.keymap.set("n", "<leader>lq", ":lclose<cr>", { silent = true, desc = "Close Diagnostic list" })
 
   vim.keymap.set(
     "n",
@@ -70,7 +66,6 @@ M.on_attach = function(client, bufnr)
   end, { buffer = bufnr, desc = "List workspace folders" })
 
   navic.attach(client, bufnr)
-  illuminate.on_attach(client)
   aerial.on_attach(client, bufnr)
   -- require("virtualtypes").on_attach(client)
 end

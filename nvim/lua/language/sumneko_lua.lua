@@ -1,0 +1,39 @@
+-- This configuration file is the lua lsp config (which named sumneko_lua).
+-- It needs a lua plugin loaded in the plugins.lua.
+-- As we don't have a lua plugin, the lua lsp configure was take over by lspconfig.lua (find the same code in lspconfig.lua)
+--
+-- local ok, lspconfig = pcall(require, "lspconfig")
+-- if not ok then
+--   vim.notify "Cound not load lspconfig"
+-- end
+
+-- local default = require "language.default"
+
+-- lspconfig.sumneko_lua.setup {
+--   settings = {
+--     Lua = {
+--       runtime = {
+--         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--         version = 'LuaJIT',
+--       },
+--       diagnostics = {
+--         -- Get the language server to recognize the 'vim' global
+--         globals = {
+--           'vim'
+--         },
+--       },
+--       workspace = {
+--         -- Make the server aware of Neovim runtime files
+--         library = vim.api.nvim_get_runtime_file("", true),
+--       },
+--       -- Do not send telemetry data containing a randomized but unique identifier
+--       telemetry = {
+--         enable = false,
+--       }
+--     }
+--   },
+--   on_attach = function(client, bufnr)
+--     default.on_attach(client, bufnr)
+--   end,
+--   capabilities = default.capabilities,
+-- }

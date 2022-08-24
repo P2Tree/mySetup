@@ -6,6 +6,7 @@ end
 
 nvim_bqf.setup ({
   auto_enable = true,
+  magic_window = true,
   auto_resize_height = true,  -- hightly recommended enable
   preview = {
     win_height = 15,
@@ -13,9 +14,9 @@ nvim_bqf.setup ({
     delay_syntax = 50,
   },
   func_map = {
-    openc = '<cr>',-- open and close quickfix
-    drop = 'o',  -- open with drop and close quickfix
-    open = 'O', -- open under the cursor in quickfix
+    open = '<CR>', -- open under the cursor in quickfix
+    drop = 'O',  -- open with drop and close quickfix
+    openc = 'o',-- open and close quickfix
     split = 'x', -- open with vertical split
     vsplit = 'v', -- open with horizontal split
 

@@ -95,6 +95,8 @@ return packer.startup {
 
     use {  "ii14/emmylua-nvim",
       opt = true,
+      disable = true,
+      -- used by sumneko_lua lsp, but i think it is optional
     }
     -- }}}
 
@@ -119,10 +121,9 @@ return packer.startup {
         { "hrsh7th/cmp-path" },
         { "hrsh7th/cmp-cmdline" },
         { "hrsh7th/cmp-calc" },
-        { "kdheepak/cmp-latex-symbols" },
         { "saadparwaiz1/cmp_luasnip" },
         { "kristijanhusak/vim-dadbod-completion" },
-        { "lukas-reineke/cmp-under-comparator" },
+        { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
       },
     }
 
@@ -132,7 +133,9 @@ return packer.startup {
       end,
     }
 
-    use {  "rafamadriz/friendly-snippets" }
+    use {  "rafamadriz/friendly-snippets",
+      disable = true,  -- not useful for me
+    }
 
     use {  "b3nj5m1n/kommentary",
       config = function()
@@ -183,7 +186,7 @@ return packer.startup {
       },
     }
 
-    use {  "akinsho/nvim-bufferline.lua",
+    use {  "akinsho/bufferline.nvim",
       config = function()
         require "interface.bufferline"
       end,
@@ -262,6 +265,7 @@ return packer.startup {
       config = function()
         require "interface.lsp_signature"
       end,
+      disable = true,  -- need to config
     }
 
     use {  "onsails/lspkind-nvim",
@@ -307,6 +311,7 @@ return packer.startup {
       config = function()
         require "interface.colorizer"
       end,
+      disable = true,
     }
 
     use {  "dstein64/nvim-scrollview" }
@@ -316,7 +321,7 @@ return packer.startup {
         require "interface.satellite"
       end,
       disable = true,
-      -- A substitue for nvim-scrollview
+      -- A substitute for nvim-scrollview
       -- which support search results, lsp diagnostics and git hunks
       -- Disable because it's work in progress
     }
@@ -325,6 +330,8 @@ return packer.startup {
       config = function()
         require "interface.bqf"
       end,
+      disable = false,
+      -- A substitute for trouble
     }
 
     use {  "kevinhwang91/nvim-fFHighlight",
@@ -385,14 +392,6 @@ return packer.startup {
       },
     }
 
-    use {  "sunjon/Shade.nvim",
-      config = function()
-        require "interface.shade"
-      end,
-      disable = true,
-      -- Disable because conflict with other floating window plugins
-    }
-
     use {  "luukvbaal/stabilize.nvim",
       config = function()
         require "interface.stabilize"
@@ -416,6 +415,7 @@ return packer.startup {
       config = function()
         require "interface.colorscheme"
       end,
+      as = "catppuccin",  -- if use catppuccin/nvim
       run = ":CatppuccinCompile", -- if use catppuccin/nvim
       -- requires = { "rktjmp/lush.nvim" }, -- Required by gruvbox
     }

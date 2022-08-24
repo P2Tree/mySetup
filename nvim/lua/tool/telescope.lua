@@ -140,10 +140,11 @@ for i = 1, #extensions do
 end
 
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Live grep" })
-vim.keymap.set("n", "<leader>f?", require("telescope.builtin").help_tags, { desc = "Help tags" })
-vim.keymap.set("n", "<leader>fh", require("telescope.builtin").oldfiles, { desc = "Old files" })
-vim.keymap.set("n", "<leader>fb", require("telescope.builtin").marks, { desc = "Marks" })
+vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Find Live grep" })
+vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help tags" })
+vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles, { desc = "Find old files" })
+vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Marks" })
 
 -- telescope-project.nvim and project.nvim are the different plugins
 -- here I use projects.nvim as this is a all in one plugins for projects managerment,
@@ -152,7 +153,6 @@ vim.keymap.set("n", "<leader>fb", require("telescope.builtin").marks, { desc = "
 -- vim.keymap.set("n", "<leader>fp", require("telescope").extensions.project.project, { desc = "Project" })
 vim.keymap.set("n", "<leader>fp", "<Cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<CR>", { desc = "Project" })
 
-vim.keymap.set("n", "<leader>fm", require("telescope").extensions.media_files.media_files, { desc = "Media files" })
 vim.keymap.set("n", "<leader>fn", require("telescope").extensions.notify.notify, { desc = "Notify" })
 vim.keymap.set("n", "<leader>fde", require("telescope").extensions.dap.commands, { desc = "Commands" })
 vim.keymap.set("n", "<leader>fdc", require("telescope").extensions.dap.configurations, { desc = "Configurations" })

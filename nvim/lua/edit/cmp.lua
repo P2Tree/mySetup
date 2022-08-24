@@ -90,8 +90,6 @@ cmp.setup {
     },
     { name = "path" },
     { name = "calc" },
-    { name = "latex_symbols" },
-    { name = "orgmode" },
   },
   formatting = {
     format = lspkind.cmp_format {
@@ -104,8 +102,6 @@ cmp.setup {
         buffer = "[BUF]",
         path = "[PTH]",
         calc = "[CLC]",
-        latex_symbols = "[TEX]",
-        orgmode = "[ORG]",
       },
     },
     fields = {
@@ -142,6 +138,3 @@ cmp.setup.cmdline("/", {
   },
 })
 
-vim.cmd [[
-autocmd FileType sql,mysql,plsql lua require("cmp").setup.buffer { sources = {  { name = "vim-dadbod-completion" } } }
-]]

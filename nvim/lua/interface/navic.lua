@@ -14,7 +14,7 @@ navic.setup {
     Property = " ",
     Field = " ",
     Constructor = " ",
-    Enum = "練",
+    Enum = "練 ",
     Interface = "練",
     Function = " ",
     Variable = " ",

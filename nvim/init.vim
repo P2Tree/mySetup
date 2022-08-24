@@ -67,6 +67,7 @@ noremap <C-S> <C-w>v
 nnoremap <silent><leader>/ :nohls<CR>
 " quit window or buffer
 nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ":bd<cr>"
+nnoremap <expr>Q ":q<cr>"
 " delete it, not concat it
 nnoremap <leader>x "_x
 nnoremap <leader>X "_X

@@ -13,13 +13,6 @@ local ok, themeobj = pcall(require, theme)
 
 if ok and theme == "catppuccin" then
   themeobj.setup {
-    dim_inactive = {
-      enabled = false,
-      shade = "dark",
-      percentage = 0.15,
-    },
-    transparent_background = false,
-    term_colors = false,
     compile = {
       enabled = true,
       path = vim.fn.stdpath "cache" .. "/catppuccin",
@@ -41,26 +34,7 @@ if ok and theme == "catppuccin" then
     },
     integrations = {
       treesitter = true,
-      native_lsp = {
-        enabled = true,
-        virtual_text = {
-          errors = { "italic" },
-          hints = { "italic" },
-          warnings = { "italic" },
-          information = { "italic" },
-        },
-        underlines = {
-          errors = { "underline" },
-          hints = { "underline" },
-          warnings = { "underline" },
-          information = { "underline" },
-        },
-      },
-      coc_nvim = false,
-      lsp_trouble = false,
       cmp = true,
-      lsp_saga = false,
-      gitgutter = false,
       gitsigns = true,
       telescope = true,
       nvimtree = {
@@ -83,7 +57,11 @@ if ok and theme == "catppuccin" then
       vim_sneak = false,
       fern = false,
       barbar = false,
-      bufferline = true,
+      bufferline = {
+        enable = true,
+        italics = true,
+        bolds = true,
+      },
       markdown = true,
       lightspeed = false,
       ts_rainbow = true,
@@ -91,7 +69,10 @@ if ok and theme == "catppuccin" then
       notify = true,
       telekasten = false,
       symbols_outline = false,
+      aerial = true,
       mini = false,
+      vimwiki = true,
+      beacon = true,
       navic = true,  -- also need to set highlight = true in navic setup file
       dap = {
         enabled = false,

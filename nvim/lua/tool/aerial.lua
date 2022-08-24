@@ -149,7 +149,7 @@ aerial.setup ({
   -- Call this function when aerial attaches to a buffer.
   -- Useful for setting keymaps. Takes a single `bufnr` argument.
   on_attach = function(bufnr)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s', '<Cmd>AerialToggle!<CR>', { desc = "Code Outline" })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>s', '<Cmd>AerialToggle<CR>', { desc = "Code Outline" })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[s', '<Cmd>AerialPrev<CR>', { desc = "Jump Backward" })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']s', '<Cmd>AerialNext<CR>', { desc = "Jump Forward" })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[[', '<Cmd>AerialPrevUp<CR>', { desc = "Jump Backward Up" })
