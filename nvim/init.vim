@@ -87,6 +87,9 @@ autocmd BufNewFile,BufRead .clang-tidy set filetype=yaml
 " Every time exit insert mode, automatically close fcitx5
 autocmd InsertLeave * :silent !fcitx5-remote -c
 
+autocmd InsertEnter * set relativenumber
+autocmd InsertLeave * set norelativenumber
+
 " Binary
 " Enter binary mode when editing a file with postfix 'bin'
 augroup Binary
@@ -99,21 +102,6 @@ augroup Binary
   autocmd BufWritePost *.bin if &bin | %!xxd
   autocmd BufWritePost *.bin set nomod | endif
 augroup END
-
-" Cursor
-" Set cursor shape to beam instead of block,
-" if exists('&TMUX')
-"   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-"   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-"   let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-" else
-"   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-"   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-"   let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-" endif
-let &t_SI .= "\e[6 q"
-let &t_SR .= "\e[3 q"
-let &t_EI .= "\e[2 q"
 
 " Neovim
 if has("nvim")

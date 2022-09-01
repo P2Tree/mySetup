@@ -15,7 +15,7 @@ bufferline.setup {
     indicator = {
       -- alternatives: right aligned =>▕ ▐  left aligned => ▎
       icon = '▶', -- this should be omitted if indicator style is not 'icon'
-      style = 'icon',  -- 'icon' | 'underline' | 'none'
+      style = 'none',  -- 'icon' | 'underline' | 'none'
     },
     buffer_close_icon = "",
     modified_icon = "●",
@@ -42,13 +42,13 @@ bufferline.setup {
       return "(" .. count .. ")"
     end,
     offsets = {
-      { filetype = "NvimTree", text = "File Explorer", text_align = "center" },
-      { filetype = "Outline", text = "Outline", text_align = "center" },
-      { filetype = "neo-tree", text = "File Explorer", text_align = "center" },
-      { filetype = "aerial", text = "Outline", text_align = "center" },
-      { filetype = "packer", text = "Plugin Manager", text_align = "center" },
-      { filetype = "dbui", text = "Database Manager", text_align = "center" },
-      { filetype = "SidebarNvim", text = "Sidebar", text_align = "center" },
+      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
+      { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
+      { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
+      { filetype = "aerial", text = "Outline", text_align = "center", saperator = true },
+      { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
+      { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
+      { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
     },
     color_icons = true, --- true | false, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
@@ -62,11 +62,16 @@ bufferline.setup {
     separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
     enforce_regular_tabs = false, -- false | true,
     always_show_bufferline = true, -- true | false,
-    sort_by = "id", -- 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+    sort_by = "id", -- 'insert_after_current' | 'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
     -- add custom logic
     --   return buffer_a.modified > buffer_b.modified
     -- end
   },
+  custom_filter = function(buf_number)
+    if vim.bo[buf_number].filetype ~= 'qf' then
+      return true
+    end
+  end,
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer

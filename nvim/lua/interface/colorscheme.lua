@@ -37,11 +37,7 @@ if ok and theme == "catppuccin" then
       cmp = true,
       gitsigns = true,
       telescope = true,
-      nvimtree = {
-        enabled = false,
-        show_root = true,
-        transparent_panel = false,
-      },
+      nvimtree = false,
       neotree = {
         enabled = true,
         show_root = true,
@@ -74,12 +70,15 @@ if ok and theme == "catppuccin" then
       vimwiki = true,
       beacon = true,
       navic = true,  -- also need to set highlight = true in navic setup file
+      overseer = false,
       dap = {
         enabled = false,
         enable_ui = false, -- nvim-dap-ui
         -- also need to set highlight groups in dap setup file
       }
     },
+    color_overrides = {},
+    highlight_overrides = {},
   }
 
   vim.api.nvim_create_autocmd("User", {
