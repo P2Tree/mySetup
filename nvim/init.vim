@@ -21,6 +21,7 @@ set autochdir
 
 " Interface
 set number
+set relativenumber
 set nowrap
 set linebreak
 set showbreak=>>
@@ -87,8 +88,8 @@ autocmd BufNewFile,BufRead .clang-tidy set filetype=yaml
 " Every time exit insert mode, automatically close fcitx5
 autocmd InsertLeave * :silent !fcitx5-remote -c
 
-autocmd InsertEnter * set relativenumber
-autocmd InsertLeave * set norelativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 
 " Binary
 " Enter binary mode when editing a file with postfix 'bin'

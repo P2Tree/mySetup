@@ -222,17 +222,11 @@ return packer.startup {
       -- substitute of illuminate
     }
 
-    use {  "anuvyklack/pretty-fold.nvim",
+    use {  "kevinhwang91/nvim-ufo",
       config = function()
-        require "interface.pretty-fold"
+        require "interface.ufo"
       end,
-      requires = { "anuvyklack/nvim-keymap-amend" },
-    }
-
-    use {  "anuvyklack/fold-preview.nvim",
-      config = function()
-        require "interface.fold-preview"
-      end,
+      requires = "kevinhwang91/promise-async",
     }
 
     use {  "m-demare/hlargs.nvim",
@@ -259,6 +253,7 @@ return packer.startup {
       config = function()
         require "interface.dressing"
       end,
+      disable = true,
     }
 
     use {  "ray-x/lsp_signature.nvim",

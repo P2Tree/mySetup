@@ -66,12 +66,12 @@ bufferline.setup {
     -- add custom logic
     --   return buffer_a.modified > buffer_b.modified
     -- end
+    custom_filter = function(buf_number)
+      if vim.bo[buf_number].filetype ~= 'qf' then
+        return true
+      end
+    end,
   },
-  custom_filter = function(buf_number)
-    if vim.bo[buf_number].filetype ~= 'qf' then
-      return true
-    end
-  end,
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
