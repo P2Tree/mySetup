@@ -48,7 +48,7 @@ if ok and theme == "catppuccin" then
         enabled = true,
         colored_indent_levels = false,
       },
-      dashboard = true,
+      dashboard = false,  -- dashboard-nvim, a fancy fastest async start screen
       neogit = true,
       vim_sneak = false,
       fern = false,
@@ -60,6 +60,7 @@ if ok and theme == "catppuccin" then
       },
       markdown = true,
       lightspeed = false,
+      leap = false,
       ts_rainbow = true,
       hop = true,
       notify = true,
@@ -69,8 +70,13 @@ if ok and theme == "catppuccin" then
       mini = false,
       vimwiki = true,
       beacon = true,
-      navic = true,  -- also need to set highlight = true in navic setup file
+      navic = {
+        enable = true,  -- also need to set highlight = true in navic setup file
+        custom_bg = "NONE",
+      },
       overseer = false,
+      fidget = true,
+      treesitter_context = true,
       dap = {
         enabled = false,
         enable_ui = false, -- nvim-dap-ui

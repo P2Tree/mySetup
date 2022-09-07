@@ -18,6 +18,7 @@ set autowrite
 set autoread
 set nowrapscan
 set autochdir
+set history=9999 " command history max save
 
 " Interface
 set number
@@ -42,6 +43,7 @@ set conceallevel=1
 set scrolloff=1
 set sidescrolloff=5
 set display+=lastline,msgsep
+set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
 
 " Encoding
 set encoding=utf-8
@@ -68,7 +70,7 @@ noremap <C-S> <C-w>v
 nnoremap <silent><leader>/ :nohls<CR>
 " quit window or buffer
 nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ":bd<cr>"
-nnoremap <expr>Q ":q<cr>"
+nnoremap <expr>Q ":wq<cr>"
 " delete it, not concat it
 nnoremap <leader>x "_x
 nnoremap <leader>X "_X

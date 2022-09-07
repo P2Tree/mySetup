@@ -50,3 +50,5 @@ zen.setup {
   -- callback where you can add custom code when the Zen window closes
   on_close = function() end,
 }
+
+vim.keymap.set("n", "<leader>tz", "<Cmd>ZenMode<CR>", { desc = "Zen Mode" })

@@ -66,10 +66,15 @@ bufferline.setup {
     -- add custom logic
     --   return buffer_a.modified > buffer_b.modified
     -- end
-    custom_filter = function(buf_number)
-      if vim.bo[buf_number].filetype ~= 'qf' then
-        return true
+    custom_filter = function(bufnr)
+      -- if the return is false, this buffer will be shown, otherwise, this buffer will be hidden
+      local exclude_ft = { "qf", "fugitive", "git" }
+      local cur_ft = vim.bo[bufnr].filetype
+      local should_filter = vim.tbl_contains(exclude_ft, cur_ft)
+      if should_filter then
+        return false
       end
+      return true
     end,
   },
 }

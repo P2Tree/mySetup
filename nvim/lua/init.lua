@@ -6,14 +6,8 @@ if ok then
 end
 
 require "plugins"
-require "keymaps"
+-- require "autocmd"
 require "llvm"
-
--- Delete trailing whitespace and tabs at the end of each line
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  command = [[%s/\s\+$//e]],
-})
 
 -- For the use of impatient.nvim, packer_compiled.lua needs to be
 -- in the lua/ directory instead of the default.

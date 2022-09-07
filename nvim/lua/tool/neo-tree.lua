@@ -1,6 +1,6 @@
 local ok, tree = pcall(require, "neo-tree")
 if not ok then
-  vim.notify "Could not load tree"
+  vim.notify "Could not load neo-tree"
   return
 end
 

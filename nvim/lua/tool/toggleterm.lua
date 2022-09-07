@@ -41,8 +41,8 @@ toggleterm.setup {
   },
 }
 
-vim.keymap.set("t", "<C-h>", "<Cmd>wincmd h<CR>")
-vim.keymap.set("t", "<C-j>", "<Cmd>wincmd j<CR>")
-vim.keymap.set("t", "<C-k>", "<Cmd>wincmd k<CR>")
-vim.keymap.set("t", "<C-l>", "<Cmd>wincmd l<CR>")
+vim.keymap.set("t", "<C-left>", "<Cmd>wincmd h<CR>")
+vim.keymap.set("t", "<C-down>", "<Cmd>wincmd j<CR>")
+vim.keymap.set("t", "<C-up>", "<Cmd>wincmd k<CR>")
+vim.keymap.set("t", "<C-right>", "<Cmd>wincmd l<CR>")
 vim.keymap.set("n", "<leader>tt", "<Cmd>ToggleTermToggleAll<CR>", { desc = "All Terminal" })

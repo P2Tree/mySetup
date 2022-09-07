@@ -275,6 +275,14 @@ return packer.startup {
       -- Disable because it not stable
     }
 
+    use {  "mrshmllow/document-color.nvim",
+      config = function()
+        require "interface.document-color"
+      end,
+      disable = true,
+      -- TODO: https://github.com/neovim/neovim/pull/9496
+    }
+
     use {  "goolord/alpha-nvim",
       config = function()
         require "interface.alpha"
@@ -348,7 +356,7 @@ return packer.startup {
       config = function()
         require "interface.zen-mode"
       end,
-      cmd = { "ZenMode" },
+      disable = true,
     }
 
     use {  "psliwka/vim-smoothie" }
@@ -578,6 +586,10 @@ return packer.startup {
     }
 
     use {  "sindrets/winshift.nvim",
+      disable = true,
+    }
+
+    use {  "simeji/winresizer",
       disable = true,
     }
 
