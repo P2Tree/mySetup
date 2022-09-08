@@ -14,9 +14,9 @@ nvim_bqf.setup ({
     delay_syntax = 50,
   },
   func_map = {
-    open = '<CR>', -- open under the cursor in quickfix
+    open = 'o', -- open under the cursor in quickfix
     drop = 'O',  -- open with drop and close quickfix
-    openc = 'o',-- open and close quickfix
+    openc = '<cr>',-- open and close quickfix
     split = 'x', -- open with vertical split
     vsplit = 'v', -- open with horizontal split
 

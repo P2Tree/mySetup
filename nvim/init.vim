@@ -37,7 +37,7 @@ set wildmenu
 set title
 set signcolumn=yes
 set cursorcolumn
-set cursorline
+" set cursorline
 set cursorlineopt=both
 set conceallevel=1
 set scrolloff=1

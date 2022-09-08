@@ -30,15 +30,15 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 -- Display a message when the current file is not in utf-8 format.
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-  pattern = { "*" },
-  group = myAutoGroup,
-  callback = function()
-    if vim.bo.fileencoding ~= 'utf-8' then
-      vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd({ "BufRead" }, {
+--   pattern = { "*" },
+--   group = myAutoGroup,
+--   callback = function()
+--     if vim.bo.fileencoding ~= 'utf-8' then
+--       vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
+--     end
+--   end
+-- })
 
 -- Resize all windows when we resie the terminal
 vim.api.nvim_create_autocmd({ "vimResized" }, {

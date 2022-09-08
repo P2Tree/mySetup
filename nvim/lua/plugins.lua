@@ -105,7 +105,7 @@ return packer.startup {
       config = function()
         require "edit.copilot"
       end,
-      disable = false,
+      disable = true,
       -- leave for later research
     }
 
@@ -182,7 +182,7 @@ return packer.startup {
       end,
       requires = {
         { "kyazdani42/nvim-web-devicons" },
-        { "ofseed/lualine-copilot" },
+        -- { "ofseed/lualine-copilot" },
       },
     }
 
@@ -413,8 +413,8 @@ return packer.startup {
       -- "Mofiqul/vscode.nvim",
       -- "ellisonleao/gruvbox.nvim",
       -- "folke/tokyonight.nvim",
-      "catppuccin/nvim",
       -- "projekt0n/github-nvim-theme",
+      "catppuccin/nvim",
       config = function()
         require "interface.colorscheme"
       end,
