@@ -22,7 +22,7 @@ aerial.setup ({
     -- Determines the default direction to open the aerial window. The 'prefer'
     -- options will open the window in the other direction *if* there is a
     -- different buffer in the way of the preferred direction
-    default_direction = "prefer_right",
+    default_direction = "right",
 
     -- Enum: edge, group, window
     --   edge   - open aerial at the far right/left of the editor
@@ -31,13 +31,16 @@ aerial.setup ({
     placement = "window",
   },
 
-  -- Enum: persist, close, auto, global
-  --   persist - aerial window will stay open until closed
-  --   close   - aerial window will close when original file is no longer visible
-  --   auto    - aerial window will stay open as long as there is a visible
-  --             buffer to attach to
-  --   global  - same as 'persist', and will always show symbols for the current buffer
-  close_behavior = "auto",
+  -- Determines how the aerial window decides which buffer to display symbols for
+  --   window - aerial window will display symbols for the buffer in the window from which it was opend
+  --   global - aerial window will disaply symbols for the current window
+  attach_mode = "window",
+
+  -- List of enum values that configure when to auto-close the aerial window
+  --   unfocus       - close aerial when you leave the original source window
+  --   switch_buffer - close aerial when you change buffers in the source window
+  --   unsupported   - close aerial when attaching to a buffer that has no symbol source
+  close_automatic_events = { "unsupported" },
 
   -- Set to false to remove the default keybindings for the aerial buffer
   default_bindings = true,

@@ -97,13 +97,13 @@ autocmd InsertLeave * set relativenumber
 " Enter binary mode when editing a file with postfix 'bin'
 augroup Binary
   autocmd!
-  autocmd BufReadPre  *.bin let &bin=1
-  autocmd BufReadPost *.bin if &bin | %!xxd
-  autocmd BufReadPost *.bin set filetype=xxd | endif
-  autocmd BufWritePre *.bin if &bin | %!xxd -r
-  autocmd BufWritePre *.bin endif
-  autocmd BufWritePost *.bin if &bin | %!xxd
-  autocmd BufWritePost *.bin set nomod | endif
+  autocmd BufReadPre  *.bin,*.dat let &bin=1
+  autocmd BufReadPost *.bin,*.dat if &bin | %!xxd
+  autocmd BufReadPost *.bin,*.dat set filetype=xxd | endif
+  autocmd BufWritePre *.bin,*.dat if &bin | %!xxd -r
+  autocmd BufWritePre *.bin,*.dat endif
+  autocmd BufWritePost *.bin,*.dat if &bin | %!xxd
+  autocmd BufWritePost *.bin,*.dat set nomod | endif
 augroup END
 
 " Neovim
