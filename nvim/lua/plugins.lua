@@ -77,6 +77,7 @@ return packer.startup {
       config = function()
         require "core.which-key"
       end,
+      disable = true,
     }
 
     use {  "b0o/mapx.nvim",

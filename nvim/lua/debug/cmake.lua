@@ -4,12 +4,6 @@ if not ok then
   return
 end
 
-local ok, key = pcall(require, "which-key")
-if not ok then
-  vim.notify "Could not load which-key"
-  return
-end
-
 local path = require "plenary.path"
 
 local script_path = path:new(debug.getinfo(1).source:sub(2))
@@ -45,11 +39,6 @@ local function on_attach()
 
   vim.keymap.set("n", "<leader><leader>st", "<cmd>CMake select_target<CR>", { buffer = 0, desc = "Target" })
   vim.keymap.set("n", "<leader><leader>sb", "<cmd>CMake select_build_type<CR>", { buffer = 0, desc = "Build type" })
-
-  key.register({
-    ["<leader><leader>b"] = { name = "+build" },
-    ["<leader><leader>s"] = { name = "+select" },
-  }, { buffer = 0 })
 end
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
