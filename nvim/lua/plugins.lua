@@ -66,25 +66,23 @@ return packer.startup {
         { "windwp/nvim-ts-autotag" },
         { "p00f/nvim-ts-rainbow" },
         { "RRethy/nvim-treesitter-endwise" },
-        { "RRethy/nvim-treesitter-textsubjects", disable = true },
+        -- { "RRethy/nvim-treesitter-textsubjects", disable = true },
         { "JoosepAlviste/nvim-ts-context-commentstring" },
       },
     }
 
     use {  "tpope/vim-unimpaired" }
 
-    use {  "folke/which-key.nvim",
-      config = function()
-        require "core.which-key"
-      end,
-      disable = true,
-    }
+    -- use {  "folke/which-key.nvim",
+    --   config = function()
+    --     require "core.which-key"
+    --   end,
+    --   disable = true,
+    -- }
 
-    use {  "b0o/mapx.nvim",
-      disable = true,
-      -- Plugin organize keymaps
-      -- Disable because lots of refactorings needs to be done
-    }
+    -- use {  "b0o/mapx.nvim",
+    --   disable = true, -- Disable because lots of refactorings needs to be done
+    -- }
 
     use {  "lewis6991/impatient.nvim" }
 
@@ -94,21 +92,19 @@ return packer.startup {
       end,
     }
 
-    use {  "ii14/emmylua-nvim",
-      opt = true,
-      disable = true,
-      -- used by sumneko_lua lsp, but i think it is optional
-    }
+    -- use {  "ii14/emmylua-nvim",
+    --   opt = true,
+    --   disable = true, -- used by sumneko_lua lsp, but i think it is optional
+    -- }
     -- }}}
 
     -- Text Editing {{{
-    use {  "github/copilot.vim",
-      config = function()
-        require "edit.copilot"
-      end,
-      disable = true,
-      -- leave for later research
-    }
+    -- use {  "github/copilot.vim",
+    --   config = function()
+    --     require "edit.copilot"
+    --   end,
+    --   disable = true, -- leave for later research
+    -- }
 
     use {  "hrsh7th/nvim-cmp",
       config = function()
@@ -134,9 +130,9 @@ return packer.startup {
       end,
     }
 
-    use {  "rafamadriz/friendly-snippets",
-      disable = true,  -- not useful for me
-    }
+    -- use {  "rafamadriz/friendly-snippets",
+    --   disable = true,  -- not useful for me
+    -- }
 
     use {  "b3nj5m1n/kommentary",
       config = function()
@@ -152,8 +148,6 @@ return packer.startup {
       config = function()
         require "edit.spellsitter"
       end,
-      disable = true,
-      -- Spell check is less needed at this time
     }
 
     use {  "windwp/nvim-autopairs",
@@ -162,18 +156,16 @@ return packer.startup {
       end,
     }
 
-    use {  "ThePrimeagen/refactoring.nvim",
-      config = function()
-        require "edit.refactoring"
-      end,
-      requires = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-treesitter/nvim-treesitter" },
-      },
-      disable = true,
-      -- Plugin surpporting refactorings
-      -- Disable because it needs neovim nightly
-    }
+    -- use {  "ThePrimeagen/refactoring.nvim",
+    --   config = function()
+    --     require "edit.refactoring"
+    --   end,
+    --   requires = {
+    --     { "nvim-lua/plenary.nvim" },
+    --     { "nvim-treesitter/nvim-treesitter" },
+    --   },
+    --   disable = true, -- Disable because it needs neovim nightly
+    -- }
     -- }}}
 
     -- Interface Extension {{{
@@ -194,11 +186,9 @@ return packer.startup {
       requires = { "kyazdani42/nvim-web-devicons" },
     }
 
-    use {  "stevearc/stickybuf.nvim",
-      disable = true,
-      -- Disable because it brings a more buggy behavior
-      -- https://github.com/neovim/neovim/issues/12517
-    }
+    -- use {  "stevearc/stickybuf.nvim",
+    --   disable = true, -- Disable because it brings a more buggy behavior. See https://github.com/neovim/neovim/issues/12517
+    -- }
 
     use {  "SmiteshP/nvim-navic",
       config = function()
@@ -210,18 +200,14 @@ return packer.startup {
       config = function()
         require "interface.illuminate"
       end,
-      disable = false,
-      -- substitute of cursorline
-      -- more powerful but heavy
     }
 
-    use {  "yamatsum/nvim-cursorline",
-      config = function()
-        require "interface.cursorline"
-      end,
-      disable = true,
-      -- substitute of illuminate
-    }
+    -- use {  "yamatsum/nvim-cursorline",
+    --   config = function()
+    --     require "interface.cursorline"
+    --   end,
+    --   disable = true, -- substitute of illuminate
+    -- }
 
     use {  "kevinhwang91/nvim-ufo",
       config = function()
@@ -250,19 +236,19 @@ return packer.startup {
       end,
     }
 
-    use {  "stevearc/dressing.nvim",
-      config = function()
-        require "interface.dressing"
-      end,
-      disable = true,
-    }
+    -- use {  "stevearc/dressing.nvim",
+    --   config = function()
+    --     require "interface.dressing"
+    --   end,
+    --   disable = true,
+    -- }
 
-    use {  "ray-x/lsp_signature.nvim",
-      config = function()
-        require "interface.lsp_signature"
-      end,
-      disable = true,  -- need to config
-    }
+    -- use {  "ray-x/lsp_signature.nvim",
+    --   config = function()
+    --     require "interface.lsp_signature"
+    --   end,
+    --   disable = true,  -- need to config
+    -- }
 
     use {  "onsails/lspkind-nvim",
       config = function()
@@ -270,26 +256,17 @@ return packer.startup {
       end,
     }
 
-    use {  "weilbith/nvim-code-action-menu",
-      cmd = { "CodeActionMenu" },
-      disable = true,
-      -- Disable because it not stable
-    }
+    -- use {  "weilbith/nvim-code-action-menu",
+    --   cmd = { "CodeActionMenu" },
+    --   disable = true, -- Disable because it not stable
+    -- }
 
-    use {  "mrshmllow/document-color.nvim",
-      config = function()
-        require "interface.document-color"
-      end,
-      disable = true,
-      -- TODO: https://github.com/neovim/neovim/pull/9496
-    }
-
-    use {  "goolord/alpha-nvim",
-      config = function()
-        require "interface.alpha"
-      end,
-      disable = true,
-    }
+    -- use {  "mrshmllow/document-color.nvim",
+    --   config = function()
+    --     require "interface.document-color"
+    --   end,
+    --   disable = true, -- TODO: https://github.com/neovim/neovim/pull/9496
+    -- }
 
     use {  "mhinz/vim-startify" }
 
@@ -311,31 +288,26 @@ return packer.startup {
       end,
     }
 
-    use {  "norcalli/nvim-colorizer.lua",
-      config = function()
-        require "interface.colorizer"
-      end,
-      disable = true,
-    }
+    -- use {  "norcalli/nvim-colorizer.lua",
+    --   config = function()
+    --     require "interface.colorizer"
+    --   end,
+    --   disable = true,
+    -- }
 
     use {  "dstein64/nvim-scrollview" }
 
-    use {  "lewis6991/satellite.nvim",
-      config = function()
-        require "interface.satellite"
-      end,
-      disable = true,
-      -- A substitute for nvim-scrollview
-      -- which support search results, lsp diagnostics and git hunks
-      -- Disable because it's work in progress
-    }
+    -- use {  "lewis6991/satellite.nvim",
+    --   config = function()
+    --     require "interface.satellite"
+    --   end,
+    --   disable = true, -- A substitute for nvim-scrollview, which support search results, lsp diagnostics and git hunks. Disable because it's work in progress
+    -- }
 
     use {  "kevinhwang91/nvim-bqf",
       config = function()
         require "interface.bqf"
       end,
-      disable = false,
-      -- A substitute for trouble
     }
 
     use {  "folke/todo-comments.nvim",
@@ -344,38 +316,35 @@ return packer.startup {
       end,
     }
 
-    use {  "folke/zen-mode.nvim",
-      config = function()
-        require "interface.zen-mode"
-      end,
-      disable = true,
-    }
+    -- use {  "folke/zen-mode.nvim",
+    --   config = function()
+    --     require "interface.zen-mode"
+    --   end,
+    --   disable = true,
+    -- }
 
     use {  "psliwka/vim-smoothie" }
 
-    use {  "edluffy/specs.nvim",
-      config = function()
-        require "interface.specs"
-      end,
-      disable = true,
-      -- Disable because it's conflicting with the chinese text
-    }
+    -- use {  "edluffy/specs.nvim",
+    --   config = function()
+    --     require "interface.specs"
+    --   end,
+    --   disable = true, -- Disable because it's conflicting with the chinese text
+    -- }
 
-    use {  "chentoast/marks.nvim",
-      config = function()
-        require "interface.marks"
-      end,
-      disable = true,
-      -- Disable causes the value of v:oldfiles to be messed up
-    }
+    -- use {  "chentoast/marks.nvim",
+    --   config = function()
+    --     require "interface.marks"
+    --   end,
+    --   disable = true, -- Disable causes the value of v:oldfiles to be messed up
+    -- }
 
-    use {  "tversteeg/registers.nvim",
-      config = function()
-        require "interface.registers"
-      end,
-      disable = true,
-      -- Behaves strangely when used with text objects
-    }
+    -- use {  "tversteeg/registers.nvim",
+    --   config = function()
+    --     require "interface.registers"
+    --   end,
+    --   disable = true, -- Behaves strangely when used with text objects
+    -- }
 
     use {  "bennypowers/nvim-regexplainer",
       config = function()
@@ -417,14 +386,13 @@ return packer.startup {
     -- }}}
 
     -- Tool Integration {{{
-    use {  "sidebar-nvim/sidebar.nvim",
-      config = function()
-        require "config.interface.sidebar"
-      end,
-      requires = { "sidebar-nvim/sections-dap" },
-      disable = true,
-      -- work in progress with alpha version
-    }
+    -- use {  "sidebar-nvim/sidebar.nvim",
+    --   config = function()
+    --     require "config.interface.sidebar"
+    --   end,
+    --   requires = { "sidebar-nvim/sections-dap" },
+    --   disable = true, -- work in progress with alpha version
+    -- }
 
     use {  "nvim-neo-tree/neo-tree.nvim",
       config = function()
@@ -439,14 +407,13 @@ return packer.startup {
       },
     }
 
-    use {  "kyazdani42/nvim-tree.lua",
-      config = function()
-        require "tool.tree"
-      end,
-      requires = { "kyazdani42/nvim-web-devicons" },
-      disable = true,
-      -- a substitue for neo-tree.nvim
-    }
+    -- use {  "kyazdani42/nvim-tree.lua",
+    --   config = function()
+    --     require "tool.tree"
+    --   end,
+    --   requires = { "kyazdani42/nvim-web-devicons" },
+    --   disable = true, -- a substitue for neo-tree.nvim
+    -- }
 
     use {  "nvim-telescope/telescope.nvim",
       config = function()
@@ -486,28 +453,26 @@ return packer.startup {
       end,
     }
 
-    use {  "simrat39/symbols-outline.nvim",
-      config = function()
-        require "tool.symbols-outline"
-      end,
-      requires = { "kyazdani42/nvim-web-devicons" },
-      cmd = { "SymbolsOutline" },
-      disable = true,
-      -- Substitute for aerial.nvim
-      -- Disable because better to use aerial.nvim
-    }
+    -- use {  "simrat39/symbols-outline.nvim",
+    --   config = function()
+    --     require "tool.symbols-outline"
+    --   end,
+    --   requires = { "kyazdani42/nvim-web-devicons" },
+    --   cmd = { "SymbolsOutline" },
+    --   disable = true, -- Substitute for aerial.nvim. Disable because better to use aerial.nvim
+    -- }
 
-    use {  "onsails/diaglist.nvim",
-      disable = true,
-    }
+    -- use {  "onsails/diaglist.nvim",
+    --   disable = true,
+    -- }
 
-    use {  "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require "tool.trouble"
-      end,
-      disable = true,
-    }
+    -- use {  "folke/trouble.nvim",
+    --   requires = "kyazdani42/nvim-web-devicons",
+    --   config = function()
+    --     require "tool.trouble"
+    --   end,
+    --   disable = true,
+    -- }
 
     use {  "akinsho/nvim-toggleterm.lua",
       config = function()
@@ -539,8 +504,6 @@ return packer.startup {
         require "tool.diffview"
       end,
       cmd = { "DiffviewOpen", "DiffviewFileHistory" },
-      disable = false,
-      -- have high requirement of git version
     }
 
     use {  "akinsho/git-conflict.nvim",
@@ -557,34 +520,34 @@ return packer.startup {
 
     use {  "kevinhwang91/vim-ibus-sw" }
 
-    use {  "ethanholz/nvim-lastplace",
-      config = function()
-        require "tool.lastplace"
-      end,
-      disable = true,
-    }
+    -- use {  "ethanholz/nvim-lastplace",
+    --   config = function()
+    --     require "tool.lastplace"
+    --   end,
+    --   disable = true,
+    -- }
 
-    use {  "Shatur/neovim-session-manager",
-      config = function()
-        require "tool.session-manager"
-      end,
-      requires = {
-        { "nvim-lua/plenary.nvim" },
-      },
-      disable = true,
-    }
+    -- use {  "Shatur/neovim-session-manager",
+    --   config = function()
+    --     require "tool.session-manager"
+    --   end,
+    --   requires = {
+    --     { "nvim-lua/plenary.nvim" },
+    --   },
+    --   disable = true,
+    -- }
 
     use {  "dstein64/vim-startuptime",
       cmd = { "StartupTime" },
     }
 
-    use {  "sindrets/winshift.nvim",
-      disable = true,
-    }
+    -- use {  "sindrets/winshift.nvim",
+    --   disable = true,
+    -- }
 
-    use {  "simeji/winresizer",
-      disable = true,
-    }
+    -- use {  "simeji/winresizer",
+    --   disable = true,
+    -- }
 
     use {  "vuki656/package-info.nvim",
       config = function()
@@ -600,21 +563,22 @@ return packer.startup {
     -- }}}
 
     -- Debug And Run {{{
-    use {  "michaelb/sniprun",
-      config = function()
-        require "debug.sniprun"
-      end,
-      run = "bash install.sh",
-    }
+    -- use {  "michaelb/sniprun",
+    --   config = function()
+    --     require "debug.sniprun"
+    --   end,
+    --   run = "bash install.sh",
+    --   disable = true,
+    -- }
 
-    use {  "rcarriga/neotest",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-      },
-      disable = true,
-    }
+    -- use {  "rcarriga/neotest",
+    --   requires = {
+    --     "nvim-lua/plenary.nvim",
+    --     "nvim-treesitter/nvim-treesitter",
+    --     "antoinemadec/FixCursorHold.nvim",
+    --   },
+    --   disable = true,
+    -- }
 
     use {  "mfussenegger/nvim-dap",
       config = function()
@@ -634,10 +598,10 @@ return packer.startup {
       end,
     }
 
-    use {  "Pocco81/dap-buddy.nvim",
-      run = "make",
-      disable = true,
-    }
+    -- use {  "Pocco81/dap-buddy.nvim",
+    --   run = "make",
+    --   disable = true,
+    -- }
 
     use {  "mfussenegger/nvim-dap-python",
       config = function()

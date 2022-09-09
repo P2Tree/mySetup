@@ -44,6 +44,8 @@ set scrolloff=1
 set sidescrolloff=5
 set display+=lastline,msgsep
 set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
+set spell " enable spell check, more options taks over by plugin
+set foldmethod=manual  " more options takes over by plugin
 
 " Encoding
 set encoding=utf-8
