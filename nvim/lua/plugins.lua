@@ -338,15 +338,6 @@ return packer.startup {
       -- A substitute for trouble
     }
 
-    use {  "kevinhwang91/nvim-fFHighlight",
-      config = function()
-        require "interface.ffhighlight"
-      end,
-      disable = true,
-      -- Plugin show inline search highlight
-      -- Disable because it's not very useful
-    }
-
     use {  "folke/todo-comments.nvim",
       config = function()
         require "interface.todo-comments"
@@ -570,6 +561,7 @@ return packer.startup {
       config = function()
         require "tool.lastplace"
       end,
+      disable = true,
     }
 
     use {  "Shatur/neovim-session-manager",

@@ -93,6 +93,8 @@ autocmd InsertLeave * :silent !fcitx5-remote -c
 autocmd InsertEnter * set norelativenumber
 autocmd InsertLeave * set relativenumber
 
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
 " Binary
 " Enter binary mode when editing a file with postfix 'bin'
 augroup Binary
