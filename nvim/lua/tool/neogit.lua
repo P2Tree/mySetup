@@ -76,5 +76,3 @@ neogit.setup {
     },
   },
 }
-
-vim.keymap.set("n", "<leader>gg", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })

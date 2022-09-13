@@ -526,14 +526,15 @@ return packer.startup {
     --   disable = true,
     -- }
 
-    use {  "Shatur/neovim-session-manager",
-      config = function()
-        require "tool.session-manager"
-      end,
-      requires = {
-        { "nvim-lua/plenary.nvim" },
-      },
-    }
+    -- use {  "Shatur/neovim-session-manager",
+    --   config = function()
+    --     require "tool.session-manager"
+    --   end,
+    --   requires = {
+    --     { "nvim-lua/plenary.nvim" },
+    --   },
+    --   disable = true,
+    -- }
 
     use {  "dstein64/vim-startuptime",
       cmd = { "StartupTime" },

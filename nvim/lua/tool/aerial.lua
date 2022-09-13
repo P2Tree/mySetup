@@ -18,13 +18,13 @@ aerial.setup ({
     width = nil,
     min_width = { 25, 0.2 },
 
-    -- Enum: prefer_right, prefer_left, right, left, float
     -- Determines the default direction to open the aerial window. The 'prefer'
     -- options will open the window in the other direction *if* there is a
     -- different buffer in the way of the preferred direction
+    -- Enum: prefer_right, prefer_left, right, left, float
     default_direction = "right",
 
-    -- Enum: edge, group, window
+    -- Determines where the aerial window will be opened
     --   edge   - open aerial at the far right/left of the editor
     --   group  - open aerial to the right/left of the group of windows containing the current buffer
     --   window - open aerial to the right/left of the current window
@@ -65,7 +65,6 @@ aerial.setup ({
     "Struct",
   },
 
-  -- Enum: split_width, full_width, last, none
   -- Determines line highlighting mode when multiple splits are visible.
   -- split_width   Each open window will have its cursor location marked in the
   --               aerial buffer. Each line will only be partially highlighted
@@ -96,7 +95,7 @@ aerial.setup ({
   icons = {},
 
   -- Control which windows and buffers aerial should ignore.
-  -- If close_behavior is "global", focusing an ignored window/buffer will
+  -- If attach_mode is "global", focusing an ignored window/buffer will
   -- not cause the aerial window to update.
   -- If open_automatic is true, focusing an ignored window/buffer will not
   -- cause an aerial window to open.
@@ -197,7 +196,7 @@ aerial.setup ({
     -- Controls border appearance. Passed to nvim_open_win
     border = "rounded",
 
-    -- Enum: cursor, editor, win
+    -- Determines location of floating window
     --   cursor - Opens float on top of the cursor
     --   editor - Opens float centered in the editor
     --   win    - Opens float centered in the window
