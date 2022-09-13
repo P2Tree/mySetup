@@ -236,12 +236,11 @@ return packer.startup {
       end,
     }
 
-    -- use {  "stevearc/dressing.nvim",
-    --   config = function()
-    --     require "interface.dressing"
-    --   end,
-    --   disable = true,
-    -- }
+    use {  "stevearc/dressing.nvim",
+      config = function()
+        require "interface.dressing"
+      end,
+    }
 
     -- use {  "ray-x/lsp_signature.nvim",
     --   config = function()
@@ -527,15 +526,14 @@ return packer.startup {
     --   disable = true,
     -- }
 
-    -- use {  "Shatur/neovim-session-manager",
-    --   config = function()
-    --     require "tool.session-manager"
-    --   end,
-    --   requires = {
-    --     { "nvim-lua/plenary.nvim" },
-    --   },
-    --   disable = true,
-    -- }
+    use {  "Shatur/neovim-session-manager",
+      config = function()
+        require "tool.session-manager"
+      end,
+      requires = {
+        { "nvim-lua/plenary.nvim" },
+      },
+    }
 
     use {  "dstein64/vim-startuptime",
       cmd = { "StartupTime" },

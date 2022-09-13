@@ -161,3 +161,7 @@ vim.keymap.set("n", "<leader>fdv", require("telescope").extensions.dap.variables
 vim.keymap.set("n", "<leader>fdf", require("telescope").extensions.dap.frames, { desc = "Frames" })
 vim.keymap.set("n", "<leader>fc", require("telescope").extensions.luasnip.luasnip, { desc = "Snippets" })
 vim.keymap.set("n", "<leader>fs", require("telescope").extensions.aerial.aerial, { desc = "Symbols" })
+
+-- need session-manager
+vim.keymap.set("n", "<leader>fwl", "<cmd>SessionManager load_session<CR>", { desc = "Load session" })
+vim.keymap.set("n", "<leader>fwd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
