@@ -156,6 +156,12 @@ return packer.startup {
       end,
     }
 
+    use {  "mhartington/formatter.nvim",
+      config = function()
+        require "edit.formatter"
+      end,
+    }
+
     -- use {  "ThePrimeagen/refactoring.nvim",
     --   config = function()
     --     require "edit.refactoring"

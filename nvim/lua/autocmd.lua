@@ -3,11 +3,12 @@ local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
 })
 
 -- Delete trailing whitespace and tabs at the end of each line
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = { "*" },
-  group = myAutoGroup,
-  command = [[%s/\s\+$//e]],
-})
+-- exchanged by formatter.nvim plugin
+-- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--   pattern = { "*" },
+--   group = myAutoGroup,
+--   command = [[%s/\s\+$//e]],
+-- })
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
