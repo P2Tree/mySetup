@@ -7,6 +7,7 @@ end
 
 require "plugins"
 require "autocmd"
+require "keymaps"
 require "llvm"
 
 -- For the use of impatient.nvim, packer_compiled.lua needs to be

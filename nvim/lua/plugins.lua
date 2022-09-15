@@ -156,11 +156,12 @@ return packer.startup {
       end,
     }
 
-    use {  "mhartington/formatter.nvim",
-      config = function()
-        require "edit.formatter"
-      end,
-    }
+    -- use {  "mhartington/formatter.nvim",
+    --   config = function()
+    --     require "edit.formatter"
+    --   end,
+    --   disable = true,  -- don't very useful
+    -- }
 
     -- use {  "ThePrimeagen/refactoring.nvim",
     --   config = function()
@@ -508,7 +509,6 @@ return packer.startup {
       config = function()
         require "tool.diffview"
       end,
-      cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     }
 
     use {  "akinsho/git-conflict.nvim",

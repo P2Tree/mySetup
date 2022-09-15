@@ -22,8 +22,8 @@ neogit.setup {
   -- customize displayed signs
   signs = {
     -- { CLOSED, OPENED }
-    section = { ">", "v" },
-    item = { ">", "v" },
+    section = { "▶", "▼" },
+    item = { "▶", "▼" },
     hunk = { "", "" },
   },
   integrations = {
@@ -69,10 +69,11 @@ neogit.setup {
   mappings = {
     -- modify status buffer mappings
     status = {
-      -- Adds a mapping with "B" as key that does the "BranchPopup" command
-      -- ["B"] = "BranchPopup",
-      -- Removes the default mapping of "s"
-      -- ["s"] = "",
+      ["<enter>"] = "Toggle",
+      ["o"] = "GoToFile",
+      ["B"] = "BranchPopup",
+      ["R"] = "RebasePopup",
+      ["C"] = "CommitPopup",
     },
   },
 }

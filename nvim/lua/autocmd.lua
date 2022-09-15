@@ -4,18 +4,18 @@ local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
 
 -- Delete trailing whitespace and tabs at the end of each line
 -- exchanged by formatter.nvim plugin
--- vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---   pattern = { "*" },
---   group = myAutoGroup,
---   command = [[%s/\s\+$//e]],
--- })
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  group = myAutoGroup,
+  command = [[%s/\s\+$//e]],
+})
 
 -- Highlight on yank
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    vim.highlight.on_yank {  timeout = 300 }
+    vim.highlight.on_yank {  timeout = 200 }
   end,
 })
 
@@ -31,15 +31,15 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 })
 
 -- Display a message when the current file is not in utf-8 format.
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-  pattern = { "*" },
-  group = myAutoGroup,
-  callback = function()
-    if vim.bo.fileencoding ~= 'utf-8' then
-      vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd({ "BufRead" }, {
+--   pattern = { "*" },
+--   group = myAutoGroup,
+--   callback = function()
+--     if vim.bo.fileencoding ~= 'utf-8' then
+--       vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
+--     end
+--   end
+-- })
 
 -- Resize all windows when we resie the terminal
 vim.api.nvim_create_autocmd({ "vimResized" }, {
@@ -49,22 +49,22 @@ vim.api.nvim_create_autocmd({ "vimResized" }, {
 })
 
 -- Automatically reload the file if it is changed outsize of Neovim
-vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-  pattern = { "*" },
-  group = myAutoGroup,
-  callback = function()
-    vim.notify("File changed on disk. Buffer reloaded!", vim.log.levels.WARN, { tilte = "nvim-config" })
-  end
-})
-vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
-  pattern = { "*" },
-  group = myAutoGroup,
-  callback = function()
-    if vim.fn.getcmdwintype() == '' then
-      vim.cmd("checktime")  -- checktime can not work in commandline, so we need to check before execution
-    end
-  end
-})
+-- vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+--   pattern = { "*" },
+--   group = myAutoGroup,
+--   callback = function()
+--     vim.notify("File changed on disk. Buffer reloaded!", vim.log.levels.WARN, { tilte = "nvim-config" })
+--   end
+-- })
+-- vim.api.nvim_create_autocmd({ "FocusGained", "CursorHold" }, {
+--   pattern = { "*" },
+--   group = myAutoGroup,
+--   callback = function()
+--     if vim.fn.getcmdwintype() == '' then
+--       vim.cmd("checktime")  -- checktime can not work in commandline, so we need to check before execution
+--     end
+--   end
+-- })
 
 -- Remember folds status whether file close/open and restore it
 -- vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
