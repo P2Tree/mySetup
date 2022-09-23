@@ -15,14 +15,14 @@ treesitter.setup {
   incremental_selection = {
     enable = false,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incrementnl = "grc",
-      node_decremental = "grm",
+      init_selection = "gni",
+      node_incremental = "gnn",
+      scope_incrementnl = "gns",
+      node_decremental = "gnd",
     },
   },
   indent = {
-    enable = true,
+    enable = false,
   },
   refactor = {
     smart_rename = {
