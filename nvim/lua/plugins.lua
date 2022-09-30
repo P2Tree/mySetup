@@ -400,26 +400,27 @@ return packer.startup {
     --   disable = true, -- work in progress with alpha version
     -- }
 
-    use {  "nvim-neo-tree/neo-tree.nvim",
-      config = function()
-        require "tool.neo-tree"
-      end,
-      branch = "v2.x",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-        "s1n7ax/nvim-window-picker",
-      },
-    }
-
-    -- use {  "kyazdani42/nvim-tree.lua",
+    -- use {  "nvim-neo-tree/neo-tree.nvim",
     --   config = function()
-    --     require "tool.tree"
+    --     require "tool.neo-tree"
     --   end,
-    --   requires = { "kyazdani42/nvim-web-devicons" },
-    --   disable = true, -- a substitue for neo-tree.nvim
+    --   branch = "v2.x",
+    --   requires = {
+    --     "nvim-lua/plenary.nvim",
+    --     "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+    --     "MunifTanjim/nui.nvim",
+    --     "s1n7ax/nvim-window-picker",
+    --   },
+    --   disable = true, -- a substitute of nvim-tree
     -- }
+
+    use {  "kyazdani42/nvim-tree.lua",
+      config = function()
+        require "tool.tree"
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+      disable = false,
+    }
 
     use {  "nvim-telescope/telescope.nvim",
       config = function()
@@ -565,6 +566,15 @@ return packer.startup {
       },
       ft = { "json" },
     }
+
+    -- use {
+    --   "rest-nvim/rest.nvim",
+    --   config = function()
+    --     require "tool.rest"
+    --   end,
+    --   ft = { "http" },
+    --   disable = true,  -- don't need it
+    -- }
     -- }}}
 
     -- Debug And Run {{{

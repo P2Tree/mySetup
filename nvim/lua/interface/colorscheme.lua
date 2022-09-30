@@ -33,55 +33,73 @@ if ok and theme == "catppuccin" then
       operators = {},
     },
     integrations = {
-      treesitter = true,
+      aerial = true,
+      barbar = false,
+      beacon = true,
       cmp = true,
+      coc_nvim = false,
+      dashboard = false,  -- dashboard-nvim, a fancy fastest async start screen
+      fern = false,
+      fidget = true,
+      gitgutter = false,
       gitsigns = true,
+      hop = true,
+      illuminate = true,
+      leap = false,
+      lightspeed = false,
+      lsp_saga = false,
+      lsp_trouble = false,
+      markdown = true,
+      mini = false,
+      neogit = true,
+      notify = true,
+      nvimtree = true,
+      overseer = false,
+      pounce = false,
+      symbols_outline = false,
+      telekasten = false,
       telescope = true,
-      nvimtree = false,
+      treesitter = true,
+      treesitter_context = true,
+      ts_rainbow = true,
+      vim_sneak = false,
+      vimwiki = true,
+      which_key = true,
+
+      -- Special integrations, see https://github.com/catppuccin/nvim#special-integrations
+      dap = {
+        enabled = true,
+        enable_ui = true, -- nvim-dap-ui
+        -- also need to set highlight groups in dap setup file
+      },
+      indent_blankline = {
+        enabled = true,
+        colored_indent_levels = false,
+      },
+      native_lsp = {
+        enabled = true,
+        virtual_text = {
+          errors = { "italic" },
+          hints = { "italic" },
+          warnings = { "italic" },
+          information = { "italic" },
+        },
+        underlines = {
+          errors = { "underline" },
+          hints = { "underline" },
+          warnings = { "underline" },
+          information = { "underline" },
+        },
+      },
+      navic = {
+        enable = true,  -- also need to set highlight = true in navic setup file
+        custom_bg = "NONE",
+      },
       neotree = {
         enabled = true,
         show_root = true,
         transparent_panel = false,
       },
-      which_key = true,
-      indent_blankline = {
-        enabled = true,
-        colored_indent_levels = false,
-      },
-      dashboard = false,  -- dashboard-nvim, a fancy fastest async start screen
-      neogit = true,
-      vim_sneak = false,
-      fern = false,
-      barbar = false,
-      bufferline = {
-        enable = true,
-        italics = true,
-        bolds = true,
-      },
-      markdown = true,
-      lightspeed = false,
-      leap = false,
-      ts_rainbow = true,
-      hop = true,
-      notify = true,
-      telekasten = false,
-      symbols_outline = false,
-      aerial = true,
-      mini = false,
-      vimwiki = true,
-      beacon = true,
-      navic = {
-        enable = true,  -- also need to set highlight = true in navic setup file
-        custom_bg = "NONE",
-      },
-      overseer = false,
-      fidget = true,
-      treesitter_context = true,
-      dap = {
-        enabled = false,
-        enable_ui = false, -- nvim-dap-ui
-        -- also need to set highlight groups in dap setup file
-      }
     },
     color_overrides = {},
     highlight_overrides = {},
@@ -107,4 +125,12 @@ if ok and theme == "catppuccin" then
 
 end
 
-vim.cmd("colorscheme "..theme)
+vim.cmd "colorscheme catppuccin"
+
+vim.cmd [[
+hi link GitSignsChangeLn DiffText
+hi link GitSignsAddInLine GitSignsAddLn
+hi link GitSignsDeleteInline GitSignsDeleteLn
+hi link GitSignsChangeInline GitSignsChangeLn
+hi link GitSignsDeleteLn DiffDelete
+]]

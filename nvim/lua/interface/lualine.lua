@@ -49,7 +49,7 @@ lualine.setup {
   },
   options = {
     icons_enabled = true,
-    theme = "catppuccin",
+    theme = "catppuccin",  -- if you use catppuccin as theme
     disabled_filetypes = {
       "alpha",
     },
