@@ -191,6 +191,7 @@ return packer.startup {
         require "interface.bufferline"
       end,
       requires = { "kyazdani42/nvim-web-devicons" },
+      after = { "catppuccin" },
     }
 
     -- use {  "stevearc/stickybuf.nvim",
@@ -221,6 +222,14 @@ return packer.startup {
         require "interface.ufo"
       end,
       requires = "kevinhwang91/promise-async",
+    }
+
+    use {
+      "kevinhwang91/nvim-hlslens",
+      config = function()
+        require "interface.hlslens"
+      end,
+      after = "catppuccin",
     }
 
     use {  "m-demare/hlargs.nvim",
@@ -433,6 +442,7 @@ return packer.startup {
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
         { "nvim-telescope/telescope-hop.nvim" },
         -- { "nvim-telescope/telescope-project.nvim" },
+        { "nvim-telescope/telescope-symbols.nvim" },
         { "nvim-telescope/telescope-media-files.nvim" },
         { "nvim-telescope/telescope-dap.nvim" },
         { "benfowler/telescope-luasnip.nvim" },
@@ -454,20 +464,20 @@ return packer.startup {
       end,
     }
 
-    use {  "stevearc/aerial.nvim",
-      config = function()
-        require "tool.aerial"
-      end,
-    }
-
-    -- use {  "simrat39/symbols-outline.nvim",
+    -- use {  "stevearc/aerial.nvim",
     --   config = function()
-    --     require "tool.symbols-outline"
+    --     require "tool.aerial"
     --   end,
-    --   requires = { "kyazdani42/nvim-web-devicons" },
-    --   cmd = { "SymbolsOutline" },
-    --   disable = true, -- Substitute for aerial.nvim. Disable because better to use aerial.nvim
+    --   disable = true,
     -- }
+
+    use {  "simrat39/symbols-outline.nvim",
+      config = function()
+        require "tool.symbols-outline"
+      end,
+      requires = { "kyazdani42/nvim-web-devicons" },
+      cmd = { "SymbolsOutline" },
+    }
 
     -- use {  "onsails/diaglist.nvim",
     --   disable = true,
@@ -613,10 +623,9 @@ return packer.startup {
       end,
     }
 
-    -- use {  "Pocco81/dap-buddy.nvim",
-    --   run = "make",
-    --   disable = true,
-    -- }
+    use {  "Pocco81/dap-buddy.nvim",
+      run = "make",
+    }
 
     use {  "mfussenegger/nvim-dap-python",
       config = function()

@@ -4,6 +4,12 @@ if not ok then
   return
 end
 
+local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
+if not ok then
+  vim.notify "Could not load catppuccin in bufferline"
+  return
+end
+
 bufferline.setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -34,7 +40,7 @@ bufferline.setup {
     -- end,
     max_name_length = 24,
     max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
-    tab_size = 24,
+    tab_size = 18,
     diagnostics = "false", -- false | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
@@ -45,7 +51,6 @@ bufferline.setup {
       { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
       { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
-      { filetype = "aerial", text = "Outline", text_align = "center", saperator = true },
       { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
       { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
       { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
@@ -78,7 +83,7 @@ bufferline.setup {
       return true
     end,
   },
-  highlights = require("catppuccin.groups.integrations.bufferline").get(),  -- set this option if you use catppuccin
+  highlights = catppuccin.get(),
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer

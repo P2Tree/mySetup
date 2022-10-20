@@ -12,7 +12,6 @@ local extensions = {
   "notify",
   "dap",
   "luasnip",
-  "aerial",
 }
 -- "project",
 
@@ -145,6 +144,7 @@ vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc =
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help tags" })
 vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles, { desc = "Find old files" })
 vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Marks" })
+vim.keymap.set("n", "<leader>fs", require("telescope.builtin").symbols, { desc = "Symbols" })
 
 -- telescope-project.nvim and project.nvim are the different plugins
 -- here I use projects.nvim as this is a all in one plugins for projects managerment,
@@ -160,7 +160,6 @@ vim.keymap.set("n", "<leader>fdb", require("telescope").extensions.dap.list_brea
 vim.keymap.set("n", "<leader>fdv", require("telescope").extensions.dap.variables, { desc = "Variables" })
 vim.keymap.set("n", "<leader>fdf", require("telescope").extensions.dap.frames, { desc = "Frames" })
 vim.keymap.set("n", "<leader>fc", require("telescope").extensions.luasnip.luasnip, { desc = "Snippets" })
-vim.keymap.set("n", "<leader>fs", require("telescope").extensions.aerial.aerial, { desc = "Symbols" })
 
 -- need session-manager
 vim.keymap.set("n", "<leader>fwl", "<cmd>SessionManager load_session<CR>", { desc = "Load session" })

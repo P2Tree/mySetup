@@ -33,10 +33,10 @@ vim.opt.expandtab = true
 vim.opt.autoindent = true
 -- smart indent in new line
 vim.opt.smartindent = true
--- indent optinos 
+-- indent optinos
 vim.opt.cinoptions = ":0"
 -- minimal number of screen lines to keep
-vim.opt.scrolloff = 8  -- default:0
+vim.opt.scrolloff = 0  -- default:0
 vim.opt.sidescrolloff = 8  -- default:0
 -- max history saves
 vim.opt.history = 1000  -- default:10000(vim)

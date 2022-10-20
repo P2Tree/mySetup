@@ -18,7 +18,7 @@ illuminate.configure {
     "fugitive",
     "NvimTree",
     "Outline",
-    "aerial",
+    -- "Aerial",
     "packer",
     "alpha",
     "NeogitStatus",

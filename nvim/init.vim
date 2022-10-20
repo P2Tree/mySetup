@@ -58,9 +58,6 @@ vnoremap <S-tab> <gv
 nnoremap <leader>re :e $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
-" Filetype
-autocmd BufNewFile,BufRead .clang-tidy set filetype=yaml
-
 " Fcitx5 auto switch
 " Every time exit insert mode, automatically close fcitx5
 autocmd InsertLeave * :silent !fcitx5-remote -c
