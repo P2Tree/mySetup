@@ -5,11 +5,12 @@ if ok then
   impatient.enable_profile()
 end
 
-require "configs"
 require "plugins"
 require "autocmd"
 require "keymaps"
 require "llvm"
+
+vim.opt.mouse = "a"
 
 -- For the use of impatient.nvim, packer_compiled.lua needs to be
 -- in the lua/ directory instead of the default.

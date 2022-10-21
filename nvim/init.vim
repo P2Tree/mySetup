@@ -2,40 +2,81 @@
 " all of the configuration into init.lua, be careful to checkout the options
 " which already set by default.
 " Edit
+set encoding=utf-8
+set syntax=on
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set smarttab
 set backspace=indent,eol,start
 set nobackup
 set swapfile
 set ignorecase
+set smartcase
+set autoindent
+set smartindent
 set nocompatible
 set completeopt=menu,menuone,noselect
+" set list " show all white spaces as character
 set hidden
 set includeexpr=substitute(v:fname,'\\.','/','g')
+set cinoptions=:0
 set autowrite
 set autoread
 set nowrapscan
 set autochdir
 
 " Interface
+set number
+set cursorline
+set cursorlineopt=both
+set cursorcolumn
 set linebreak
 set showbreak=>>
-set mouse=a
 set showcmd
+set hlsearch
+set ruler
+" set mouse=a
 set laststatus=2
 set belloff=all
+set termguicolors
 set wildmenu
 set title
+set nowrap
 set signcolumn=yes
-set cursorcolumn
-" set cursorline
-set cursorlineopt=both
 set conceallevel=1
-set display+=lastline,msgsep
+set scrolloff=1
+set sidescrolloff=5
+set history=9999 " command history max save
+set display+=lastline
 set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
-set spell " enable spell check, more options taks over by plugin
 set foldmethod=manual  " more options takes over by plugin
 
 " Keymapping
 set pastetoggle=<F2>
+let mapleader=" "
+" cursor move
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+noremap T J                " joint two line together
+noremap H ^
+noremap L $
+noremap J <C-e>
+noremap K <C-y>
+" window
+noremap <C-left> <C-w>h
+noremap <C-right> <C-w>l
+noremap <C-up> <C-w>k
+noremap <C-down> <C-w>j
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
+noremap <C-k> <C-w>k
+noremap <C-j> <C-w>j
+noremap sv <C-w>v          " split new window with vetical
+noremap sh <C-w>s          " split new window with horizon
+noremap sc <C-w>c          " close current window
+noremap so <C-w>o          " open current window
 " di-highlight
 nnoremap <esc> :nohl<cr>
 
@@ -58,12 +99,8 @@ vnoremap <S-tab> <gv
 nnoremap <leader>re :e $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
-" Fcitx5 auto switch
-" Every time exit insert mode, automatically close fcitx5
-autocmd InsertLeave * :silent !fcitx5-remote -c
-
-autocmd InsertEnter * set norelativenumber
-autocmd InsertLeave * set relativenumber
+autocmd InsertEnter * set relativenumber
+autocmd InsertLeave * set norelativenumber
 
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -81,13 +118,13 @@ augroup Binary
 augroup END
 
 " Neovim
+" NOTE: make a soft link file of this file to ~/.vimrc, which can auto load
+" those configures when you use vim instead nvim
 if has("nvim")
   if has("nvim-0.7")
     lua require "init"
   else
     echo "This configuration needs NeoVim 0.7+ version"
   endif
-else
-  echo "This configuration needs NeoVim"
 endif
 
