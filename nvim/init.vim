@@ -29,6 +29,7 @@ set autochdir
 
 " Interface
 set number
+set relativenumber
 set cursorline
 set cursorlineopt=both
 set cursorcolumn
@@ -56,6 +57,7 @@ set foldmethod=manual  " more options takes over by plugin
 " Keymapping
 set pastetoggle=<F2>
 let mapleader=" "
+
 " cursor move
 cmap <C-p> <Up>
 cmap <C-n> <Down>
@@ -64,6 +66,7 @@ noremap H ^
 noremap L $
 noremap J <C-e>
 noremap K <C-y>
+
 " window
 noremap <C-left> <C-w>h
 noremap <C-right> <C-w>l
@@ -77,12 +80,11 @@ noremap sv <C-w>v          " split new window with vetical
 noremap sh <C-w>s          " split new window with horizon
 noremap sc <C-w>c          " close current window
 noremap so <C-w>o          " open current window
-" di-highlight
-nnoremap <esc> :nohl<cr>
 
 " quit window or buffer
 nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ":bd<cr>"
 nnoremap <expr>Q ":wqa<cr>"
+
 " delete it, not concat it
 nnoremap <leader>x "_x
 nnoremap <leader>X "_X
@@ -91,6 +93,7 @@ nnoremap <leader>dd "_dd
 nnoremap <leader>D "_D
 vnoremap <leader>d "_d
 vnoremap <leader>dd "_dd
+
 " indent map
 vnoremap <tab> >gv
 vnoremap <S-tab> <gv
@@ -99,8 +102,8 @@ vnoremap <S-tab> <gv
 nnoremap <leader>re :e $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
-autocmd InsertEnter * set relativenumber
-autocmd InsertLeave * set norelativenumber
+autocmd InsertEnter * set norelativenumber
+autocmd InsertLeave * set relativenumber
 
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 

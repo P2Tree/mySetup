@@ -380,23 +380,13 @@ return packer.startup {
     }
 
     use {
-      -- "EdenEast/nightfox.nvim",
-      -- "navarasu/onedark.nvim",
-      -- "tanvirtin/monokai.nvim",
-      -- "shaunsingh/solarized.nvim",
-      -- "shaunsingh/moonlight.nvim",
-      -- "shaunsingh/nord.nvim",
-      -- "Mofiqul/vscode.nvim",
-      -- "ellisonleao/gruvbox.nvim",
-      -- "folke/tokyonight.nvim",
-      -- "projekt0n/github-nvim-theme",
       "catppuccin/nvim",
       config = function()
         require "interface.colorscheme"
       end,
       as = "catppuccin",  -- if use catppuccin/nvim
       run = ":CatppuccinCompile", -- if use catppuccin/nvim
-      -- requires = { "rktjmp/lush.nvim" }, -- Required by gruvbox
+      tag = "v0.2.4",  -- for nvim 0.7, if update to nvim 0.8, delete this limit
     }
     -- }}}
 
