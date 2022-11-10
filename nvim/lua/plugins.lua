@@ -276,13 +276,6 @@ return packer.startup {
     --   disable = true, -- Disable because it not stable
     -- }
 
-    -- use {  "mrshmllow/document-color.nvim",
-    --   config = function()
-    --     require "interface.document-color"
-    --   end,
-    --   disable = true, -- TODO: https://github.com/neovim/neovim/pull/9496
-    -- }
-
     use {  "mhinz/vim-startify" }
 
     use {  "j-hui/fidget.nvim",
@@ -303,20 +296,29 @@ return packer.startup {
       end,
     }
 
-    -- use {  "norcalli/nvim-colorizer.lua",
-    --   config = function()
-    --     require "interface.colorizer"
-    --   end,
+    -- use {  "dstein64/nvim-scrollview",
     --   disable = true,
     -- }
 
-    use {  "dstein64/nvim-scrollview" }
+      use {  "petertriho/nvim-scrollbar",
+        config = function()
+          require "interface.scrollbar"
+        end,
+      }
 
     -- use {  "lewis6991/satellite.nvim",
     --   config = function()
-    --     require "interface.satellite"
+    --     -- require "interface.satellite"
+    --     require('satellite').setup()
     --   end,
     --   disable = true, -- A substitute for nvim-scrollview, which support search results, lsp diagnostics and git hunks. Disable because it's work in progress
+    -- }
+
+    -- use { "gorbit99/codewindow.nvim",
+    --   config = function()
+    --     require "interface.codewindow"
+    --   end,
+    --   disable = true, -- A substitute for nvim-scrollview
     -- }
 
     use {  "kevinhwang91/nvim-bqf",
@@ -329,6 +331,7 @@ return packer.startup {
       config = function()
         require "interface.todo-comments"
       end,
+      branch = "neovim-pre-0.8.0",  -- use this before 0.8.0 version
     }
 
     -- use {  "folke/zen-mode.nvim",
@@ -430,6 +433,7 @@ return packer.startup {
         { "nvim-lua/plenary.nvim" },
         { "ahmedkhalf/project.nvim" },
         { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+        { "nvim-telescope/telescope-live-grep-args.nvim" },
         { "nvim-telescope/telescope-hop.nvim" },
         -- { "nvim-telescope/telescope-project.nvim" },
         { "nvim-telescope/telescope-symbols.nvim" },

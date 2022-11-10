@@ -4,7 +4,7 @@ if not ok then
   return
 end
 
-require('hlslens').setup()
+hlslens.setup()
 
 vim.keymap.set(
   "n",

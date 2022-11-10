@@ -2,15 +2,6 @@ local theme = "catppuccin"
 
 local ok, themeobj = pcall(require, theme)
 
--- local ok, nightfox = pcall(require, "nightfox")
--- if ok then
---   nightfox.setup {
---     options.styles = {
---       comments = "italic",
---     },
---   }
--- end
-
 if ok and theme == "catppuccin" then
   themeobj.setup {
     compile = {
@@ -49,7 +40,6 @@ if ok and theme == "catppuccin" then
       lightspeed = false,
       lsp_saga = false,
       lsp_trouble = false,
-      mason = true,
       markdown = true,
       mini = false,
       neogit = true,
