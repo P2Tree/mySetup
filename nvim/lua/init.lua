@@ -10,6 +10,7 @@ require "autocmd"
 require "keymaps"
 require "llvm"
 
+-- mouse enable
 vim.opt.mouse = "a"
 
 -- For the use of impatient.nvim, packer_compiled.lua needs to be
@@ -19,3 +20,18 @@ local ok, packer_compiled = pcall(require, "packer_compiled")
 if not ok then
   vim.cmd "PackerSync"
 end
+
+-- Load colorscheme after plugins are loaded
+-- Only the configuration started the second time takes effect for the bufferline
+vim.cmd "colorscheme desert"
+vim.cmd "colorscheme catppuccin"
+
+-- custom hightlight, after colorscheme is loaded
+vim.cmd [[
+hi link GitSignsChangeLn DiffText
+hi link GitSignsAddInLine GitSignsAddLn
+hi link GitSignsDeleteInline GitSignsDeleteLn
+hi link GitSignsChangeInline GitSignsChangeLn
+hi link GitSignsDeleteLn DiffDelete
+]]
+

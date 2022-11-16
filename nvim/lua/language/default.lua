@@ -7,11 +7,6 @@ if not ok then
   return
 end
 
--- local ok, aerial = pcall(require, "aerial")
--- if not ok then
---   vim.notify "Could not load aerial"
--- end
-
 local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not ok then
   vim.notify "Could not load nvim-cmp"
@@ -69,7 +64,6 @@ M.on_attach = function(client, bufnr)
   end, { buffer = bufnr, desc = "List workspace folders" })
 
   navic.attach(client, bufnr)
-  -- aerial.on_attach(client, bufnr)
 end
 
 return M

@@ -191,7 +191,6 @@ return packer.startup {
         require "interface.bufferline"
       end,
       requires = { "kyazdani42/nvim-web-devicons" },
-      after = { "catppuccin" },
     }
 
     -- use {  "stevearc/stickybuf.nvim",
@@ -229,15 +228,12 @@ return packer.startup {
       config = function()
         require "interface.hlslens"
       end,
-      after = "catppuccin",
     }
 
     use {  "m-demare/hlargs.nvim",
       config = function()
         require "interface.hlargs"
       end,
-      after = "catppuccin",
-      -- hlargs should be loaded after colorscheme
     }
 
     use {  "zbirenbaum/neodim",
@@ -378,19 +374,53 @@ return packer.startup {
       config = function()
         require "interface.stabilize"
       end,
-      disable = false,
-      -- Disable it after the last neovim update, as this plugin is trying to merge into neovim
+      -- Delete this plugin after vim 0.8.0, which is merged into main stream with option 'splitkeep'
     }
+    -- }}}
 
+    -- {{{ Colorscheme
     use {
       "catppuccin/nvim",
+      as = "catppuccin",
       config = function()
-        require "interface.colorscheme"
+        require "colorscheme.catppuccin"
       end,
-      as = "catppuccin",  -- if use catppuccin/nvim
       run = ":CatppuccinCompile", -- if use catppuccin/nvim
       tag = "v0.2.4",  -- for nvim 0.7, if update to nvim 0.8, delete this limit
     }
+
+    -- use {
+    --   "folke/tokyonight.nvim",
+    --   config = function()
+    --     require "colorscheme.tokyonight"
+    --   end,
+    --   disable = true,
+    -- }
+
+    -- use {
+    --   "ellisonleao/gruvbox.nvim",
+    --   config = function()
+    --     require "colorscheme.gruvbox"
+    --   end,
+    --   disable = true,
+    -- }
+
+    -- use {
+    --   "navarasu/onedark.nvim",
+    --   config = function()
+    --     require "colorscheme.onedark"
+    --   end,
+    --   disable = true,
+    -- }
+
+    -- use {
+    --   "rose-pine/neovim",
+    --   as = "rose-pine",
+    --   config = function()
+    --     require "colorscheme.rose-pine"
+    --   end,
+    --   disable = true,
+    -- }
     -- }}}
 
     -- Tool Integration {{{
@@ -416,12 +446,11 @@ return packer.startup {
     --   disable = true, -- a substitute of nvim-tree
     -- }
 
-    use {  "kyazdani42/nvim-tree.lua",
+    use {  "nvim-tree/nvim-tree.lua",
       config = function()
         require "tool.tree"
       end,
       requires = { "kyazdani42/nvim-web-devicons" },
-      disable = false,
     }
 
     use {  "nvim-telescope/telescope.nvim",
