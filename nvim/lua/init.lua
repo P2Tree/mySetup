@@ -13,6 +13,18 @@ require "llvm"
 -- mouse enable
 vim.opt.mouse = "a"
 
+-- custom hightlight, after colorscheme is loaded
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffText" })
+    vim.api.nvim_set_hl(0, "GitSignsAddInLine", { link = "GitSignsAddLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { link = "GitSignsDeleteLn" })
+    vim.api.nvim_set_hl(0, "GitSignsChangeInline", { link = "GitSignsChangeLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
+  end,
+})
+
 -- For the use of impatient.nvim, packer_compiled.lua needs to be
 -- in the lua/ directory instead of the default.
 -- If it doesn't exist, it will be created by :PackerSync
@@ -23,15 +35,6 @@ end
 
 -- Load colorscheme after plugins are loaded
 -- Only the configuration started the second time takes effect for the bufferline
-vim.cmd "colorscheme desert"
-vim.cmd "colorscheme catppuccin"
-
--- custom hightlight, after colorscheme is loaded
-vim.cmd [[
-hi link GitSignsChangeLn DiffText
-hi link GitSignsAddInLine GitSignsAddLn
-hi link GitSignsDeleteInline GitSignsDeleteLn
-hi link GitSignsChangeInline GitSignsChangeLn
-hi link GitSignsDeleteLn DiffDelete
-]]
+vim.cmd "silent! colorscheme desert"
+vim.cmd "silent! colorscheme catppuccin"
 
