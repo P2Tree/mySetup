@@ -39,7 +39,9 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
   vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
-  vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, { buffer = bufnr, desc = "Format document" })
+  vim.keymap.set("n", "<leader>lf", function()
+    vim.lsp.buf.format { async = true }
+  end, { buffer = bufnr, desc = "Format document" })
 
   vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })

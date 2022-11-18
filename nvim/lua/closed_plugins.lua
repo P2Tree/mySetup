@@ -196,6 +196,14 @@
       end,
       ft = { "http" },
     }
+
+    -- TEST: I use tmux, so this plugin is not needed
+    use {  "akinsho/nvim-toggleterm.lua",
+      config = function()
+        require "tool.toggleterm"
+      end,
+    }
+
 -- end of 4-Tool }}}
 
 -- {{{ 5-Colorscheme

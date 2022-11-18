@@ -114,9 +114,11 @@ return packer.startup {
       end,
     }
 
-    use {  "tpope/vim-surround" }
-
-    use {  "tpope/vim-repeat" }
+    use {  "kylechui/nvim-surround",
+      config = function()
+        require "edit.surround"
+      end,
+    }
 
     use {  "lewis6991/spellsitter.nvim",
       config = function()
@@ -240,7 +242,6 @@ return packer.startup {
       config = function()
         require "interface.todo-comments"
       end,
-      branch = "neovim-pre-0.8.0",  -- use this before 0.8.0 version
     }
 
     use {  "psliwka/vim-smoothie" }
@@ -259,7 +260,6 @@ return packer.startup {
       config = function()
         require "interface.stabilize"
       end,
-      -- Delete this plugin after vim 0.8.0, which is merged into main stream with option 'splitkeep'
     }
 -- end of 3-Interface }}}
 
@@ -311,13 +311,6 @@ return packer.startup {
       end,
       requires = { "kyazdani42/nvim-web-devicons" },
       cmd = { "SymbolsOutline" },
-    }
-
-    use {  "akinsho/nvim-toggleterm.lua",
-      config = function()
-        require "tool.toggleterm"
-      end,
-      tag = "v2.*",
     }
 
     use {  "lewis6991/gitsigns.nvim",
@@ -383,7 +376,6 @@ return packer.startup {
         require "colorscheme.catppuccin"
       end,
       run = ":CatppuccinCompile", -- if use catppuccin/nvim
-      tag = "v0.2.4",  -- for nvim 0.7, if update to nvim 0.8, delete this limit
     }
 
 -- end of 5-Colorscheme }}}
