@@ -667,5 +667,6 @@ return packer.startup {
       prompt_border = "rounded",
     },
     compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
+    max_jobs = 10,
   },
 }
