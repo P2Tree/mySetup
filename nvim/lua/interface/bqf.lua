@@ -9,6 +9,8 @@ nvim_bqf.setup ({
   magic_window = true,
   auto_resize_height = true,  -- hightly recommended enable
   preview = {
+    auto_preview = true,
+    show_title = true,
     win_height = 15,
     win_vheight = 15,
     delay_syntax = 50,

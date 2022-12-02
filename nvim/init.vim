@@ -54,6 +54,8 @@ set display+=lastline
 set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
 set foldmethod=manual  " more options takes over by plugin
 
+set termguicolors " enable true color
+
 " Keymapping
 set pastetoggle=<F2>
 let mapleader=" "

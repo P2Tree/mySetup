@@ -143,6 +143,20 @@ return packer.startup {
       },
     }
 
+    use {  "folke/noice.nvim",
+      config = function()
+        require "interface.noice"
+      end,
+      requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+      }
+    }
+
     use {  "akinsho/bufferline.nvim",
       config = function()
         require "interface.bufferline"
@@ -174,6 +188,7 @@ return packer.startup {
       config = function()
         require "interface.hlslens"
       end,
+      disable = true,
     }
 
     use {  "m-demare/hlargs.nvim",
@@ -341,6 +356,7 @@ return packer.startup {
       config = function()
         require "tool.git-conflict"
       end,
+      tag = "*",  -- use stable branch. The default branch is develop one which is unstable to use
     }
 
     use {  "aserowy/tmux.nvim",
@@ -458,6 +474,7 @@ return packer.startup {
   end,
 
   config = {
+    -- max_jobs = 10, -- use this when you hang in PackerSync
     display = {
       prompt_border = "rounded",
     },
