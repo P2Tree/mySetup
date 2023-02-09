@@ -16,10 +16,7 @@ M.capabilities.textDocument.foldingRange = {
   lineFoldingOnly = true,
 }
 
-M.on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  local bufopts = { silent = true, buffer = bufnr }
+M.set_keymap = function(bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
@@ -58,7 +55,13 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, { buffer = bufnr, desc = "List workspace folders" })
+end
 
+M.on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  M.set_keymap(bufnr)
 end
 
 return M

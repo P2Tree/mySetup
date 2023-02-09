@@ -58,13 +58,13 @@ catppuccin.setup {
     neogit = true,
     notify = true,
     nvimtree = true,
-    overseer = false,
+    overseer = true,
     pounce = false,
     symbols_outline = true,
     telekasten = false,
     telescope = true,
     treesitter = true,
-    treesitter_context = true,
+    treesitter_context = false,
     ts_rainbow = true,
     vim_sneak = false,
     vimwiki = true,
@@ -75,6 +75,9 @@ catppuccin.setup {
       enabled = true,
       enable_ui = true, -- nvim-dap-ui
       -- also need to set highlight groups in dap setup file
+    },
+    barbecue = {
+      dim_dirname = true,
     },
     indent_blankline = {
       enabled = true,

@@ -8,7 +8,8 @@ blankline.setup {
   show_current_context_start = true,
   -- use_treesitter = true,
   -- use_treesitter_scope = true,
-  -- filetype_exclude = {
-    -- "OverseerForm",
-  -- }
+  filetype_exclude = {
+    "help",
+    "OverseerForm",
+  }
 }

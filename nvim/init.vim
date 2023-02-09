@@ -12,6 +12,7 @@ set smarttab
 set backspace=indent,eol,start
 set nobackup
 set swapfile
+set undofile
 set ignorecase
 set smartcase
 set autoindent
@@ -47,11 +48,11 @@ set title
 set nowrap
 set signcolumn=yes
 set conceallevel=1
-set scrolloff=1
+set scrolloff=2
 set sidescrolloff=5
 set history=9999 " command history max save
 set display+=lastline
-set fillchars+=diff:/
+set fillchars+=diff:╱
 set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
 set foldmethod=manual  " more options takes over by plugin
 " set splitkeep=screen " keeps the same screen screen lines in all split

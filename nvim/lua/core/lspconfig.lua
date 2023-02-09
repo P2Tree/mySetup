@@ -15,12 +15,7 @@ vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     prefix = "●",
-    severity = {
-      vim.diagnostic.severity.ERROR,
-      vim.diagnostic.severity.WARN,
-      vim.diagnostic.severity.INFO,
-      vim.diagnostic.severity.HINT,
-    }
+    severity = vim.diagnostic.severity.ERROR,
   },
   float = {
     severity_sort = true,
@@ -83,6 +78,11 @@ mason.setup_handlers {
       end,
       settings = {
         Lua = {
+          completion = {
+            postfix = ".",
+            showWord = "Disable",
+            workspaceWord = false,
+          },
           runtime = {
             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
             version = 'LuaJIT',

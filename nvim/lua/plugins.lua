@@ -1,10 +1,9 @@
 -- vim:foldmethod=marker
 ---@diagnostic disable: different-requires
 -- Automatically download packer.nvim if it doesn't exist
-local fn = vim.fn
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
+local install_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path }
   vim.cmd "packadd packer.nvim"
 end
 
@@ -105,7 +104,7 @@ return packer.startup {
 
     use {  "L3MON4D3/LuaSnip",
       config = function()
-        require "edit.luasnip"
+        require "edit.snip"
       end,
     }
 
@@ -337,6 +336,11 @@ return packer.startup {
       config = function()
         require "tool.diffview"
       end,
+      -- keys = {
+      --   { "<leader>gdo", "<Cmd>DiffviewOpen<CR>", desc = "Open DiffView" },
+      --   { "<leader>gdc", "<Cmd>DiffviewClose<CR>", desc = "Close DiffView" },
+      --   { "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open History" },
+      -- },
     }
 
     use {  "akinsho/git-conflict.nvim",
@@ -346,6 +350,12 @@ return packer.startup {
       tag = "*",  -- use stable branch. The default branch is develop one which is unstable to use
     }
 
+    use {  "simnalamburt/vim-mundo",
+      config = function()
+        require "tool.mundo"
+      end,
+    }
+
     use {  "aserowy/tmux.nvim",
       config = function()
         require "tool.tmux"
@@ -353,6 +363,12 @@ return packer.startup {
     }
 
     use {  "kevinhwang91/vim-ibus-sw" }
+
+    use { "Pocco81/auto-save.nvim",
+      config = function()
+        require "tool.auto-save"
+      end,
+    }
 
     use {  "dstein64/vim-startuptime",
       cmd = { "StartupTime" },

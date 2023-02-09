@@ -4,7 +4,19 @@ if not ok then
   return
 end
 
+local ok, overseer = pcall(require, "overseer")
+if not ok then
+  vim.notify "Could not load overseer"
+  return
+end
+
 local Path = require "plenary.path"
+
+-- Convert the cwd to a simple file name
+local function get_cwd_as_name()
+  local dir = vim.fn.getcwd(0)
+  return dir:gsub("[^A-Za-z0-9]", "_")
+end
 
 manager.setup {
   sessions_dir = Path:new(vim.fn.stdpath "data", "sessions"), -- The directory where the session files will be saved.
@@ -20,6 +32,35 @@ manager.setup {
   autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
 }
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SessionSavePre",
+  callback = function()
+    local task_name = get_cwd_as_name()
+
+    -- Remove the task if it exists
+    if vim.tbl_contains(overseer.list_task_bundles(), task_name) then
+      overseer.delete_task_bundle(task_name)
+    end
+
+    overseer.save_task_bundle(
+      task_name,
+      -- Passing nil will use config.opts.save_task_opts. You can call list_tasks() explicitly and
+      -- pass in the results if you want to save specific tasks.
+      nil,
+      { on_conflict = "overwrite" } -- Overwrite existing bundle, if any
+    )
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "SessionLoadPost",
+  callback = function()
+    overseer.load_task_bundle(get_cwd_as_name(), { ignore_missing = true })
+  end,
+})
+
+-- vim.keymap.set("n", "<leader>ws", "<cmd>SessionManager load_session<CR>", { desc = "Load selected session" })
 -- vim.keymap.set("n", "<leader>wl", "<cmd>SessionManager load_last_session<CR>", { desc = "Load last session" })
+-- vim.keymap.set("n", "<leader>wd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
 vim.keymap.set("n", "<leader>ws", "<cmd>SessionManager save_current_session<CR>", { desc = "Save current session" })
 vim.keymap.set("n", "<leader>wl", "<cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
