@@ -126,8 +126,6 @@ augroup Binary
   autocmd BufWritePost *.bin,*.dat set nomod | endif
 augroup END
 
-colorscheme habamax
-
 " Neovim
 " NOTE: make a soft link file of this file to ~/.vimrc, which can auto load
 " those configures when you use vim instead nvim

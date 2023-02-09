@@ -112,6 +112,12 @@ lazy.setup({
       event = "VeryLazy",
     },
 
+    {  "RaafatTurki/hex.nvim",
+      config = function()
+        require "edit.hex"
+      end,
+    },
+
     {  "lewis6991/spellsitter.nvim",
       config = function()
         require "edit.spellsitter"
