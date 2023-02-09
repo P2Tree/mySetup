@@ -54,8 +54,6 @@ return packer.startup {
       end,
     }
 
-    use { "tpope/vim-sleuth" }
-
     use {  "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       config = function()
@@ -71,7 +69,11 @@ return packer.startup {
       },
     }
 
+    use {  "nvim-tree/nvim-web-devicons" }
+
     use {  "tpope/vim-unimpaired" }
+
+    use { "tpope/vim-sleuth" }
 
     use {  "lewis6991/impatient.nvim" }
 
@@ -80,7 +82,6 @@ return packer.startup {
         require "core.filetype"
       end,
     }
-
 -- end of 1-Core }}}
 
 -- 2-Edit {{{
@@ -112,7 +113,7 @@ return packer.startup {
       config = function()
         require "edit.kommentary"
       end,
-    }
+     }
 
     use {  "kylechui/nvim-surround",
       config = function()
@@ -143,20 +144,6 @@ return packer.startup {
       },
     }
 
-    use {  "folke/noice.nvim",
-      config = function()
-        require "interface.noice"
-      end,
-      requires = {
-        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-        "MunifTanjim/nui.nvim",
-        -- OPTIONAL:
-        --   `nvim-notify` is only needed, if you want to use the notification view.
-        --   If not available, we use `mini` as the fallback
-        "rcarriga/nvim-notify",
-      }
-    }
-
     use {  "akinsho/bufferline.nvim",
       config = function()
         require "interface.bufferline"
@@ -164,10 +151,15 @@ return packer.startup {
       requires = { "kyazdani42/nvim-web-devicons" },
     }
 
-    use {  "SmiteshP/nvim-navic",
+    use {  "utilyre/barbecue.nvim",
       config = function()
-        require "interface.navic"
+        require "interface.barbecue"
       end,
+      requires = {
+        "neovim/nvim-lspconfig",
+        "SmiteshP/nvim-navic",
+        "kyazdani42/nvim-web-devicons",
+      },
     }
 
     use {  "RRethy/vim-illuminate",
@@ -241,13 +233,14 @@ return packer.startup {
       end,
     }
 
-      use {  "petertriho/nvim-scrollbar",
-        config = function()
-          require "interface.scrollbar"
-        end,
-      }
+    use {  "petertriho/nvim-scrollbar",
+      config = function()
+        require "interface.scrollbar"
+      end,
+    }
 
     use {  "kevinhwang91/nvim-bqf",
+      ft = 'qf',
       config = function()
         require "interface.bqf"
       end,
@@ -269,12 +262,6 @@ return packer.startup {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
       },
-    }
-
-    use {  "luukvbaal/stabilize.nvim",
-      config = function()
-        require "interface.stabilize"
-      end,
     }
 -- end of 3-Interface }}}
 
@@ -428,13 +415,6 @@ return packer.startup {
 
     use {  "rafcamlet/nvim-luapad",
       ft = { "lua" },
-    }
-
-    use {  "Shatur/neovim-cmake",
-      config = function()
-        require "debug.cmake"
-      end,
-      ft = { "c", "cpp", "cmake" },
     }
 -- end of 6-Debug }}}
 

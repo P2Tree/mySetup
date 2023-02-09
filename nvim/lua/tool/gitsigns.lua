@@ -11,6 +11,7 @@ gitsigns.setup {
     delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    untracked = { hl = "GitSignsAdd", text = "┆", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
@@ -32,7 +33,7 @@ gitsigns.setup {
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
-  max_file_length = 40000,
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
   preview_config = {
     -- Options passed to nvim_open_win
     border = "rounded",
@@ -79,3 +80,14 @@ gitsigns.setup {
     end, { buffer = bufnr, desc = "Blame line" })
   end,
 }
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffText" })
+    vim.api.nvim_set_hl(0, "GitSignsAddInLine", { link = "GitSignsAddLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { link = "GitSignsDeleteLn" })
+    vim.api.nvim_set_hl(0, "GitSignsChangeInline", { link = "GitSignsChangeLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
+  end,
+})

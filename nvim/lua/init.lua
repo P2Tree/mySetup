@@ -18,12 +18,6 @@ vim.opt.mouse = "a"
 vim.api.nvim_set_hl(0, 'DiffText', { fg = "#ffffff", bg = "#1d3b40" })
 vim.api.nvim_set_hl(0, 'DiffAdd', { fg = "#ffffff", bg = "#1d3450" })
 
-vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffText" })
-vim.api.nvim_set_hl(0, "GitSignsAddInLine", { link = "GitSignsAddLn" })
-vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { link = "GitSignsDeleteLn" })
-vim.api.nvim_set_hl(0, "GitSignsChangeInline", { link = "GitSignsChangeLn" })
-vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
-
 -- For the use of impatient.nvim, packer_compiled.lua needs to be
 -- in the lua/ directory instead of the default.
 -- If it doesn't exist, it will be created by :PackerSync

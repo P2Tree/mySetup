@@ -13,3 +13,11 @@ vim.keymap.set("n", "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", { desc = "Ope
 -- symbolsOutline
 vim.keymap.set("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Open Outline" })
 
+-- local function close()
+--   for _, win in pairs(vim.fn.getwininfo()) do
+--     if win['quickfix'] == 1 then
+--       vim.cmd("close " .. win.winnr)
+--       return
+--     end
+--   end
+-- end

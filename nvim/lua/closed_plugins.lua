@@ -15,6 +15,13 @@
       end,
     }
 
+    -- TEST: Not very useful for me
+    use {  "stevearc/overseer.nvim",
+      config = function ()
+        require "core.overseer"
+      end
+    }
+
     -- TODO: Disable because lots of refactorings needs to be done
     use {  "b0o/mapx.nvim" }
 
@@ -63,6 +70,27 @@
       config = function()
         require "interface.cursorline"
       end,
+    }
+
+    -- HACK: substitute of barbecue.nvim
+    use {  "SmiteshP/nvim-navic",
+      config = function()
+        require "interface.navic"
+      end,
+    }
+    -- TEST: UI update plugin, I tried and I don't like it, maybe notify is enough for me
+    use {  "folke/noice.nvim",
+      config = function()
+        require "interface.noice"
+      end,
+      requires = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+      }
     }
 
     -- TODO: needs to config

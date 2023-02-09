@@ -51,8 +51,11 @@ set scrolloff=1
 set sidescrolloff=5
 set history=9999 " command history max save
 set display+=lastline
+set fillchars+=diff:/
 set synmaxcol=1000 " max syntax highlight in one line onely support 1000 characters
 set foldmethod=manual  " more options takes over by plugin
+" set splitkeep=screen " keeps the same screen screen lines in all split
+" windows, avaliable for vim 9.0 and neovim nightly
 
 set termguicolors " enable true color
 
@@ -84,7 +87,7 @@ noremap sc <C-w>c          " close current window
 noremap so <C-w>o          " open current window
 
 " quit window or buffer
-nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ":bd<cr>"
+nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ": bd<cr>"
 nnoremap <expr>Q ":wqa<cr>"
 
 " delete it, not concat it

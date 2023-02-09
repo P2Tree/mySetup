@@ -20,8 +20,10 @@ bufferline.setup {
     middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     indicator = {
       -- alternatives: right aligned =>▕ ▐  left aligned => ▎
-      icon = '▶', -- this should be omitted if indicator style is not 'icon'
-      style = 'none',  -- 'icon' | 'underline' | 'none'
+      icon = "▎", -- this should be omitted if indicator style is not 'icon'
+      style = "icon", -- "icon" | "underline" | "none",
+      -- icon = '▶', -- this should be omitted if indicator style is not 'icon'
+      -- style = 'none',  -- 'icon' | 'underline' | 'none'
     },
     buffer_close_icon = "",
     modified_icon = "●",
@@ -48,13 +50,14 @@ bufferline.setup {
       return "(" .. count .. ")"
     end,
     offsets = {
-      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
-      { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
+      -- { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
+      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
-      { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
+      -- { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
       { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
-      { filetype = "httpResult", text = "Http Result", text_align = "center", saperator = true },
+      -- { filetype = "httpResult", text = "Http Result", text_align = "center", saperator = true },
+      -- { filetype = "OverseerList", text = "Tasks", text_align = "center", saperator = true },
     },
     color_icons = true, --- true | false, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
