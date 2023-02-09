@@ -25,10 +25,6 @@
     -- TODO: Disable because lots of refactorings needs to be done
     use {  "b0o/mapx.nvim" }
 
-    -- HACK: Used by sumneko_lua lsp, but i think it is optional
-    use {  "ii14/emmylua-nvim",
-      opt = true,
-    }
 -- end of 1-Core }}}
 
 -- 2-Edit {{{
@@ -58,6 +54,13 @@
         { "nvim-lua/plenary.nvim" },
         { "nvim-treesitter/nvim-treesitter" },
       },
+    }
+
+    -- HACK
+    {  "kevinhwang91/nvim-hlslens",
+      config = function()
+        require "interface.hlslens"
+      end,
     }
 -- end of 2-Edit }}}
 
@@ -285,6 +288,11 @@
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
       },
+    }
+
+    -- TODO: needs to test
+    {  "Pocco81/dap-buddy.nvim",
+      build = "make",
     }
 -- end of 6-Debug }}}
   end
