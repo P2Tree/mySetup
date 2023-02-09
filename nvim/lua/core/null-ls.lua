@@ -12,5 +12,6 @@ null_ls.setup {
     null_ls.builtins.formatting.isort,
     -- ls.builtins.diagnostics.pylint,
     -- ls.builtins.diagnostics.codespell,
+    null_ls.builtins.formatting.shfmt,
   },
 }

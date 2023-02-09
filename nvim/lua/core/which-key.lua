@@ -114,6 +114,7 @@ key.register {
     ["d"] = { name = "+debug" },
     ["t"] = { name = "+toggle" },
     ["h"] = { name = "+hop" },
+    ["o"] = { name = "+open" },
     ["c"] = { name = "+comment" },
   },
 }

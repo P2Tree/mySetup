@@ -47,9 +47,10 @@ lazy.setup({
         require "core.treesitter"
       end,
       dependencies = {
+        { "nvim-treesitter/nvim-treesitter-textobjects" },
         { "nvim-treesitter/nvim-treesitter-refactor" },
         { "windwp/nvim-ts-autotag" },
-        { "p00f/nvim-ts-rainbow" },
+        { "mrjones2014/nvim-ts-rainbow" },
         { "RRethy/nvim-treesitter-endwise" },
         { "RRethy/nvim-treesitter-textsubjects", disable = false },
         { "JoosepAlviste/nvim-ts-context-commentstring" },
@@ -57,11 +58,7 @@ lazy.setup({
       build = ":TSUpdate",
     },
 
-    {  "tpope/vim-unimpaired" },
-
     { "tpope/vim-sleuth" },
-
-    {  "lewis6991/impatient.nvim" },
 
     {  "nathom/filetype.nvim",
       config = function()
@@ -91,24 +88,28 @@ lazy.setup({
         { "kristijanhusak/vim-dadbod-completion" },
         { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
       },
+      event = "VeryLazy",
     },
 
     {  "L3MON4D3/LuaSnip",
       config = function()
         require "edit.snip"
       end,
+      event = "VeryLazy",
     },
 
     {  "b3nj5m1n/kommentary",
       config = function()
         require "edit.kommentary"
       end,
+      event = "VeryLazy",
     },
 
     {  "kylechui/nvim-surround",
       config = function()
         require "edit.surround"
       end,
+      event = "VeryLazy",
     },
 
     {  "lewis6991/spellsitter.nvim",
@@ -121,6 +122,7 @@ lazy.setup({
       config = function()
         require "edit.autopairs"
       end,
+      event = "VeryLazy",
     },
 -- end of 2-Edit }}}
 
@@ -147,9 +149,13 @@ lazy.setup({
       end,
       dependencies = {
         "neovim/nvim-lspconfig",
-        "SmiteshP/nvim-navic",
+        -- "SmiteshP/nvim-navic",
         "kyazdani42/nvim-web-devicons",
       },
+    },
+
+    {  "luukvbaal/statuscol.nvim",
+      enabled = false, -- Requires neovim 0.9
     },
 
     {  "RRethy/vim-illuminate",
@@ -209,12 +215,6 @@ lazy.setup({
       end,
     },
 
-    {  "nvim-treesitter/nvim-treesitter-context",
-      config = function()
-        require "interface.treesitter-context"
-      end,
-    },
-
     {  "petertriho/nvim-scrollbar",
       config = function()
         require "interface.scrollbar"
@@ -253,6 +253,9 @@ lazy.setup({
         require "tool.tree"
       end,
       dependencies = { "kyazdani42/nvim-web-devicons" },
+      keys = {
+        { "<leader>e", "<Cmd>NvimTreeToggle<CR>", desc = "File Explorer" },
+      },
     },
 
     {  "nvim-telescope/telescope.nvim",
@@ -304,6 +307,12 @@ lazy.setup({
       dependencies = "nvim-lua/plenary.nvim",
     },
 
+    {  "akinsho/git-conflict.nvim",
+      config = function()
+        require "tool.git-conflict"
+      end,
+    },
+
     {  "TimUntersberger/neogit",
       config = function()
         require "tool.neogit"
@@ -312,30 +321,31 @@ lazy.setup({
         "nvim-lua/plenary.nvim",
         "sindrets/diffview.nvim",
       },
-      cmd = { "Neogit" },
+      keys = {
+        { "<leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" },
+      },
     },
 
     {  "sindrets/diffview.nvim",
       config = function()
         require "tool.diffview"
       end,
-      -- keys = {
-      --   { "<leader>gdo", "<Cmd>DiffviewOpen<CR>", desc = "Open DiffView" },
-      --   { "<leader>gdc", "<Cmd>DiffviewClose<CR>", desc = "Close DiffView" },
-      --   { "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open History" },
-      -- },
+      keys = {
+        { "<leader>gdo", "<Cmd>DiffviewOpen<CR>", desc = "Open DiffView" },
+        { "<leader>gdc", "<Cmd>DiffviewClose<CR>", desc = "Close DiffView" },
+        { "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open History" },
+      },
     },
 
-    {  "akinsho/git-conflict.nvim",
-      config = function()
-        require "tool.git-conflict"
-      end,
-    },
+    {  "rbong/vim-flog" },
 
     {  "simnalamburt/vim-mundo",
       config = function()
         require "tool.mundo"
       end,
+      keys = {
+        { "<leader>u", "<Cmd>MundoToggle<CR>", desc = "Undo Tree" },
+      },
     },
 
     {  "aserowy/tmux.nvim",
@@ -420,7 +430,7 @@ lazy.setup({
       config = function()
         require "language.clangd_extensions"
       end,
-      ft = { "c", "cpp" },
+      ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
     },
 
     {  "mfussenegger/nvim-jdtls",
@@ -441,10 +451,10 @@ lazy.setup({
       config = function()
         require "language.schema-store"
       end,
-      ft = { "json" },
+      ft = { "json", "jsonc" },
     },
 -- }}}
-}, {
+}, {  -- lazy plugin configuration
   root = vim.fn.stdpath "data" .. "/lazy", -- directory where plugins will be installed
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?

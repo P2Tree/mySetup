@@ -126,11 +126,15 @@ augroup Binary
   autocmd BufWritePost *.bin,*.dat set nomod | endif
 augroup END
 
+colorscheme habamax
+
 " Neovim
 " NOTE: make a soft link file of this file to ~/.vimrc, which can auto load
 " those configures when you use vim instead nvim
 if has("nvim")
   if has("nvim-0.8")
+    aunmenu PopUp.How-to\ disable\ mouse
+    aunmenu PopUp.-1-
     lua require "init"
   else
     echo "This configuration needs NeoVim 0.7+ version"

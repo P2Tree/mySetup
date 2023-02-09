@@ -4,6 +4,12 @@ if not ok then
   return
 end
 
+local ok, lazy_status = pcall(require, "lazy.status")
+if not ok then
+  vim.notify "Could not load lazy.status"
+  return
+end
+
 local function diff_source()
   local gitsigns = vim.b.gitsigns_status_dict
   if gitsigns then
@@ -54,7 +60,12 @@ lualine.setup {
       { lsp, },
     },
     lualine_x = {
-      -- "overseer",
+      {
+        lazy_status.updates,
+        cond = lazy_status.has_updates,
+        color = { fg = "#ff9e64" },
+      },
+      "overseer",
       -- "copilot",
       "filetype",
       indent,
