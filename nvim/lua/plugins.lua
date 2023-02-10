@@ -394,6 +394,37 @@ lazy.setup({
       build = ":CatppuccinCompile", -- if use catppuccin/nvim
     },
 
+    {  "folke/tokyonight.nvim",
+      config = function()
+        require "colorscheme.tokyonight"
+      end,
+    },
+
+    {  "rose-pine/neovim",
+      name = "rose-pine",
+      config = function()
+        require "colorscheme.rose-pine"
+      end,
+    },
+
+    {  "EdenEast/nightfox.nvim",
+      config = function()
+        require "colorscheme.nightfox"
+      end,
+    },
+
+    {  "navarasu/onedark.nvim",
+      config = function()
+        require "colorscheme.onedark"
+      end,
+    },
+
+    {  "ellisonleao/gruvbox.nvim",
+      config = function()
+        require "colorscheme.gruvbox"
+      end,
+    },
+
 -- end of 5-Colorscheme }}}
 
 -- 6- Debug {{{

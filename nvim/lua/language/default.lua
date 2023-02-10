@@ -7,6 +7,12 @@ if not ok then
   return
 end
 
+local ok, ufo = pcall(require, "ufo")
+if not ok then
+  vim.notify "Could not load ufo"
+  return
+end
+
 -- Add additional capabilities supported by nvim-cmp
 M.capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -27,7 +33,14 @@ M.set_keymap = function(bufnr)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
   vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "References" })
 
-  vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "<leader>lh", function()
+    local winid = ufo.peekFoldedLinesUnderCursor()
+    if not winid then
+      -- choose one of coc.nvim and nvim LSP
+      -- vim.fn.CocActionAsync "definitionHover" -- for coc.nvim
+      vim.lsp.buf.hover() -- for nvim LSP
+    end
+   end, { buffer = bufnr, desc = "LSP: Hover" })
   vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
   vim.keymap.set("n", "<leader>lf", function()

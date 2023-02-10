@@ -15,6 +15,9 @@
       end,
     },
 
+    -- BUG: unstable, beta state
+    {  "linty-org/key-menu.nvim" }
+
     -- TEST: Not very useful for me
     {  "stevearc/overseer.nvim",
       config = function ()
