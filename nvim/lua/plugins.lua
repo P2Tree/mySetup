@@ -431,30 +431,9 @@ lazy.setup({
     config = function()
       require "debug.dap"
     end,
+    event = "VeryLazy",
   },
 
-  {  "theHamsta/nvim-dap-virtual-text",
-    config = function()
-      require "debug.dap-virtual-text"
-    end,
-  },
-
-  {  "rcarriga/nvim-dap-ui",
-    config = function()
-      require "debug.dap-ui"
-    end,
-  },
-
-  {  "mfussenegger/nvim-dap-python",
-    config = function()
-      require "debug.dap-python"
-    end,
-    ft = { "python" },
-  },
-
-  {  "rafcamlet/nvim-luapad",
-    ft = { "lua" },
-  },
 -- end of 6-Debug }}}
 
 -- 7-Language {{{

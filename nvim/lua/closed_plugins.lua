@@ -307,26 +307,55 @@
 -- end of 5-Colorscheme }}}
 
 -- 6- Debug {{{
-    -- TODO: needs to test
-    {  "michaelb/sniprun",
-      config = function()
-        require "debug.sniprun"
-      end,
-      build = "bash install.sh",
-    },
+  -- TODO: needs to test
+  {  "theHamsta/nvim-dap-virtual-text",
+    config = function()
+      require "debug.dap-virtual-text"
+    end,
+    event = "VeryLazy",
+  },
 
-    -- TODO: needs to test
-    {  "rcarriga/neotest",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-      },
-    },
+  -- TODO: needs to test
+  {  "rcarriga/nvim-dap-ui",
+    config = function()
+      require "debug.dap-ui"
+    end,
+    event = "VeryLazy",
+  },
 
-    -- TODO: needs to test
-    {  "Pocco81/dap-buddy.nvim",
-      build = "make",
+  -- TODO: needs to test
+  {  "mfussenegger/nvim-dap-python",
+    config = function()
+      require "debug.dap-python"
+    end,
+    ft = { "python" },
+  },
+
+  -- TODO: needs to test
+  {  "rafcamlet/nvim-luapad",
+    ft = { "lua" },
+  },
+
+  -- TODO: needs to test
+  {  "michaelb/sniprun",
+    config = function()
+      require "debug.sniprun"
+    end,
+    build = "bash install.sh",
+  },
+
+  -- TODO: needs to test
+  {  "rcarriga/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
     },
+  },
+
+  -- TODO: needs to test
+  {  "Pocco81/dap-buddy.nvim",
+    build = "make",
+  },
 -- end of 6-Debug }}}
 }
