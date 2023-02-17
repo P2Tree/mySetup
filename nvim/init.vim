@@ -63,6 +63,7 @@ set termguicolors " enable true color
 " Keymapping
 set pastetoggle=<F2>
 let mapleader=" "
+let maplocalleader = "  "
 
 " cursor move
 cmap <C-p> <Up>

@@ -217,6 +217,13 @@
       end,
     },
 
+    -- TEST: don't very useful
+    {  "mfussenegger/nvim-treehopper",
+      config = function()
+        require "tool.treehopper"
+      end,
+    },
+
     -- HACK: replaced by a auto command
     {  "ethanholz/nvim-lastplace",
       config = function()
@@ -252,6 +259,13 @@
     {  "akinsho/nvim-toggleterm.lua",
       config = function()
         require "tool.toggleterm"
+      end,
+    },
+
+    -- BUG: it conflict with autopairs and seems not very useful
+    { "Pocco81/auto-save.nvim",
+      config = function()
+        require "tool.auto-save"
       end,
     },
 

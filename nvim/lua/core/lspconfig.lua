@@ -64,13 +64,13 @@ mason.setup_handlers {
   end,
 
   clangd = function(server) end,
-  rust_analyzer = function(server) end,
+  jdtls = function(server) end,
   tsserver = function(server) end,
   jsonls = function(server) end,
 
-  -- sumneko_lua = function(server) end,  -- we needs some config for lua lsp
-  sumneko_lua = function()
-    lspconfig.sumneko_lua.setup {
+  -- we needs some config for lua lsp
+  lua_ls = function()
+    lspconfig.lua_ls.setup {
       capabilities = default.capabilities,
       on_attach = function(client, bufnr)
         default.on_attach(client, bufnr)
