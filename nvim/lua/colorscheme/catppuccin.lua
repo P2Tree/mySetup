@@ -103,7 +103,7 @@ catppuccin.setup {
       custom_bg = "NONE",
     },
     neotree = {
-      enabled = true,
+      enabled = false,
       show_root = true,
       transparent_panel = false,
     },

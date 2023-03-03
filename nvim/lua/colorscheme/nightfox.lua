@@ -13,15 +13,15 @@ nightfox.setup {
     dim_inactive = false, -- Non focused panes set to alternative background
     module_default = true, -- Default enable value for modules
     styles = { -- Style to be applied to different syntax groups
-      comments = "NONE", -- Value is any valid attr-list value `:help attr-list`
-      conditionals = "NONE",
+      comments = "italic", -- Value is any valid attr-list value `:help attr-list`
+      conditionals = "italic",
       constants = "NONE",
       functions = "NONE",
-      keywords = "NONE",
+      keywords = "bold",
       numbers = "NONE",
       operators = "NONE",
       strings = "NONE",
-      types = "NONE",
+      types = "bold",
       variables = "NONE",
     },
     inverse = { -- Inverse highlight for different types

@@ -53,7 +53,7 @@ bufferline.setup {
       { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
       -- { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
-      { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
+      -- { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
       -- { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
       { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
       -- { filetype = "httpResult", text = "Http Result", text_align = "center", saperator = true },

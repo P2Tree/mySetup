@@ -60,6 +60,10 @@ set foldmethod=manual  " more options takes over by plugin
 
 set termguicolors " enable true color
 
+" used for italic in tmux
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+
 " Keymapping
 set pastetoggle=<F2>
 let mapleader=" "
