@@ -32,7 +32,7 @@ lazy.setup({
     end,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      { "neovim/nvim-lspconfig" },
+      { "jay-babu/mason-null-ls.nvim" }
     },
   },
 
@@ -48,7 +48,6 @@ lazy.setup({
     end,
     dependencies = {
       { "nvim-treesitter/nvim-treesitter-textobjects" },
-      { "nvim-treesitter/nvim-treesitter-refactor" },
       { "windwp/nvim-ts-autotag" },
       { "mrjones2014/nvim-ts-rainbow" },
       { "RRethy/nvim-treesitter-endwise" },
@@ -69,6 +68,22 @@ lazy.setup({
   {  "ii14/emmylua-nvim",
     lazy = true,
   },
+
+  {  "psliwka/vim-smoothie" },
+
+  {  "editorconfig/editorconfig-vim" },
+
+  {  "kevinhwang91/nvim-fundo",
+    requires = "kevinhwang91/promise-async",
+    run = function()
+      require("fundo").install()
+    end,
+    config = function()
+      require "tool.fundo"
+    end,
+    enabled = false,  -- WIP
+  },
+
 -- end of 1-Core }}}
 
 -- 2-Edit {{{
@@ -174,6 +189,13 @@ lazy.setup({
     config = function()
       require "interface.hlargs"
     end,
+    after = "catppuccin",  -- hlargs should be loaded after colorscheme
+  },
+
+  {  "lvimuser/lsp-inlayhints.nvim",
+    config = function()
+      require "interface.lsp-inlayhints"
+    end,
   },
 
   {  "zbirenbaum/neodim",
@@ -231,18 +253,6 @@ lazy.setup({
     config = function()
       require "interface.todo-comments"
     end,
-  },
-
-  {  "psliwka/vim-smoothie" },
-
-  {  "bennypowers/nvim-regexplainer",
-    config = function()
-      require "interface.regexplainer"
-    end,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
   },
 -- end of 3-Interface }}}
 
@@ -328,12 +338,6 @@ lazy.setup({
     config = function()
       require "tool.diffview"
     end,
-    keys = {
-      { "<leader>gdo", "<Cmd>DiffviewOpen<CR>", desc = "Open DiffView" },
-      { "<leader>gdc", "<Cmd>DiffviewClose<CR>", desc = "Close DiffView" },
-      { "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", desc = "Open History" },
-    },
-    event = "VeryLazy",
   },
 
   {  "rbong/vim-flog" },
@@ -348,17 +352,6 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "kevinhwang91/nvim-fundo",
-    requires = "kevinhwang91/promise-async",
-    run = function()
-      require("fundo").install()
-    end,
-    config = function()
-      require "tool.fundo"
-    end,
-    enabled = false,  -- WIP
-  },
-
   {  "aserowy/tmux.nvim",
     config = function()
       require "tool.tmux"
@@ -366,10 +359,6 @@ lazy.setup({
   },
 
   {  "kevinhwang91/vim-ibus-sw" },
-
-  {  "dstein64/vim-startuptime",
-    cmd = { "StartupTime" },
-  },
 
   {  "vuki656/package-info.nvim",
     config = function()
@@ -384,7 +373,44 @@ lazy.setup({
   },
 -- end of 4-Tool }}}
 
--- 5-Colorscheme {{{
+-- 5-Debug {{{
+  {  "mfussenegger/nvim-dap",
+    config = function()
+      require "debug.dap"
+    end,
+    event = "VeryLazy",
+    dependencies = {
+      "jay-babu/mason-nvim-dap.nvim",
+    },
+  },
+
+  {  "Civitasv/cmake-tools.nvim",
+    enabled = false,
+  },
+
+-- end of 5-Debug }}}
+
+-- 6-Language {{{
+  {  "plasticboy/vim-markdown",
+    ft = { "markdown" },
+  },
+
+  {  "p00f/clangd_extensions.nvim",
+    config = function()
+      require "language.clangd_extensions"
+    end,
+    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+  },
+
+  {  "b0o/SchemaStore.nvim",
+    config = function()
+      require "language.schema-store"
+    end,
+    ft = { "json", "jsonc" },
+  },
+-- end of 6-Language }}}
+
+-- 7-Colorscheme {{{
   {  "catppuccin/nvim",
     name = "catppuccin",
     config = function()
@@ -423,52 +449,8 @@ lazy.setup({
       require "colorscheme.gruvbox"
     end,
   },
+-- end of 7-Colorscheme }}}
 
--- end of 5-Colorscheme }}}
-
--- 6- Debug {{{
-  {  "mfussenegger/nvim-dap",
-    config = function()
-      require "debug.dap"
-    end,
-    event = "VeryLazy",
-  },
-
--- end of 6-Debug }}}
-
--- 7-Language {{{
-  {  "plasticboy/vim-markdown",
-    ft = { "markdown" },
-  },
-
-  {  "p00f/clangd_extensions.nvim",
-    config = function()
-      require "language.clangd_extensions"
-    end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-  },
-
-  {  "mfussenegger/nvim-jdtls",
-    config = function()
-      require "language.jdtls"
-    end,
-    ft = { "java" },
-  },
-
-  {  "jose-elias-alvarez/typescript.nvim",
-    config = function()
-      require "language.typescript"
-    end,
-    ft = { "typescript" },
-  },
-
-  {  "b0o/SchemaStore.nvim",
-    config = function()
-      require "language.schema-store"
-    end,
-    ft = { "json", "jsonc" },
-  },
--- }}}
 }, {  -- lazy plugin configuration
   root = vim.fn.stdpath "data" .. "/lazy", -- directory where plugins will be installed
   defaults = {

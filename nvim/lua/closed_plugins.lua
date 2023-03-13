@@ -6,307 +6,288 @@
 -- HACK: backup or substitute for other same kind of plugins
 -- TEST: don't very useful and consider to drop
 
-{
+local lazy = require "lazy"
+
+lazy.setup({
 -- 1-Core {{{
-    -- BUG: Disable because plugin may lost proformance
-    {  "folke/which-key.nvim",
-      config = function()
-        require "core.which-key"
-      end,
-    },
+  -- BUG: unstable, beta state
+  {  "linty-org/key-menu.nvim" },
 
-    -- BUG: unstable, beta state
-    {  "linty-org/key-menu.nvim" }
+  -- TEST: Not very useful for me
+  {  "stevearc/overseer.nvim",
+    config = function ()
+      require "core.overseer"
+    end
+  },
 
-    -- TEST: Not very useful for me
-    {  "stevearc/overseer.nvim",
-      config = function ()
-        require "core.overseer"
-      end
-    },
+  -- TODO: Disable because lots of refactorings needs to be done
+  {  "b0o/mapx.nvim" },
 
-    -- TODO: Disable because lots of refactorings needs to be done
-    {  "b0o/mapx.nvim" },
-
-    -- HACK: plugins manager `lazy` has already done the same things
-    {  "lewis6991/impatient.nvim" },
-
-
+  -- HACK: plugins manager `lazy` has already done the same things
+  {  "lewis6991/impatient.nvim" },
 -- end of 1-Core }}}
 
 -- 2-Edit {{{
-    -- TEST: Don't needs it
-    {  "github/copilot.vim",
-      config = function()
-        require "edit.copilot"
-      end,
-    },
+  -- TEST: Don't needs it
+  {  "github/copilot.vim",
+    config = function()
+      require "edit.copilot"
+    end,
+  },
 
-    -- TEST: I rarely use snippets and Luasnip is enough
-    {  "rafamadriz/friendly-snippets" },
+  -- TEST: I rarely use snippets and Luasnip is enough
+  {  "rafamadriz/friendly-snippets" },
 
-    -- TEST: the plugin will format the whole file but only one line, so it only useful for new project
-    {  "mhartington/formatter.nvim",
-      config = function()
-        require "edit.formatter"
-      end,
-    },
+  -- TEST: the plugin will format the whole file but only one line, so it only useful for new project
+  {  "mhartington/formatter.nvim",
+    config = function()
+      require "edit.formatter"
+    end,
+  },
 
-    -- BUG: Disable because it needs neovim nightly
-    {  "ThePrimeagen/refactoring.nvim",
-      config = function()
-        require "edit.refactoring"
-      end,
-      dependencies = {
-        { "nvim-lua/plenary.nvim" },
-        { "nvim-treesitter/nvim-treesitter" },
-      },
+  -- BUG: Disable because it needs neovim nightly
+  {  "ThePrimeagen/refactoring.nvim",
+    config = function()
+      require "edit.refactoring"
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" },
     },
+  },
 
-    -- HACK
-    {  "kevinhwang91/nvim-hlslens",
-      config = function()
-        require "interface.hlslens"
-      end,
-    },
+  -- HACK
+  {  "kevinhwang91/nvim-hlslens",
+    config = function()
+      require "interface.hlslens"
+    end,
+  },
 -- end of 2-Edit }}}
 
 -- 3-Interface {{{
-    -- BUG: Disable because it brings a more buggy behavior. See https://github.com/neovim/neovim/issues/12517
-    {  "stevearc/stickybuf.nvim" },
+  -- BUG: Disable because it brings a more buggy behavior. See https://github.com/neovim/neovim/issues/12517
+  {  "stevearc/stickybuf.nvim" },
 
-    -- HACK: substitute of illuminate
-    {  "yamatsum/nvim-cursorline",
-      config = function()
-        require "interface.cursorline"
-      end,
+  -- HACK: substitute of illuminate
+  {  "yamatsum/nvim-cursorline",
+    config = function()
+      require "interface.cursorline"
+    end,
+  },
+
+  -- HACK: substitute of barbecue.nvim
+  {  "SmiteshP/nvim-navic",
+    config = function()
+      require "interface.navic"
+    end,
+  },
+  -- TEST: UI update plugin, I tried and I don't like it, maybe notify is enough for me
+  {  "folke/noice.nvim",
+    config = function()
+      require "interface.noice"
+    end,
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    }
+  },
+
+  -- HACK
+  {  "nvim-treesitter/nvim-treesitter-context",
+    config = function()
+      require "interface.treesitter-context"
+    end,
+  },
+
+
+  -- TODO: needs to config
+  {  "ray-x/lsp_signature.nvim",
+    config = function()
+      require "interface.lsp_signature"
+    end,
+  },
+
+  -- BUG: Disable because it not stable
+  {  "weilbith/nvim-code-action-menu",
+    cmd = { "CodeActionMenu" },
+  },
+
+  -- HACK: substitute of nvim-scrollbar
+  {  "dstein64/nvim-scrollview" },
+
+  -- HACK: substitute for nvim-scrollbar, which support search results, lsp diagnostics and git hunks. Disable because it's work in progress
+  {  "lewis6991/satellite.nvim",
+    config = function()
+      -- require "interface.satellite"
+      require('satellite').setup()
+    end,
+  },
+
+  -- HACK: A substitute for nvim-scrollbar
+  { "gorbit99/codewindow.nvim",
+    config = function()
+      require "interface.codewindow"
+    end,
+  },
+
+  -- TEST: I don't like it
+  {  "folke/zen-mode.nvim",
+    config = function()
+      require "interface.zen-mode"
+    end,
+    keys = {
+      { "<leader>tz", "<Cmd>ZenMode<CR>", desc = "Zen Mode" },
     },
+  },
 
-    -- HACK: substitute of barbecue.nvim
-    {  "SmiteshP/nvim-navic",
-      config = function()
-        require "interface.navic"
-      end,
+  -- BUG: Disable because it's conflicting with the chinese text
+  {  "edluffy/specs.nvim",
+    config = function()
+      require "interface.specs"
+    end,
+  },
+
+  -- BUG: Disable causes the value of v:oldfiles to be messed up
+  {  "chentoast/marks.nvim",
+    config = function()
+      require "interface.marks"
+    end,
+  },
+
+  -- BUG: Behaves strangely when used with text objects
+  {  "tversteeg/registers.nvim",
+    config = function()
+      require "interface.registers"
+    end,
+  },
+
+  -- TEST: I don't use regex expression offen.
+  {  "bennypowers/nvim-regexplainer",
+    config = function()
+      require "interface.regexplainer"
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
     },
-    -- TEST: UI update plugin, I tried and I don't like it, maybe notify is enough for me
-    {  "folke/noice.nvim",
-      config = function()
-        require "interface.noice"
-      end,
-      dependencies = {
-        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-        "MunifTanjim/nui.nvim",
-        -- OPTIONAL:
-        --   `nvim-notify` is only needed, if you want to use the notification view.
-        --   If not available, we use `mini` as the fallback
-        "rcarriga/nvim-notify",
-      }
-    },
-
-    -- HACK
-    {  "nvim-treesitter/nvim-treesitter-context",
-      config = function()
-        require "interface.treesitter-context"
-      end,
-    },
-
-
-    -- TODO: needs to config
-    {  "ray-x/lsp_signature.nvim",
-      config = function()
-        require "interface.lsp_signature"
-      end,
-    },
-
-    -- BUG: Disable because it not stable
-    {  "weilbith/nvim-code-action-menu",
-      cmd = { "CodeActionMenu" },
-    },
-
-    -- HACK: substitute of nvim-scrollbar
-    {  "dstein64/nvim-scrollview" },
-
-    -- HACK: substitute for nvim-scrollbar, which support search results, lsp diagnostics and git hunks. Disable because it's work in progress
-    {  "lewis6991/satellite.nvim",
-      config = function()
-        -- require "interface.satellite"
-        require('satellite').setup()
-      end,
-    },
-
-    -- HACK: A substitute for nvim-scrollbar
-    { "gorbit99/codewindow.nvim",
-      config = function()
-        require "interface.codewindow"
-      end,
-    },
-
-    -- TEST: I don't like it
-    {  "folke/zen-mode.nvim",
-      config = function()
-        require "interface.zen-mode"
-      end,
-      keys = {
-        { "<leader>tz", "<Cmd>ZenMode<CR>", desc = "Zen Mode" },
-      },
-    },
-
-    -- BUG: Disable because it's conflicting with the chinese text
-    {  "edluffy/specs.nvim",
-      config = function()
-        require "interface.specs"
-      end,
-    },
-
-    -- BUG: Disable causes the value of v:oldfiles to be messed up
-    {  "chentoast/marks.nvim",
-      config = function()
-        require "interface.marks"
-      end,
-    },
-
-    -- BUG: Behaves strangely when used with text objects
-    {  "tversteeg/registers.nvim",
-      config = function()
-        require "interface.registers"
-      end,
-    },
+    -- Also need to install regex with nvim-treesitter: `:TSInstall regex`
+  },
 -- end of 3-Interface }}}
 
 -- 4-Tool {{{
-    -- BUG: work in progress with alpha version
-    {  "sidebar-nvim/sidebar.nvim",
-      config = function()
-        require "config.interface.sidebar"
-      end,
-      dependencies = { "sidebar-nvim/sections-dap" },
+  -- BUG: work in progress with alpha version
+  {  "sidebar-nvim/sidebar.nvim",
+    config = function()
+      require "config.interface.sidebar"
+    end,
+    dependencies = { "sidebar-nvim/sections-dap" },
+  },
+
+  -- HACK: a substitute of nvim-tree
+  {  "nvim-neo-tree/neo-tree.nvim",
+    config = function()
+      require "tool.neo-tree"
+    end,
+    branch = "v2.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      "s1n7ax/nvim-window-picker",
     },
+  },
 
-    -- HACK: a substitute of nvim-tree
-    {  "nvim-neo-tree/neo-tree.nvim",
-      config = function()
-        require "tool.neo-tree"
-      end,
-      branch = "v2.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "kyazdani42/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-        "s1n7ax/nvim-window-picker",
-      },
+  -- BUG: some bug occured, which is replaced by symbol-outline
+  {  "stevearc/aerial.nvim",
+    config = function()
+      require "tool.aerial"
+    end,
+    keys = {
+      { "<leader>s", "<Cmd>AerialToggle<CR>", desc = "Code Outline" },
     },
+  },
 
-    -- BUG: some bug occured, which is replaced by symbol-outline
-    {  "stevearc/aerial.nvim",
-      config = function()
-        require "tool.aerial"
-      end,
-      keys = {
-        { "<leader>s", "<Cmd>AerialToggle<CR>", desc = "Code Outline" },
-      },
+  -- TODO: waitting for test and enable
+  {  "onsails/diaglist.nvim" },
+
+  -- HACK: a substitute of some more plugins, such as native lsp and diaglist
+  {  "folke/trouble.nvim",
+    dependencies = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require "tool.trouble"
+    end,
+  },
+
+  -- TEST: don't very useful
+  {  "mfussenegger/nvim-treehopper",
+    config = function()
+      require "tool.treehopper"
+    end,
+  },
+
+  -- HACK: replaced by a auto command
+  {  "ethanholz/nvim-lastplace",
+    config = function()
+      require "tool.lastplace"
+    end,
+  },
+
+  -- TEST: don't very useful
+  {  "Shatur/neovim-session-manager",
+    config = function()
+      require "tool.session-manager"
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
     },
+  },
 
-    -- TODO: waitting for test and enable
-    {  "onsails/diaglist.nvim" },
+  -- BUG: Disable because plugin may lost proformance
+  {  "folke/which-key.nvim",
+    config = function()
+      require "core.which-key"
+    end,
+  },
 
-    -- HACK: a substitute of some more plugins, such as native lsp and diaglist
-    {  "folke/trouble.nvim",
-      dependencies = "kyazdani42/nvim-web-devicons",
-      config = function()
-        require "tool.trouble"
-      end,
-    },
+  -- TODO: waitting for config
+  {  "sindrets/winshift.nvim" },
 
-    -- TEST: don't very useful
-    {  "mfussenegger/nvim-treehopper",
-      config = function()
-        require "tool.treehopper"
-      end,
-    },
+  -- TEST: seems not very useful
+  {  "simeji/winresizer" },
 
-    -- HACK: replaced by a auto command
-    {  "ethanholz/nvim-lastplace",
-      config = function()
-        require "tool.lastplace"
-      end,
-    },
+  -- TEST: used in HTTP filetype, don't use it for me
+  {  "rest-nvim/rest.nvim",
+    config = function()
+      require "tool.rest"
+    end,
+    ft = { "http" },
+  },
 
-    -- TEST: don't very useful
-    {  "Shatur/neovim-session-manager",
-      config = function()
-        require "tool.session-manager"
-      end,
-      dependencies = {
-        { "nvim-lua/plenary.nvim" },
-      },
-    },
+  -- TEST: I use tmux, so this plugin is not needed
+  {  "akinsho/nvim-toggleterm.lua",
+    config = function()
+      require "tool.toggleterm"
+    end,
+  },
 
-    -- TODO: waitting for config
-    {  "sindrets/winshift.nvim" },
+  -- BUG: it conflict with autopairs and seems not very useful
+  { "Pocco81/auto-save.nvim",
+    config = function()
+      require "tool.auto-save"
+    end,
+  },
 
-    -- TEST: seems not very useful
-    {  "simeji/winresizer" },
-
-    -- TEST: used in HTTP filetype, don't use it for me
-    {  "rest-nvim/rest.nvim",
-      config = function()
-        require "tool.rest"
-      end,
-      ft = { "http" },
-    },
-
-    -- TEST: I use tmux, so this plugin is not needed
-    {  "akinsho/nvim-toggleterm.lua",
-      config = function()
-        require "tool.toggleterm"
-      end,
-    },
-
-    -- BUG: it conflict with autopairs and seems not very useful
-    { "Pocco81/auto-save.nvim",
-      config = function()
-        require "tool.auto-save"
-      end,
-    },
+  {  "dstein64/vim-startuptime",
+    cmd = { "StartupTime" },
+  },
 
 -- end of 4-Tool }}}
 
--- {{{ 5-Colorscheme
-    -- HACK:
-    {
-      "folke/tokyonight.nvim",
-      config = function()
-        require "colorscheme.tokyonight"
-      end,
-    },
-
-    -- HACK:
-    {
-      "ellisonleao/gruvbox.nvim",
-      config = function()
-        require "colorscheme.gruvbox"
-      end,
-    },
-
-    -- HACK:
-    {
-      "navarasu/onedark.nvim",
-      config = function()
-        require "colorscheme.onedark"
-      end,
-    },
-
-    -- HACK:
-    {
-      "rose-pine/neovim",
-      as = "rose-pine",
-      config = function()
-        require "colorscheme.rose-pine"
-      end,
-    },
--- end of 5-Colorscheme }}}
-
--- 6- Debug {{{
+-- 5- Debug {{{
   -- TODO: needs to test
   {  "theHamsta/nvim-dap-virtual-text",
     config = function()
@@ -320,6 +301,9 @@
     config = function()
       require "debug.dap-ui"
     end,
+    requires = {
+      "mfussenegger/nvim-dap",
+    },
     event = "VeryLazy",
   },
 
@@ -357,5 +341,56 @@
   {  "Pocco81/dap-buddy.nvim",
     build = "make",
   },
--- end of 6-Debug }}}
-}
+-- end of 5-Debug }}}
+
+-- 6-Language {{{
+  {  "mfussenegger/nvim-jdtls",
+    config = function()
+      require "language.jdtls"
+    end,
+    ft = { "java" },
+  },
+
+  {  "jose-elias-alvarez/typescript.nvim",
+    config = function()
+      require "language.typescript"
+    end,
+    ft = { "typescript" },
+  },
+-- end of 6-Language }}}
+
+-- 7-Colorscheme {{{
+  -- HACK:
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require "colorscheme.tokyonight"
+    end,
+  },
+
+  -- HACK:
+  {
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      require "colorscheme.gruvbox"
+    end,
+  },
+
+  -- HACK:
+  {
+    "navarasu/onedark.nvim",
+    config = function()
+      require "colorscheme.onedark"
+    end,
+  },
+
+  -- HACK:
+  {
+    "rose-pine/neovim",
+    as = "rose-pine",
+    config = function()
+      require "colorscheme.rose-pine"
+    end,
+  },
+-- end of 7-Colorscheme }}}
+})

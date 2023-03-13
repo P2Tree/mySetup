@@ -31,9 +31,9 @@ set autochdir
 " Interface
 set number
 set relativenumber
-set cursorline
-set cursorlineopt=both
-set cursorcolumn
+" set cursorline
+" set cursorlineopt=both
+" set cursorcolumn
 set linebreak
 set showbreak=>>
 set showcmd
@@ -120,16 +120,16 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 
 " Binary
 " Enter binary mode when editing a file with postfix 'bin'
-augroup Binary
-  autocmd!
-  autocmd BufReadPre  *.bin,*.dat let &bin=1
-  autocmd BufReadPost *.bin,*.dat if &bin | %!xxd
-  autocmd BufReadPost *.bin,*.dat set filetype=xxd | endif
-  autocmd BufWritePre *.bin,*.dat if &bin | %!xxd -r
-  autocmd BufWritePre *.bin,*.dat endif
-  autocmd BufWritePost *.bin,*.dat if &bin | %!xxd
-  autocmd BufWritePost *.bin,*.dat set nomod | endif
-augroup END
+" augroup Binary
+"   autocmd!
+"   autocmd BufReadPre  *.bin,*.dat let &bin=1
+"   autocmd BufReadPost *.bin,*.dat if &bin | %!xxd
+"   autocmd BufReadPost *.bin,*.dat set filetype=xxd | endif
+"   autocmd BufWritePre *.bin,*.dat if &bin | %!xxd -r
+"   autocmd BufWritePre *.bin,*.dat endif
+"   autocmd BufWritePost *.bin,*.dat if &bin | %!xxd
+"   autocmd BufWritePost *.bin,*.dat set nomod | endif
+" augroup END
 
 " Neovim
 " NOTE: make a soft link file of this file to ~/.vimrc, which can auto load

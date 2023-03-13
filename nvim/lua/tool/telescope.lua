@@ -95,6 +95,9 @@ telescope.setup {
     live_grep = {
       theme = "dropdown",
     },
+    buffers = {
+      sort_lastused = true,
+    },
   },
   extensions = {
     fzf = {

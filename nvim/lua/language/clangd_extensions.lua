@@ -41,7 +41,7 @@ extensions.setup {
   extensions = {
     -- defaults:
     -- Automatically set inlay hints (type hints)
-    autoSetHints = false,
+    autoSetHints = false,  -- substitute by lsp-inlayhints.nvim
     -- Whether to show hover actions inside the hover window
     -- This overrides the default hover handler
     hover_with_actions = true,

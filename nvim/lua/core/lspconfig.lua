@@ -78,6 +78,11 @@ mason.setup_handlers {
       end,
       settings = {
         Lua = {
+          hint = {
+            enable = true,
+            setType = true,
+            arrayIndex = "Disable",
+          },
           completion = {
             callSnippet = "Replace",
             postfix = ".",
