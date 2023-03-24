@@ -23,6 +23,8 @@ zmodule utility
 zmodule fzf
 # Auto jump directories
 zmodule rupa/z
+# Easy extract manipulation
+zmodule le0me55i/zsh-extract --source extract.plugin.zsh
 
 #
 # Prompt

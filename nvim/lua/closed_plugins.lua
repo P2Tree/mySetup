@@ -10,7 +10,7 @@ local lazy = require "lazy"
 
 lazy.setup({
 -- 1-Core {{{
-  -- BUG: unstable, beta state
+  -- BUG: unstable, beta state, alternative to which-key.nvim
   {  "linty-org/key-menu.nvim" },
 
   -- TEST: Not very useful for me
@@ -103,14 +103,6 @@ lazy.setup({
     end,
   },
 
-
-  -- TODO: needs to config
-  {  "ray-x/lsp_signature.nvim",
-    config = function()
-      require "interface.lsp_signature"
-    end,
-  },
-
   -- BUG: Disable because it not stable
   {  "weilbith/nvim-code-action-menu",
     cmd = { "CodeActionMenu" },
@@ -151,13 +143,6 @@ lazy.setup({
     end,
   },
 
-  -- BUG: Disable causes the value of v:oldfiles to be messed up
-  {  "chentoast/marks.nvim",
-    config = function()
-      require "interface.marks"
-    end,
-  },
-
   -- BUG: Behaves strangely when used with text objects
   {  "tversteeg/registers.nvim",
     config = function()
@@ -176,6 +161,14 @@ lazy.setup({
     },
     -- Also need to install regex with nvim-treesitter: `:TSInstall regex`
   },
+
+  -- PERF: have proformance issue and not very useful
+  {  "lvimuser/lsp-inlayhints.nvim",
+    config = function()
+      require "interface.lsp-inlayhints"
+    end,
+  },
+
 -- end of 3-Interface }}}
 
 -- 4-Tool {{{
@@ -246,13 +239,6 @@ lazy.setup({
     },
   },
 
-  -- BUG: Disable because plugin may lost proformance
-  {  "folke/which-key.nvim",
-    config = function()
-      require "core.which-key"
-    end,
-  },
-
   -- TODO: waitting for config
   {  "sindrets/winshift.nvim" },
 
@@ -281,9 +267,13 @@ lazy.setup({
     end,
   },
 
+  -- TEST: lazy can do this and do more
   {  "dstein64/vim-startuptime",
     cmd = { "StartupTime" },
   },
+
+  -- BUG: can't be use
+  {  "rbong/vim-flog" },
 
 -- end of 4-Tool }}}
 

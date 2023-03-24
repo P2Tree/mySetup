@@ -4,8 +4,6 @@ if not ok then
   return
 end
 
-require('telescope').load_extension('projects')
-
 project.setup {
   -- Manual mode doesn't automatically change your root directory, so you have
   -- the option to manually do so using `:ProjectRoot` command.

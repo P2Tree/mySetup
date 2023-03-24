@@ -87,10 +87,6 @@ noremap <C-h> <C-w>h
 noremap <C-l> <C-w>l
 noremap <C-k> <C-w>k
 noremap <C-j> <C-w>j
-noremap sv <C-w>v          " split new window with vetical
-noremap sh <C-w>s          " split new window with horizon
-noremap sc <C-w>c          " close current window
-noremap so <C-w>o          " open current window
 
 " quit window or buffer
 nnoremap <expr>q (len(getbufinfo({'buflisted': 1})) == 1) ? ":echo \"Last buffer!\"<cr>" : ": bd<cr>"

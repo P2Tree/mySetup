@@ -172,9 +172,22 @@ lazy.setup({
     enabled = false, -- Requires neovim 0.9
   },
 
+  {  "folke/which-key.nvim",
+    config = function()
+      require "interface.which-key"
+    end,
+  },
+
   {  "RRethy/vim-illuminate",
     config = function()
       require "interface.illuminate"
+    end,
+  },
+
+  {  "utilyre/sentiment.nvim",
+    version = "*",
+    config = function()
+      require "interface.sentiment"
     end,
   },
 
@@ -192,12 +205,6 @@ lazy.setup({
     after = "catppuccin",  -- hlargs should be loaded after colorscheme
   },
 
-  {  "lvimuser/lsp-inlayhints.nvim",
-    config = function()
-      require "interface.lsp-inlayhints"
-    end,
-  },
-
   {  "zbirenbaum/neodim",
     config = function()
       require "interface.dim"
@@ -213,6 +220,12 @@ lazy.setup({
   {  "stevearc/dressing.nvim",
     config = function()
       require "interface.dressing"
+    end,
+  },
+
+  {  "ray-x/lsp_signature.nvim",
+    config = function()
+      require "interface.lsp_signature"
     end,
   },
 
@@ -252,6 +265,12 @@ lazy.setup({
   {  "folke/todo-comments.nvim",
     config = function()
       require "interface.todo-comments"
+    end,
+  },
+
+  {  "chentoast/marks.nvim",
+    config = function()
+      require "interface.marks"
     end,
   },
 -- end of 3-Interface }}}
@@ -338,9 +357,11 @@ lazy.setup({
     config = function()
       require "tool.diffview"
     end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
   },
-
-  {  "rbong/vim-flog" },
 
   {  "simnalamburt/vim-mundo",
     config = function()
@@ -356,6 +377,7 @@ lazy.setup({
     config = function()
       require "tool.tmux"
     end,
+    event = "VeryLazy",
   },
 
   {  "kevinhwang91/vim-ibus-sw" },
