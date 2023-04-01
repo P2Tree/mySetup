@@ -4,11 +4,11 @@ if not ok then
   return
 end
 
-local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
-if not ok then
-  vim.notify "Could not load catppuccin in bufferline"
-  return
-end
+-- local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
+-- if not ok then
+--   vim.notify "Could not load catppuccin in bufferline"
+--   return
+-- end
 
 bufferline.setup {
   options = {
@@ -86,7 +86,7 @@ bufferline.setup {
       return true
     end,
   },
-  highlights = catppuccin.get(),
+  -- highlights = catppuccin.get(),
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
@@ -110,6 +110,6 @@ vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin 
 vim.keymap.set("n", "<leader>bk", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer" })
 
 vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Close Buffer" })
-vim.keymap.set("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
-vim.keymap.set("n", "<leader>bsd", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
-vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })
+-- vim.keymap.set("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
+vim.keymap.set("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
+-- vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })

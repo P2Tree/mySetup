@@ -229,16 +229,6 @@ lazy.setup({
     end,
   },
 
-  -- TEST: don't very useful
-  {  "Shatur/neovim-session-manager",
-    config = function()
-      require "tool.session-manager"
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-    },
-  },
-
   -- TODO: waitting for config
   {  "sindrets/winshift.nvim" },
 
@@ -275,10 +265,32 @@ lazy.setup({
   -- BUG: can't be use
   {  "rbong/vim-flog" },
 
+  -- TEST: needs to install other tools to support (pynvim) and can't be use
+  {  "simnalamburt/vim-mundo",
+    config = function()
+      require "tool.mundo"
+    end,
+    keys = {
+      { "<leader>u", "<Cmd>MundoToggle<CR>", desc = "Undo Tree" },
+    },
+    event = "VeryLazy",
+  },
+
 -- end of 4-Tool }}}
 
 -- 5- Debug {{{
-  -- TODO: needs to test
+  -- TEST: don't very useful at all
+  {  "mfussenegger/nvim-dap",
+    config = function()
+      require "debug.dap"
+    end,
+    event = "VeryLazy",
+    dependencies = {
+      "jay-babu/mason-nvim-dap.nvim",
+    },
+  },
+
+  -- TEST: don't very useful at all
   {  "theHamsta/nvim-dap-virtual-text",
     config = function()
       require "debug.dap-virtual-text"
@@ -286,7 +298,7 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  -- TODO: needs to test
+  -- TEST: don't very useful at all
   {  "rcarriga/nvim-dap-ui",
     config = function()
       require "debug.dap-ui"
@@ -295,6 +307,11 @@ lazy.setup({
       "mfussenegger/nvim-dap",
     },
     event = "VeryLazy",
+  },
+
+  -- TODO: needs to test
+  {  "Civitasv/cmake-tools.nvim",
+    enabled = false,
   },
 
   -- TODO: needs to test
@@ -327,7 +344,7 @@ lazy.setup({
     },
   },
 
-  -- TODO: needs to test
+  -- HACK: manage dap, mason can do this
   {  "Pocco81/dap-buddy.nvim",
     build = "make",
   },
@@ -351,11 +368,12 @@ lazy.setup({
 
 -- 7-Colorscheme {{{
   -- HACK:
-  {
-    "folke/tokyonight.nvim",
+  {  "catppuccin/nvim",
+    name = "catppuccin",
     config = function()
-      require "colorscheme.tokyonight"
+      require "colorscheme.catppuccin"
     end,
+    build = ":CatppuccinCompile",
   },
 
   -- HACK:
@@ -380,6 +398,13 @@ lazy.setup({
     as = "rose-pine",
     config = function()
       require "colorscheme.rose-pine"
+    end,
+  },
+
+  -- HACK:
+  {  "EdenEast/nightfox.nvim",
+    config = function()
+      require "colorscheme.nightfox"
     end,
   },
 -- end of 7-Colorscheme }}}

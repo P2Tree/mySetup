@@ -109,6 +109,10 @@ vnoremap <S-tab> <gv
 nnoremap <leader>re :e $MYVIMRC<CR>
 nnoremap <leader>rs :source $MYVIMRC<CR>
 
+" custom command
+command RelativeNumberToggle set rnu! | echo ( &rnu ? "Enable" : "Disable" ) . " relative number"
+
+" auto command
 autocmd InsertEnter * set norelativenumber
 autocmd InsertLeave * set relativenumber
 

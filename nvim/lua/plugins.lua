@@ -47,12 +47,8 @@ lazy.setup({
       require "core.treesitter"
     end,
     dependencies = {
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
-      { "windwp/nvim-ts-autotag" },
-      { "mrjones2014/nvim-ts-rainbow" },
       { "RRethy/nvim-treesitter-endwise" },
-      { "RRethy/nvim-treesitter-textsubjects", disable = false },
-      { "JoosepAlviste/nvim-ts-context-commentstring" },
+      -- { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     build = ":TSUpdate",
   },
@@ -202,7 +198,7 @@ lazy.setup({
     config = function()
       require "interface.hlargs"
     end,
-    after = "catppuccin",  -- hlargs should be loaded after colorscheme
+    -- after = "catppuccin",  -- hlargs should be loaded after colorscheme
   },
 
   {  "zbirenbaum/neodim",
@@ -235,7 +231,11 @@ lazy.setup({
     end,
   },
 
-  {  "mhinz/vim-startify" },
+  {  "goolord/alpha-nvim",
+    config = function()
+      require "interface.alpha"
+    end,
+  },
 
   {  "j-hui/fidget.nvim",
     config = function()
@@ -297,22 +297,25 @@ lazy.setup({
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       { "nvim-telescope/telescope-live-grep-args.nvim" },
       { "nvim-telescope/telescope-hop.nvim" },
+      -- { "nvim-telescope/telescope-ui-select.nvim" },  -- similar with dressing.nvim
+      -- { "debugloop/telescope-undo.nvim" },
       { "ahmedkhalf/project.nvim" },
       -- { "nvim-telescope/telescope-project.nvim" },
-      -- { "nvim-telescope/telescope-symbols.nvim" },
+      { "nvim-telescope/telescope-symbols.nvim" },
       { "nvim-telescope/telescope-media-files.nvim" },
-      { "nvim-telescope/telescope-dap.nvim" },
+      -- { "nvim-telescope/telescope-dap.nvim" },
       { "benfowler/telescope-luasnip.nvim" },
     },
     branch = "0.1.x",
     event = "VeryLazy",
   },
 
-  {  "phaazon/hop.nvim",
+  -- origin hop.nvim repo is phaazon/hop.nvim, but it has bugs and not fix for a long time (since 2022.10), so I found a substitute one
+  {  "aznhe21/hop.nvim",
     config = function()
       require "tool.hop"
     end,
-    branch = "v2",
+    branch = "fix-some-bugs",
     event = "VeryLazy",
   },
 
@@ -363,14 +366,13 @@ lazy.setup({
     },
   },
 
-  {  "simnalamburt/vim-mundo",
+  {  "Shatur/neovim-session-manager",
     config = function()
-      require "tool.mundo"
+      require "tool.session-manager"
     end,
-    keys = {
-      { "<leader>u", "<Cmd>MundoToggle<CR>", desc = "Undo Tree" },
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
     },
-    event = "VeryLazy",
   },
 
   {  "aserowy/tmux.nvim",
@@ -396,20 +398,6 @@ lazy.setup({
 -- end of 4-Tool }}}
 
 -- 5-Debug {{{
-  {  "mfussenegger/nvim-dap",
-    config = function()
-      require "debug.dap"
-    end,
-    event = "VeryLazy",
-    dependencies = {
-      "jay-babu/mason-nvim-dap.nvim",
-    },
-  },
-
-  {  "Civitasv/cmake-tools.nvim",
-    enabled = false,
-  },
-
 -- end of 5-Debug }}}
 
 -- 6-Language {{{
@@ -433,42 +421,10 @@ lazy.setup({
 -- end of 6-Language }}}
 
 -- 7-Colorscheme {{{
-  {  "catppuccin/nvim",
-    name = "catppuccin",
-    config = function()
-      require "colorscheme.catppuccin"
-    end,
-    build = ":CatppuccinCompile",
-  },
-
+  -- Other color schemes can be found in closed_plugins.lua
   {  "folke/tokyonight.nvim",
     config = function()
       require "colorscheme.tokyonight"
-    end,
-  },
-
-  {  "rose-pine/neovim",
-    name = "rose-pine",
-    config = function()
-      require "colorscheme.rose-pine"
-    end,
-  },
-
-  {  "EdenEast/nightfox.nvim",
-    config = function()
-      require "colorscheme.nightfox"
-    end,
-  },
-
-  {  "navarasu/onedark.nvim",
-    config = function()
-      require "colorscheme.onedark"
-    end,
-  },
-
-  {  "ellisonleao/gruvbox.nvim",
-    config = function()
-      require "colorscheme.gruvbox"
     end,
   },
 -- end of 7-Colorscheme }}}

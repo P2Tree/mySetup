@@ -75,7 +75,7 @@ lualine.setup {
   },
   options = {
     icons_enabled = true,
-    theme = "catppuccin",  -- if you use catppuccin as theme
+    -- theme = "catppuccin",  -- if you use catppuccin as theme
     disabled_filetypes = {
       "alpha",
     },
@@ -87,12 +87,12 @@ lualine.setup {
   extensions = {
     "man",
     "quickfix",
-    -- "nvim-tree",
-    "neo-tree",
+    "nvim-tree",
+    -- "neo-tree",
     "toggleterm",
     "symbols-outline",
     -- "aerial",
     "nvim-dap-ui",
-    "mundo",
+    -- "mundo",
   },
 }
