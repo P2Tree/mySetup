@@ -11,11 +11,12 @@ gitsigns.setup {
     delete = { hl = "GitSignsDelete", text = "_", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     topdelete = { hl = "GitSignsDelete", text = "‾", numhl = "GitSignsDeleteNr", linehl = "GitSignsDeleteLn" },
     changedelete = { hl = "GitSignsChange", text = "~", numhl = "GitSignsChangeNr", linehl = "GitSignsChangeLn" },
+    untracked = { hl = "GitSignsAdd", text = "┆", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
   },
   signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
   linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+  word_diff = true, -- Toggle with `:Gitsigns toggle_word_diff`
   watch_gitdir = {
     interval = 1000,
     follow_files = true,
@@ -25,14 +26,14 @@ gitsigns.setup {
   current_line_blame_opts = {
     virt_text = true,
     virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
-    delay = 1000,
+    delay = 0,
     ignore_whitespace = false,
   },
   current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
-  max_file_length = 40000,
+  max_file_length = 40000, -- Disable if file is longer than this (in lines)
   preview_config = {
     -- Options passed to nvim_open_win
     border = "rounded",
@@ -73,8 +74,20 @@ gitsigns.setup {
     vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { buffer = bufnr, desc = "Stage buffer" })
     vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { buffer = bufnr, desc = "Reset buffer" })
     vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { buffer = bufnr, desc = "Preview hunk" })
-    vim.keymap.set("n", "<leader>gb", function()
+    vim.keymap.set("n", "<leader>gb", gitsigns.toggle_current_line_blame, { buffer = bufnr, desc = "Toggle blame line" })
+    vim.keymap.set("n", "<leader>gB", function()
       gitsigns.blame_line { full = true }
     end, { buffer = bufnr, desc = "Blame line" })
   end,
 }
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "GitSignsChangeLn", { link = "DiffText" })
+    vim.api.nvim_set_hl(0, "GitSignsAddInLine", { link = "GitSignsAddLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteInline", { link = "GitSignsDeleteLn" })
+    vim.api.nvim_set_hl(0, "GitSignsChangeInline", { link = "GitSignsChangeLn" })
+    vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { link = "DiffDelete" })
+  end,
+})

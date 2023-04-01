@@ -6,15 +6,15 @@ end
 
 local extensions = {
   "fzf",
+  "live_grep_args",
   "hop",
-  "projects",
+  -- "undo",
+  -- "projects",
   "media_files",
   "notify",
-  "dap",
+  -- "dap",
   "luasnip",
-  "aerial",
 }
--- "project",
 
 -- Hot-reloaded function for telescope-hop
 if pcall(require, "plenary") then
@@ -79,6 +79,11 @@ telescope.setup {
           }
           require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
         end,
+
+        -- Needs telescope-undo enable first
+        -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
+        -- ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+        -- ["<C-cr"] = require("telescope-undo.actions").restore,
       },
     },
 
@@ -95,6 +100,9 @@ telescope.setup {
     live_grep = {
       theme = "dropdown",
     },
+    buffers = {
+      sort_lastused = true,
+    },
   },
   extensions = {
     fzf = {
@@ -103,6 +111,9 @@ telescope.setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
+    },
+    live_grep_args = {
+      theme = "dropdown",
     },
     hop = {
       -- the shown `keys` are the defaults, no need to set `keys` if defaults work for you ;)
@@ -124,6 +135,14 @@ telescope.setup {
       -- jump to entry where hoop loop was started from
       reset_selection = true,
     },
+    undo = {
+      use_delta = false,
+      side_by_side = false,
+      layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0.8,
+      },
+    },
     media_files = {
       -- filetypes whitelist
       -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
@@ -140,28 +159,27 @@ for i = 1, #extensions do
 end
 
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Find Live grep" })
 vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help tags" })
 vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles, { desc = "Find old files" })
 vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Marks" })
+vim.keymap.set("n", "<leader>fs", require("telescope.builtin").symbols, { desc = "Symbols" })
 
 -- telescope-project.nvim and project.nvim are the different plugins
--- here I use projects.nvim as this is a all in one plugins for projects managerment,
+-- projects.nvim is a all in one plugins for projects managerment,
 -- but telescope-project.nvim is only a extension for telescope to manage projects.
--- As you can see, integrate with project.nvim is more harder than the telescope-project.nvim
 -- vim.keymap.set("n", "<leader>fp", require("telescope").extensions.project.project, { desc = "Project" })
-vim.keymap.set("n", "<leader>fp", "<Cmd>lua require('telescope').extensions.projects.projects(require('telescope.themes').get_dropdown({hidden=true}))<CR>", { desc = "Project" })
+-- vim.keymap.set("n", "<leader>fp", require("telescope").extensions.projects.projects, { desc = "Find project" })
 
-vim.keymap.set("n", "<leader>fn", require("telescope").extensions.notify.notify, { desc = "Notify" })
-vim.keymap.set("n", "<leader>fde", require("telescope").extensions.dap.commands, { desc = "Commands" })
-vim.keymap.set("n", "<leader>fdc", require("telescope").extensions.dap.configurations, { desc = "Configurations" })
-vim.keymap.set("n", "<leader>fdb", require("telescope").extensions.dap.list_breakpoints, { desc = "Breakpoints" })
-vim.keymap.set("n", "<leader>fdv", require("telescope").extensions.dap.variables, { desc = "Variables" })
-vim.keymap.set("n", "<leader>fdf", require("telescope").extensions.dap.frames, { desc = "Frames" })
-vim.keymap.set("n", "<leader>fc", require("telescope").extensions.luasnip.luasnip, { desc = "Snippets" })
-vim.keymap.set("n", "<leader>fs", require("telescope").extensions.aerial.aerial, { desc = "Symbols" })
+-- vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Find Live grep" })  -- exchanged by live_grep_args
+vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {  desc = "Live grep"})
+vim.keymap.set("n", "<leader>fn", require("telescope").extensions.notify.notify, { desc = "Find notify" })
+-- vim.keymap.set("n", "<leader>fde", require("telescope").extensions.dap.commands, { desc = "Commands" })
+-- vim.keymap.set("n", "<leader>fdc", require("telescope").extensions.dap.configurations, { desc = "Configurations" })
+-- vim.keymap.set("n", "<leader>fdb", require("telescope").extensions.dap.list_breakpoints, { desc = "Breakpoints" })
+-- vim.keymap.set("n", "<leader>fdv", require("telescope").extensions.dap.variables, { desc = "Variables" })
+-- vim.keymap.set("n", "<leader>fdf", require("telescope").extensions.dap.frames, { desc = "Frames" })
+vim.keymap.set("n", "<leader>fc", require("telescope").extensions.luasnip.luasnip, { desc = "Find snippets" })
 
--- need session-manager
-vim.keymap.set("n", "<leader>fwl", "<cmd>SessionManager load_session<CR>", { desc = "Load session" })
-vim.keymap.set("n", "<leader>fwd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
+-- telescope-undo.nvim
+-- vim.keymap.set("n", "<leader>fu", require("telescope").extensions.undo.undo, { desc = "Find undo history" })

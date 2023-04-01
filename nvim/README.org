@@ -1,37 +1,10 @@
 #+title: Nvim
-#+author: Yi Ming
 
 My personal Neovim configuration, which keeps the structure simple and
 straightforward by logically distributing the configuration into various
 directories. Aims to be highly customizable and have no hacks.
 
-[[https://user-images.githubusercontent.com/61115159/179394575-3ac8fbb5-323b-45fb-9ed8-24f875788464.png]]
-
-* Table of Contents :toc:
-- [[#introduction][Introduction]]
-- [[#directory-structure][Directory Structure]]
-
-* Introduction
-This configuration doesn't break any of Neovim's default keymaps,
-except for =s=, the source-level equivalent of =cl=, =s= is used as
-the [[https://github.com/easymotion/vim-easymotion#default-bindings][easymotion-prefix]](In fact the functionality of easymotion is
-provided by a plugin called [[https://github.com/phaazon/hop.nvim][hop.nvim]]).
-
-Except for the entry file init.vim, all configuration is done by Lua.
-The reason to use init.vim instead of init.lua is to maintain support
-for classic Vim or Vim emulators such as IdeaVim, VSCodeVim, or FakeVim
-that partially support VimScript.
-
-This configuration contains more than 100 plugins, but the configuration
-of each plugin is placed in a separate file, and these files are
-classified into different modules according to the function of the
-plugin and placed in different folders.
-
-In addition, all configuration options and keymaps for each plugin
-are listed in their respective files, making it easy to adjust
-individual options without having to look up the manual.
-
-The configuration structure is as shown in the figure below.
+This is a fork from https://github.com/ofseed/nvim
 
 #+begin_src screen
                   │                             ┌──────────────────┐
@@ -63,45 +36,4 @@ Entry, Vim common   All Neovim-specific  │      │ ┌───────�
                   │                      │      ┌──────────────────┐
                                          └─────►│ ...other modules │
                   │                             └──────────────────┘
-#+end_src
-
-* Directory Structure
-#+begin_src screen
-├── lua
-│   ├── core # Core plugins, often depended on by other plugins
-│   │   ├── lspconfig.lua
-│   │   ├── treesitter.lua
-│   │   └── ...
-│   ├── debug # Debug and run
-│   │   ├── dap.lua
-│   │   ├── dap-ui.lua
-│   │   └── ...
-│   ├── edit # Text edting
-│   │   ├── cmp.lua
-│   │   ├── copilot.lua
-│   │   └── ...
-│   ├── efficiency # Efficiency Improvement
-│   │   ├── session-manager.lua
-│   │   ├── telescope.lua
-│   │   └── ...
-│   ├── interface # Interface Extension
-│   │   ├── bufferline.lua
-│   │   ├── lualine.lua
-│   │   └── ...
-│   ├── language # Language Specific
-│   │   ├── jdtls.lua
-│   │   └── tex.lua
-│   ├── tool # Tool Integration
-│   │   ├── gitsigns.lua
-│   │   ├── tree.lua
-│   │   └── ...
-│   ├── plugins.lua # Plugin management
-│   ├── keymaps.lua # Keymap for lazy loading plugins
-│   └── init.lua # All Neovim-specific configuration
-├── .gitignore
-├── stylua.toml
-├── LICENSE
-├── README.org
-├── ginit.vim # Neovim-qt configuration
-└── init.vim # Vim common configuration
 #+end_src

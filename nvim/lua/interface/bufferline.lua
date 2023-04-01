@@ -4,6 +4,12 @@ if not ok then
   return
 end
 
+-- local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
+-- if not ok then
+--   vim.notify "Could not load catppuccin in bufferline"
+--   return
+-- end
+
 bufferline.setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
@@ -14,8 +20,10 @@ bufferline.setup {
     middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
     indicator = {
       -- alternatives: right aligned =>▕ ▐  left aligned => ▎
-      icon = '▶', -- this should be omitted if indicator style is not 'icon'
-      style = 'none',  -- 'icon' | 'underline' | 'none'
+      icon = "▎", -- this should be omitted if indicator style is not 'icon'
+      style = "icon", -- "icon" | "underline" | "none",
+      -- icon = '▶', -- this should be omitted if indicator style is not 'icon'
+      -- style = 'none',  -- 'icon' | 'underline' | 'none'
     },
     buffer_close_icon = "",
     modified_icon = "●",
@@ -34,7 +42,7 @@ bufferline.setup {
     -- end,
     max_name_length = 24,
     max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
-    tab_size = 24,
+    tab_size = 18,
     diagnostics = "false", -- false | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
     -- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
@@ -42,13 +50,14 @@ bufferline.setup {
       return "(" .. count .. ")"
     end,
     offsets = {
-      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
-      { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
-      { filetype = "aerial", text = "Outline", text_align = "center", saperator = true },
-      { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
-      { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
+      -- { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
+      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
+      -- { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
+      -- { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
       { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
+      -- { filetype = "httpResult", text = "Http Result", text_align = "center", saperator = true },
+      -- { filetype = "OverseerList", text = "Tasks", text_align = "center", saperator = true },
     },
     color_icons = true, --- true | false, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
@@ -77,6 +86,7 @@ bufferline.setup {
       return true
     end,
   },
+  -- highlights = catppuccin.get(),
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
@@ -100,6 +110,6 @@ vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin 
 vim.keymap.set("n", "<leader>bk", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer" })
 
 vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Close Buffer" })
-vim.keymap.set("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
-vim.keymap.set("n", "<leader>bsd", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
-vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })
+-- vim.keymap.set("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
+vim.keymap.set("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
+-- vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })

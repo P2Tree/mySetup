@@ -6,10 +6,10 @@ end
 
 key.setup {
   plugins = {
-    marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = false, -- shows a list of your marks on ' and `
+    registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = false, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20, -- how many suggestions should be shown in the list?
     },
     -- the presets plugin, adds help for a bunch of default keybindings in Neovim
@@ -33,6 +33,9 @@ key.setup {
     -- ["<space>"] = "SPC",
     -- ["<cr>"] = "RET",
     -- ["<tab>"] = "TAB",
+  },
+  motions = {
+    count = true,
   },
   icons = {
     breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
@@ -59,8 +62,22 @@ key.setup {
   ignore_missing = false, -- enable this to hide mappings for which you didn't specify a label
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ ", "<Plug>", "require" }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
+  show_keys = true, -- show the currently pressed key and its label as a message in the command line
   triggers = "auto", -- automatically setup triggers
   -- triggers = {"<leader>"} -- or specify a list manually
+  -- list of triggers, where WhichKey should not wait for timeoutlen and show immediately
+  triggers_nowait = {
+    -- marks
+    "`",
+    "'",
+    "g`",
+    "g'",
+    -- registers
+    '"',
+    "<c-r>",
+    -- spelling
+    "z=",
+  },
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -90,30 +107,28 @@ key.register {
     ["I"] = { name = "inplementation" },
     ["r"] = { name = "reference" },
   },
-  ["f"] = { name = "search" },
 
   ["<leader>"] = {
     name = "+<leader>",
     ["<leader>"] = { name = "+<localleader>" },
+    ["b"] = {
+      name = "+buffer",
+      ["s"] = { name = "+sort" },
+    },
+    ["c"] = { name = "+comment" },
+    -- ["d"] = { name = "+debug" },
     ["f"] = {
       name = "+find",
       ["d"] = { name = "+debug" },
     },
     ["g"] = {
       name = "+git",
-      ["d"] = { name = "+diffview" },
-    },
-    ["b"] = {
-      name = "+buffer",
-      ["s"] = { name = "+sort" },
     },
     ["l"] = {
       name = "+lsp",
       ["w"] = { name = "+workspace" },
     },
-    ["d"] = { name = "+debug" },
-    ["t"] = { name = "+toggle" },
-    ["h"] = { name = "+hop" },
-    ["c"] = { name = "+comment" },
+    -- ["t"] = { name = "+toggle" },
+    ["o"] = { name = "+open" },
   },
 }

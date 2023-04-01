@@ -1,38 +1,28 @@
 -- Default LSP server settigns
 local M = {}
 
-local ok, navic = pcall(require, "nvim-navic")
-if not ok then
-  vim.notify "Could not load navic"
-  return
-end
-
-local ok, aerial = pcall(require, "aerial")
-if not ok then
-  vim.notify "Could not load aerial"
-end
-
 local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not ok then
   vim.notify "Could not load nvim-cmp"
   return
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local ok, ufo = pcall(require, "ufo")
+if not ok then
+  vim.notify "Could not load ufo"
+  return
+end
+
+-- Add additional capabilities supported by nvim-cmp
+M.capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Enable LSP foldingRange capability
-capabilities.textDocument.foldingRange = {
+M.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
 }
 
--- Add additional capabilities supported by nvim-cmp
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-
-M.on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-  local bufopts = { silent = true, buffer = bufnr }
+M.set_keymap = function(bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
@@ -43,10 +33,19 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
   vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "References" })
 
-  vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover" })
+  vim.keymap.set("n", "<leader>lh", function()
+    local winid = ufo.peekFoldedLinesUnderCursor()
+    if not winid then
+      -- choose one of coc.nvim and nvim LSP
+      -- vim.fn.CocActionAsync "definitionHover" -- for coc.nvim
+      vim.lsp.buf.hover() -- for nvim LSP
+    end
+   end, { buffer = bufnr, desc = "LSP: Hover" })
   vim.keymap.set("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
-  vim.keymap.set("n", "<leader>lf", vim.lsp.buf.formatting, { buffer = bufnr, desc = "Format document" })
+  vim.keymap.set("n", "<leader>lf", function()
+    vim.lsp.buf.format { async = true }
+  end, { buffer = bufnr, desc = "Format document" })
 
   vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
   vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
@@ -69,10 +68,16 @@ M.on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>lwl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, { buffer = bufnr, desc = "List workspace folders" })
+end
 
-  navic.attach(client, bufnr)
-  aerial.on_attach(client, bufnr)
-  -- require("virtualtypes").on_attach(client)
+M.on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- Disable semantic tokens
+  client.server_capabilities.semanticTokensProvider = nil
+
+  M.set_keymap(bufnr)
 end
 
 return M

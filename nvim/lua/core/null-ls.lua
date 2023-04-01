@@ -4,13 +4,23 @@ if not ok then
   return
 end
 
+local os, mason = pcall(require, "mason-null-ls")
+
+mason.setup {
+  automatic_setup = true,
+}
+
+mason.setup_handlers {
+  function(source_name, methods)
+    -- all sources with no handler get passed here
+
+    -- To keep the original functionality of `automatic_setup = true`,
+    -- please add the below.
+    require "mason-null-ls.automatic_setup"(source_name, methods)
+  end,
+}
+
 null_ls.setup {
-  sources = {
-    null_ls.builtins.formatting.prettier,
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.formatting.isort,
-    -- ls.builtins.diagnostics.pylint,
-    -- ls.builtins.diagnostics.codespell,
-  },
+  border = "rounded",
+  fallback_severity = vim.diagnostic.severity.INFO,
 }

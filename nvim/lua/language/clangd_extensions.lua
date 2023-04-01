@@ -6,15 +6,16 @@ end
 
 local default = require "language.default"
 
-local capabilities = default.capabilities
-capabilities.offsetEncoding = "utf-8"
+local capabilities = vim.tbl_extend("force", default.capabilities, {
+  offsetEncoding = "utf-8",
+})
 
 extensions.setup {
   server = {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
       default.on_attach(client, bufnr)
-      vim.keymap.set("n", "<leader><leader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
+      vim.keymap.set("n", "<localleader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
       vim.keymap.set(
         "n",
         "<leader>a",
@@ -23,13 +24,13 @@ extensions.setup {
       )
       vim.keymap.set(
         "n",
-        "<leader><leader>h",
+        "<localleader>h",
         "<cmd>ClangdTypeHierarchy<CR>",
         { buffer = bufnr, desc = "Show type hierarchy" }
       )
       vim.keymap.set(
         "n",
-        "<leader><leader>m",
+        "<localleader>m",
         "<cmd>ClangdMemoryUsage<CR>",
         { buffer = bufnr, desc = "Clangd memory usage" }
       )
@@ -40,7 +41,7 @@ extensions.setup {
   extensions = {
     -- defaults:
     -- Automatically set inlay hints (type hints)
-    autoSetHints = false,
+    autoSetHints = false,  -- substitute by lsp-inlayhints.nvim
     -- Whether to show hover actions inside the hover window
     -- This overrides the default hover handler
     hover_with_actions = true,

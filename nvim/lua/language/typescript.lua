@@ -15,23 +15,47 @@ typescript.setup {
       default.on_attach(client, bufnr)
       vim.keymap.set(
         "n",
-        "<leader><leader>i",
+        "<localleader>i",
         typescript.actions.addMissingImports,
         { buffer = bufnr, desc = "Add missing imports" }
       )
       vim.keymap.set(
         "n",
-        "<leader><leader>o",
+        "<localleader>o",
         typescript.actions.organizeImports,
         { buffer = bufnr, desc = "Organize imports" }
       )
       vim.keymap.set(
         "n",
-        "<leader><leader>r",
+        "<localleader>r",
         typescript.actions.removeUnused,
         { buffer = bufnr, desc = "Remove unused variables" }
       )
-      vim.keymap.set("n", "<leader><leader>f", typescript.actions.fixAll, { buffer = bufnr, desc = "Fix all" })
+      vim.keymap.set("n", "<localleader>f", typescript.actions.fixAll, { buffer = bufnr, desc = "Fix all" })
     end,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all",
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
   },
 }

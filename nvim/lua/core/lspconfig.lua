@@ -10,23 +10,12 @@ if not ok then
   return
 end
 
--- local ok, color = pcall(require, "document-color")
--- if not ok then
---   vim.notify "Could not load document-color"
---   return
--- end
-
 -- Set diagnostic options
 vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     prefix = "●",
-    severity = {
-      vim.diagnostic.severity.ERROR,
-      vim.diagnostic.severity.WARN,
-      vim.diagnostic.severity.INFO,
-      vim.diagnostic.severity.HINT,
-    }
+    severity = vim.diagnostic.severity.ERROR,
   },
   float = {
     severity_sort = true,
@@ -75,19 +64,31 @@ mason.setup_handlers {
   end,
 
   clangd = function(server) end,
-  rust_analyzer = function(server) end,
+  jdtls = function(server) end,
   tsserver = function(server) end,
   jsonls = function(server) end,
 
-  -- sumneko_lua = function(server) end,  -- we needs some config for lua lsp
-  sumneko_lua = function()
-    lspconfig.sumneko_lua.setup {
+  -- we needs some config for lua lsp
+  lua_ls = function()
+    lspconfig.lua_ls.setup {
       capabilities = default.capabilities,
       on_attach = function(client, bufnr)
         default.on_attach(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
       end,
       settings = {
         Lua = {
+          hint = {
+            enable = true,
+            setType = true,
+            arrayIndex = "Disable",
+          },
+          completion = {
+            callSnippet = "Replace",
+            postfix = ".",
+            showWord = "Disable",
+            workspaceWord = false,
+          },
           runtime = {
             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
             version = 'LuaJIT',
@@ -100,7 +101,11 @@ mason.setup_handlers {
           },
           workspace = {
             -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
+            library =  {
+              vim.api.nvim_get_runtime_file("", true),
+              ["${3rd}/luassert/library"] = true,
+              ["${3rd}/luv/library"] = true,
+            }
           },
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = {
@@ -111,18 +116,17 @@ mason.setup_handlers {
     }
   end,
 
-  -- tailwindcss = function()
-  --   local capabilities = default.capabilities
-  --   capabilities.textDocument.colorProvider = {
-  --     dynamicRegistration = false,
-  --   }
-
-  --   lspconfig.tailwindcss.setup {
-  --     on_attach = function(client, bufnr)
-  --       default.on_attach(client, bufnr)
-  --       color.buf_attach(bufnr)
-  --     end,
-  --     capabilities = capabilities,
-  --   }
-  -- end,
+  pyright = function()
+    lspconfig.pyright.setup {
+      on_attach = default.on_attach,
+      capabilities = default.capabilities,
+      settings = {
+        python = {
+          analysis = {
+            typeCheckingMode = "off",
+          },
+        },
+      },
+    }
+  end,
 }

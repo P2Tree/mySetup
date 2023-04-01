@@ -57,3 +57,8 @@ tmux.setup {
     resize_step_y = 1,
   },
 }
+
+vim.keymap.set({'n', 't'}, "<C-Left>", function() tmux.move_left() end, { desc = "Move to left panel" })
+vim.keymap.set({'n', 't'}, "<C-Right>", function() tmux.move_right() end, { desc = "Move to right panel" })
+vim.keymap.set({'n', 't'}, "<C-Up>", function() tmux.move_top() end, { desc = "Move to up panel" })
+vim.keymap.set({'n', 't'}, "<C-Down>", function() tmux.move_bottom() end, { desc = "Move to down panel" })

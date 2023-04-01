@@ -4,9 +4,9 @@ if not ok then
   return
 end
 
-local ok, navic = pcall(require, "nvim-navic")
+local ok, lazy_status = pcall(require, "lazy.status")
 if not ok then
-  vim.notify "Could not load navic"
+  vim.notify "Could not load lazy.status"
   return
 end
 
@@ -29,6 +29,26 @@ local function indent()
   end
 end
 
+local function lsp()
+  local clients = vim.lsp.buf_get_clients()
+  if #clients == 0 then
+    return ""
+  end
+  local names = {}
+  local ignored = { "null-ls", "copilot" }
+  for _, client in ipairs(clients) do
+    if not vim.tbl_contains(ignored, client.name) then
+      table.insert(names, client.name)
+    end
+  end
+  local msg = table.concat(names, ", ")
+  if msg == "" then
+    return ""
+  else
+    return " " .. msg
+  end
+end
+
 lualine.setup {
   sections = {
     lualine_b = {
@@ -37,19 +57,25 @@ lualine.setup {
       "diagnostics",
     },
     lualine_c = {
-      { navic.get_location, cond = navic.is_available },
+      { lsp, },
     },
     lualine_x = {
+      {
+        lazy_status.updates,
+        cond = lazy_status.has_updates,
+        color = { fg = "#ff9e64" },
+      },
+      "overseer",
       -- "copilot",
       "filetype",
-      'indent',
+      indent,
       "encoding",
       "fileformat",
     },
   },
   options = {
     icons_enabled = true,
-    theme = "catppuccin",
+    -- theme = "catppuccin",  -- if you use catppuccin as theme
     disabled_filetypes = {
       "alpha",
     },
@@ -60,60 +86,13 @@ lualine.setup {
   },
   extensions = {
     "man",
-    -- "nvim-tree",
-    "neo-tree",
+    "quickfix",
+    "nvim-tree",
+    -- "neo-tree",
     "toggleterm",
-    -- "symbols-outline",
-    "aerial",
+    "symbols-outline",
+    -- "aerial",
     "nvim-dap-ui",
+    -- "mundo",
   },
 }
--- lualine.setup {
---   sections = {
---     lualine_a = {
---       { 'mode', separator = { left = '' }, right_padding = 2 },
---     },
---     lualine_b = {
---       { "b:gitsigns_head", icon = "" },
---       { "diff", source = diff_source },
---       "diagnostics",
---     },
---     lualine_c = {
---       { navic.get_location, cond = navic.is_available },
---     },
---     lualine_x = {
---       -- "copilot",
---       "filetype",
---       'indent',
---       "encoding",
---       "fileformat",
---     },
---     lualine_y = { 'filetype', 'progress' },
---     lualine_z = {
---       { 'location', separator = { right = '' }, left_padding = 2 },
---     },
---   },
---   options = {
---     theme = "catppuccin",
---     component_separators = '|',
---     section_separators = { left = '', right = '' },
---   },
---   inactive_sections = {
---     lualine_a = { 'filename' },
---     lualine_b = {},
---     lualine_c = {},
---     lualine_x = {},
---     lualine_y = {},
---     lualine_z = { 'location' },
---   },
---   tabline = {},
---   extensions = {
---     "man",
---     -- "nvim-tree",
---     "neo-tree",
---     "toggleterm",
---     -- "symbols-outline",
---     "aerial",
---     "nvim-dap-ui",
---   },
--- }
