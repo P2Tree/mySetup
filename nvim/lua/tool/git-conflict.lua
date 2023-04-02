@@ -12,10 +12,10 @@ conflict.setup {
   },
 }
 
-vim.keymap.set('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "git conflict choose ours" })
-vim.keymap.set('n', '<leader>gct', '<Plug>(git-conflict-theirs)', { desc = "git conflict choose theirs" })
-vim.keymap.set('n', '<leader>gcb', '<Plug>(git-conflict-both)', { desc = "git conflict choose both" })
-vim.keymap.set('n', '<leader>gcn', '<Plug>(git-conflict-none)', { desc = "git conflict choose none" })
-vim.keymap.set('n', '<leader>gcq', '<Cmd>GitConflictListQf<cr>', { desc = "show git conflict items in quickfix" })
-vim.keymap.set('n', '[x', '<Plug>(git-conflict-prev-conflict)', { desc = "git conflict choose previous one" })
-vim.keymap.set('n', ']x', '<Plug>(git-conflict-next-conflict)', { desc = "git conflict choose next one" })
+vim.keymap.set('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "Git Conflict Choose Ours" })
+vim.keymap.set('n', '<leader>gct', '<Plug>(git-conflict-theirs)', { desc = "Git Conflict Choose Theirs" })
+vim.keymap.set('n', '<leader>gcb', '<Plug>(git-conflict-both)', { desc = "Git Conflict Choose Both" })
+vim.keymap.set('n', '<leader>gcn', '<Plug>(git-conflict-none)', { desc = "Git Conflict Choose None" })
+vim.keymap.set('n', '<leader>gcq', '<Cmd>GitConflictListQf<cr>', { desc = "Show Git Conflict Items in Quickfix" })
+vim.keymap.set('n', '[x', '<Plug>(git-conflict-prev-conflict)', { desc = "Git Conflict Choose Previous One" })
+vim.keymap.set('n', ']x', '<Plug>(git-conflict-next-conflict)', { desc = "Git Conflict Choose Next One" })

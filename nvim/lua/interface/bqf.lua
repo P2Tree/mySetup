@@ -27,7 +27,7 @@ nvim_bqf.setup ({
     -- [[Border and scroll bar chars, they respectively represent:
     --   vline, vline, hline, hline, ulcorner, urcorner, blcorner, brcorner, sbar]],
     -- default = {'│', '│', '─', '─', '╭', '╮', '╰', '╯', '█'}
-    border_chars = {'│', '│', '─', '─', '╭', '╮', '╰', '╯', '█'}
+    border_chars = {'│', '│', '─', '─', '╭', '╮', '╰', '╯', '█'},
 
     -- [[Show the window title]],
     -- default = true

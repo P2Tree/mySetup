@@ -6,7 +6,7 @@ end
 
 treesitter.setup {
   -- A list of parser names, or "all" ( "c", "lua", "vim", "help", "query" should always be installed)
-  ensure_installed = { "vim", "lua", "luadoc", "json", "yaml", "c", "cpp", "llvm", "tablegen", "python", "bash", "ninja", "make", "cmake", "markdown", "cuda", "diff", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "help", "ini", "query" },
+  ensure_installed = { "vim", "lua", "luadoc", "json", "yaml", "c", "cpp", "llvm", "tablegen", "python", "bash", "ninja", "make", "cmake", "markdown", "cuda", "diff", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore", "ini" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,

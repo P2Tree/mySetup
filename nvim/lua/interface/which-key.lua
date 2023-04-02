@@ -116,14 +116,8 @@ key.register {
       ["s"] = { name = "+sort" },
     },
     ["c"] = { name = "+comment" },
-    -- ["d"] = { name = "+debug" },
-    ["f"] = {
-      name = "+find",
-      ["d"] = { name = "+debug" },
-    },
-    ["g"] = {
-      name = "+git",
-    },
+    ["f"] = { name = "+find" },
+    ["g"] = { name = "+git" },
     ["l"] = {
       name = "+lsp",
       ["w"] = { name = "+workspace" },
