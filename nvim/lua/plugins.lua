@@ -48,7 +48,7 @@ lazy.setup({
     end,
     dependencies = {
       { "RRethy/nvim-treesitter-endwise" },
-      -- { "nvim-treesitter/nvim-treesitter-textobjects" },
+      { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     build = ":TSUpdate",
   },
@@ -64,8 +64,6 @@ lazy.setup({
   {  "ii14/emmylua-nvim",
     lazy = true,
   },
-
-  {  "psliwka/vim-smoothie" },
 
   {  "editorconfig/editorconfig-vim" },
 
@@ -97,7 +95,7 @@ lazy.setup({
       { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" },
       { "kristijanhusak/vim-dadbod-completion" },
-      { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
+      -- { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
     },
     event = "VeryLazy",
   },
@@ -252,6 +250,12 @@ lazy.setup({
   {  "petertriho/nvim-scrollbar",
     config = function()
       require "interface.scrollbar"
+    end,
+  },
+
+  {  "karb94/neoscroll.nvim",
+    config = function()
+      require "interface/neoscroll"
     end,
   },
 

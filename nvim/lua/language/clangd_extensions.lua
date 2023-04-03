@@ -16,6 +16,7 @@ extensions.setup {
     on_attach = function(client, bufnr)
       default.on_attach(client, bufnr)
       vim.keymap.set("n", "<localleader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
+      vim.keymap.set("n", "<localleader>s", "<cmd>ClangdSymbolInfo<cr>", { buffer = bufnr, desc = "Show type info" })
       vim.keymap.set(
         "n",
         "<leader>a",

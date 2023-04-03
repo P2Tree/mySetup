@@ -75,8 +75,11 @@ cmap <C-n> <Down>
 noremap T J                " joint two line together
 noremap H ^
 noremap L $
-noremap J <C-e>
-noremap K <C-y>
+nmap J <C-e>
+nmap K <C-y>
+
+nmap <PageUp> <C-u>
+nmap <PageDown> <C-d>
 
 " window
 noremap <C-left> <C-w>h
