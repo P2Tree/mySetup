@@ -44,6 +44,10 @@ end
 local function select_tips()
   local tips_path = vim.fn.stdpath('config') .. "/lua/tips"
   local tips_files = vim.fn.globpath(tips_path, '*', true, true)
+  if next(tips_files) == nil then
+    return nil
+  end
+
   local tips_file = tips_files[math.random(#tips_files)]
   local tips = {}
   for tip in io.lines(tips_file) do
@@ -65,11 +69,15 @@ if footer ~= nil then
   footer = "💡 Tips: Use `" .. key .. "` for " .. footer
 else
   local tip = select_tips()
-  local tip_parts = string_split(tip, ':')
-  if #tip_parts == 2 then
-    footer = "💡 Tips: Use `" .. tip_parts[1] .. "` for " .. tip_parts[2]
+  if tip == nil then
+    footer = ""
   else
-    footer = "💡 Tips: " .. tip_parts[1]
+    local tip_parts = string_split(tip, ':')
+    if #tip_parts == 2 then
+      footer = "💡 Tips: Use `" .. tip_parts[1] .. "` for " .. tip_parts[2]
+    else
+      footer = "💡 Tips: " .. tip_parts[1]
+    end
   end
 end
 dashboard.section.footer.val = footer
