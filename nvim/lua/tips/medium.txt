@@ -1,0 +1,39 @@
+^ w e $     : bigger movements: beginning of line, word, end of word, end of line
+c        : starts a change command
+C        : change to end of line (same as c$)
+ce       : change to end of word (a complete change command)
+* # g* g#     : find word under cursor (forwards/backwards)
+%             : match brackets {}[]()
+:ls     : list of buffers(eg following)
+:cd ..  : move to parent directory
+Vu      : lowercase line
+VU      : uppercase line
+~       : invert case (upper->lower; lower->upper) of current character
+gf      : open file name under cursor (SUPER)
+ga      : display hex, ascii value of character under cursor
+g8      : display hex value of utf-8 character under cursor
+xp      : swap next two characters around
+CTRL-A,CTRL-X : increment, decrement next number on same line as the cursor
+CTRL-R=5*5    : insert 25 into text
+=             : (re)indent the text on the current line or on the area selected (SUPER)
+=%            : (re)indent the current braces { ... }
+G=gg          : auto (re)indent entire document
+.           : repeat previous command
+:&     : redo last substitution
+@     :repeat last ": command"
+:vs     : vertical split
+:vs filename     : open "filename" in new vertical split
+:sp     : horizontal split
+gv      : reselect last visual area (super useful)
+o      : navigate visual area (after visual selection)
+CTRL + ]     : jump to definition of function under cursor (need tags)
+"_d  (motion)   : delete without destroying default buffer contents ex: "_dd
+g<C-G>     :count words/lines in file
+:sav new_name     : save file as filename
+CTRL + w + w ....    : cycle splits
+ls     : show current buffer
+b number     : open buffer #number in this window
+?      : jump to definition tag (call ALEGoToDefinition)
+CTRL + T     : jump back from definition tag to old position
+:r [name]      : insert the file [name] below the cursor.
+:r !{cmd}      : execute {cmd} and insert its standard output below the cursor.

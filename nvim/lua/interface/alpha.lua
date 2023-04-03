@@ -31,6 +31,8 @@ dashboard.section.buttons.val = {
   dashboard.button("q", "  Exit NeoVim" , ":qa<CR>"),
 }
 
+math.randomseed(os.time())
+
 local function string_split(str, delimiter)
   local result = {}
   -- local regex = ("([^%s]+)"):format(delimiter, delimiter)
@@ -53,33 +55,38 @@ local function select_tips()
   for tip in io.lines(tips_file) do
     table.insert(tips, tip)
   end
-  return tips[math.random(#tips)]
-end
 
-local keymaps = vim.api.nvim_get_keymap('n')
-math.randomseed(os.time())
-local selected_keymap = keymaps[math.random(#keymaps)]
-
-local footer = selected_keymap.desc
-local key = selected_keymap.lhs
-if string.sub(key, 1, 1) == vim.api.nvim_get_var('mapleader') then
-  key = "<leader>" .. string.sub(key, 2)
-end
-if footer ~= nil then
-  footer = "💡 Tips: Use `" .. key .. "` for " .. footer
-else
-  local tip = select_tips()
-  if tip == nil then
-    footer = ""
+  local tip = tips[math.random(#tips)]
+  local tip_parts = string_split(tip, ':')
+  local tip_msg = ""
+  if #tip_parts == 2 then
+    tip_msg = "🎯 Tips: Use `" .. tip_parts[1] .. "` for " .. tip_parts[2]
   else
-    local tip_parts = string_split(tip, ':')
-    if #tip_parts == 2 then
-      footer = "💡 Tips: Use `" .. tip_parts[1] .. "` for " .. tip_parts[2]
-    else
-      footer = "💡 Tips: " .. tip_parts[1]
-    end
+    tip_msg = "🎯 Tips: " .. tip_parts[1] .. " with no description"
   end
+  return tip_msg
 end
+
+local function select_keymaps()
+  local keymaps = vim.api.nvim_get_keymap('n')
+  local selected_keymap = keymaps[math.random(#keymaps)]
+
+  local key = selected_keymap.lhs
+  if string.sub(key, 1, 1) == vim.api.nvim_get_var('mapleader') then
+    key = "<leader>" .. string.sub(key, 2)
+  end
+
+  local key_msg = selected_keymap.desc
+  if key_msg ~= nil then
+    key_msg = "💡 Keys: Use `" .. key .. "` for " .. key_msg
+  else
+    key_msg = "💡 Keys: Use `" .. key .. "` with no description"
+  end
+  return key_msg
+end
+
+local selections = {select_tips, select_keymaps}
+local footer = selections[math.random(#selections)]
 dashboard.section.footer.val = footer
 
 alpha.setup(dashboard.opts)
