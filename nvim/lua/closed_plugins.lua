@@ -351,6 +351,13 @@ lazy.setup({
 -- end of 5-Debug }}}
 
 -- 6-Language {{{
+  {  "p00f/clangd_extensions.nvim",
+    config = function()
+      require "language.clangd_extensions"
+    end,
+    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+  },
+
   {  "mfussenegger/nvim-jdtls",
     config = function()
       require "language.jdtls"

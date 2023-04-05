@@ -11,32 +11,6 @@ local capabilities = vim.tbl_extend("force", default.capabilities, {
 })
 
 extensions.setup {
-  server = {
-    capabilities = capabilities,
-    on_attach = function(client, bufnr)
-      default.on_attach(client, bufnr)
-      vim.keymap.set("n", "<localleader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
-      vim.keymap.set("n", "<localleader>s", "<cmd>ClangdSymbolInfo<cr>", { buffer = bufnr, desc = "Show type info" })
-      vim.keymap.set(
-        "n",
-        "<leader>a",
-        "<cmd>ClangdSwitchSourceHeader<CR>",
-        { buffer = bufnr, desc = "Switch between source and header" }
-      )
-      vim.keymap.set(
-        "n",
-        "<localleader>h",
-        "<cmd>ClangdTypeHierarchy<CR>",
-        { buffer = bufnr, desc = "Show type hierarchy" }
-      )
-      vim.keymap.set(
-        "n",
-        "<localleader>m",
-        "<cmd>ClangdMemoryUsage<CR>",
-        { buffer = bufnr, desc = "Clangd memory usage" }
-      )
-    end,
-  },
   -- options to pass to nvim-lspconfig
   -- i.e. the arguments to require("lspconfig").clangd.setup({})
   extensions = {

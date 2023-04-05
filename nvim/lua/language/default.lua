@@ -1,26 +1,11 @@
 -- Default LSP server settigns
 local M = {}
 
-local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
-  vim.notify "Could not load nvim-cmp"
-  return
-end
-
 local ok, ufo = pcall(require, "ufo")
 if not ok then
   vim.notify "Could not load ufo"
   return
 end
-
--- Add additional capabilities supported by nvim-cmp
-M.capabilities = cmp_nvim_lsp.default_capabilities()
-
--- Enable LSP foldingRange capability
-M.capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true,
-}
 
 M.set_keymap = function(bufnr)
   -- Mappings.
@@ -33,7 +18,7 @@ M.set_keymap = function(bufnr)
   vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
   vim.keymap.set("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "References" })
 
-  vim.keymap.set("n", "<leader>lh", function()
+  vim.keymap.set("n", "gk", function()
     local winid = ufo.peekFoldedLinesUnderCursor()
     if not winid then
       -- choose one of coc.nvim and nvim LSP

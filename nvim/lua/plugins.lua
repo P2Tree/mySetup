@@ -95,7 +95,7 @@ lazy.setup({
       { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" },
       { "kristijanhusak/vim-dadbod-completion" },
-      -- { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
+      { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
     },
     event = "VeryLazy",
   },
@@ -407,13 +407,6 @@ lazy.setup({
 -- 6-Language {{{
   {  "plasticboy/vim-markdown",
     ft = { "markdown" },
-  },
-
-  {  "p00f/clangd_extensions.nvim",
-    config = function()
-      require "language.clangd_extensions"
-    end,
-    ft = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   },
 
   {  "b0o/SchemaStore.nvim",

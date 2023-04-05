@@ -4,11 +4,19 @@ if not ok then
   return
 end
 
+local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not ok then
+  vim.notify "Could not load nvim-cmp"
+  return
+end
+
 local ok, mason = pcall(require, "mason-lspconfig")
 if not ok then
   vim.notify "Could not load mason-lspconfig"
   return
 end
+
+local default = require "language.default"
 
 -- Set diagnostic options
 vim.diagnostic.config {
@@ -32,29 +40,36 @@ for type, icon in pairs(signs) do
 end
 
 -- TODO: Use lsp_signature instead
-vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
-vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
-
-local border = {
-  { "╭", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╮", "FloatBorder" },
-  { "│", "FloatBorder" },
-  { "╯", "FloatBorder" },
-  { "─", "FloatBorder" },
-  { "╰", "FloatBorder" },
-  { "│", "FloatBorder" },
-}
+-- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
+-- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 
 -- To instead override globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+  }
+
   opts = opts or {}
   opts.border = opts.border or border
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-local default = require "language.default"
+-- Add additional capabilities supported by nvim-cmp
+local capabilities = cmp_nvim_lsp.default_capabilities()
+-- Enable LSP foldingRange capability
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+  offsetEncoding = "utf-8",
+}
 
 mason.setup()
 
@@ -63,15 +78,42 @@ mason.setup_handlers {
     lspconfig[server].setup(default)
   end,
 
-  clangd = function(server) end,
   jdtls = function(server) end,
   tsserver = function(server) end,
   jsonls = function(server) end,
 
-  -- we needs some config for lua lsp
+  clangd = function()
+    lspconfig.clangd.setup {
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        default.on_attach(client, bufnr)
+        vim.keymap.set("n", "<localleader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
+        vim.keymap.set("n", "<localleader>s", "<cmd>ClangdSymbolInfo<cr>", { buffer = bufnr, desc = "Show type info" })
+        vim.keymap.set(
+          "n",
+          "<leader>a",
+          "<cmd>ClangdSwitchSourceHeader<CR>",
+          { buffer = bufnr, desc = "Switch between source and header" }
+        )
+        vim.keymap.set(
+          "n",
+          "<localleader>h",
+          "<cmd>ClangdTypeHierarchy<CR>",
+          { buffer = bufnr, desc = "Show type hierarchy" }
+        )
+        vim.keymap.set(
+          "n",
+          "<localleader>m",
+          "<cmd>ClangdMemoryUsage<CR>",
+          { buffer = bufnr, desc = "Clangd memory usage" }
+        )
+      end,
+    }
+  end,
+
   lua_ls = function()
     lspconfig.lua_ls.setup {
-      capabilities = default.capabilities,
+      capabilities = capabilities,
       on_attach = function(client, bufnr)
         default.on_attach(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
@@ -118,8 +160,8 @@ mason.setup_handlers {
 
   pyright = function()
     lspconfig.pyright.setup {
+      capabilities = capabilities,
       on_attach = default.on_attach,
-      capabilities = default.capabilities,
       settings = {
         python = {
           analysis = {
