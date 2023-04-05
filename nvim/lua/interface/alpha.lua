@@ -1,6 +1,5 @@
-local ok, alpha = pcall(require, "alpha")
-if not ok then
-  vim.notify "Could not load alpha"
+local alpha = require_plugin("alpha")
+if not alpha then
   return
 end
 

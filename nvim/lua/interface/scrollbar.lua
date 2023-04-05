@@ -1,6 +1,5 @@
-local ok, scrollbar = pcall(require, "scrollbar")
-if not ok then
-  vim.notify "Could not load scrollbar"
+local scrollbar = require_plugin("scrollbar")
+if not scrollbar then
   return
 end
 

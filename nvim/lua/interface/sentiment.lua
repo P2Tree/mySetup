@@ -1,6 +1,5 @@
-local ok, sentiment = pcall(require, "sentiment")
-if not ok then
-  vim.notify "Could not load satellite"
+local sentiment = require_plugin("sentiment")
+if not sentiment then
   return
 end
 

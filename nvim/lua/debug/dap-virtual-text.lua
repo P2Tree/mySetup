@@ -1,6 +1,5 @@
-local ok, text = pcall(require, "nvim-dap-virtual-text")
-if not ok then
-  vim.notify "Could not load dap virtual text"
+local text = require_plugin("nvim-dap-virtual-text")
+if not text then
   return
 end
 

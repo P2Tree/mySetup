@@ -1,6 +1,5 @@
-local ok, dapui = pcall(require, "dapui")
-if not ok then
-  vim.notify "Could not load dap ui"
+local dapui = require_plugin("dapui")
+if not dapui then
   return
 end
 

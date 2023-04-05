@@ -1,18 +1,7 @@
-local ok, cmp = pcall(require, "cmp")
-if not ok then
-  vim.notify "Could not load cmp"
-  return
-end
-
-local ok, luasnip = pcall(require, "luasnip")
-if not ok then
-  vim.notify "Could not load luasnip"
-  return
-end
-
-local ok, lspkind = pcall(require, "lspkind")
-if not ok then
-  vim.notify "Could not load lspkind"
+local cmp = require_plugin("cmp")
+local luasnip = require_plugin("luasnip")
+local lspkind = require_plugin("lspkind")
+if not cmp or not luasnip or not lspkind then
   return
 end
 

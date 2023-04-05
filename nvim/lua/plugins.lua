@@ -55,12 +55,6 @@ lazy.setup({
 
   { "tpope/vim-sleuth" },
 
-  {  "nathom/filetype.nvim",
-    config = function()
-      require "core.filetype"
-    end,
-  },
-
   {  "ii14/emmylua-nvim",
     lazy = true,
   },
@@ -73,7 +67,7 @@ lazy.setup({
       require("fundo").install()
     end,
     config = function()
-      require "tool.fundo"
+      require "core.fundo"
     end,
     enabled = false,  -- WIP
   },
@@ -89,12 +83,10 @@ lazy.setup({
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
-      { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-cmdline" },
       { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" },
-      { "kristijanhusak/vim-dadbod-completion" },
       { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
     },
     event = "VeryLazy",
@@ -196,7 +188,6 @@ lazy.setup({
     config = function()
       require "interface.hlargs"
     end,
-    -- after = "catppuccin",  -- hlargs should be loaded after colorscheme
   },
 
   {  "zbirenbaum/neodim",
@@ -255,7 +246,7 @@ lazy.setup({
 
   {  "karb94/neoscroll.nvim",
     config = function()
-      require "interface/neoscroll"
+      require "interface.neoscroll"
     end,
   },
 
@@ -285,9 +276,6 @@ lazy.setup({
       require "tool.tree"
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "<leader>e", "<Cmd>NvimTreeToggle<CR>", desc = "File Explorer" },
-    },
     event = "VeryLazy",
   },
 
@@ -328,9 +316,6 @@ lazy.setup({
       require "tool.symbols-outline"
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "<leader>s", "<Cmd>SymbolsOutline<CR>", desc = "Code Outline" },
-    },
     event = "VeryLazy",
   },
 
@@ -353,9 +338,6 @@ lazy.setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
-    },
-    keys = {
-      { "<leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" },
     },
     event = "VeryLazy",
   },
@@ -402,6 +384,33 @@ lazy.setup({
 -- end of 4-Tool }}}
 
 -- 5-Debug {{{
+  {  "mfussenegger/nvim-dap",
+    config = function()
+      require "debug.dap"
+    end,
+    event = "VeryLazy",
+    dependencies = {
+      "jay-babu/mason-nvim-dap.nvim",
+    },
+  },
+
+  {  "theHamsta/nvim-dap-virtual-text",
+    config = function()
+      require "debug.dap-virtual-text"
+    end,
+    event = "VeryLazy",
+  },
+
+  {  "rcarriga/nvim-dap-ui",
+    config = function()
+      require "debug.dap-ui"
+    end,
+    requires = {
+      "mfussenegger/nvim-dap",
+    },
+    event = "VeryLazy",
+  },
+
 -- end of 5-Debug }}}
 
 -- 6-Language {{{
@@ -426,7 +435,8 @@ lazy.setup({
   },
 -- end of 7-Colorscheme }}}
 
-}, {  -- lazy plugin configuration
+}, {
+  -- lazy plugin configuration
   root = vim.fn.stdpath "data" .. "/lazy", -- directory where plugins will be installed
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?
@@ -493,17 +503,10 @@ lazy.setup({
     -- If you want to use a specific browser, you can define it here
     browser = nil, --@type string?
     throttle = 20, -- how frequently should the ui process render events
-    custom_keys = {
-      -- you can define custom key maps here.
-      -- To disable one of the defaults, set it to false
 
-      -- open lazygit log
-      ["<localleader>l"] = function(plugin)
-        require("lazy.util").float_term({ "lazygit", "log" }, {
-          cwd = plugin.dir,
-        })
-      end,
-    },
+    -- you can define custom key maps here.
+    -- To disable one of the defaults, set it to false
+    custom_keys = {},
   },
   diff = {
     -- diff command <d> can be one of:

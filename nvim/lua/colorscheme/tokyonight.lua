@@ -1,6 +1,5 @@
-local ok, tokyonight = pcall(require, "tokyonight")
-if not ok then
-  vim.notify "Could not load tokyonight"
+local tokyonight = require_plugin("tokyonight")
+if not tokyonight then
   return
 end
 

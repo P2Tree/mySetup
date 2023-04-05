@@ -1,6 +1,5 @@
-local ok, gruvbox = pcall(require, "gruvbox")
-if not ok then
-  vim.notify "Could not load gruvbox"
+local gruvbox = require_plugin("gruvbox")
+if not gruvbox then
   return
 end
 

@@ -1,6 +1,5 @@
-local ok, diffview = pcall(require, "diffview")
-if not ok then
-  vim.notify "Could not load diffview"
+local diffview = require_plugin("diffview")
+if not diffview then
   return
 end
 

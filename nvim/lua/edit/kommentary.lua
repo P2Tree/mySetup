@@ -1,6 +1,5 @@
-local ok, kommentary = pcall(require, "kommentary.config")
-if not ok then
-  vim.notify "Could not load Kommentary"
+local kommentary = require_plugin("kommentary.config")
+if not kommentary then
   return
 end
 

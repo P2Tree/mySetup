@@ -1,6 +1,5 @@
-local ok, hlargs = pcall(require, "hlargs")
-if not ok then
-  vim.notify "Could not load hlargs"
+local hlargs = require_plugin("hlargs")
+if not hlargs then
   return
 end
 

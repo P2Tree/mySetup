@@ -1,6 +1,5 @@
-local ok, catppuccin = pcall(require, "catppuccin")
-if not ok then
-  vim.notify "Could not load catppuccin"
+local catppuccin = require_plugin("catppuccin")
+if not catppuccin then
   return
 end
 

@@ -1,6 +1,5 @@
-local ok, notify = pcall(require, "notify")
-if not ok then
-  vim.notify "Could not load notify"
+local notify = require_plugin("notify")
+if not notify then
   return
 end
 

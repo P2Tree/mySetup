@@ -1,6 +1,5 @@
-local ok, tree = pcall(require, "nvim-tree")
-if not ok then
-  vim.notify "Could not load tree"
+local tree = require_plugin("nvim-tree")
+if not tree then
   return
 end
 
@@ -245,3 +244,5 @@ tree.setup {
     },
   },
 }
+
+vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" })

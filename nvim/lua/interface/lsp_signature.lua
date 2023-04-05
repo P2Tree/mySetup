@@ -1,6 +1,5 @@
-local ok, signature = pcall(require, "lsp_signature")
-if not ok then
-  vim.notify "Could not load lsp signature"
+local signature = require_plugin("lsp_signature")
+if not signature then
   return
 end
 

@@ -1,6 +1,5 @@
-local ok, project = pcall(require, "project_nvim")
-if not ok then
-  vim.notify "Could not load project"
+local project = require_plugin("project_nvim")
+if not project then
   return
 end
 

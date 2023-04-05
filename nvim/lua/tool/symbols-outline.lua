@@ -1,6 +1,5 @@
-local ok, outline = pcall(require, "symbols-outline")
-if not ok then
-  vim.notify "Could not load symbols-outline"
+local outline = require_plugin("symbols-outline")
+if not outline then
   return 0
 end
 
@@ -65,3 +64,5 @@ outline.setup {
     TypeParameter = { icon = "𝙏", hl = "TSParameter" },
   },
 }
+
+vim.keymap.set("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })

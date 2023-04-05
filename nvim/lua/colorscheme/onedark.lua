@@ -1,6 +1,5 @@
-local ok, onedark = pcall(require, "onedark")
-if not ok then
-  vim.notify "Could not load onedark"
+local onedark = require_plugin("onedark")
+if not onedark then
   return
 end
 

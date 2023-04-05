@@ -1,6 +1,6 @@
-local ok, illuminate = pcall(require, "illuminate")
-if not ok then
-  vim.notify "Could not load illuminate"
+local illuminate = require_plugin("illuminate")
+if not illuminate then
+  return
 end
 
 illuminate.configure {

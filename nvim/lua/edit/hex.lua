@@ -1,6 +1,5 @@
-local ok, hex = pcall(require, "hex")
-if not ok then
-  vim.notify "Could not load hex"
+local hex = require_plugin("hex")
+if not hex then
   return
 end
 

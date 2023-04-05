@@ -1,6 +1,5 @@
-local ok, dressing = pcall(require, "dressing")
-if not ok then
-  vim.notify "Could not load dressing"
+local dressing = require_plugin("dressing")
+if not dressing then
   return
 end
 
@@ -18,7 +17,7 @@ dressing.setup {
     -- When true, <Esc> will close the modal
     insert_only = true,
 
-    -- When true, input will start in insert mode 
+    -- When true, input will start in insert mode
     start_in_insert = true,
 
     -- These are passed to nvim_open_win

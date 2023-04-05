@@ -1,6 +1,5 @@
-local ok, ufo = pcall(require, "ufo")
-if not ok then
-  vim.notify "Could not load ufo"
+local ufo = require_plugin("ufo")
+if not ufo then
   return
 end
 

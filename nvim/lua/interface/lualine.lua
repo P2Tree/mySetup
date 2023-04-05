@@ -1,12 +1,6 @@
-local ok, lualine = pcall(require, "lualine")
-if not ok then
-  vim.notify "Could not load lualine"
-  return
-end
-
-local ok, lazy_status = pcall(require, "lazy.status")
-if not ok then
-  vim.notify "Could not load lazy.status"
+local lualine = require_plugin("lualine")
+local lazy_status = require_plugin("lazy.status")
+if not lualine or not lazy_status then
   return
 end
 

@@ -1,10 +1,9 @@
-local ok, nvim_bqf = pcall(require, "bqf")
-if not ok then
-  vim.notify "Could not load bqf"
+local bqf = require_plugin("bqf")
+if not bqf then
   return
 end
 
-nvim_bqf.setup ({
+bqf.setup ({
   -- [[Enable nvim-bqf in quickfix window automatically]],
   -- default: true
   auto_enable = true,

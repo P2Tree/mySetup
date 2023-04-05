@@ -1,6 +1,5 @@
-local ok, bufferline = pcall(require, "bufferline")
-if not ok then
-  vim.notify "Could not load bufferline"
+local bufferline = require_plugin("bufferline")
+if not bufferline then
   return
 end
 

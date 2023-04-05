@@ -1,3 +1,4 @@
+require "util"
 require "plugins"
 require "autocmd"
 require "keymaps"

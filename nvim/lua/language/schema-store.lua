@@ -1,11 +1,7 @@
-local ok, schemastore = pcall(require, "schemastore")
-if not ok then
-  vim.notify "Could not load schemastore"
-end
-
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-  vim.notify "Could not load lspconfig"
+local schemastore = require_plugin("schemastore")
+local lspconfig = require_plugin("lspconfig")
+if not schemastore or not lspconfig then
+  return
 end
 
 local default = require "language.default"

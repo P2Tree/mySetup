@@ -1,6 +1,5 @@
-local ok, info = pcall(require, "package-info")
-if not ok then
-  vim.notify "Could not load package info"
+local info = require_plugin("package-info")
+if not info then
   return
 end
 

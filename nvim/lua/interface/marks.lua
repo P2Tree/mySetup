@@ -1,6 +1,5 @@
-local ok, marks = pcall(require, "marks")
-if not ok then
-  vim.notify "Could not load marks"
+local marks = require_plugin("marks")
+if not marks then
   return
 end
 

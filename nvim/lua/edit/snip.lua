@@ -1,6 +1,5 @@
-local ok, snip = pcall(require, "luasnip")
-if not ok then
-  vim.notify "Could not load luasnip"
+local snip = require_plugin("luasnip")
+if not snip then
   return
 end
 

@@ -1,6 +1,5 @@
-local ok, neogit = pcall(require, "neogit")
-if not ok then
-  vim.notify "Could not load neogit"
+local neogit = require_plugin("neogit")
+if not neogit then
   return
 end
 
@@ -81,3 +80,5 @@ neogit.setup {
     },
   },
 }
+
+vim.keymap.set("n", "<leader>gg", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })

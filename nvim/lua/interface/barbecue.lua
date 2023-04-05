@@ -1,6 +1,5 @@
-local ok, barbecue = pcall(require, "barbecue")
-if not ok then
-  vim.notify "Could not load barbecue"
+local barbecue = require_plugin("barbecue")
+if not barbecue then
   return
 end
 

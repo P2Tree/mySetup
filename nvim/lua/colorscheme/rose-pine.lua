@@ -1,6 +1,5 @@
-local ok, rose_pine = pcall(require, "rose-pine")
-if not ok then
-  vim.notify "Could not load rose-pine"
+local rose_pine = require_plugin("rose-pine")
+if not rose_pine then
   return
 end
 

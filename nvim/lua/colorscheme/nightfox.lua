@@ -1,6 +1,6 @@
-local ok, nightfox = pcall(require, "nightfox")
-if not ok then
-  vim.notify "Could not load nightfox"
+local nightfox = require_plugin("nightfox")
+if not nightfox then
+  return
 end
 
 nightfox.setup {

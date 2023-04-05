@@ -1,6 +1,6 @@
-local ok, conflict = pcall(require, "git-conflict")
-if not ok then
-  vim.notify "Could not load git-conflict"
+local conflict = require_plugin("git-conflict")
+if not conflict then
+  return
 end
 
 conflict.setup {

@@ -1,6 +1,5 @@
-local ok, manager = pcall(require, "session_manager")
-if not ok then
-  vim.notify "Could not load session manager"
+local manager = require_plugin("session_manager")
+if not manager then
   return
 end
 

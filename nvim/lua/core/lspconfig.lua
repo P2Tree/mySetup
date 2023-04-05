@@ -1,18 +1,7 @@
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-  vim.notify "Could not load lspconfig"
-  return
-end
-
-local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not ok then
-  vim.notify "Could not load nvim-cmp"
-  return
-end
-
-local ok, mason = pcall(require, "mason-lspconfig")
-if not ok then
-  vim.notify "Could not load mason-lspconfig"
+local lspconfig = require_plugin("lspconfig")
+local cmp_nvim_lsp = require_plugin("cmp_nvim_lsp")
+local mason = require_plugin("mason-lspconfig")
+if not lspconfig or not cmp_nvim_lsp or not mason then
   return
 end
 

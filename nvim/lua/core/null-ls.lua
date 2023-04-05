@@ -1,14 +1,8 @@
-local ok, null_ls = pcall(require, "null-ls")
-if not ok then
-  vim.notify "Could not load null-ls"
+local null_ls = require_plugin("null-ls")
+local mason = require_plugin("mason-null-ls")
+if not null_ls or not mason then
   return
 end
-
-local os, mason = pcall(require, "mason-null-ls")
-
-mason.setup {
-  automatic_setup = true,
-}
 
 mason.setup_handlers {
   function(source_name, methods)

@@ -1,6 +1,5 @@
-local ok, tmux = pcall(require, "tmux")
-if not ok then
-  vim.notify "Could not load tmux"
+local tmux = require_plugin("tmux")
+if not tmux then
   return
 end
 

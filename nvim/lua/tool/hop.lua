@@ -1,6 +1,5 @@
-local ok, hop = pcall(require, "hop")
-if not ok then
-  vim.notify "Could not load hop"
+local hop = require_plugin("hop")
+if not hop then
   return
 end
 

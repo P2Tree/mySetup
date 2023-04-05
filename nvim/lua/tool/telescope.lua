@@ -1,6 +1,5 @@
-local ok, telescope = pcall(require, "telescope")
-if not ok then
-  vim.notify "Could not load telescope"
+local telescope = require_plugin("telescope")
+if not telescope then
   return
 end
 

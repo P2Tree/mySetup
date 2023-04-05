@@ -1,6 +1,5 @@
-local ok, fidget = pcall(require, "fidget")
-if not ok then
-  vim.notify "Could not load fidget"
+local fidget = require_plugin("fidget")
+if not fidget then
   return
 end
 

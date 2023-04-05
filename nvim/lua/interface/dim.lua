@@ -1,6 +1,5 @@
-local ok, dim = pcall(require, "neodim")
-if not ok then
-  vim.notify "Could not load dim"
+local dim = require_plugin("neodim")
+if not dim then
   return
 end
 

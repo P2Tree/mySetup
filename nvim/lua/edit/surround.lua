@@ -1,6 +1,5 @@
-local ok, surround = pcall(require, "nvim-surround")
-if not ok then
-  vim.notify "Could not load nvim-surround"
+local surround = require_plugin("nvim-surround")
+if not surround then
   return
 end
 

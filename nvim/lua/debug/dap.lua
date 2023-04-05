@@ -1,12 +1,6 @@
-local ok, dap = pcall(require, "dap")
-if not ok then
-  vim.notify "Could not load dap"
-  return
-end
-
-local ok, mason  = pcall(require, "mason-nvim-dap")
-if not ok then
-  vim.notify "Could not load mason-nvim-dap"
+local dap = require_plugin("dap")
+local mason  = require_plugin("mason-nvim-dap")
+if not dap or not mason then
   return
 end
 

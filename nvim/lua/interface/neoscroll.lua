@@ -1,6 +1,6 @@
-local ok, neoscroll = pcall(require, "neoscroll")
-if not ok then
-  vim.notify "Could not load neoscroll"
+local neoscroll = require_plugin("neoscroll")
+if not neoscroll then
+  return
 end
 
 neoscroll.setup({
