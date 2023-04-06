@@ -99,9 +99,9 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "b3nj5m1n/kommentary",
+  {  "numToStr/Comment.nvim",
     config = function()
-      require "edit.kommentary"
+      require "edit.comment"
     end,
     event = "VeryLazy",
   },

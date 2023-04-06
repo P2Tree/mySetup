@@ -59,12 +59,21 @@ lazy.setup({
     },
   },
 
-  -- HACK
+  -- HACK:
   {  "kevinhwang91/nvim-hlslens",
     config = function()
       require "interface.hlslens"
     end,
   },
+
+  -- HACK: exchanged by numToStr/Comment.nvim
+  {  "b3nj5m1n/kommentary",
+    config = function()
+      require "edit.kommentary"
+    end,
+    event = "VeryLazy",
+  },
+
 -- end of 2-Edit }}}
 
 -- 3-Interface {{{
