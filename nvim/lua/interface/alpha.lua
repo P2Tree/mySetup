@@ -34,8 +34,6 @@ math.randomseed(os.time())
 
 local function string_split(str, delimiter)
   local result = {}
-  -- local regex = ("([^%s]+)"):format(delimiter, delimiter)
-  -- for match in str:gmatch(regex) do
   for match in (str .. delimiter):gmatch("(.-)" .. delimiter) do
     table.insert(result, match)
   end
@@ -56,7 +54,7 @@ local function select_tips()
   end
 
   local tip = tips[math.random(#tips)]
-  local tip_parts = string_split(tip, ':')
+  local tip_parts = string_split(tip, ' = ')
   local tip_msg = ""
   if #tip_parts == 2 then
     tip_msg = "🎯 Tips: Use `" .. tip_parts[1] .. "` for " .. tip_parts[2]

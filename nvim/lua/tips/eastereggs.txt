@@ -1,8 +1,8 @@
-:help 42     : Easter Egg
-:help holy-grail      :Easter Egg
-:help!      :Easter Egg
-:help map-modes      :Easter Egg
-:help UserGettingBored      :Easter Egg
-:help showmatches     :Easter Egg
-:Ni!     :Easter Egg
-:smile     :Easter Egg
+:help 42 = Easter Egg
+:help holy-grail = Easter Egg
+:help! = Easter Egg
+:help map-modes = Easter Egg
+:help UserGettingBored = Easter Egg
+:help showmatches = Easter Egg
+:Ni! = Easter Egg
+:smile = Easter Egg

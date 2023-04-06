@@ -1,8 +1,8 @@
-`.       : jump to exact spot in last modification line
-<C-O>    : retrace your movements in file (backward)
-<C-I>    : retrace your movements in file (forward)
-:ju(mps) : list of your movements {{help|jump-motions}}
-:history : list of all your command
-m{a-z}     : marks current position as {a-z}, eg: ma marks as "a"
-'a       : move to first character of 'a-marked line
-y'a       : yank from current position to (incl.) 'a-marked line
+`. = jump to exact spot in last modification line
+<C-O> = retrace your movements in file (backward)
+<C-I> = retrace your movements in file (forward)
+:ju(mps) = list of your movements {{help|jump-motions}}
+:history = list of all your command
+m{a-z} = marks current position as {a-z}, eg: ma marks as "a"
+'a = move to first character of 'a-marked line
+y'a = yank from current position to (incl.) 'a-marked line
