@@ -1,3 +1,4 @@
+require "basic"
 require "util"
 require "plugins"
 require "autocmd"

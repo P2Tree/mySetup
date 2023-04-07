@@ -234,13 +234,6 @@ lazy.setup({
     end,
   },
 
-  -- HACK: replaced by a auto command
-  {  "ethanholz/nvim-lastplace",
-    config = function()
-      require "tool.lastplace"
-    end,
-  },
-
   -- TODO: waitting for config
   {  "sindrets/winshift.nvim" },
 
@@ -259,13 +252,6 @@ lazy.setup({
   {  "akinsho/nvim-toggleterm.lua",
     config = function()
       require "tool.toggleterm"
-    end,
-  },
-
-  -- BUG: it conflict with autopairs and seems not very useful
-  { "Pocco81/auto-save.nvim",
-    config = function()
-      require "tool.auto-save"
     end,
   },
 
