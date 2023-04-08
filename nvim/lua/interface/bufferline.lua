@@ -3,12 +3,6 @@ if not bufferline then
   return
 end
 
--- local ok, catppuccin = pcall(require, "catppuccin.groups.integrations.bufferline")
--- if not ok then
---   vim.notify "Could not load catppuccin in bufferline"
---   return
--- end
-
 bufferline.setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead

@@ -1,6 +1,5 @@
-local ok, comment = pcall(require, "Comment")
-if not ok then
-  vim.notify("Could not load plugin comment.nvim")
+local comment = require_plugin("Comment")
+if not comment then
   return
 end
 
