@@ -6,6 +6,7 @@ end
 bufferline.setup {
   options = {
     mode = "buffers", -- set to "tabs" to only show tabpages instead
+    themable = true, -- true | false, allows highlight groups to be overriden i.e. sets highlights as default
     numbers = "ordinal", -- "none" | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
     close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
     right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
@@ -15,8 +16,6 @@ bufferline.setup {
       -- alternatives: right aligned =>▕ ▐  left aligned => ▎
       icon = "▎", -- this should be omitted if indicator style is not 'icon'
       style = "icon", -- "icon" | "underline" | "none",
-      -- icon = '▶', -- this should be omitted if indicator style is not 'icon'
-      -- style = 'none',  -- 'icon' | 'underline' | 'none'
     },
     buffer_close_icon = "",
     modified_icon = "●",
@@ -35,6 +34,7 @@ bufferline.setup {
     -- end,
     max_name_length = 24,
     max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
+    truncate_names = true, -- whether or not tab names should be truncated
     tab_size = 18,
     diagnostics = "false", -- false | "nvim_lsp" | "coc",
     diagnostics_update_in_insert = false,
@@ -42,32 +42,7 @@ bufferline.setup {
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
       return "(" .. count .. ")"
     end,
-    offsets = {
-      { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
-      -- { filetype = "neo-tree", text = "File Explorer", text_align = "center", saperator = true },
-      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
-      -- { filetype = "packer", text = "Plugin Manager", text_align = "center", saperator = true },
-      -- { filetype = "dbui", text = "Database Manager", text_align = "center", saperator = true },
-      { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
-      -- { filetype = "httpResult", text = "Http Result", text_align = "center", saperator = true },
-      -- { filetype = "OverseerList", text = "Tasks", text_align = "center", saperator = true },
-    },
-    color_icons = true, --- true | false, -- whether or not to add the filetype icon highlights
-    show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
-    show_buffer_close_icons = true, -- true | false,
-    show_buffer_default_icon = true, -- true | false, -- whether or not an unrecognised filetype should show a default icon
-    show_close_icon = false, -- true | false,
-    show_tab_indicators = true, -- true | false,
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    -- can also be a table containing 2 custom separators
-    -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
-    enforce_regular_tabs = false, -- false | true,
-    always_show_bufferline = true, -- true | false,
-    sort_by = "id", -- 'insert_after_current' | 'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
-    -- add custom logic
-    --   return buffer_a.modified > buffer_b.modified
-    -- end
+    -- NOTE: this will be called a lot so don't do any heavy processing here
     custom_filter = function(bufnr)
       -- if the return is false, this buffer will be shown, otherwise, this buffer will be hidden
       local exclude_ft = { "qf", "fugitive", "git" }
@@ -78,8 +53,35 @@ bufferline.setup {
       end
       return true
     end,
+    offsets = {
+      { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
+      { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
+      { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
+    },
+    color_icons = true, --- true | false, -- whether or not to add the filetype icon highlights
+    get_element_icon = {},  -- This can be used to change how bufferline fetches the icon for an element e.g. a buffer or a tab
+    show_buffer_icons = true, -- true | false, -- disable filetype icons for buffers
+    show_buffer_close_icons = true, -- true | false,
+    show_buffer_default_icon = true, -- true | false, -- whether or not an unrecognised filetype should show a default icon
+    show_close_icon = false, -- true | false,
+    show_tab_indicators = true, -- true | false,
+    show_duplicate_prefix = true, -- true | false, whether to show duplicate buffer prefix
+    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+    -- can also be a table containing 2 custom separators
+    -- [focused and unfocused]. eg: { '|', '|' }
+    separator_style = "thin", -- "slant" | "thick" | "thin" | { 'any', 'any' },
+    enforce_regular_tabs = false, -- false | true,
+    always_show_bufferline = true, -- true | false,
+    hover = {
+      enable = true,
+      delay = 200,
+      reveal = {'close'}
+    },
+    sort_by = "id", -- 'insert_after_current' | 'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+    -- add custom logic
+    --   return buffer_a.modified > buffer_b.modified
+    -- end
   },
-  -- highlights = catppuccin.get(),
 }
 
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer

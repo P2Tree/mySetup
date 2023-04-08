@@ -71,6 +71,14 @@ vim.opt.synmaxcol = 200
 vim.g.t_ZH = "\\e[3m"
 vim.g.t_ZR = "\\e[23m"
 
+--- -------------
+---    Plugins
+--- -------------
+
+--- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 --- ----------------
 ---    Leader key
 --- ----------------
