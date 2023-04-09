@@ -93,6 +93,3 @@ scrollbar.setup({
       search = false, -- Requires hlslens to be loaded, will run require("scrollbar.handlers.search").setup() for you
   },
 })
-
--- Configure hlslens co-work for search highlight
--- require("scrollbar.handlers.search").setup()

@@ -83,5 +83,3 @@ dapui.setup {
     max_value_lines = 100,
   },
 }
-
-vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle UI" })

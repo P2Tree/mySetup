@@ -84,27 +84,3 @@ bufferline.setup {
   },
 }
 
--- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
--- The plugin support select buffer kind at go_to_buffer. So I use absolute buffer
-vim.keymap.set("n", "<M-1>", "<Cmd>lua require(\"bufferline\").go_to_buffer(1, true)<CR>", { desc = "Go to buffer 1" })
-vim.keymap.set("n", "<M-2>", "<Cmd>lua require(\"bufferline\").go_to_buffer(2, true)<CR>", { desc = "Go to buffer 2" })
-vim.keymap.set("n", "<M-3>", "<Cmd>lua require(\"bufferline\").go_to_buffer(3, true)<CR>", { desc = "Go to buffer 3" })
-vim.keymap.set("n", "<M-4>", "<Cmd>lua require(\"bufferline\").go_to_buffer(4, true)<CR>", { desc = "Go to buffer 4" })
-vim.keymap.set("n", "<M-5>", "<Cmd>lua require(\"bufferline\").go_to_buffer(5, true)<CR>", { desc = "Go to buffer 5" })
-vim.keymap.set("n", "<M-6>", "<Cmd>lua require(\"bufferline\").go_to_buffer(6, true)<CR>", { desc = "Go to buffer 6" })
-vim.keymap.set("n", "<M-7>", "<Cmd>lua require(\"bufferline\").go_to_buffer(7, true)<CR>", { desc = "Go to buffer 7" })
-vim.keymap.set("n", "<M-8>", "<Cmd>lua require(\"bufferline\").go_to_buffer(8, true)<CR>", { desc = "Go to buffer 8" })
-vim.keymap.set("n", "<M-9>", "<Cmd>lua require(\"bufferline\").go_to_buffer(9, true)<CR>", { desc = "Go to buffer 9" })
-
-vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-vim.keymap.set("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-vim.keymap.set("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-
-vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin Buffer" })
-vim.keymap.set("n", "<leader>bk", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer" })
-
-vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Close Buffer" })
--- vim.keymap.set("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
-vim.keymap.set("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
--- vim.keymap.set("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })

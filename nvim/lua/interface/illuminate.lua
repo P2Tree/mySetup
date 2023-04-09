@@ -55,6 +55,3 @@ illuminate.configure {
   -- min_count_to_highlight: minimum number of matches required to preform highlighting
   min_count_to_highlight = 1,
 }
-
-vim.keymap.set("n", "<M-n>", illuminate.goto_next_reference, { desc = "Next reference" })
-vim.keymap.set("n", "<M-p>", illuminate.goto_prev_reference, { desc = "Previous reference" })

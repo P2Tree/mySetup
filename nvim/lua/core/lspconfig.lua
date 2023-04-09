@@ -5,8 +5,6 @@ if not lspconfig or not cmp_nvim_lsp or not mason then
   return
 end
 
-local default = require "language.default"
-
 -- Set diagnostic options
 vim.diagnostic.config {
   virtual_text = {
@@ -27,10 +25,6 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
--- TODO: Use lsp_signature instead
--- vim.cmd [[autocmd ColorScheme * highlight NormalFloat guibg=#1f2335]]
--- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 
 -- To instead override globally
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -60,53 +54,58 @@ capabilities.textDocument.foldingRange = {
   offsetEncoding = "utf-8",
 }
 
+local default_option = {}
+default_option.on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+
+  -- Disable semantic tokens
+  client.server_capabilities.semanticTokensProvider = nil
+
+  require("keymaps").lsp(bufnr)
+end
+
 mason.setup()
 
 mason.setup_handlers {
+  --- Default handler and will be called for each installed server that
+  --- doesn't have a dedicated handler
   function(server)
-    lspconfig[server].setup(default)
+    lspconfig[server].setup(default_option)
   end,
 
-  jdtls = function(server) end,
-  tsserver = function(server) end,
-  jsonls = function(server) end,
+  --- Provide dedicated handler for specific servers:
 
-  clangd = function()
-    lspconfig.clangd.setup {
-      capabilities = capabilities,
+  -- Need to install json-lsp
+  jsonls = function()
+    lspconfig.jsonls.setup {
+      settings = {
+        json = {
+          schemas = require("schemastore").json.schemas(),
+          validate = { enable = true },
+        },
+      },
+      capabilities = default_option.capabilities,
       on_attach = function(client, bufnr)
-        default.on_attach(client, bufnr)
-        vim.keymap.set("n", "<localleader>t", "<cmd>ClangdAST<CR>", { buffer = bufnr, desc = "Show AST" })
-        vim.keymap.set("n", "<localleader>s", "<cmd>ClangdSymbolInfo<cr>", { buffer = bufnr, desc = "Show type info" })
-        vim.keymap.set(
-          "n",
-          "<leader>a",
-          "<cmd>ClangdSwitchSourceHeader<CR>",
-          { buffer = bufnr, desc = "Switch between source and header" }
-        )
-        vim.keymap.set(
-          "n",
-          "<localleader>h",
-          "<cmd>ClangdTypeHierarchy<CR>",
-          { buffer = bufnr, desc = "Show type hierarchy" }
-        )
-        vim.keymap.set(
-          "n",
-          "<localleader>m",
-          "<cmd>ClangdMemoryUsage<CR>",
-          { buffer = bufnr, desc = "Clangd memory usage" }
-        )
+        default_option.on_attach(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
       end,
     }
   end,
 
+  -- Need to install clangd
+  clangd = function()
+    lspconfig.clangd.setup {
+      capabilities = capabilities,
+      on_attach = default_option.on_attach,
+    }
+  end,
+
+  -- Need to install lua-language-server
   lua_ls = function()
     lspconfig.lua_ls.setup {
       capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        default.on_attach(client, bufnr)
-        client.server_capabilities.documentFormattingProvider = false
-      end,
+      on_attach = default_option.on_attach,
       settings = {
         Lua = {
           hint = {
@@ -126,9 +125,7 @@ mason.setup_handlers {
           },
           diagnostics = {
             -- Get the language server to recognize the 'vim' global
-            globals = {
-              'vim'
-            },
+            globals = { 'vim' },
           },
           workspace = {
             -- Make the server aware of Neovim runtime files
@@ -147,10 +144,11 @@ mason.setup_handlers {
     }
   end,
 
+  -- Need to install pyright
   pyright = function()
     lspconfig.pyright.setup {
       capabilities = capabilities,
-      on_attach = default.on_attach,
+      on_attach = default_option.on_attach,
       settings = {
         python = {
           analysis = {

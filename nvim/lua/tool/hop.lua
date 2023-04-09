@@ -7,11 +7,3 @@ hop.setup {
   keys = "etovxqpdygfblzhckisuran",
   jump_on_sole_occurrence = true,
 }
-
-vim.keymap.set({ "n", "v" }, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
-vim.keymap.set({ "n", "v" }, "F", "<Cmd>HopChar1CurrentLineBC<CR>", { desc = "Jump to char after in current line" })
-
-vim.keymap.set({ "n", "v", "o" }, "ss", "<Cmd>HopChar1<CR>", { desc = "Jump to char" })
-vim.keymap.set({ "n", "v", "o" }, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
-vim.keymap.set({ "n", "v", "o" }, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
-vim.keymap.set({ "n", "v", "o" }, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })

@@ -28,9 +28,3 @@ manager.setup {
   autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
   max_path_length = 80, --Shorten the display path if length path if length exceeds this threshold, Use 0 if don't want to shorten the path at all.
 }
-
--- vim.keymap.set("n", "<leader>wl", "<cmd>SessionManager load_last_session<CR>", { desc = "Load last session" })
-vim.keymap.set("n", "<leader>wd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
-vim.keymap.set("n", "<leader>wl", "<cmd>SessionManager load_session<CR>", { desc = "Load selected session" })
-vim.keymap.set("n", "<leader>ws", "<cmd>SessionManager save_current_session<CR>", { desc = "Save current session" })
-vim.keymap.set("n", "<leader>ww", "<cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })

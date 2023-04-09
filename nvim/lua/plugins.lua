@@ -12,18 +12,18 @@ local lazy = require "lazy"
 
 lazy.setup({
 -- 1-Core {{{
+  {  "williamboman/mason.nvim",
+    config = function()
+      require "core.mason"
+    end,
+  },
+
   {  "neovim/nvim-lspconfig",
     config = function()
       require "core.lspconfig"
     end,
     dependencies = { "williamboman/mason-lspconfig.nvim" },
     after = "mason.nvim",
-  },
-
-  {  "williamboman/mason.nvim",
-    config = function()
-      require "core.mason"
-    end,
   },
 
   {  "jose-elias-alvarez/null-ls.nvim",
@@ -34,6 +34,7 @@ lazy.setup({
       { "nvim-lua/plenary.nvim" },
       { "jay-babu/mason-null-ls.nvim" }
     },
+    after = "mason.nvim",
   },
 
   {  "ahmedkhalf/project.nvim",
@@ -419,9 +420,6 @@ lazy.setup({
   },
 
   {  "b0o/SchemaStore.nvim",
-    config = function()
-      require "language.schema-store"
-    end,
     ft = { "json", "jsonc" },
   },
 -- end of 6-Language }}}
@@ -570,5 +568,3 @@ lazy.setup({
   },
   state = vim.fn.stdpath "state" .. "/lazy/state.json", -- state info for checker and other things
 })
-
-vim.keymap.set("n", "<leader>ol", "<Cmd>Lazy<CR>", { silent = true, desc = "Plugin manager" })

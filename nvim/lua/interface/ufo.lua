@@ -43,10 +43,3 @@ ufo.setup({
   close_fold_kinds = {'imports', 'comment'},
   fold_virt_text_handler = handler,
 })
-
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
-vim.keymap.set('n', 'zr', require('ufo').openFoldsExceptKinds)
-vim.keymap.set('n', 'zm', require('ufo').closeFoldsWith)  -- closeAllFolds == closeFoldsWith(0)
-
---- Some Other Configure are in LSP Configure File.

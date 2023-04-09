@@ -23,7 +23,3 @@ hex.setup {
     -- must return a bool
   end,
 }
-
-vim.keymap.set({"n"}, "<leader>hd", "<Cmd>HexDump<CR>", { desc = "Convert binary view to hex view" })
-vim.keymap.set({"n"}, "<leader>ha", "<Cmd>HexAssemble<CR>", { desc = "Convert hex view to binary view" })
-vim.keymap.set({"n"}, "<leader>hh", "<Cmd>HexToggle<CR>", { desc = "Convert between hex view and binary view" })

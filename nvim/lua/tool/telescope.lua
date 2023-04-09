@@ -156,29 +156,3 @@ telescope.setup {
 for i = 1, #extensions do
   telescope.load_extension(extensions[i])
 end
-
-vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffers" })
-vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help tags" })
-vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles, { desc = "Find old files" })
-vim.keymap.set("n", "<leader>fm", require("telescope.builtin").marks, { desc = "Marks" })
-vim.keymap.set("n", "<leader>fs", require("telescope.builtin").symbols, { desc = "Symbols" })
-
--- telescope-project.nvim and project.nvim are the different plugins
--- projects.nvim is a all in one plugins for projects managerment,
--- but telescope-project.nvim is only a extension for telescope to manage projects.
--- vim.keymap.set("n", "<leader>fp", require("telescope").extensions.project.project, { desc = "Project" })
--- vim.keymap.set("n", "<leader>fp", require("telescope").extensions.projects.projects, { desc = "Find project" })
-
--- vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Find Live grep" })  -- exchanged by live_grep_args
-vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {  desc = "Live grep"})
-vim.keymap.set("n", "<leader>fn", require("telescope").extensions.notify.notify, { desc = "Find notify" })
--- vim.keymap.set("n", "<leader>fde", require("telescope").extensions.dap.commands, { desc = "Commands" })
--- vim.keymap.set("n", "<leader>fdc", require("telescope").extensions.dap.configurations, { desc = "Configurations" })
--- vim.keymap.set("n", "<leader>fdb", require("telescope").extensions.dap.list_breakpoints, { desc = "Breakpoints" })
--- vim.keymap.set("n", "<leader>fdv", require("telescope").extensions.dap.variables, { desc = "Variables" })
--- vim.keymap.set("n", "<leader>fdf", require("telescope").extensions.dap.frames, { desc = "Frames" })
-vim.keymap.set("n", "<leader>fc", require("telescope").extensions.luasnip.luasnip, { desc = "Find snippets" })
-
--- telescope-undo.nvim
--- vim.keymap.set("n", "<leader>fu", require("telescope").extensions.undo.undo, { desc = "Find undo history" })

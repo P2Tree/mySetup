@@ -64,5 +64,3 @@ outline.setup {
     TypeParameter = { icon = "𝙏", hl = "TSParameter" },
   },
 }
-
-vim.keymap.set("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })

@@ -9,5 +9,3 @@ mason.setup {
   },
   automatic_setup = true,
 }
-
-vim.keymap.set("n", "<leader>om", "<Cmd>Mason<CR>", { silent = true, desc = "Package manager" })

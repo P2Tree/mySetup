@@ -82,11 +82,8 @@ lualine.setup {
     "man",
     "quickfix",
     "nvim-tree",
-    -- "neo-tree",
     "toggleterm",
     "symbols-outline",
-    -- "aerial",
     "nvim-dap-ui",
-    -- "mundo",
   },
 }
