@@ -169,6 +169,7 @@ lazy.setup({
     config = function()
       require "interface.illuminate"
     end,
+    event = "VeryLazy",
   },
 
   {  "utilyre/sentiment.nvim",

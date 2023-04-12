@@ -42,11 +42,14 @@ map("n", "<C-j>", "<C-w>j", { desc = "Focus on the down window" })
 
 --- Quit window or buffer
 map("n", "q", function()
-  vim.cmd "windo redraw!"
-  if #vim.fn.getbufinfo { buflisted = 1 } == 1 then
+  vim.cmd "redraw"
+  local ft = vim.o.filetype
+  if ft == "help" or ft == "qf" then
     vim.cmd "q"
   elseif #vim.fn.getwininfo() ~= 1 then
     vim.cmd "close!"
+  elseif #vim.fn.getbufinfo { buflisted = 1 } == 1 then
+    vim.cmd "q"
   else
     vim.cmd "bp | bd #"
   end
@@ -109,15 +112,15 @@ map("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buff
 -- map("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })
 
 --- Interface: Illuminate
-local illuminate = require_plugin("illuminate")
-if illuminate then
+local illuminate_status, illuminate = pcall(require, "illuminate")
+if illuminate_status then
   map("n", "<M-n>", illuminate.goto_next_reference, { desc = "Next reference" })
   map("n", "<M-p>", illuminate.goto_prev_reference, { desc = "Previous reference" })
 end
 
 --- Interface: Ufo
-local ufo = require_plugin("ufo")
-if ufo then
+local ufo_status, ufo = pcall(require, "ufo")
+if ufo_status then
   map('n', 'zR', ufo.openAllFolds, { desc = "Open all fold code" })
   map('n', 'zM', ufo.closeAllFolds, { desc = "Close all fold code" })
   map('n', 'zr', ufo.openFoldsExceptKinds, { desc = "Open fold except kinds" })
@@ -129,8 +132,8 @@ end
 map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" })
 
 --- Tool: Telescope builtin
-local telescope_builtin = require_plugin("telescope.builtin")
-if telescope_builtin then
+local telescope_builtin_status, telescope_builtin = pcall(require, "telescope.builtin")
+if telescope_builtin_status then
   map("n", "<leader>ff", telescope_builtin.find_files, { desc = "Find files" })
   map("n", "<leader>fb", telescope_builtin.buffers, { desc = "Find buffers" })
   map("n", "<leader>fh", telescope_builtin.help_tags, { desc = "Find help tags" })
@@ -141,8 +144,8 @@ if telescope_builtin then
 end
 
 --- Tool: Telescope plugins
-local telescope_plugins = require_plugin("telescope")
-if telescope_plugins then
+local telescope_plugins_status, telescope_plugins = pcall(require, "telescope")
+if telescope_plugins_status then
   --- telescope-project.nvim and project.nvim are the different plugins
   --- projects.nvim is a all in one plugins for projects managerment,
   --- but telescope-project.nvim is only a extension for telescope to manage projects.
@@ -205,8 +208,8 @@ map("n", "<leader>ws", "<cmd>SessionManager save_current_session<CR>", { desc = 
 map("n", "<leader>ww", "<cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
 
 --- Tool: Tmux
-local tmux = require_plugin("tmux")
-if tmux then
+local tmux_status, tmux = pcall(require, "tmux")
+if tmux_status then
   map({'n', 't'}, "<C-Left>", function() tmux.move_left() end, { desc = "Move to left panel" })
   map({'n', 't'}, "<C-Right>", function() tmux.move_right() end, { desc = "Move to right panel" })
   map({'n', 't'}, "<C-Up>", function() tmux.move_top() end, { desc = "Move to up panel" })
@@ -214,8 +217,8 @@ if tmux then
 end
 
 --- Tool: Package-Info
-local package_info = require_plugin("package-info")
-if package_info then
+local package_info_status, package_info = pcall(require, "package-info")
+if package_info_status then
   map("n", "<localleader>s", package_info.show, { desc = "Show package versions" })
   map("n", "<localleader>c", package_info.hide, { desc = "Hide package versions" })
   map("n", "<localleader>u", package_info.update, { desc = "Update package on line" })
@@ -225,8 +228,8 @@ if package_info then
 end
 
 --- Debug: DAP
-local dap = require_plugin("dap")
-if dap then
+local dap_status, dap = pcall(require, "dap")
+if dap_status then
   map("n", "<leader>dc", dap.continue, { desc = "Debug: Continue" })
   map("n", "<leader>dn", dap.step_over, { desc = "Debug: Step over" })
   map("n", "<leader>ds", dap.step_into, { desc = "Debug: Step into" })
@@ -244,8 +247,8 @@ if dap then
 end
 
 --- Debug DAP-UI
-local dapui = require_plugin("dapui")
-if dapui then
+local dapui_status, dapui = pcall(require, "dapui")
+if dapui_status then
   map("n", "<leader>du", dapui.toggle, { desc = "Toggle Deubg UI" })
 end
 
@@ -265,8 +268,8 @@ plugin_keymaps.lsp = function(bufnr)
   map("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Type definition" })
 
   map("n", "gk", function()
-   local ufo = require_plugin("ufo")
-   if ufo then
+   local ufo_status, ufo = pcall(require, "ufo")
+   if ufo_status then
      local winid = ufo.peekFoldedLinesUnderCursor()
      if not winid then
         vim.lsp.buf.hover()
@@ -304,8 +307,8 @@ plugin_keymaps.lsp = function(bufnr)
 end
 
 --- Tool: GitSigns
-local gitsigns = require_plugin("gitsigns")
-if gitsigns then
+local gitsigns_status, gitsigns = pcall(require, "gitsigns")
+if gitsigns_status then
   plugin_keymaps.gitsigns = function(bufnr)
     -- Navigation
     map("n", "[g", gitsigns.prev_hunk, { buffer = bufnr, desc = "Previous Git hunk" })

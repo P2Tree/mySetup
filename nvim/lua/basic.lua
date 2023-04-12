@@ -32,10 +32,6 @@ vim.opt.swapfile = false
 --- Undo backup
 vim.opt.undofile = true
 
---- Show all white spaces as character
-vim.opt.list = true
-vim.opt.listchars = "trail:·"
-
 --- Include file string exchange
 vim.opt.includeexpr = "substitute(v:fname,'\\.','/','g')"
 
@@ -75,7 +71,7 @@ vim.opt.showbreak = ">>"
 vim.opt.title = true
 
 --- Hide some special characters
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 2
 
 --- Cmd mode auto complete
 vim.opt.showcmd = true
@@ -87,7 +83,7 @@ vim.opt.synmaxcol = 200
 vim.g.t_ZH = "\\e[3m"
 vim.g.t_ZR = "\\e[23m"
 
---- Disable netrw
+--- Eagerly disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
