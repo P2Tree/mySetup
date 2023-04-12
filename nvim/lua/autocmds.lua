@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    vim.notify("File changed elsewhere, buffer reloaded!", vim.log.levels.WARN, { tilte = "nvim-config" })
+    vim.notify("File changed elsewhere, buffer reloaded!", vim.log.levels.WARN, { title = "nvim-config" })
   end,
   desc = "Auto reload file if changed elsewhere"
 })

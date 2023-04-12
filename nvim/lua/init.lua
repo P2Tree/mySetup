@@ -1,7 +1,7 @@
-require "basic"
-require "util"
+require "options"
+require "utils"
 require "plugins"
-require "autocmd"
+require "autocmds"
 require "keymaps"
 require "llvm"
 
