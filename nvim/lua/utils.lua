@@ -10,3 +10,6 @@ function _G.require_plugin(name)
   return plugin
 end
 
+function _G.has_plugin(name)
+  return require("lazy.core.config").plugins[name] ~= nil
+end

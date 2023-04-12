@@ -1,12 +1,5 @@
 local map = vim.keymap.set
 
---- ------------
----   Outline
---- - `'n` to Normal Keymaps
---- - `'k` to Plugin Keymaps
---- - `'h` to Plugin Handler Keymaps
---- ------------
-
 --- --------------------
 ---    Normal Keymaps
 --- --------------------
@@ -65,13 +58,13 @@ map("v", "<S-Tab>", "<gv", { desc = "Text descrease indent" })
 map("v", "<<", "<gv", { desc = "Text descrease indent" })
 
 --- Disable search highlight
-map("n", "<Leader><CR>", ":nohl<CR>", { desc = "Disable search highlight" })
+map("n", "<Leader><CR>", ":nohl<CR>", { silent = true, desc = "Disable search highlight" })
 
 --- Copy to system clipboard
 map({ "n", "v" }, "Y", '"+y', { desc = "Copy to system clipboard" })
 
 --- Refresh Neovim configure
-map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Refresh Neovim configure" })
+map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Refresh neovim configure" })
 
 --- --------------------
 ---    Plugin Keymaps
@@ -91,86 +84,69 @@ map("n", "<leader>hh", "<Cmd>HexToggle<CR>", { desc = "Convert between hex view 
 --- Interface: BufferLine
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
 -- The plugin support select buffer kind at go_to_buffer. So I use absolute buffer
-map("n", "<M-1>", "<Cmd>lua require(\"bufferline\").go_to_buffer(1, true)<CR>", { desc = "Go to buffer 1" })
-map("n", "<M-2>", "<Cmd>lua require(\"bufferline\").go_to_buffer(2, true)<CR>", { desc = "Go to buffer 2" })
-map("n", "<M-3>", "<Cmd>lua require(\"bufferline\").go_to_buffer(3, true)<CR>", { desc = "Go to buffer 3" })
-map("n", "<M-4>", "<Cmd>lua require(\"bufferline\").go_to_buffer(4, true)<CR>", { desc = "Go to buffer 4" })
-map("n", "<M-5>", "<Cmd>lua require(\"bufferline\").go_to_buffer(5, true)<CR>", { desc = "Go to buffer 5" })
-map("n", "<M-6>", "<Cmd>lua require(\"bufferline\").go_to_buffer(6, true)<CR>", { desc = "Go to buffer 6" })
-map("n", "<M-7>", "<Cmd>lua require(\"bufferline\").go_to_buffer(7, true)<CR>", { desc = "Go to buffer 7" })
-map("n", "<M-8>", "<Cmd>lua require(\"bufferline\").go_to_buffer(8, true)<CR>", { desc = "Go to buffer 8" })
-map("n", "<M-9>", "<Cmd>lua require(\"bufferline\").go_to_buffer(9, true)<CR>", { desc = "Go to buffer 9" })
-map("n", "]b", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-map("n", "[b", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-map("n", "<tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
-map("n", "<S-tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
-map("n", "<leader>bp", "<cmd>BufferLineTogglePin<CR>", { desc = "Pin Buffer" })
-map("n", "<leader>bk", "<cmd>BufferLinePick<CR>", { desc = "Pick Buffer" })
-map("n", "<leader>bc", "<cmd>BufferLinePickClose<CR>", { desc = "Close Buffer" })
-map("n", "<leader>bs", "<cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
+map("n", "<M-1>", function() require('bufferline').go_to_buffer(1, true) end, { desc = "Go to buffer 1" })
+map("n", "<M-2>", function() require('bufferline').go_to_buffer(2, true) end, { desc = "Go to buffer 2" })
+map("n", "<M-3>", function() require('bufferline').go_to_buffer(3, true) end, { desc = "Go to buffer 3" })
+map("n", "<M-4>", function() require('bufferline').go_to_buffer(4, true) end, { desc = "Go to buffer 4" })
+map("n", "<M-5>", function() require('bufferline').go_to_buffer(5, true) end, { desc = "Go to buffer 5" })
+map("n", "<M-6>", function() require('bufferline').go_to_buffer(6, true) end, { desc = "Go to buffer 6" })
+map("n", "<M-7>", function() require('bufferline').go_to_buffer(7, true) end, { desc = "Go to buffer 7" })
+map("n", "<M-8>", function() require('bufferline').go_to_buffer(8, true) end, { desc = "Go to buffer 8" })
+map("n", "<M-9>", function() require('bufferline').go_to_buffer(9, true) end, { desc = "Go to buffer 9" })
+map("n", "]b", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+map("n", "[b", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+map("n", "<tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "Next Buffer" })
+map("n", "<S-tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "Previous Buffer" })
+map("n", "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", { desc = "Pin Buffer" })
+map("n", "<leader>bk", "<Cmd>BufferLinePick<CR>", { desc = "Pick Buffer" })
+map("n", "<leader>bc", "<Cmd>BufferLinePickClose<CR>", { desc = "Close Buffer" })
+map("n", "<leader>bs", "<Cmd>BufferLineSortByDirectory<CR>", { desc = "Sort Buffer by directory" })
 -- map("n", "<leader>bse", "<cmd>BufferLineSortByExtension<CR>", { desc = "Sort Buffer by extension" })
 -- map("n", "<leader>bst", "<cmd>BufferLineSortByTabs<CR>", { desc = "Sort Buffer by tabs" })
 
 --- Interface: Illuminate
-local illuminate_status, illuminate = pcall(require, "illuminate")
-if illuminate_status then
-  map("n", "<M-n>", illuminate.goto_next_reference, { desc = "Next reference" })
-  map("n", "<M-p>", illuminate.goto_prev_reference, { desc = "Previous reference" })
-end
+map("n", "<M-n>", function() require('illuminate').goto_next_reference() end, { desc = "Next reference" })
+map("n", "<M-p>", function() require('illuminate').goto_prev_reference() end, { desc = "Previous reference" })
 
 --- Interface: Ufo
-local ufo_status, ufo = pcall(require, "ufo")
-if ufo_status then
-  map('n', 'zR', ufo.openAllFolds, { desc = "Open all fold code" })
-  map('n', 'zM', ufo.closeAllFolds, { desc = "Close all fold code" })
-  map('n', 'zr', ufo.openFoldsExceptKinds, { desc = "Open fold except kinds" })
-  map('n', 'zm', ufo.closeFoldsWith, { desc = "Close specific number fold code" })  -- closeAllFolds == closeFoldsWith(0)
-  --- NOTE: 'za', 'zc', 'zo' is the native keymaps of Neovim
-end
+map('n', 'zR', function() require('ufo').openAllFolds() end, { desc = "Open all fold code" })
+map('n', 'zM', function() require('ufo').closeAllFolds() end, { desc = "Close all fold code" })
+map('n', 'zr', function() require('ufo').openFoldsExceptKinds() end, { desc = "Open fold except kinds" })
+map('n', 'zm', function() require('ufo').closeFoldsWith() end, { desc = "Close specific number fold code" })  -- closeAllFolds == closeFoldsWith(0)
+--- NOTE: 'za', 'zc', 'zo' is the native keymaps of Neovim
 
 --- Nvim-tree
 map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" })
 
 --- Tool: Telescope builtin
-local telescope_builtin_status, telescope_builtin = pcall(require, "telescope.builtin")
-if telescope_builtin_status then
-  map("n", "<leader>ff", telescope_builtin.find_files, { desc = "Find files" })
-  map("n", "<leader>fb", telescope_builtin.buffers, { desc = "Find buffers" })
-  map("n", "<leader>fh", telescope_builtin.help_tags, { desc = "Find help tags" })
-  map("n", "<leader>fo", telescope_builtin.oldfiles, { desc = "Find old files" })
-  map("n", "<leader>fm", telescope_builtin.marks, { desc = "Find marks" })
-  map("n", "<leader>fs", telescope_builtin.symbols, { desc = "Find symbols" })
-  -- map("n", "<leader>fg", telescope_builtin.live_grep, { desc = "Find Live grep" })  -- exchanged by live_grep_args
-end
+map("n", "<leader>ff", function() require('telescope.builtin').find_files() end, { desc = "Find files" })
+map("n", "<leader>fb", function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
+map("n", "<leader>fh", function() require('telescope.builtin').help_tags() end, { desc = "Find help tags" })
+map("n", "<leader>fo", function() require('telescope.builtin').oldfiles() end, { desc = "Find old files" })
+map("n", "<leader>fm", function() require('telescope.builtin').marks() end, { desc = "Find marks" })
+map("n", "<leader>fs", function() require('telescope.builtin').symbols() end, { desc = "Find symbols" })
+-- map("n", "<leader>fg", function() require('telescope.builtin').live_grep end, { desc = "Find Live grep" })  -- exchanged by live_grep_args
 
 --- Tool: Telescope plugins
-local telescope_plugins_status, telescope_plugins = pcall(require, "telescope")
-if telescope_plugins_status then
-  --- telescope-project.nvim and project.nvim are the different plugins
-  --- projects.nvim is a all in one plugins for projects managerment,
-  --- but telescope-project.nvim is only a extension for telescope to manage projects.
-  -- map("n", "<leader>fp", telescope.extensions.project.project, { desc = "Project" })
-  -- map("n", "<leader>fp", telescope.extensions.projects.projects, { desc = "Find project" })
-
-  --- Need telescope-live-grep-args
-  map("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {  desc = "Find Live grep" })
-
-  --- Need notify
-  map("n", "<leader>fn", telescope_plugins.extensions.notify.notify, { desc = "Find notify" })
-
-  --- Need telescope-dap
-  -- map("n", "<leader>fde", telescope_plugins.extensions.dap.commands, { desc = "Commands" })
-  -- map("n", "<leader>fdc", telescope_plugins.extensions.dap.configurations, { desc = "Configurations" })
-  -- map("n", "<leader>fdb", telescope_plugins.extensions.dap.list_breakpoints, { desc = "Breakpoints" })
-  -- map("n", "<leader>fdv", telescope_plugins.extensions.dap.variables, { desc = "Variables" })
-  -- map("n", "<leader>fdf", telescope_plugins.extensions.dap.frames, { desc = "Frames" })
-
-  --- Need telescope-luasnip
-  map("n", "<leader>fc", telescope_plugins.extensions.luasnip.luasnip, { desc = "Find snippets" })
-
-  --- Need telescope-undo.nvim
-  -- map("n", "<leader>fu", telescope_plugins.extensions.undo.undo, { desc = "Find undo history" })
-end
+--- telescope-project.nvim and project.nvim are the different plugins
+--- projects.nvim is a all in one plugins for projects managerment,
+--- but telescope-project.nvim is only a extension for telescope to manage projects.
+-- map("n", "<leader>fp", function() require('telescope').extensions.project.project end, { desc = "Project" })
+-- map("n", "<leader>fp", function() require('telescope').extensions.projects.projects end, { desc = "Find project" })
+--- Need telescope-live-grep-args
+map("n", "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end, {  desc = "Find Live grep" })
+--- Need notify
+map("n", "<leader>fn", function() require('telescope').extensions.notify.notify() end, { desc = "Find notify" })
+--- Need telescope-dap
+-- map("n", "<leader>fde", function() require('telescope').extensions.dap.commands, { desc = "Commands" })
+-- map("n", "<leader>fdc", function() require('telescope').extensions.dap.configurations, { desc = "Configurations" })
+-- map("n", "<leader>fdb", function() require('telescope').extensions.dap.list_breakpoints, { desc = "Breakpoints" })
+-- map("n", "<leader>fdv", function() require('telescope').extensions.dap.variables, { desc = "Variables" })
+-- map("n", "<leader>fdf", function() require('telescope').extensions.dap.frames, { desc = "Frames" })
+--- Need telescope-luasnip
+map("n", "<leader>fc", function() require('telescope').extensions.luasnip.luasnip() end, { desc = "Find snippets" })
+--- Need telescope-undo.nvim
+-- map("n", "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" })
 
 --- Tool: HOP
 map({ "n", "v" }, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
@@ -202,55 +178,43 @@ map("n", "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", { desc = "Open History o
 
 --- Tool: Session-Manager
 -- map("n", "<leader>wl", "<cmd>SessionManager load_last_session<CR>", { desc = "Load last session" })
-map("n", "<leader>wd", "<cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
-map("n", "<leader>wl", "<cmd>SessionManager load_session<CR>", { desc = "Load selected session" })
-map("n", "<leader>ws", "<cmd>SessionManager save_current_session<CR>", { desc = "Save current session" })
-map("n", "<leader>ww", "<cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
+map("n", "<leader>wd", "<Cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
+map("n", "<leader>wl", "<Cmd>SessionManager load_session<CR>", { desc = "Load selected session" })
+map("n", "<leader>ws", "<Cmd>SessionManager save_current_session<CR>", { desc = "Save current session" })
+map("n", "<leader>ww", "<Cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
 
 --- Tool: Tmux
-local tmux_status, tmux = pcall(require, "tmux")
-if tmux_status then
-  map({'n', 't'}, "<C-Left>", function() tmux.move_left() end, { desc = "Move to left panel" })
-  map({'n', 't'}, "<C-Right>", function() tmux.move_right() end, { desc = "Move to right panel" })
-  map({'n', 't'}, "<C-Up>", function() tmux.move_top() end, { desc = "Move to up panel" })
-  map({'n', 't'}, "<C-Down>", function() tmux.move_bottom() end, { desc = "Move to down panel" })
-end
+map({'n', 't'}, "<C-Left>", function() require('tmux').move_left() end, { desc = "Move to left panel" })
+map({'n', 't'}, "<C-Right>", function() require('tmux').move_right() end, { desc = "Move to right panel" })
+map({'n', 't'}, "<C-Up>", function() require('tmux').move_top() end, { desc = "Move to up panel" })
+map({'n', 't'}, "<C-Down>", function() require('tmux').move_bottom() end, { desc = "Move to down panel" })
 
 --- Tool: Package-Info
-local package_info_status, package_info = pcall(require, "package-info")
-if package_info_status then
-  map("n", "<localleader>s", package_info.show, { desc = "Show package versions" })
-  map("n", "<localleader>c", package_info.hide, { desc = "Hide package versions" })
-  map("n", "<localleader>u", package_info.update, { desc = "Update package on line" })
-  map("n", "<localleader>d", package_info.delete, { desc = "Delete package on line" })
-  map("n", "<localleader>i", package_info.install, { desc = "Install a new package" })
-  map("n", "<localleader>p", package_info.change_version, { desc = "Install a different package version" })
-end
+map("n", "<localleader>s", function() require('package_info').show() end, { desc = "Show package versions" })
+map("n", "<localleader>c", function() require('package_info').hide() end, { desc = "Hide package versions" })
+map("n", "<localleader>u", function() require('package_info').update() end, { desc = "Update package on line" })
+map("n", "<localleader>d", function() require('package_info').delete() end, { desc = "Delete package on line" })
+map("n", "<localleader>i", function() require('package_info').install() end, { desc = "Install a new package" })
+map("n", "<localleader>p", function() require('package_info').change_version() end, { desc = "Install a different package version" })
 
 --- Debug: DAP
-local dap_status, dap = pcall(require, "dap")
-if dap_status then
-  map("n", "<leader>dc", dap.continue, { desc = "Debug: Continue" })
-  map("n", "<leader>dn", dap.step_over, { desc = "Debug: Step over" })
-  map("n", "<leader>ds", dap.step_into, { desc = "Debug: Step into" })
-  map("n", "<leader>df", dap.step_out, { desc = "Debug: Step out" })
-  map("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle breakpoint" })
-  map("n", "<leader>dr", dap.repl.toggle, { desc = "Deubg: Toggle REPL" })
-  map("n", "<leader>dl", dap.run_last, { desc = "Deubg: Run last" })
+map("n", "<leader>dc", function() require('dap').continue() end, { desc = "Debug: Continue" })
+map("n", "<leader>dn", function() require('dap').step_over() end, { desc = "Debug: Step over" })
+map("n", "<leader>ds", function() require('dap').step_into() end, { desc = "Debug: Step into" })
+map("n", "<leader>df", function() require('dap').step_out() end, { desc = "Debug: Step out" })
+map("n", "<leader>db", function() require('dap').toggle_breakpoint() end, { desc = "Debug: Toggle breakpoint" })
+map("n", "<leader>dr", function() require('dap').repl.toggle() end, { desc = "Deubg: Toggle REPL" })
+map("n", "<leader>dl", function() require('dap').run_last() end, { desc = "Deubg: Run last" })
 
-  map("n", "<leader>dp", function()
-    dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
-  end, { desc = "Deubg: Set breakpoint" })
-  map("n", "<leader>di", function()
-    dap.set_breakpoint(nil, nil, vim.fn.input "Log point message: ")
-  end, { desc = "Deubg: Set log point" })
-end
+map("n", "<leader>dp", function()
+  require('dap').set_breakpoint(vim.fn.input "Breakpoint condition: ")
+end, { desc = "Deubg: Set breakpoint" })
+map("n", "<leader>di", function()
+  require('dap').set_breakpoint(nil, nil, vim.fn.input "Log point message: ")
+end, { desc = "Deubg: Set log point" })
 
 --- Debug DAP-UI
-local dapui_status, dapui = pcall(require, "dapui")
-if dapui_status then
-  map("n", "<leader>du", dapui.toggle, { desc = "Toggle Deubg UI" })
-end
+map("n", "<leader>du", function() require('dap-ui').toggle() end, { desc = "Toggle Deubg UI" })
 
 
 --- ---------------------
@@ -261,28 +225,29 @@ local plugin_keymaps = {}
 --- Core: LSP Mappings
 --- See `:help vim.lsp.*` for documentation on any of the below functions
 plugin_keymaps.lsp = function(bufnr)
-  map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Definition" })
-  map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Declaration" })
-  map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Implementation" })
-  map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "References" })
-  map("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Type definition" })
+  map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Goto definition" })
+  map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Goto declaration" })
+  map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Goto implementation" })
+  map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Goto references" })
+  map("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Goto type definition" })
 
-  map("n", "gk", function()
-   local ufo_status, ufo = pcall(require, "ufo")
-   if ufo_status then
-     local winid = ufo.peekFoldedLinesUnderCursor()
-     if not winid then
-        vim.lsp.buf.hover()
-     end
-   else
-     vim.lsp.buf.hover()
-   end
-  end, { buffer = bufnr, desc = "LSP: Hover" })
   map("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
   map("n", "<leader>lf", function()
     vim.lsp.buf.format { async = true }
   end, { buffer = bufnr, desc = "Format document" })
+
+  map("n", "lk", function()
+    local ufo = require_plugin("ufo")
+    if ufo then
+      local winid = ufo.peekFoldedLinesUnderCursor()
+      if not winid then
+        vim.lsp.buf.hover()
+      end
+    else
+      vim.lsp.buf.hover()
+    end
+  end, { buffer = bufnr, desc = "Type hover" })
 
   map("n", "]g", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
   map("n", "[g", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
@@ -307,27 +272,24 @@ plugin_keymaps.lsp = function(bufnr)
 end
 
 --- Tool: GitSigns
-local gitsigns_status, gitsigns = pcall(require, "gitsigns")
-if gitsigns_status then
-  plugin_keymaps.gitsigns = function(bufnr)
-    -- Navigation
-    map("n", "[g", gitsigns.prev_hunk, { buffer = bufnr, desc = "Previous Git hunk" })
-    map("n", "]g", gitsigns.next_hunk, { buffer = bufnr, desc = "Next Git hunk" })
+plugin_keymaps.gitsigns = function(bufnr)
+  -- Navigation
+  map("n", "[g", function() require('gitsigns').prev_hunk() end, { buffer = bufnr, desc = "Previous Git hunk" })
+  map("n", "]g", function() require('gitsigns').next_hunk() end, { buffer = bufnr, desc = "Next Git hunk" })
 
-    -- Actions
-    map({ "n", "v" }, "<leader>gs", gitsigns.stage_hunk, { buffer = bufnr, desc = "Stage hunk" })
-    map({ "n", "v" }, "<leader>gr", gitsigns.reset_hunk, { buffer = bufnr, desc = "Reset hunk" })
-    map("n", "<leader>gu", gitsigns.undo_stage_hunk, { buffer = bufnr, desc = "Undo stage hunk" })
-    map("n", "<leader>gS", gitsigns.stage_buffer, { buffer = bufnr, desc = "Stage buffer" })
-    map("n", "<leader>gR", gitsigns.reset_buffer, { buffer = bufnr, desc = "Reset buffer" })
+  -- Actions
+  map({ "n", "v" }, "<leader>gs", function() require('gitsigns').stage_hunk() end, { buffer = bufnr, desc = "Stage hunk" })
+  map({ "n", "v" }, "<leader>gr", function() require('gitsigns').reset_hunk() end, { buffer = bufnr, desc = "Reset hunk" })
+  map("n", "<leader>gu", function() require('gitsigns').undo_stage_hunk() end, { buffer = bufnr, desc = "Undo stage hunk" })
+  map("n", "<leader>gS", function() require('gitsigns').stage_buffer() end, { buffer = bufnr, desc = "Stage buffer" })
+  map("n", "<leader>gR", function() require('gitsigns').reset_buffer() end, { buffer = bufnr, desc = "Reset buffer" })
 
-    -- Review
-    map("n", "<leader>gk", gitsigns.preview_hunk, { buffer = bufnr, desc = "Preview hunk" })
-    map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { buffer = bufnr, desc = "Toggle blame line" })
-    map("n", "<leader>gB", function()
-      gitsigns.blame_line { full = true }
-    end, { buffer = bufnr, desc = "Blame line" })
-  end
+  -- Review
+  map("n", "<leader>gk", function() require('gitsigns').preview_hunk() end, { buffer = bufnr, desc = "Preview hunk" })
+  map("n", "<leader>gb", function() require('gitsigns').toggle_current_line_blame() end, { buffer = bufnr, desc = "Toggle blame line" })
+  map("n", "<leader>gB", function()
+    require('gitsigns').blame_line { full = true }
+  end, { buffer = bufnr, desc = "Blame line" })
 end
 
 --- Keymaps of those plugins are setting at the specific configure file

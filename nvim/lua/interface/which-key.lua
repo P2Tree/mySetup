@@ -106,6 +106,7 @@ key.register {
     ["I"] = { name = "inplementation" },
     ["r"] = { name = "reference" },
   },
+  ["d"] = { name = "+debug" },
 
   ["<leader>"] = {
     name = "+<leader>",
@@ -117,8 +118,8 @@ key.register {
     ["c"] = { name = "+comment" },
     ["f"] = { name = "+find" },
     ["g"] = { name = "+git" },
-    ["l"] = {
-      name = "+lsp",
+    ["w"] = { name = "+workspace" },
+    ["l"] = { name = "+lsp",
       ["w"] = { name = "+workspace" },
     },
     -- ["t"] = { name = "+toggle" },
