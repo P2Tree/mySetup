@@ -3,7 +3,14 @@
 -- Automatically download lazy.nvim if it doesn't exist
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system { "git", "clone", "--filter=blob:none", "--single-branch", "https://github.com/folke/lazy.nvim.git", lazypath, }
+  vim.fn.system {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  }
 end
 
 vim.opt.runtimepath:prepend(lazypath)
@@ -11,14 +18,16 @@ vim.opt.runtimepath:prepend(lazypath)
 local lazy = require "lazy"
 
 lazy.setup({
--- 1-Core {{{
-  {  "williamboman/mason.nvim",
+  -- 1-Core {{{
+  {
+    "williamboman/mason.nvim",
     config = function()
       require "core.mason"
     end,
   },
 
-  {  "neovim/nvim-lspconfig",
+  {
+    "neovim/nvim-lspconfig",
     config = function()
       require "core.lspconfig"
     end,
@@ -26,43 +35,45 @@ lazy.setup({
     after = "mason.nvim",
   },
 
-  {  "jose-elias-alvarez/null-ls.nvim",
+  {
+    "jose-elias-alvarez/null-ls.nvim",
     config = function()
       require "core.null-ls"
     end,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      { "jay-babu/mason-null-ls.nvim" }
+      { "jay-babu/mason-null-ls.nvim" },
     },
     after = "mason.nvim",
   },
 
-  {  "ahmedkhalf/project.nvim",
+  {
+    "ahmedkhalf/project.nvim",
     config = function()
       require "core.project"
     end,
   },
 
-  {  "nvim-treesitter/nvim-treesitter",
+  {
+    "nvim-treesitter/nvim-treesitter",
     config = function()
       require "core.treesitter"
     end,
     dependencies = {
       { "RRethy/nvim-treesitter-endwise" },
-      { "nvim-treesitter/nvim-treesitter-textobjects" },
+      -- { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
     build = ":TSUpdate",
   },
 
   { "tpope/vim-sleuth" },
 
-  {  "ii14/emmylua-nvim",
-    lazy = true,
-  },
+  { "ii14/emmylua-nvim", lazy = true },
 
-  {  "editorconfig/editorconfig-vim" },
+  { "editorconfig/editorconfig-vim" },
 
-  {  "kevinhwang91/nvim-fundo",
+  {
+    "kevinhwang91/nvim-fundo",
     requires = "kevinhwang91/promise-async",
     run = function()
       require("fundo").install()
@@ -70,13 +81,14 @@ lazy.setup({
     config = function()
       require "core.fundo"
     end,
-    enabled = false,  -- WIP
+    enabled = false, -- WIP
   },
 
--- end of 1-Core }}}
+  -- end of 1-Core }}}
 
--- 2-Edit {{{
-  {  "hrsh7th/nvim-cmp",
+  -- 2-Edit {{{
+  {
+    "hrsh7th/nvim-cmp",
     config = function()
       require "edit.cmp"
     end,
@@ -88,12 +100,13 @@ lazy.setup({
       { "hrsh7th/cmp-cmdline" },
       { "hrsh7th/cmp-calc" },
       { "saadparwaiz1/cmp_luasnip" },
-      { "lukas-reineke/cmp-under-comparator" },  -- use for sort helper
+      { "lukas-reineke/cmp-under-comparator" }, -- use for sort helper
     },
     event = "VeryLazy",
   },
 
-  {  "L3MON4D3/LuaSnip",
+  {
+    "L3MON4D3/LuaSnip",
     config = function()
       require "edit.snip"
     end,
@@ -103,52 +116,70 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "numToStr/Comment.nvim",
+  {
+    "numToStr/Comment.nvim",
     config = function()
       require "edit.comment"
     end,
     event = "VeryLazy",
   },
 
-  {  "kylechui/nvim-surround",
+  {
+    "kylechui/nvim-surround",
     config = function()
       require "edit.surround"
     end,
     event = "VeryLazy",
   },
 
-  {  "RaafatTurki/hex.nvim",
+  {
+    "RaafatTurki/hex.nvim",
     config = function()
       require "edit.hex"
     end,
   },
 
-  {  "windwp/nvim-autopairs",
+  {
+    "windwp/nvim-autopairs",
     config = function()
       require "edit.autopairs"
     end,
     event = "VeryLazy",
   },
--- end of 2-Edit }}}
 
--- 3-Interface {{{
-  {  "nvim-lualine/lualine.nvim",
+  {
+    "echasnovski/mini.nvim",
+    config = function()
+      require "edit.mini"
+    end,
+    event = "VeryLazy",
+    version = 'stable'
+  },
+  -- end of 2-Edit }}}
+
+  -- 3-Interface {{{
+  {
+    "nvim-lualine/lualine.nvim",
     config = function()
       require "interface.lualine"
     end,
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
     },
+    event = "VeryLazy",
   },
 
-  {  "akinsho/bufferline.nvim",
+  {
+    "akinsho/bufferline.nvim",
     config = function()
       require "interface.bufferline"
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
   },
 
-  {  "utilyre/barbecue.nvim",
+  {
+    "utilyre/barbecue.nvim",
     config = function()
       require "interface.barbecue"
     end,
@@ -158,125 +189,145 @@ lazy.setup({
     },
   },
 
-  {  "luukvbaal/statuscol.nvim",
+  {
+    "luukvbaal/statuscol.nvim",
     enabled = false, -- Requires neovim 0.9
   },
 
-  {  "folke/which-key.nvim",
+  {
+    "folke/which-key.nvim",
     config = function()
       require "interface.which-key"
     end,
   },
 
-  {  "RRethy/vim-illuminate",
+  {
+    "RRethy/vim-illuminate",
     config = function()
       require "interface.illuminate"
     end,
     event = "VeryLazy",
   },
 
-  {  "utilyre/sentiment.nvim",
+  {
+    "utilyre/sentiment.nvim",
     version = "*",
     config = function()
       require "interface.sentiment"
     end,
   },
 
-  {  "kevinhwang91/nvim-ufo",
+  {
+    "kevinhwang91/nvim-ufo",
     config = function()
       require "interface.ufo"
     end,
     dependencies = "kevinhwang91/promise-async",
   },
 
-  {  "m-demare/hlargs.nvim",
+  {
+    "m-demare/hlargs.nvim",
     config = function()
       require "interface.hlargs"
     end,
   },
 
-  {  "zbirenbaum/neodim",
+  {
+    "zbirenbaum/neodim",
     config = function()
       require "interface.dim"
     end,
   },
 
-  {  "lukas-reineke/indent-blankline.nvim",
+  {
+    "lukas-reineke/indent-blankline.nvim",
     config = function()
       require "interface.indent-blankline"
     end,
   },
 
-  {  "stevearc/dressing.nvim",
+  {
+    "stevearc/dressing.nvim",
     config = function()
       require "interface.dressing"
     end,
   },
 
-  {  "ray-x/lsp_signature.nvim",
+  {
+    "ray-x/lsp_signature.nvim",
     config = function()
       require "interface.lsp_signature"
     end,
   },
 
-  {  "onsails/lspkind-nvim",
+  {
+    "onsails/lspkind-nvim",
     config = function()
       require "interface.lspkind"
     end,
   },
 
-  {  "goolord/alpha-nvim",
+  {
+    "goolord/alpha-nvim",
     config = function()
       require "interface.alpha"
     end,
   },
 
-  {  "j-hui/fidget.nvim",
+  {
+    "j-hui/fidget.nvim",
     config = function()
       require "interface.fidget"
     end,
   },
 
-  {  "rcarriga/nvim-notify",
+  {
+    "rcarriga/nvim-notify",
     config = function()
       require "interface.notify"
     end,
   },
 
-  {  "petertriho/nvim-scrollbar",
+  {
+    "petertriho/nvim-scrollbar",
     config = function()
       require "interface.scrollbar"
     end,
   },
 
-  {  "karb94/neoscroll.nvim",
+  {
+    "karb94/neoscroll.nvim",
     config = function()
       require "interface.neoscroll"
     end,
   },
 
-  {  "kevinhwang91/nvim-bqf",
-    ft = 'qf',
+  {
+    "kevinhwang91/nvim-bqf",
+    ft = "qf",
     config = function()
       require "interface.bqf"
     end,
   },
 
-  {  "folke/todo-comments.nvim",
+  {
+    "folke/todo-comments.nvim",
     config = function()
       require "interface.todo-comments"
     end,
   },
 
-  {  "chentoast/marks.nvim",
+  {
+    "chentoast/marks.nvim",
     config = function()
       require "interface.marks"
     end,
   },
--- end of 3-Interface }}}
+  -- end of 3-Interface }}}
 
--- 4-Tool {{{
-  {  "nvim-tree/nvim-tree.lua",
+  -- 4-Tool {{{
+  {
+    "nvim-tree/nvim-tree.lua",
     config = function()
       require "tool.tree"
     end,
@@ -284,7 +335,8 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "nvim-telescope/telescope.nvim",
+  {
+    "nvim-telescope/telescope.nvim",
     config = function()
       require "tool.telescope"
     end,
@@ -308,7 +360,8 @@ lazy.setup({
   },
 
   -- origin hop.nvim repo is phaazon/hop.nvim, but it has bugs and not fix for a long time (since 2022.10), so I found a substitute one
-  {  "aznhe21/hop.nvim",
+  {
+    "aznhe21/hop.nvim",
     config = function()
       require "tool.hop"
     end,
@@ -316,7 +369,8 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "simrat39/symbols-outline.nvim",
+  {
+    "simrat39/symbols-outline.nvim",
     config = function()
       require "tool.symbols-outline"
     end,
@@ -324,19 +378,22 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "lewis6991/gitsigns.nvim",
+  {
+    "lewis6991/gitsigns.nvim",
     config = function()
       require "tool.gitsigns"
     end,
   },
 
-  {  "akinsho/git-conflict.nvim",
+  {
+    "akinsho/git-conflict.nvim",
     config = function()
       require "tool.git-conflict"
     end,
   },
 
-  {  "TimUntersberger/neogit",
+  {
+    "TimUntersberger/neogit",
     config = function()
       require "tool.neogit"
     end,
@@ -347,7 +404,8 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  {  "sindrets/diffview.nvim",
+  {
+    "sindrets/diffview.nvim",
     config = function()
       require "tool.diffview"
     end,
@@ -357,7 +415,8 @@ lazy.setup({
     },
   },
 
-  {  "Shatur/neovim-session-manager",
+  {
+    "Shatur/neovim-session-manager",
     config = function()
       require "tool.session-manager"
     end,
@@ -366,16 +425,18 @@ lazy.setup({
     },
   },
 
-  {  "aserowy/tmux.nvim",
+  {
+    "aserowy/tmux.nvim",
     config = function()
       require "tool.tmux"
     end,
     event = "VeryLazy",
   },
 
-  {  "kevinhwang91/vim-ibus-sw" },
+  { "kevinhwang91/vim-ibus-sw" },
 
-  {  "vuki656/package-info.nvim",
+  {
+    "vuki656/package-info.nvim",
     config = function()
       require "tool.package-info"
     end,
@@ -386,10 +447,11 @@ lazy.setup({
     },
     ft = { "json" },
   },
--- end of 4-Tool }}}
+  -- end of 4-Tool }}}
 
--- 5-Debug {{{
-  {  "mfussenegger/nvim-dap",
+  -- 5-Debug {{{
+  {
+    "mfussenegger/nvim-dap",
     config = function()
       require "debug.dap"
     end,
@@ -399,14 +461,16 @@ lazy.setup({
     },
   },
 
-  {  "theHamsta/nvim-dap-virtual-text",
+  {
+    "theHamsta/nvim-dap-virtual-text",
     config = function()
       require "debug.dap-virtual-text"
     end,
     event = "VeryLazy",
   },
 
-  {  "rcarriga/nvim-dap-ui",
+  {
+    "rcarriga/nvim-dap-ui",
     config = function()
       require "debug.dap-ui"
     end,
@@ -416,21 +480,18 @@ lazy.setup({
     event = "VeryLazy",
   },
 
--- end of 5-Debug }}}
+  -- end of 5-Debug }}}
 
--- 6-Language {{{
-  {  "plasticboy/vim-markdown",
-    ft = { "markdown" },
-  },
+  -- 6-Language {{{
+  { "plasticboy/vim-markdown", ft = { "markdown" } },
 
-  {  "b0o/SchemaStore.nvim",
-    ft = { "json", "jsonc" },
-  },
--- end of 6-Language }}}
+  { "b0o/SchemaStore.nvim", ft = { "json", "jsonc" } },
+  -- end of 6-Language }}}
 
--- 7-Colorscheme {{{
+  -- 7-Colorscheme {{{
   -- Other color schemes can be found in closed_plugins.lua
-  {  "folke/tokyonight.nvim",
+  {
+    "folke/tokyonight.nvim",
     config = function()
       require "colorscheme.tokyonight"
     end,
@@ -442,8 +503,7 @@ lazy.setup({
       require "colorscheme.gruvbox"
     end,
   },
--- end of 7-Colorscheme }}}
-
+  -- end of 7-Colorscheme }}}
 }, {
   -- lazy plugin configuration
   root = vim.fn.stdpath "data" .. "/lazy", -- directory where plugins will be installed

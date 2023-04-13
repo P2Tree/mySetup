@@ -4,8 +4,8 @@ if not blankline then
 end
 
 blankline.setup {
-  show_current_context = true,
-  show_current_context_start = true,
+  show_current_context = false,
+  show_current_context_start = false,
   filetype_exclude = {
     "help",
     "alpha",
