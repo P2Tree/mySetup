@@ -4,6 +4,10 @@ local map = vim.keymap.set
 ---    Normal Keymaps
 --- --------------------
 
+--- better up down line with wrap line
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
 --- Select up or down in insert mode
 map("c", "<C-p>", "<Up>", { desc = "Select up in insert mode" })
 map("c", "<C-n>", "<Down>", { desc = "Select down in insert mode" })
@@ -33,6 +37,10 @@ map("n", "<C-l>", "<C-w>l", { desc = "Focus on the right window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Focus on the up window" })
 map("n", "<C-j>", "<C-w>j", { desc = "Focus on the down window" })
 
+--- Window split
+map("n", "<leader>-", "<C-w>s", { desc = "Split window horizontal" })
+map("n", "<leader>\\", "<C-w>v", { desc = "Split window vertical" })
+
 --- Quit window or buffer
 map("n", "q", function()
   vim.cmd "redraw"
@@ -51,20 +59,37 @@ end, { silent = true, desc = "Close buffer or exit neovim" })
 --- Record mode
 map("n", "Q", "q", { desc = "Record mode (same as origin `q`)" })
 
---- Tab indent
-map("v", "<Tab>", ">gv", { desc = "Text increase indent" })
-map("v", ">>", ">gv", { desc = "Text increase indent" })
-map("v", "<S-Tab>", "<gv", { desc = "Text descrease indent" })
-map("v", "<<", "<gv", { desc = "Text descrease indent" })
+--- Better indent
+map("v", "<Tab>", ">gv")
+map("v", ">>", ">gv")
+map("v", "<S-Tab>", "<gv")
+map("v", "<<", "<gv")
+
+--- Search word under cursor
+map({"n", "x"}, "*", "*N", { remap = true, desc = "Search word under cursor" })
+
+--- switch previous buffer
+map("n", "<Leader>bb", "<Cmd>e #<CR>", { desc = "Switch to other buffer" })
 
 --- Disable search highlight
-map("n", "<Leader><CR>", ":nohl<CR>", { silent = true, desc = "Disable search highlight" })
+map("n", "<Esc>", "<Cmd>nohl<CR><Esc>", { silent = true, desc = "Disable search highlight" })
 
 --- Copy to system clipboard
 map({ "n", "v" }, "Y", '"+y', { desc = "Copy to system clipboard" })
 
 --- Refresh Neovim configure
 map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Refresh neovim configure" })
+
+--- Add undo break-points
+map("i", ",", ",<C-g>u")
+map("i", ".", ".<C-g>u")
+map("i", ";", ";<C-g>u")
+
+--- save file
+map({"i", "v", "n", "s"}, "<C-s>", "<Cmd>w<CR><Esc>", { desc = "Save file" })
+
+--- open quickfix window
+map("n", "<leader>oq", "<Cmd>copen<CR>", { silent = true, desc = "Open Quickfix List" })
 
 --- --------------------
 ---    Plugin Keymaps
@@ -237,7 +262,7 @@ plugin_keymaps.lsp = function(bufnr)
     vim.lsp.buf.format { async = true }
   end, { buffer = bufnr, desc = "Format document" })
 
-  map("n", "lk", function()
+  map("n", "<leader>lk", function()
     local ufo = require_plugin("ufo")
     if ufo then
       local winid = ufo.peekFoldedLinesUnderCursor()
