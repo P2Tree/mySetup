@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    vim.notify("File changed elsewhere, buffer reloaded!", vim.log.levels.WARN, { title = "nvim-config" })
+    vim.notify("File changed elsewhere, buffer reloaded", vim.log.levels.INFO, { title = "nvim-config" })
   end,
   desc = "Auto reload file if changed elsewhere"
 })
@@ -69,10 +69,22 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-      vim.cmd("normal! g'\"")
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
   desc = "Recover cursor position with where last exit",
+})
+
+--- Wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  group = myAutoGroup,
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end
 })
 

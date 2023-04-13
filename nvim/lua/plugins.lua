@@ -97,6 +97,9 @@ lazy.setup({
     config = function()
       require "edit.snip"
     end,
+    -- dependencies = {
+    --   "rafamadriz/friendly-snippets",
+    -- },
     event = "VeryLazy",
   },
 
@@ -430,6 +433,13 @@ lazy.setup({
   {  "folke/tokyonight.nvim",
     config = function()
       require "colorscheme.tokyonight"
+    end,
+  },
+
+  {
+    "ellisonleao/gruvbox.nvim",
+    config = function()
+      require "colorscheme.gruvbox"
     end,
   },
 -- end of 7-Colorscheme }}}

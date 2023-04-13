@@ -46,9 +46,7 @@ map("n", "q", function()
   vim.cmd "redraw"
   local ft = vim.o.filetype
   if ft == "help" or ft == "qf" then
-    vim.cmd "q"
-  elseif #vim.fn.getwininfo() ~= 1 then
-    vim.cmd "close!"
+    vim.cmd "close"
   elseif #vim.fn.getbufinfo { buflisted = 1 } == 1 then
     vim.cmd "q"
   else
@@ -147,10 +145,12 @@ map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" })
 map("n", "<leader>ff", function() require('telescope.builtin').find_files() end, { desc = "Find files" })
 map("n", "<leader>fb", function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
 map("n", "<leader>fh", function() require('telescope.builtin').help_tags() end, { desc = "Find help tags" })
-map("n", "<leader>fo", function() require('telescope.builtin').oldfiles() end, { desc = "Find old files" })
+map("n", "<leader>fr", function() require('telescope.builtin').oldfiles() end, { desc = "Find recent files" })
 map("n", "<leader>fm", function() require('telescope.builtin').marks() end, { desc = "Find marks" })
 map("n", "<leader>fs", function() require('telescope.builtin').symbols() end, { desc = "Find symbols" })
 -- map("n", "<leader>fg", function() require('telescope.builtin').live_grep end, { desc = "Find Live grep" })  -- exchanged by live_grep_args
+map("n", "<leader>fk", function() require('telescope.builtin').keymaps() end, { desc = "Find keymaps" })
+map("n", "<leader>fc", function() require('telescope.builtin').colorscheme() end, { desc = "Find colorscheme" })
 
 --- Tool: Telescope plugins
 --- telescope-project.nvim and project.nvim are the different plugins
@@ -169,7 +169,7 @@ map("n", "<leader>fn", function() require('telescope').extensions.notify.notify(
 -- map("n", "<leader>fdv", function() require('telescope').extensions.dap.variables, { desc = "Variables" })
 -- map("n", "<leader>fdf", function() require('telescope').extensions.dap.frames, { desc = "Frames" })
 --- Need telescope-luasnip
-map("n", "<leader>fc", function() require('telescope').extensions.luasnip.luasnip() end, { desc = "Find snippets" })
+-- map("n", "", function() require('telescope').extensions.luasnip.luasnip() end, { desc = "Find snippets" })
 --- Need telescope-undo.nvim
 -- map("n", "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" })
 

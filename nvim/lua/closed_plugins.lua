@@ -353,14 +353,6 @@ lazy.setup({
 
   -- HACK:
   {
-    "ellisonleao/gruvbox.nvim",
-    config = function()
-      require "colorscheme.gruvbox"
-    end,
-  },
-
-  -- HACK:
-  {
     "navarasu/onedark.nvim",
     config = function()
       require "colorscheme.onedark"
