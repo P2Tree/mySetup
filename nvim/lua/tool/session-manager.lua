@@ -25,6 +25,6 @@ manager.setup {
     "qf",
   },
   autosave_ignore_buftypes = {}, -- All buffers of these buffer types will be closed before the session is saved.
-  autosave_only_in_session = false, -- Always autosaves session. If true, only autosaves after a session is active.
+  autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
   max_path_length = 80, --Shorten the display path if length path if length exceeds this threshold, Use 0 if don't want to shorten the path at all.
 }

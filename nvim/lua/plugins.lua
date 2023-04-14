@@ -187,6 +187,7 @@ lazy.setup({
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons",
     },
+    event = "VeryLazy",
   },
 
   {
@@ -254,13 +255,6 @@ lazy.setup({
   },
 
   {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require "interface.lsp_signature"
-    end,
-  },
-
-  {
     "onsails/lspkind-nvim",
     config = function()
       require "interface.lspkind"
@@ -275,17 +269,23 @@ lazy.setup({
   },
 
   {
-    "j-hui/fidget.nvim",
-    config = function()
-      require "interface.fidget"
-    end,
-  },
-
-  {
     "rcarriga/nvim-notify",
     config = function()
       require "interface.notify"
     end,
+    event = "VeryLazy"
+  },
+
+  {
+    "folke/noice.nvim",
+    config = function()
+      require "interface.noice"
+    end,
+    dependencies = {
+      { "MunifTanjim/nui.nvim" },
+      { "rcarriga/nvim-notify" },  -- optional, use notification view
+    },
+    event = "VeryLazy"
   },
 
   {
@@ -497,10 +497,9 @@ lazy.setup({
     end,
   },
 
-  {
-    "ellisonleao/gruvbox.nvim",
+  {  "EdenEast/nightfox.nvim",
     config = function()
-      require "colorscheme.gruvbox"
+      require "colorscheme.nightfox"
     end,
   },
   -- end of 7-Colorscheme }}}

@@ -27,6 +27,9 @@ map("n", "J", "<C-e>", { remap = true, desc = "Screen tiny step down scroll" })
 map("n", "<PageUp>", "<C-u>", { remap = true, desc = "Screen half step up scroll" })
 map("n", "<PageDown>", "<C-d>", { remap = true, desc = "Screen half step down scroll" })
 
+--- Jump between boundary symbol, drop native `c`
+map({"n", "v"}, "c", "%", { desc = "Jump between boundary symbol (same as `%`)" })
+
 --- Window move
 map("n", "<C-left>", "<C-w>h", { desc = "Focus on the left window" })
 map("n", "<C-right>", "<C-w>l", { desc = "Focus on the right window" })

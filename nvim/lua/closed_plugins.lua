@@ -369,9 +369,10 @@ lazy.setup({
   },
 
   -- HACK:
-  {  "EdenEast/nightfox.nvim",
+  {
+    "ellisonleao/gruvbox.nvim",
     config = function()
-      require "colorscheme.nightfox"
+      require "colorscheme.gruvbox"
     end,
   },
 -- end of 7-Colorscheme }}}
