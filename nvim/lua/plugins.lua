@@ -287,7 +287,12 @@ lazy.setup({
       { "MunifTanjim/nui.nvim" },
       { "rcarriga/nvim-notify" },  -- optional, use notification view
     },
-    event = "VeryLazy"
+    event = "VeryLazy",
+    enabled = function()  -- Currently, neovide is not working with noice
+      if not vim.g.neovide then
+        return true
+      end
+    end
   },
 
   {
@@ -295,6 +300,11 @@ lazy.setup({
     config = function()
       require "interface.scrollbar"
     end,
+    enabled = function()  -- Neovide has native scroll animation
+      if not vim.g.neovide then
+        return true
+      end
+    end
   },
 
   {
@@ -538,7 +548,7 @@ lazy.setup({
     -- install missing plugins on startup. This doesn't increase startup time.
     missing = true,
     -- try to load one of these colorschemes when starting an installation during startup
-    colorscheme = { "habamax" },
+    colorscheme = { "tokyonight" },
   },
   ui = {
     -- a number <1 is a percentage., >1 is a fixed size
