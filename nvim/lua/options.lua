@@ -96,7 +96,7 @@ vim.opt.grepprg = "rg --vimgrep"
 vim.opt.inccommand = "nosplit"
 
 --- status line
-vim.opt.laststatus = 0
+vim.opt.laststatus = 2
 
 --- popup menu
 vim.opt.pumblend = 10
@@ -106,12 +106,13 @@ vim.opt.pumheight = 10
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
 --- avoid hit-enter prompts
-vim.opt.shortmess:append { W = true, I = true, c = true }
+vim.opt.shortmess:append { I = true, c = true, q = true }
 
 --- don't show mode
 vim.opt.showmode = false
 
 --- spelling
+vim.opt.spell = true
 vim.opt.spelllang = { "en" }
 
 --- window split

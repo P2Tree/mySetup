@@ -14,10 +14,12 @@ cmp.setup {
   window = {
     completion = {
       border = "rounded",
+      winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None",
       col_offset = -3,
     },
     documentation = {
       border = "rounded",
+      winhighlight = "Normal:Normal,FloatBorder:Normal,Search:None",
     },
   },
   snippet = {
