@@ -78,13 +78,3 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   desc = "Recover cursor position with where last exit",
 })
 
---- Wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "*" },
-  group = myAutoGroup,
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end
-})
-

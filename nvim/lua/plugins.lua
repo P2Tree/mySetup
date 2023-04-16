@@ -31,8 +31,10 @@ lazy.setup({
     config = function()
       require "core.lspconfig"
     end,
-    dependencies = { "williamboman/mason-lspconfig.nvim" },
-    after = "mason.nvim",
+    dependencies = {
+      { "williamboman/mason.nvim" },
+      { "williamboman/mason-lspconfig.nvim" },
+    },
   },
 
   {
@@ -42,9 +44,9 @@ lazy.setup({
     end,
     dependencies = {
       { "nvim-lua/plenary.nvim" },
+      { "williamboman/mason.nvim" },
       { "jay-babu/mason-null-ls.nvim" },
     },
-    after = "mason.nvim",
   },
 
   {
@@ -74,7 +76,7 @@ lazy.setup({
 
   {
     "kevinhwang91/nvim-fundo",
-    requires = "kevinhwang91/promise-async",
+    dependencies = "kevinhwang91/promise-async",
     run = function()
       require("fundo").install()
     end,
@@ -474,7 +476,7 @@ lazy.setup({
     config = function()
       require "debug.dap-ui"
     end,
-    requires = {
+    dependencies = {
       "mfussenegger/nvim-dap",
     },
     event = "VeryLazy",
