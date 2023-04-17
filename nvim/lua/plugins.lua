@@ -247,6 +247,7 @@ lazy.setup({
     config = function()
       require "interface.indent-blankline"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -257,10 +258,19 @@ lazy.setup({
   },
 
   {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require "interface.lsp_signature"
+    end,
+    event = "VeryLazy",
+  },
+
+  {
     "onsails/lspkind-nvim",
     config = function()
       require "interface.lspkind"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -268,6 +278,14 @@ lazy.setup({
     config = function()
       require "interface.alpha"
     end,
+  },
+
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require "interface.fidget"
+    end,
+    event = "VeryLazy",
   },
 
   {
@@ -279,23 +297,6 @@ lazy.setup({
   },
 
   {
-    "folke/noice.nvim",
-    config = function()
-      require "interface.noice"
-    end,
-    dependencies = {
-      { "MunifTanjim/nui.nvim" },
-      { "rcarriga/nvim-notify" },  -- optional, use notification view
-    },
-    event = "VeryLazy",
-    enabled = function()  -- Currently, neovide is not working with noice
-      if not vim.g.neovide then
-        return true
-      end
-    end
-  },
-
-  {
     "petertriho/nvim-scrollbar",
     config = function()
       require "interface.scrollbar"
@@ -304,7 +305,8 @@ lazy.setup({
       if not vim.g.neovide then
         return true
       end
-    end
+    end,
+    event = "VeryLazy",
   },
 
   {
@@ -312,6 +314,7 @@ lazy.setup({
     config = function()
       require "interface.neoscroll"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -320,6 +323,7 @@ lazy.setup({
     config = function()
       require "interface.bqf"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -327,6 +331,7 @@ lazy.setup({
     config = function()
       require "interface.todo-comments"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -334,6 +339,7 @@ lazy.setup({
     config = function()
       require "interface.marks"
     end,
+    event = "VeryLazy",
   },
   -- end of 3-Interface }}}
 
