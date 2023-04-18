@@ -194,7 +194,14 @@ lazy.setup({
 
   {
     "luukvbaal/statuscol.nvim",
-    enabled = false, -- Requires neovim 0.9
+    config = function()
+      require "interface.statuscol"
+    end,
+    cond = function()
+      if vim.fn.has("nvim-0.9.2") == 1 then
+        return true
+      end
+    end
   },
 
   {
@@ -301,7 +308,7 @@ lazy.setup({
     config = function()
       require "interface.scrollbar"
     end,
-    enabled = function()  -- Neovide has native scroll animation
+    cond = function()  -- Neovide has native scroll animation
       if not vim.g.neovide then
         return true
       end

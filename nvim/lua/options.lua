@@ -105,9 +105,6 @@ vim.opt.pumheight = 10
 --- session options
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 
---- avoid hit-enter prompts
-vim.opt.shortmess:append { I = true, c = true, q = true }
-
 --- don't show mode
 vim.opt.showmode = false
 
@@ -137,6 +134,5 @@ vim.g.loaded_netrwPlugin = 1
 if vim.fn.has("nvim-0.9.0") == 1 then
   --- Keeps the same screen screen lines in all split windows
   vim.opt.splitkeep = "screen"
-  vim.shortmess:append { C = true }
 end
 

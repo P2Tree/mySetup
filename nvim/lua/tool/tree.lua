@@ -14,7 +14,7 @@ tree.setup {
   sync_root_with_cwd = true,
   reload_on_bufenter = true,
   respect_buf_cwd = true,
-  on_attach = "disable",
+  on_attach = require("keymaps").nvimtree,
   -- remove_keymaps = false,
   -- select_prompts = false,
   view = {
