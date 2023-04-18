@@ -72,8 +72,6 @@ lazy.setup({
 
   { "ii14/emmylua-nvim", lazy = true },
 
-  { "editorconfig/editorconfig-vim" },
-
   {
     "kevinhwang91/nvim-fundo",
     dependencies = "kevinhwang91/promise-async",
@@ -198,10 +196,11 @@ lazy.setup({
       require "interface.statuscol"
     end,
     cond = function()
-      if vim.fn.has("nvim-0.9.2") == 1 then
+      if vim.fn.has("nvim-0.9.0") == 1 then
         return true
       end
-    end
+    end,
+    event = "VeryLazy"
   },
 
   {
@@ -209,6 +208,7 @@ lazy.setup({
     config = function()
       require "interface.which-key"
     end,
+    event = "VeryLazy"
   },
 
   {
@@ -643,7 +643,7 @@ lazy.setup({
       disabled_plugins = {
         -- "gzip",
         -- "matchit",
-        -- "matchparen",
+        "matchparen",
         -- "netrwPlugin",
         -- "tarPlugin",
         -- "tohtml",
