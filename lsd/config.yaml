@@ -1,0 +1,21 @@
+# This config is used for `lsd`, and some non-default options listed below
+# To check the all of useable options, find in https://github.com/lsd-rs/lsd#config-file-content
+
+# sort
+sorting:
+  # Whether to group directories together and where
+  # When "classic" is set, this is set to "none"
+  # first | last | none(default)
+  dir-grouping: first
+
+# Whether to display the total size of directories
+# false(default) | true
+total-size: true
+
+# Attach hyperlink to filenames
+# always | auto | never(default)
+hyperlink: auto
+
+# Whether to display block header
+# false(default) | true
+header: true
