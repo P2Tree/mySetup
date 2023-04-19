@@ -109,6 +109,21 @@ lazy.setup({
     event = "VeryLazy",
   },
 
+  {
+    "zbirenbaum/neodim",
+    config = function()
+      require "interface.dim"
+    end,
+    event = "VeryLazy",
+  },
+
+  {
+    "m-demare/hlargs.nvim",
+    config = function()
+      require "interface.hlargs"
+    end,
+  },
+
   -- HACK
   {  "nvim-treesitter/nvim-treesitter-context",
     config = function()

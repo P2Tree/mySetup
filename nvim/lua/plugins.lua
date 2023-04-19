@@ -238,21 +238,6 @@ lazy.setup({
   },
 
   {
-    "m-demare/hlargs.nvim",
-    config = function()
-      require "interface.hlargs"
-    end,
-  },
-
-  {
-    "zbirenbaum/neodim",
-    config = function()
-      require "interface.dim"
-    end,
-    event = "VeryLazy",
-  },
-
-  {
     "lukas-reineke/indent-blankline.nvim",
     config = function()
       require "interface.indent-blankline"
