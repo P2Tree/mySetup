@@ -16,12 +16,12 @@ map("c", "<C-n>", "<Down>", { desc = "Select down in insert mode" })
 map("n", "T", "J", { desc = "Joint two lines together (same as origin `J`)" })
 
 --- Jump to head or tail of the line
-map("n", "H", "^", { desc = "Jump to the head of the line (same as `^`)" })
-map("n", "L", "$", { desc = "Jump to the tail of the line (same as `$`)" })
+map({"n", "v"}, "H", "^", { desc = "Jump to the head of the line (same as `^`)" })
+map({"n", "v"}, "L", "$", { desc = "Jump to the tail of the line (same as `$`)" })
 
 --- Screen tiny step up or down scroll
-map("n", "K", "<C-y>", { remap = true, desc = "Screen tiny step up scroll" })
-map("n", "J", "<C-e>", { remap = true, desc = "Screen tiny step down scroll" })
+map({"n", "v"}, "K", "<C-y>", { remap = true, desc = "Screen tiny step up scroll" })
+map({"n", "v"}, "J", "<C-e>", { remap = true, desc = "Screen tiny step down scroll" })
 
 --- Screen half step up and down scroll
 map("n", "<PageUp>", "<C-u>", { remap = true, desc = "Screen half step up scroll" })
@@ -76,7 +76,7 @@ map("n", "<Leader>bb", "<Cmd>e #<CR>", { desc = "Switch to other buffer" })
 map("n", "<Esc>", "<Cmd>nohl<CR><Esc>", { silent = true, desc = "Disable search highlight" })
 
 --- Copy to system clipboard
-map({ "n", "v" }, "Y", '"+y', { desc = "Copy to system clipboard" })
+map({"n", "v"}, "Y", '"+y', { desc = "Copy to system clipboard" })
 
 --- Refresh Neovim configure
 map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Refresh neovim configure" })
@@ -177,12 +177,12 @@ map("n", "<leader>fn", function() require('telescope').extensions.notify.notify(
 -- map("n", "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" })
 
 --- Tool: HOP
-map({ "n", "v" }, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
-map({ "n", "v" }, "F", "<Cmd>HopChar1CurrentLineBC<CR>", { desc = "Jump to char after in current line" })
-map({ "n", "v", "o" }, "ss", "<Cmd>HopChar1<CR>", { desc = "Jump to char" })
-map({ "n", "v", "o" }, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
-map({ "n", "v", "o" }, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
-map({ "n", "v", "o" }, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
+map({"n", "v"}, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
+map({"n", "v"}, "F", "<Cmd>HopChar1CurrentLineBC<CR>", { desc = "Jump to char after in current line" })
+map({"n", "v", "o"}, "ss", "<Cmd>HopChar1<CR>", { desc = "Jump to char" })
+map({"n", "v", "o"}, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
+map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
+map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
 
 --- Tool: Symbols-Outline
 map("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })
@@ -307,8 +307,8 @@ plugin_keymaps.gitsigns = function(bufnr)
   map("n", "]g", function() api.next_hunk() end, { buffer = bufnr, desc = "Next Git hunk" })
 
   -- Actions
-  map({ "n", "v" }, "<leader>gs", function() api.stage_hunk() end, { buffer = bufnr, desc = "Stage hunk" })
-  map({ "n", "v" }, "<leader>gr", function() api.reset_hunk() end, { buffer = bufnr, desc = "Reset hunk" })
+  map({"n", "v"}, "<leader>gs", function() api.stage_hunk() end, { buffer = bufnr, desc = "Stage hunk" })
+  map({"n", "v"}, "<leader>gr", function() api.reset_hunk() end, { buffer = bufnr, desc = "Reset hunk" })
   map("n", "<leader>gu", function() api.undo_stage_hunk() end, { buffer = bufnr, desc = "Undo stage hunk" })
   map("n", "<leader>gS", function() api.stage_buffer() end, { buffer = bufnr, desc = "Stage buffer" })
   map("n", "<leader>gR", function() api.reset_buffer() end, { buffer = bufnr, desc = "Reset buffer" })

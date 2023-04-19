@@ -9,7 +9,7 @@ end
 vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
-    prefix = "●",
+    prefix = "", -- ●
     severity = vim.diagnostic.severity.ERROR,
   },
   float = {
