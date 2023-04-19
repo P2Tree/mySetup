@@ -136,22 +136,13 @@ lazy.setup({
     cmd = { "CodeActionMenu" },
   },
 
-  -- HACK: substitute of nvim-scrollbar
-  {  "dstein64/nvim-scrollview" },
-
-  -- HACK: substitute for nvim-scrollbar, which support search results, lsp diagnostics and git hunks. Disable because it's work in progress
-  {  "lewis6991/satellite.nvim",
+  -- HACK: substitute of satellite.nvim
+  {
+    "petertriho/nvim-scrollbar",
     config = function()
-      -- require "interface.satellite"
-      require('satellite').setup()
+      require "interface.scrollbar"
     end,
-  },
-
-  -- HACK: A substitute for nvim-scrollbar
-  { "gorbit99/codewindow.nvim",
-    config = function()
-      require "interface.codewindow"
-    end,
+    event = "VeryLazy",
   },
 
   -- TEST: I don't like it

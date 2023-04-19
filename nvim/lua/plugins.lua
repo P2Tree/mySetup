@@ -292,15 +292,9 @@ lazy.setup({
     event = "VeryLazy"
   },
 
-  {
-    "petertriho/nvim-scrollbar",
+  {  "lewis6991/satellite.nvim",
     config = function()
-      require "interface.scrollbar"
-    end,
-    cond = function()  -- Neovide has native scroll animation
-      if not vim.g.neovide then
-        return true
-      end
+      require "interface.satellite"
     end,
     event = "VeryLazy",
   },
@@ -309,6 +303,11 @@ lazy.setup({
     "karb94/neoscroll.nvim",
     config = function()
       require "interface.neoscroll"
+    end,
+    cond = function()  -- Neovide has native scroll animation
+      if not vim.g.neovide then
+        return true
+      end
     end,
     event = "VeryLazy",
   },
