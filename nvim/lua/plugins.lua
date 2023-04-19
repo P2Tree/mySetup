@@ -24,6 +24,7 @@ lazy.setup({
     config = function()
       require "core.mason"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -70,7 +71,7 @@ lazy.setup({
 
   { "tpope/vim-sleuth" },
 
-  { "ii14/emmylua-nvim", lazy = true },
+  { "ii14/emmylua-nvim" },
 
   {
     "kevinhwang91/nvim-fundo",
@@ -233,6 +234,7 @@ lazy.setup({
       require "interface.ufo"
     end,
     dependencies = "kevinhwang91/promise-async",
+    event = "VeryLazy",
   },
 
   {
@@ -247,6 +249,7 @@ lazy.setup({
     config = function()
       require "interface.dim"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -262,6 +265,7 @@ lazy.setup({
     config = function()
       require "interface.dressing"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -408,6 +412,7 @@ lazy.setup({
     config = function()
       require "tool.gitsigns"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -415,6 +420,7 @@ lazy.setup({
     config = function()
       require "tool.git-conflict"
     end,
+    event = "VeryLazy",
   },
 
   {
@@ -438,6 +444,7 @@ lazy.setup({
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+    event = "VeryLazy",
   },
 
   {
@@ -458,7 +465,10 @@ lazy.setup({
     event = "VeryLazy",
   },
 
-  { "kevinhwang91/vim-ibus-sw" },
+  {
+    "kevinhwang91/vim-ibus-sw",
+    event = "VeryLazy",
+  },
 
   {
     "vuki656/package-info.nvim",
