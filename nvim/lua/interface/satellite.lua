@@ -5,7 +5,7 @@ end
 
 satellite.setup {
   current_only = false,
-  winblend = 50,
+  winblend = 0,
   zindex = 40,
   excluded_filetypes = {},
   width = 2,

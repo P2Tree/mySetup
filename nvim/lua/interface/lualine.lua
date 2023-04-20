@@ -29,7 +29,7 @@ local function lsp()
     return ""
   end
   local names = {}
-  local ignored = { "null-ls", "copilot" }
+  local ignored = { "null-ls" }
   for _, client in ipairs(clients) do
     if not vim.tbl_contains(ignored, client.name) then
       table.insert(names, client.name)
@@ -66,8 +66,8 @@ lualine.setup {
     },
   },
   options = {
+    theme = 'tokyonight',
     icons_enabled = true,
-    -- theme = "catppuccin",  -- if you use catppuccin as theme
     disabled_filetypes = {
       "alpha",
     },
