@@ -69,8 +69,6 @@ lazy.setup({
     build = ":TSUpdate",
   },
 
-  { "tpope/vim-sleuth" },
-
   { "ii14/emmylua-nvim" },
 
   {
@@ -154,7 +152,6 @@ lazy.setup({
       require "edit.mini"
     end,
     event = "VeryLazy",
-    version = 'stable'
   },
   -- end of 2-Edit }}}
 

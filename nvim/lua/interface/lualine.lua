@@ -83,5 +83,6 @@ lualine.setup {
     "toggleterm",
     "symbols-outline",
     "nvim-dap-ui",
+    "lazy",
   },
 }
