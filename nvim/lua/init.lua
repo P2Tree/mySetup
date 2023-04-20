@@ -6,7 +6,7 @@ end
 
 require "options"
 require "utils"
-require "plugins"
+require "core.lazy"
 require "autocmds"
 require "keymaps"
 require "llvm"
