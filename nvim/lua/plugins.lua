@@ -380,6 +380,11 @@ Plugins = {
   },
 
   {
+    "chrisgrieser/nvim-spider",
+    event = "VeryLazy",
+  },
+
+  {
     "simrat39/symbols-outline.nvim",
     config = function()
       require "tool.symbols-outline"

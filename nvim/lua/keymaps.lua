@@ -184,6 +184,12 @@ map({"n", "v", "o"}, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
 map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
 map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
 
+--- Tool: Spider
+map({"n", "o", "x"}, "w", function() require('spider').motion('w') end, { desc = "Spider 'w' move" })
+map({"n", "o", "x"}, "e", function() require('spider').motion('e') end, { desc = "Spider 'e' move" })
+map({"n", "o", "x"}, "b", function() require('spider').motion('b') end, { desc = "Spider 'b' move" })
+map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end, { desc = "Spider 'ge' move" })
+
 --- Tool: Symbols-Outline
 map("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })
 
