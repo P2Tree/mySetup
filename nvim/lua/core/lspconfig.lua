@@ -58,10 +58,7 @@ local default_option = {}
 default_option.on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-  -- Disable semantic tokens
-  client.server_capabilities.semanticTokensProvider = nil
-
+  -- Custom keymaps of lsp
   require("keymaps").lsp(bufnr)
 end
 

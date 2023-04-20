@@ -124,22 +124,22 @@ tree.setup {
   --   cmd = "",
   --   args = {},
   -- },
-  diagnostics = {
-    enable = true,
-    show_on_dirs = false,
-    show_on_open_dirs = true,
-    debounce_delay = 50,
-    severity = {
-      min = vim.diagnostic.severity.HINT,
-      max = vim.diagnostic.severity.ERROR,
-    },
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    },
-  },
+  -- diagnostics = {
+  --   enable = false,
+  --   show_on_dirs = false,
+  --   show_on_open_dirs = true,
+  --   debounce_delay = 50,
+  --   severity = {
+  --     min = vim.diagnostic.severity.HINT,
+  --     max = vim.diagnostic.severity.ERROR,
+  --   },
+  --   icons = {
+  --     hint = "",
+  --     info = "",
+  --     warning = "",
+  --     error = "",
+  --   },
+  -- },
   filters = {
     dotfiles = true,
     -- git_clean = false,
@@ -152,18 +152,18 @@ tree.setup {
   --   debounce_delay = 50,
   --   ignore_dirs = {},
   -- },
-  -- git = {
-  --   enable = true,
+  git = {
+    enable = false,
   --   ignore = true,
   --   show_on_dirs = true,
   --   show_on_open_dirs = true,
   --   timeout = 400,
-  -- },
-  -- modified = {
-  --   enable = false,
-  --   show_on_dirs = true,
-  --   show_on_open_dirs = true,
-  -- },
+  },
+  modified = {
+    enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+  },
   actions = {
     -- use_system_clipboard = true,
     -- change_dir = {
