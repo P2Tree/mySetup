@@ -271,7 +271,7 @@ lazy.setup({
     config = function()
       require "interface.alpha"
     end,
-  },
+  }, -- don't support lazy load
 
   {
     "j-hui/fidget.nvim",
@@ -333,6 +333,21 @@ lazy.setup({
     end,
     event = "VeryLazy",
   },
+
+  {
+    "Bekaboo/deadcolumn.nvim",
+    config = function()
+      require "interface.deadcolumn"
+    end,
+    event = "VeryLazy",
+  },
+
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require('colorizer').setup()
+    end,
+  }, -- don't support lazy load
   -- end of 3-Interface }}}
 
   -- 4-Tool {{{
