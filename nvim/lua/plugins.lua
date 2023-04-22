@@ -110,9 +110,6 @@ Plugins = {
 
   {
     "kylechui/nvim-surround",
-    config = function()
-      require "edit.surround"
-    end,
     event = "VeryLazy",
   },
 

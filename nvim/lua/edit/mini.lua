@@ -76,4 +76,3 @@ if mini_indentscope then
     symbol = '│',
   })
 end
-

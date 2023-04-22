@@ -9,8 +9,8 @@ end
 vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
-    prefix = "", -- ●
-    severity = vim.diagnostic.severity.ERROR,
+    prefix = "●",
+    severity = vim.diagnostic.severity.ERROR
   },
   float = {
     severity_sort = true,

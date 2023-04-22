@@ -27,9 +27,6 @@ map({"n", "v"}, "J", "<C-e>", { remap = true, desc = "Screen tiny step down scro
 map("n", "<PageUp>", "<C-u>", { remap = true, desc = "Screen half step up scroll" })
 map("n", "<PageDown>", "<C-d>", { remap = true, desc = "Screen half step down scroll" })
 
---- Jump between boundary symbol, drop native `c`
-map({"n", "v"}, "c", "%", { desc = "Jump between boundary symbol (same as `%`)" })
-
 --- Window move
 map("n", "<C-left>", "<C-w>h", { desc = "Focus on the left window" })
 map("n", "<C-right>", "<C-w>l", { desc = "Focus on the right window" })
@@ -283,8 +280,8 @@ plugin_keymaps.lsp = function(bufnr)
     end
   end, { buffer = bufnr, desc = "Type hover" })
 
-  map("n", "]g", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
-  map("n", "[g", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
+  map("n", "]l", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
+  map("n", "[l", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
 
   map("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
   map("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
