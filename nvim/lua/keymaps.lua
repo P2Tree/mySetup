@@ -190,6 +190,10 @@ map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end, { desc
 --- Tool: Symbols-Outline
 map("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })
 
+--- Tool: Formatter 
+map("n", "=", "<Cmd>Format<CR>", { desc = "Format code"})
+map("v", "=", "<Cmd>'<,'>Format<CR>", { desc = "Format code"})
+
 --- Tool: Git-Conflict
 map('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "Git Conflict Choose Ours" })
 map('n', '<leader>gct', '<Plug>(git-conflict-theirs)', { desc = "Git Conflict Choose Theirs" })
