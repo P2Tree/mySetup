@@ -146,10 +146,7 @@ Plugins = {
     config = function()
       require "interface.lualine"
     end,
-    dependencies = {
-      { "nvim-tree/nvim-web-devicons" },
-    },
-    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
   {
@@ -158,7 +155,6 @@ Plugins = {
       require "interface.bufferline"
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "VeryLazy",
   },
 
   {

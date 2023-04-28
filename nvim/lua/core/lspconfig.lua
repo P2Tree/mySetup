@@ -10,7 +10,7 @@ vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     prefix = "●",
-    severity = vim.diagnostic.severity.ERROR
+    severity = vim.diagnostic.severity.WARNING
   },
   float = {
     severity_sort = true,
@@ -20,7 +20,7 @@ vim.diagnostic.config {
 }
 
 -- Set diagnostic icons
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
