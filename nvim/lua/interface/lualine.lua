@@ -1,26 +1,6 @@
 local lualine = require_plugin("lualine")
-local lazy_status = require_plugin("lazy.status")
-if not lualine or not lazy_status then
+if not lualine then
   return
-end
-
-local function diff_source()
-  local gitsigns = vim.b.gitsigns_status_dict
-  if gitsigns then
-    return {
-      added = gitsigns.added,
-      modified = gitsigns.changed,
-      removed = gitsigns.removed,
-    }
-  end
-end
-
-local function indent()
-  if vim.o.expandtab then
-    return "SW:" .. vim.o.shiftwidth
-  else
-    return "TS:" .. vim.o.tabstop
-  end
 end
 
 local function lsp()
@@ -43,29 +23,39 @@ local function lsp()
   end
 end
 
+local function is_buffer_empty()
+  return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+end
+
 lualine.setup {
   sections = {
+    lualine_a = {
+      { "mode", icon = "" },
+    },
     lualine_b = {
-      { "b:gitsigns_head", icon = "" },
-      { "diff", source = diff_source },
-      "diagnostics",
+      { "filename", cond = is_buffer_empty, color = { gui = 'bold' } },
+      { "progress" },
     },
     lualine_c = {
-      { lsp, },
+      { "diagnostics",
+        sources = { 'nvim_diagnostic' },
+        symbols = { error = ' ', warn = ' ', info = ' ' },
+      },
     },
     lualine_x = {
-      {
-        lazy_status.updates,
-        cond = lazy_status.has_updates,
-        color = { fg = "#ff9e64" },
-      },
-      "filetype",
-      indent,
-      "encoding",
-      "fileformat",
+      { 'diff', symbols = { added = ' ', modified = ' ', removed = ' ' } }
     },
+    lualine_y = {
+      { "branch", icon = "", color = { gui = 'bold' } },
+      { lsp },
+    },
+    lualine_z = {
+      { "encoding", fmt = string.upper } ,
+    }
   },
   options = {
+    component_separators = '',
+    section_separators = { left = "", right = "" },
     theme = 'tokyonight',
     icons_enabled = true,
     disabled_filetypes = {
@@ -73,8 +63,6 @@ lualine.setup {
     },
     always_divide_middle = true,
     globalstatus = false,
-    section_separators = { left = "", right = "" },
-    component_separators = { left = "", right = "" },
   },
   extensions = {
     "man",

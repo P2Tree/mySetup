@@ -100,7 +100,7 @@ telescope.setup {
       theme = "dropdown",
     },
     buffers = {
-      sort_lastused = true,
+      sort_lastused = false,
     },
   },
   extensions = {

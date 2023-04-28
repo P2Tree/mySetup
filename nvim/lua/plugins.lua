@@ -110,6 +110,9 @@ Plugins = {
 
   {
     "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup()
+    end,
     event = "VeryLazy",
   },
 
@@ -405,7 +408,7 @@ Plugins = {
     end,
     event = "VeryLazy",
   },
-  
+
   {
     "akinsho/git-conflict.nvim",
     config = function()
