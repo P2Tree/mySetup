@@ -203,8 +203,8 @@ plugin_keymaps.symbolsoutline_toggle = {
 }
 
 --- Tool: Formatter
-map("n", "=", "<Cmd>Format<CR>", { desc = "Format code"})
-map("v", "=", "<Cmd>'<,'>Format<CR>", { desc = "Format code"})
+map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
+map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
 
 --- Tool: Git-Conflict
 map('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "Git Conflict Choose Ours" })

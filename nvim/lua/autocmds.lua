@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    vim.highlight.on_yank {  timeout = 100 }
+    vim.highlight.on_yank { timeout = 100 }
   end,
   desc = "Highlight on yank"
 })
@@ -27,8 +27,8 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   group = myAutoGroup,
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions
-                            - "o"  -- O and o, don't continue comments
-                            + "r"  -- but do continue when pressing enter.
+        - "o" -- O and o, don't continue comments
+        + "r" -- but do continue when pressing enter.
   end,
   desc = "Do not insert comment sign when input o and O"
 })
@@ -77,4 +77,3 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   end,
   desc = "Recover cursor position with where last exit",
 })
-
