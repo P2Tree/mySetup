@@ -5,14 +5,13 @@ end
 
 local extensions = {
   "fzf",
-  "live_grep_args",
   "hop",
+  "notify",
+  "luasnip",
+  -- "live_grep_args",
   -- "undo",
   -- "projects",
-  "media_files",
-  "notify",
   -- "dap",
-  "luasnip",
 }
 
 -- Hot-reloaded function for telescope-hop
@@ -90,14 +89,10 @@ telescope.setup {
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
   },
   pickers = {
-    find_files = {
-      theme = "ivy",
-    },
-    oldfiles = {
-      theme = "ivy",
-    },
-    live_grep = {
-      theme = "dropdown",
+    -- Here can custom themes for each plugins
+    -- Themes: leave empty for default | "cursor" | "dropdown" | "ivy"
+    symbols = {
+      theme = "cursor",
     },
     buffers = {
       sort_lastused = false,
@@ -110,9 +105,6 @@ telescope.setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
-    },
-    live_grep_args = {
-      theme = "dropdown",
     },
     hop = {
       -- the shown `keys` are the defaults, no need to set `keys` if defaults work for you ;)
@@ -141,12 +133,6 @@ telescope.setup {
       layout_config = {
         preview_height = 0.8,
       },
-    },
-    media_files = {
-      -- filetypes whitelist
-      -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-      filetypes = { "png", "jpg", "mp4", "webm" },
-      find_cwd = "rg",
     },
   },
 }

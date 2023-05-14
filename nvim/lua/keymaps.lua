@@ -1,4 +1,5 @@
 local map = vim.keymap.set
+local plugin_keymaps = {}
 
 --- --------------------
 ---    Normal Keymaps
@@ -53,6 +54,11 @@ map("n", "q", function()
     vim.cmd "bp | bd #"
   end
 end, { silent = true, desc = "Close buffer or exit neovim" })
+
+vim.api.nvim_set_keymap("n", "gx",
+  [[:silent execute '!open ' . shellescape(expand('<cfile>'), 1)<CR>]],
+  { desc = "Open URL under cursor with browser" }
+  )
 
 --- Record mode
 map("n", "Q", "q", { desc = "Record mode (same as origin `q`)" })
@@ -138,40 +144,44 @@ map('n', 'zr', function() require('ufo').openFoldsExceptKinds() end, { desc = "O
 map('n', 'zm', function() require('ufo').closeFoldsWith() end, { desc = "Close specific number fold code" })  -- closeAllFolds == closeFoldsWith(0)
 --- NOTE: 'za', 'zc', 'zo' is the native keymaps of Neovim
 
---- Nvim-tree
-map("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" })
+--- Interface: Nvim-tree
+plugin_keymaps.nvimtree_toggle = {
+  { "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" } }
+}
 
 --- Tool: Telescope builtin
-map("n", "<leader>ff", function() require('telescope.builtin').find_files() end, { desc = "Find files" })
-map("n", "<leader>fb", function() require('telescope.builtin').buffers() end, { desc = "Find buffers" })
-map("n", "<leader>fh", function() require('telescope.builtin').help_tags() end, { desc = "Find help tags" })
-map("n", "<leader>fr", function() require('telescope.builtin').oldfiles() end, { desc = "Find recent files" })
-map("n", "<leader>fm", function() require('telescope.builtin').marks() end, { desc = "Find marks" })
-map("n", "<leader>fs", function() require('telescope.builtin').symbols() end, { desc = "Find symbols" })
--- map("n", "<leader>fg", function() require('telescope.builtin').live_grep end, { desc = "Find Live grep" })  -- exchanged by live_grep_args
-map("n", "<leader>fk", function() require('telescope.builtin').keymaps() end, { desc = "Find keymaps" })
-map("n", "<leader>fc", function() require('telescope.builtin').colorscheme() end, { desc = "Find colorscheme" })
+plugin_keymaps.telescope_toggle = {
+  { "<leader>ff", ":Telescope find_files<CR>", { desc = "Find files" } },
+  { "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffers" } },
+  { "<leader>fh", ":Telescope help_tags<CR>", { desc = "Find help tags" } },
+  { "<leader>fr", ":Telescope oldfiles<CR>", { desc = "Find recent files" } },
+  { "<leader>fm", ":Telescope marks<CR>", { desc = "Find marks" } },
+  { "<leader>fs", ":Telescope symbols<CR>", { desc = "Find symbols" } },
+  { "<leader>fg", ":Telescope live_grep<CR>", { desc = "Find Live grep" } },  -- exchanged by live_grep_args
+  { "<leader>fk", ":Telescope keymaps<CR>", { desc = "Find keymaps" } },
+  { "<leader>fc", ":Telescope colorscheme<CR>", { desc = "Find colorscheme" } },
 
---- Tool: Telescope plugins
---- telescope-project.nvim and project.nvim are the different plugins
---- projects.nvim is a all in one plugins for projects managerment,
---- but telescope-project.nvim is only a extension for telescope to manage projects.
--- map("n", "<leader>fp", function() require('telescope').extensions.project.project end, { desc = "Project" })
--- map("n", "<leader>fp", function() require('telescope').extensions.projects.projects end, { desc = "Find project" })
---- Need telescope-live-grep-args
-map("n", "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end, {  desc = "Find Live grep" })
---- Need notify
-map("n", "<leader>fn", function() require('telescope').extensions.notify.notify() end, { desc = "Find notify" })
---- Need telescope-dap
--- map("n", "<leader>fde", function() require('telescope').extensions.dap.commands, { desc = "Commands" })
--- map("n", "<leader>fdc", function() require('telescope').extensions.dap.configurations, { desc = "Configurations" })
--- map("n", "<leader>fdb", function() require('telescope').extensions.dap.list_breakpoints, { desc = "Breakpoints" })
--- map("n", "<leader>fdv", function() require('telescope').extensions.dap.variables, { desc = "Variables" })
--- map("n", "<leader>fdf", function() require('telescope').extensions.dap.frames, { desc = "Frames" })
---- Need telescope-luasnip
--- map("n", "", function() require('telescope').extensions.luasnip.luasnip() end, { desc = "Find snippets" })
---- Need telescope-undo.nvim
--- map("n", "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" })
+  --- Tool: Telescope plugins
+  --- telescope-project.nvim and project.nvim are the different plugins
+  --- projects.nvim is a all in one plugins for projects managerment,
+  --- but telescope-project.nvim is only a extension for telescope to manage projects.
+  -- { "<leader>fp", function() require('telescope').extensions.project.project end, { desc = "Project" } },
+  -- { "<leader>fp", function() require('telescope').extensions.projects.projects end, { desc = "Find project" } },
+  --- Need telescope-live-grep-args
+  -- { "<leader>fg", function() require('telescope').extensions.live_grep_args.live_grep_args() end, {  desc = "Find Live grep" } },
+  --- Need notify
+  { "<leader>fn", function() require('telescope').extensions.notify.notify() end, { desc = "Find notify" } },
+  --- Need telescope-dap
+  -- { "<leader>fde", function() require('telescope').extensions.dap.commands, { desc = "Commands" } },
+  -- { "<leader>fdc", function() require('telescope').extensions.dap.configurations, { desc = "Configurations" } },
+  -- { "<leader>fdb", function() require('telescope').extensions.dap.list_breakpoints, { desc = "Breakpoints" } },
+  -- { "<leader>fdv", function() require('telescope').extensions.dap.variables, { desc = "Variables" } },
+  -- { "<leader>fdf", function() require('telescope').extensions.dap.frames, { desc = "Frames" } },
+  --- Need telescope-luasnip
+  -- { "<leader>fsp", function() require('telescope').extensions.luasnip.luasnip() end, { desc = "Find snippets" } },
+  --- Need telescope-undo.nvim
+  -- { "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" } },
+}
 
 --- Tool: HOP
 map({"n", "v"}, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
@@ -188,9 +198,11 @@ map({"n", "o", "x"}, "b", function() require('spider').motion('b') end, { desc =
 map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end, { desc = "Spider 'ge' move" })
 
 --- Tool: Symbols-Outline
-map("n", "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" })
+plugin_keymaps.symbolsoutline_toggle = {
+  { "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" } }
+}
 
---- Tool: Formatter 
+--- Tool: Formatter
 map("n", "=", "<Cmd>Format<CR>", { desc = "Format code"})
 map("v", "=", "<Cmd>'<,'>Format<CR>", { desc = "Format code"})
 
@@ -204,7 +216,9 @@ map('n', '[x', '<Plug>(git-conflict-prev-conflict)', { desc = "Git Conflict Choo
 map('n', ']x', '<Plug>(git-conflict-next-conflict)', { desc = "Git Conflict Choose Next One" })
 
 --- Tool: NeoGit
-map("n", "<leader>gg", "<Cmd>Neogit<CR>", { desc = "Open Neogit" })
+plugin_keymaps.neogit_toggle = {
+  { "<leader>gg", "<Cmd>Neogit<CR>", { desc = "Open Neogit" } }
+}
 
 --- Tool: Diffview
 map("n", "<leader>gdo", "<Cmd>DiffviewOpen<CR>", { desc = "Open Diffview" })
@@ -255,7 +269,6 @@ map("n", "<leader>du", function() require('dap-ui').toggle() end, { desc = "Togg
 --- ---------------------
 ---    Plugin handlers
 --- ---------------------
-local plugin_keymaps = {}
 
 --- Core: LSP Mappings
 --- See `:help vim.lsp.*` for documentation on any of the below functions
