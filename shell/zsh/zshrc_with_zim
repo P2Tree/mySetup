@@ -202,3 +202,35 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Start tmux
+if [[ "`tty`" != "not a tty" && -z "${TMUX}" && -o login ]]; then
+  tmux -V > /dev/null 2>&1
+  if [[ $? == 0 ]]; then
+    echo "ﱘ Current tmux sessions:"
+    tmux ls
+    if [[ $? == 0 ]]; then
+      echo -n "ﱘ Select a tmux session name or create new session (Leave empty without tmux launch):"
+      read line
+      if [[ -z "$line" ]]; then
+        unset line
+        clear
+      else
+        exec `tmux a -t $line`
+        unset line
+      fi
+    else
+      echo -n "ﱘ Create new tmux session? (y/n) "
+      read input
+      if [[ $input == 'y' || $input == 'Y' ]]; then
+        unset input
+        exec `tmux`
+      else
+        unset input
+        clear
+      fi
+    fi
+  else
+    echo "Warning: tmux can't work well, won't launch it!"
+  fi
+fi
