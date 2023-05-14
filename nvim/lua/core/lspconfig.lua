@@ -1,7 +1,7 @@
-local lspconfig = require_plugin("lspconfig")
-local cmp_nvim_lsp = require_plugin("cmp_nvim_lsp")
-local mason = require_plugin("mason-lspconfig")
-if not lspconfig or not cmp_nvim_lsp or not mason then
+local lspconfig = require_plugin "lspconfig"
+local cmp_nvim_lsp = require_plugin "cmp_nvim_lsp"
+local mason_lspconfig = require_plugin "mason-lspconfig"
+if not lspconfig or not cmp_nvim_lsp or not mason_lspconfig then
   return
 end
 
@@ -10,7 +10,7 @@ vim.diagnostic.config {
   virtual_text = {
     spacing = 4,
     prefix = "●",
-    severity = vim.diagnostic.severity.WARNING
+    severity = vim.diagnostic.severity.WARNING,
   },
   float = {
     severity_sort = true,
@@ -62,9 +62,35 @@ default_option.on_attach = function(client, bufnr)
   require("keymaps").lsp(bufnr)
 end
 
-mason.setup()
+mason_lspconfig.setup {
+  -- A list of servers to automatically install if they are not already installed.
+  -- This setting has no relatino with the `automatic_installation` setting.
+  -- @type string[]
+  ensure_installed = {
+    "clangd",
+    "pyright",
+    "bashls",
+    "jsonls",
+    "lua_ls",
+  },
 
-mason.setup_handlers {
+  -- Whether servers that are set up (via lspconfig) should be automatically installed
+  -- if they're not already installed.
+  -- This setting has no relation with the `ensure_installed` setting.
+  -- Can either be:
+  --   - false: Servers are not automatically installed.
+  --   - true: All servers set up via lspconfig are automatically installed.
+  --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided
+  --       in the list, are automatically installed.
+  -- @type boolean
+  automatic_installation = false,
+
+  -- See `:h mason-lspconfig.setup_handlers()`
+  -- @type table<string, fun(server_name: string)>?
+  handlers = nil,
+}
+
+mason_lspconfig.setup_handlers {
   --- Default handler and will be called for each installed server that
   --- doesn't have a dedicated handler
   function(server)
@@ -118,26 +144,26 @@ mason.setup_handlers {
           },
           runtime = {
             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT',
+            version = "LuaJIT",
           },
           diagnostics = {
             -- Get the language server to recognize the 'vim' global
-            globals = { 'vim' },
+            globals = { "vim" },
           },
           workspace = {
             -- Make the server aware of Neovim runtime files
-            library =  {
+            library = {
               vim.api.nvim_get_runtime_file("", true),
               ["${3rd}/luassert/library"] = true,
               ["${3rd}/luv/library"] = true,
-            }
+            },
           },
           -- Do not send telemetry data containing a randomized but unique identifier
           telemetry = {
             enable = false,
-          }
-        }
-      }
+          },
+        },
+      },
     }
   end,
 

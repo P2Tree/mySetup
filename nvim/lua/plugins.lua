@@ -174,11 +174,11 @@ Plugins = {
       require "interface.statuscol"
     end,
     cond = function()
-      if vim.fn.has("nvim-0.9.0") == 1 then
+      if vim.fn.has "nvim-0.9.0" == 1 then
         return true
       end
     end,
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {
@@ -186,7 +186,7 @@ Plugins = {
     config = function()
       require "interface.which-key"
     end,
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
   {
@@ -266,10 +266,11 @@ Plugins = {
     config = function()
       require "interface.notify"
     end,
-    event = "VeryLazy"
+    event = "VeryLazy",
   },
 
-  {  "lewis6991/satellite.nvim",
+  {
+    "lewis6991/satellite.nvim",
     config = function()
       require "interface.satellite"
     end,
@@ -281,7 +282,7 @@ Plugins = {
     config = function()
       require "interface.neoscroll"
     end,
-    cond = function()  -- Neovide has native scroll animation
+    cond = function() -- Neovide has native scroll animation
       if not vim.g.neovide then
         return true
       end
@@ -325,7 +326,7 @@ Plugins = {
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
-      require('colorizer').setup()
+      require("colorizer").setup()
     end,
   }, -- don't support lazy load
   -- end of 3-Interface }}}
@@ -361,7 +362,7 @@ Plugins = {
       -- { "nvim-telescope/telescope-dap.nvim" },
     },
     branch = "0.1.x",
-    keys = require("keymaps").telescope_toggle
+    keys = require("keymaps").telescope_toggle,
   },
 
   -- origin hop.nvim repo is phaazon/hop.nvim, but it has bugs and not fix for a long time (since 2022.10), so I found a substitute one
@@ -513,7 +514,8 @@ Plugins = {
     end,
   },
 
-  {  "EdenEast/nightfox.nvim",
+  {
+    "EdenEast/nightfox.nvim",
     config = function()
       require "colorscheme.nightfox"
     end,

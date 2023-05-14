@@ -7,7 +7,9 @@ end
 mason_dap.setup ({
   -- A list of adapters to install if they're not already installed.
   -- This setting has no relation with the `automatic_installatin` setting.
-  ensure_installed = { "python" },
+  ensure_installed = {
+    "python"
+  },
 
   -- Whether adapters that are set up (via dap) should be automatically installed if they're not already installed.
   -- This setting has no relation with the `ensure_installed` setting.
