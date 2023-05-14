@@ -192,10 +192,10 @@ map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line aft
 map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
 
 --- Tool: Spider
-map({"n", "o", "x"}, "w", function() require('spider').motion('w') end, { desc = "Spider 'w' move" })
-map({"n", "o", "x"}, "e", function() require('spider').motion('e') end, { desc = "Spider 'e' move" })
-map({"n", "o", "x"}, "b", function() require('spider').motion('b') end, { desc = "Spider 'b' move" })
-map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end, { desc = "Spider 'ge' move" })
+map({"n", "o", "x"}, "w", function() require('spider').motion('w') end)
+map({"n", "o", "x"}, "e", function() require('spider').motion('e') end)
+map({"n", "o", "x"}, "b", function() require('spider').motion('b') end)
+map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end)
 
 --- Tool: Symbols-Outline
 plugin_keymaps.symbolsoutline_toggle = {
@@ -243,23 +243,23 @@ map("n", "<localleader>i", function() require('package_info').install() end, { d
 map("n", "<localleader>p", function() require('package_info').change_version() end, { desc = "Install a different package version" })
 
 --- Debug: DAP
-map("n", "<leader>dc", function() require('dap').continue() end, { desc = "Debug: Continue" })
-map("n", "<leader>dn", function() require('dap').step_over() end, { desc = "Debug: Step over" })
-map("n", "<leader>ds", function() require('dap').step_into() end, { desc = "Debug: Step into" })
-map("n", "<leader>df", function() require('dap').step_out() end, { desc = "Debug: Step out" })
-map("n", "<leader>db", function() require('dap').toggle_breakpoint() end, { desc = "Debug: Toggle breakpoint" })
-map("n", "<leader>dr", function() require('dap').repl.toggle() end, { desc = "Deubg: Toggle REPL" })
-map("n", "<leader>dl", function() require('dap').run_last() end, { desc = "Deubg: Run last" })
+map("n", "<leader>dc", function() require('dap').continue() end, { desc = "Debug option 'Continue'" })
+map("n", "<leader>dn", function() require('dap').step_over() end, { desc = "Debug option 'Step over'" })
+map("n", "<leader>ds", function() require('dap').step_into() end, { desc = "Debug option 'Step into'" })
+map("n", "<leader>df", function() require('dap').step_out() end, { desc = "Debug option 'Step out'" })
+map("n", "<leader>db", function() require('dap').toggle_breakpoint() end, { desc = "Debug option 'Toggle breakpoint'" })
+map("n", "<leader>dr", function() require('dap').repl.toggle() end, { desc = "Debug option 'Toggle REPL'" })
+map("n", "<leader>dl", function() require('dap').run_last() end, { desc = "Debug option 'Run last'" })
 
 map("n", "<leader>dp", function()
   require('dap').set_breakpoint(vim.fn.input "Breakpoint condition: ")
-end, { desc = "Deubg: Set breakpoint" })
+end, { desc = "Debug option 'Set breakpoint'" })
 map("n", "<leader>di", function()
   require('dap').set_breakpoint(nil, nil, vim.fn.input "Log point message: ")
-end, { desc = "Deubg: Set log point" })
+end, { desc = "Debug option 'Set log point'" })
 
 --- Debug DAP-UI
-map("n", "<leader>du", function() require('dap-ui').toggle() end, { desc = "Toggle Deubg UI" })
+map("n", "<leader>du", function() require('dap-ui').toggle() end, { desc = "Toggle debug UI" })
 
 
 --- ---------------------

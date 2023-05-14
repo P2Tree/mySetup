@@ -1,7 +1,7 @@
-V = select entire lines
-C-v = select as bloc (columns)
-gv = relesect last visual selection
-v% = selects matching parenthesis
-vi{ = selects inside matching curly braces,
-vi" = select inside matching quotes
-c% = cut until end of next bracketed (,{,[ section
+V = Select entire lines
+<Ctrl-v> = Select as bloc (columns)
+gv = Reselect last visual selection
+v% = Select matching parenthesis
+vi{ = Select inside matching curly braces,
+vi" = Select inside matching quotes
+c% = Cut until end of next bracketed (,{,[ section
