@@ -397,14 +397,6 @@ Plugins = {
   },
 
   {
-    "mhartington/formatter.nvim",
-    config = function()
-      require "tool.formatter"
-    end,
-    event = "VeryLazy",
-  },
-
-  {
     "akinsho/git-conflict.nvim",
     config = function()
       require "tool.git-conflict"

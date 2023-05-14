@@ -202,10 +202,6 @@ plugin_keymaps.symbolsoutline_toggle = {
   { "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" } }
 }
 
---- Tool: Formatter
-map("n", "=", "<Cmd>Format<CR>", { desc = "Format code"})
-map("v", "=", "<Cmd>'<,'>Format<CR>", { desc = "Format code"})
-
 --- Tool: Git-Conflict
 map('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "Git Conflict Choose Ours" })
 map('n', '<leader>gct', '<Plug>(git-conflict-theirs)', { desc = "Git Conflict Choose Theirs" })
@@ -317,6 +313,10 @@ plugin_keymaps.lsp = function(bufnr)
   --- clangd special keymaps
   map( "n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>",
     { buffer = bufnr, desc = "Switch between source and header" })
+
+  --- auto format
+  map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
+  map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
 end
 
 --- Tool: GitSigns
