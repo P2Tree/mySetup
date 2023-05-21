@@ -229,10 +229,10 @@ map("n", "<leader>ws", "<Cmd>SessionManager save_current_session<CR>", { desc = 
 map("n", "<leader>ww", "<Cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
 
 --- Tool: Tmux
-map({'n', 't'}, "<C-Left>", function() require('tmux').move_left() end, { desc = "Move to left panel" })
-map({'n', 't'}, "<C-Right>", function() require('tmux').move_right() end, { desc = "Move to right panel" })
-map({'n', 't'}, "<C-Up>", function() require('tmux').move_top() end, { desc = "Move to up panel" })
-map({'n', 't'}, "<C-Down>", function() require('tmux').move_bottom() end, { desc = "Move to down panel" })
+map({'n', 'v', 'i', 't'}, "<C-Left>", function() require('tmux').move_left() end, { desc = "Move to left panel" })
+map({'n', 'v', 'i', 't'}, "<C-Right>", function() require('tmux').move_right() end, { desc = "Move to right panel" })
+map({'n', 'v', 'i', 't'}, "<C-Up>", function() require('tmux').move_top() end, { desc = "Move to up panel" })
+map({'n', 'v', 'i', 't'}, "<C-Down>", function() require('tmux').move_bottom() end, { desc = "Move to down panel" })
 
 --- Tool: Package-Info
 map("n", "<localleader>s", function() require('package_info').show() end, { desc = "Show package versions" })
@@ -259,7 +259,7 @@ map("n", "<leader>di", function()
 end, { desc = "Debug option 'Set log point'" })
 
 --- Debug DAP-UI
-map("n", "<leader>du", function() require('dap-ui').toggle() end, { desc = "Toggle debug UI" })
+map("n", "<leader>du", function() require('dapui').toggle() end, { desc = "Toggle debug UI" })
 
 
 --- ---------------------

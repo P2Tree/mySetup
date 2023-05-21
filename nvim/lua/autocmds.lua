@@ -77,3 +77,22 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   end,
   desc = "Recover cursor position with where last exit",
 })
+
+--- Open nvim-tree window when neovim open a directory
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  pattern = { "*" },
+  callback = function(data)
+    local directory = vim.fn.isdirectory(data.file) == 1
+
+    if not directory then return end
+
+    -- create a new empty buffer
+    vim.cmd.enew()
+    vim.cmd.bw(data.buf)
+    -- change to the directory
+    vim.cmd.cd(data.file)
+    -- open the nvim-tree
+    require("nvim-tree.api").tree.open()
+  end,
+  desc = "Open nvim-tree when open a directory"
+})

@@ -141,7 +141,7 @@ tree.setup {
   --   },
   -- },
   filters = {
-    dotfiles = true,
+    -- dotfiles = false,
     -- git_clean = false,
     -- no_buffer = false,
     -- custom = {},
@@ -153,11 +153,11 @@ tree.setup {
   --   ignore_dirs = {},
   -- },
   git = {
-    enable = false,
-  --   ignore = true,
-  --   show_on_dirs = true,
-  --   show_on_open_dirs = true,
-  --   timeout = 400,
+    enable = true,
+    ignore = true,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+    timeout = 400,
   },
   modified = {
     enable = true,
@@ -222,20 +222,6 @@ tree.setup {
   --   confirm = {
   --     remove = true,
   --     trash = true,
-  --   },
-  -- },
-  -- log = {
-  --   enable = false,
-  --   truncate = false,
-  --   types = {
-  --     all = false,
-  --     config = false,
-  --     copy_paste = false,
-  --     dev = false,
-  --     diagnostics = false,
-  --     git = false,
-  --     profile = false,
-  --     watcher = false,
   --   },
   -- },
 }

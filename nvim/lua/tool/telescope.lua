@@ -66,6 +66,7 @@ telescope.setup {
 
     mappings = {
       i = {
+        ["<ESC>"] = require("telescope.actions").close,
         -- IMPORTANT
         -- either hot-reloaded or `function(prompt_bufnr) telescope.extensions.hop.hop end`
         ["<C-h>"] = R("telescope").extensions.hop.hop, -- hop.hop_toggle_selection
