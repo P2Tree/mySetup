@@ -69,7 +69,7 @@ lualine.setup {
     "quickfix",
     "nvim-tree",
     "toggleterm",
-    "symbols-outline",
+    "aerial",
     "nvim-dap-ui",
     "lazy",
   },

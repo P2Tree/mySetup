@@ -131,7 +131,7 @@ Plugins = {
   },
 
   {
-    "echasnovski/mini.nvim",
+    "echasnovski/mini.indentscope",
     config = function()
       require "edit.mini"
     end,
@@ -375,13 +375,11 @@ Plugins = {
     event = "VeryLazy",
   },
 
-  {
-    "simrat39/symbols-outline.nvim",
+  {  "stevearc/aerial.nvim",
     config = function()
-      require "tool.symbols-outline"
+      require "tool.aerial"
     end,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = require("keymaps").symbolsoutline_toggle,
+    keys = require("keymaps").aerial_toggle,
   },
 
   {

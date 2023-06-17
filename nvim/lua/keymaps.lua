@@ -191,9 +191,9 @@ map({"n", "v", "o"}, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
 map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
 map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
 
---- Tool: Symbols-Outline
-plugin_keymaps.symbolsoutline_toggle = {
-  { "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" } }
+--- Tool: Aerial
+plugin_keymaps.aerial_toggle = {
+  { "<leader>s", "<Cmd>AerialToggle!<CR>", { desc = "Code Outline" } }
 }
 
 --- Tool: Git-Conflict

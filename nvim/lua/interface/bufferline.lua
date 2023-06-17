@@ -57,7 +57,7 @@ bufferline.setup {
       return true
     end,
     offsets = {
-      { filetype = "Outline", text = "Outline", text_align = "center", saperator = true },
+      { filetype = "aerial", text = "Outline", text_align = "center", saperator = true },
       { filetype = "NvimTree", text = "File Explorer", text_align = "center", saperator = true },
       { filetype = "SidebarNvim", text = "Sidebar", text_align = "center", saperator = true },
     },

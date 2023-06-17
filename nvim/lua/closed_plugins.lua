@@ -213,14 +213,14 @@ lazy.setup({
     },
   },
 
-  -- BUG: some bug occured, which is replaced by symbol-outline
-  {  "stevearc/aerial.nvim",
+  -- BUG: some bug occured, which is replaced by aerial
+  {
+    "simrat39/symbols-outline.nvim",
     config = function()
-      require "tool.aerial"
+      require "tool.symbols-outline"
     end,
-    keys = {
-      { "<leader>s", "<Cmd>AerialToggle<CR>", desc = "Code Outline" },
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = require("keymaps").symbolsoutline_toggle,
   },
 
   -- TODO: waitting for test and enable

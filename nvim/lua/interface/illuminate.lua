@@ -22,7 +22,7 @@ illuminate.configure {
     "fugitive",
     "NvimTree",
     "Outline",
-    -- "Aerial",
+    "aerial",
     "lazy",
     "startify",
     "NeogitStatus",

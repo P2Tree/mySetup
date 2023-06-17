@@ -3,39 +3,39 @@
 -- effort. They all share same configuration approaches and
 -- general design principles.
 
--- Extend and create a/i textobjects
-local mini_ai = require_plugin('mini.ai')
-if mini_ai then
-  mini_ai.setup({
-    -- Module mappings. Use `''` (empty string) to disable one
-    mappings = {
-      -- Main textobject prefixes
-      around = 'a',
-      inside = 'i',
-
-      -- Next/last variants
-      around_next = 'an',
-      inside_next = 'in',
-      around_last = 'al',
-      inside_last = 'il',
-
-      -- Move cursor to corresponding edge of `a` textobject
-      goto_left = '',
-      goto_right = '',
-    },
-
-    -- Number of lines within which textobject is searched
-    n_lines = 50,
-
-    -- How to search for object
-    -- One of `cover`, `cover_or_next`, `cover_or_prev`,
-    -- `cover_or_nearest`, `next`, `previous`, `nearest`.
-    -- search_method = 'cover_or_next',
-
-    -- Whether to disable showing non-error feedback
-    -- silent = false,
-  })
-end
+--- Extend and create a/i textobjects
+-- local mini_ai = require_plugin('mini.ai')
+-- if mini_ai then
+--   mini_ai.setup({
+--     -- Module mappings. Use `''` (empty string) to disable one
+--     mappings = {
+--       -- Main textobject prefixes
+--       around = 'a',
+--       inside = 'i',
+--
+--       -- Next/last variants
+--       around_next = 'an',
+--       inside_next = 'in',
+--       around_last = 'al',
+--       inside_last = 'il',
+--
+--       -- Move cursor to corresponding edge of `a` textobject
+--       goto_left = '',
+--       goto_right = '',
+--     },
+--
+--     -- Number of lines within which textobject is searched
+--     n_lines = 50,
+--
+--     -- How to search for object
+--     -- One of `cover`, `cover_or_next`, `cover_or_prev`,
+--     -- `cover_or_nearest`, `next`, `previous`, `nearest`.
+--     -- search_method = 'cover_or_next',
+--
+--     -- Whether to disable showing non-error feedback
+--     -- silent = false,
+--   })
+-- end
 
 -- Visualize and work with indent scope
 local mini_indentscope = require_plugin('mini.indentscope')
