@@ -80,7 +80,6 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
   zsh-syntax-highlighting
   zsh-autosuggestions
   z
@@ -125,11 +124,99 @@ alias vi="nvim"
 alias vim="nvim"
 alias vimdiff="nvim -d"
 
+alias gst="git status"
+alias gs="git stash"
+alias ga="git add"
+alias gd="git diff"
+alias gl="git log"
+alias gls="git log --stat"
+alias glp="git log --patch"
+alias glg="git log --grep"
+alias gla="git log --author"
+alias gc="git commit"
+alias gca="git commit -a"
+alias go="git checkout"
+alias gb="git branch"
+
 if [[ -x "`which lsd`" ]]; then
   alias ls="lsd"
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -f ~/.fzf.zsh ]]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+  if [[ `command -v fd` ]];then
+    # use fd as finder, enable hidden file and directory
+    # no ignored by .gitignore file
+    export FZF_DEFAULT_COMMAND='fd -H -I --type file'
+  else
+    export FZF_DEFAULT_COMMAND='find . -type f'
+  fi
+
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+  export FZF_DEFAULT_OPTS="--height 99% -e --preview \
+    '(bat --style=numbers --color=always {} ||  highlight -O ansi -l {} || coderay {} || rougify {} || cat {}) 2> /dev/null ' \
+    --preview-window up,50%,border-horizontal \
+    --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+
+  ## vim powered by fzf
+  alias fvi='vim $(fzf)'
+
+  ## ps powered by fzf
+  fkp () {
+    local pid=$(ps -ef | sed 1d | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[kill:process]'" | awk '{print $2}')
+
+    if [ "x$pid" != "x" ]
+    then
+      echo $pid | xargs kill -${1:-9}
+      fkp
+    fi
+  }
+
+  ## Git powered by fzf
+  local is_in_git_repo() {
+      # git rev-parse HEAD > /dev/null 2>&1
+      git rev-parse HEAD > /dev/null
+  }
+  # Filter branches.
+  fgb() {
+      is_in_git_repo || return
+
+      local tags branches target
+      tags=$(
+      git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return
+      branches=$(
+      git branch --all | grep -v HEAD |
+          sed "s/.* //" | sed "s#remotes/[^/]*/##" |
+          sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return
+      target=$(
+      (echo "$tags"; echo "$branches") |
+          fzf --no-hscroll --no-multi --delimiter="\t" -n 2 \
+          --ansi --preview="git log -200 --pretty=format:%s $(echo {+2..} |  sed 's/$/../' )" ) || return
+      echo $(echo "$target" | awk -F "\t" '{print $2}')
+  }
+  # Filter branches and checkout the selected one with <enter> key,
+  fgo() {
+      is_in_git_repo || return
+      git checkout $(fgb)
+  }
+  # Filter commit logs. The diff is shown on the preview window.
+  fgl() { # fshow - git commit browser
+      is_in_git_repo || return
+
+      _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+      _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always %'"
+      git log --graph --color=always \
+      --format="%C(auto)%h%d [%an] %s %C(black)%C(bold)%cr" "$@" |
+      fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --preview="$_viewGitLogLine" \
+      --bind "ctrl-m:execute:
+          (grep -o '[a-f0-9]\{7\}' | head -1 |
+          xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+          {}
+  FZF-EOF"
+  }
+fi
 
 # User configuration
 
