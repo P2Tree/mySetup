@@ -170,7 +170,7 @@ aerial.setup ({
   post_jump_cmd = "normal! zz",
 
   -- When true, aerial will automatically close after jumping to a symbol
-  close_on_select = false,
+  close_on_select = true,
 
   -- Show box drawing characters for the tree hierarchy
   show_guides = false,

@@ -375,7 +375,8 @@ Plugins = {
     event = "VeryLazy",
   },
 
-  {  "stevearc/aerial.nvim",
+  {
+    "stevearc/aerial.nvim",
     config = function()
       require "tool.aerial"
     end,

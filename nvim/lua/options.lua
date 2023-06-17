@@ -40,6 +40,15 @@ vim.opt.includeexpr = "substitute(v:fname,'\\.','/','g')"
 vim.opt.scrolloff = 4
 vim.opt.sidescrolloff = 8
 
+--- options about fold
+vim.o.foldcolumn = "1"
+vim.o.foldenable = true
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+
+--- Spilt window space
+vim.o.fillchars = "foldopen:,foldclose:,foldsep: ,diff:╱"
+
 --- Line number and relative number
 vim.opt.number = true
 -- vim.opt.relativenumber = true
