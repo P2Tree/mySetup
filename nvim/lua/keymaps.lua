@@ -191,12 +191,6 @@ map({"n", "v", "o"}, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
 map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
 map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
 
---- Tool: Spider
-map({"n", "o", "x"}, "w", function() require('spider').motion('w') end)
-map({"n", "o", "x"}, "e", function() require('spider').motion('e') end)
-map({"n", "o", "x"}, "b", function() require('spider').motion('b') end)
-map({"n", "o", "x"}, "ge", function() require('spider').motion('ge') end)
-
 --- Tool: Symbols-Outline
 plugin_keymaps.symbolsoutline_toggle = {
   { "<leader>s", "<Cmd>SymbolsOutline<CR>", { desc = "Code Outline" } }
@@ -277,10 +271,6 @@ plugin_keymaps.lsp = function(bufnr)
 
   map("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
 
-  map("n", "<leader>lf", function()
-    vim.lsp.buf.format { async = true }
-  end, { buffer = bufnr, desc = "Format document" })
-
   map("n", "<leader>lk", function()
     local ufo = require_plugin("ufo")
     if ufo then
@@ -317,6 +307,18 @@ plugin_keymaps.lsp = function(bufnr)
   --- auto format
   map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
   map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
+
+    --- needs indent_blankline
+  map("n", "gc", function()
+    local ok, start = require("indent_blankline.utils").get_current_context(
+      vim.g.indent_blankline_context_patterns,
+      vim.g.indent_blankline_use_treesitter_scope
+    )
+    if ok then
+      vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
+      vim.cmd [[normal! _]]
+    end
+  end, { desc = "Goto current context header" })
 end
 
 --- Tool: GitSigns
