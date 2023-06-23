@@ -54,8 +54,8 @@ if mini_indentscope then
       object_scope = 'ii',
       object_scope_with_border = 'ai',
       -- Motions (jump to respective border line; if not present - body line)
-      goto_top = 'tk',
-      goto_bottom = 'tj',
+      goto_top = 'gk',
+      goto_bottom = 'gj',
     },
 
     -- Options which control scope computation

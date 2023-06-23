@@ -350,10 +350,8 @@ Plugins = {
       { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      { "nvim-telescope/telescope-hop.nvim" },
       { "ahmedkhalf/project.nvim" },
       { "nvim-telescope/telescope-symbols.nvim" },
-      -- { "nvim-telescope/telescope-media-files.nvim" },
       { "benfowler/telescope-luasnip.nvim" },
       -- { "nvim-telescope/telescope-live-grep-args.nvim" },  -- similar with native live grep
       -- { "nvim-telescope/telescope-ui-select.nvim" },  -- similar with dressing.nvim
@@ -365,16 +363,13 @@ Plugins = {
     keys = require("keymaps").telescope_toggle,
   },
 
-  -- origin hop.nvim repo is phaazon/hop.nvim, but it has bugs and not fix for a long time (since 2022.10), so I found a substitute one
   {
-    "aznhe21/hop.nvim",
+    "ggandor/leap.nvim",
     config = function()
-      require "tool.hop"
+      require "tool.leap"
     end,
-    branch = "fix-some-bugs",
     event = "VeryLazy",
   },
-
   {
     "stevearc/aerial.nvim",
     config = function()

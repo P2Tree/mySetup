@@ -1,14 +1,25 @@
 {
-  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "runtime": {
-    "version": "LuaJIT"
-  },
-  "diagnostics": {
-    "globals": [ "vim" ]
-  },
-  "workspace": {
-    "library": [
-      "$HOME/.local/share/nvim/lazy/emmylua-nvim"
-    ]
-  }
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "Lua.diagnostics.globals": [
+        "vim",
+        "lfs"
+    ],
+    "Lua.workspace.checkThirdParty": false,
+    "Lua.workspace.library": [
+        "$HOME/.local/share/nvim/lazy/emmylua-nvim",
+        "${3rd}/lfs/library"
+    ],
+    "diagnostics": {
+        "globals": [
+            "vim"
+        ]
+    },
+    "runtime": {
+        "version": "LuaJIT"
+    },
+    "workspace": {
+        "library": [
+            "$HOME/.local/share/nvim/lazy/emmylua-nvim"
+        ]
+    }
 }

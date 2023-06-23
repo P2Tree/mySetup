@@ -5,7 +5,6 @@ end
 
 local extensions = {
   "fzf",
-  "hop",
   "notify",
   "luasnip",
   -- "live_grep_args",
@@ -13,16 +12,6 @@ local extensions = {
   -- "projects",
   -- "dap",
 }
-
--- Hot-reloaded function for telescope-hop
-if pcall(require, "plenary") then
-  RELOAD = require("plenary.reload").reload_module
-
-  R = function(name)
-    RELOAD(name)
-    return require(name)
-  end
-end
 
 telescope.setup {
   defaults = {
@@ -67,17 +56,6 @@ telescope.setup {
     mappings = {
       i = {
         ["<ESC>"] = require("telescope.actions").close,
-        -- IMPORTANT
-        -- either hot-reloaded or `function(prompt_bufnr) telescope.extensions.hop.hop end`
-        ["<C-h>"] = R("telescope").extensions.hop.hop, -- hop.hop_toggle_selection
-        -- custom hop loop to multi selects and sending selected entries to quickfix list
-        ["<C-space>"] = function(prompt_bufnr)
-          local opts = {
-            callback = require("telescope.actions").toggle_selection,
-            loop_callback = require("telescope.actions").send_selected_to_qflist,
-          }
-          require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
-        end,
 
         -- Needs telescope-undo enable first
         -- ["<cr>"] = require("telescope-undo.actions").yank_additions,
@@ -106,26 +84,6 @@ telescope.setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
-    },
-    hop = {
-      -- the shown `keys` are the defaults, no need to set `keys` if defaults work for you ;)
-      -- keys = {
-      --   "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-      --   "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-      -- },
-      -- Highlight groups to link to signs and lines; the below configuration refers to demo
-      -- sign_hl typically only defines foreground to possibly be combined with line_hl
-      -- sign_hl = { "WarningMsg", "Title" },
-      -- optional, typically a table of two highlight groups that are alternated between
-      -- line_hl = { "CursorLine", "Normal" },
-      -- options specific to `hop_loop`
-      -- true temporarily disables Telescope selection highlighting
-      clear_selection_hl = false,
-      -- highlight hopped to entry with telescope selection highlight
-      -- note: mutually exclusive with `clear_selection_hl`
-      trace_entry = true,
-      -- jump to entry where hoop loop was started from
-      reset_selection = true,
     },
     undo = {
       use_delta = false,

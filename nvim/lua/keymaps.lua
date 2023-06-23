@@ -183,14 +183,6 @@ plugin_keymaps.telescope_toggle = {
   -- { "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" } },
 }
 
---- Tool: HOP
-map({"n", "v"}, "f", "<Cmd>HopChar1CurrentLineAC<CR>", { desc = "Jump to char after in current line" })
-map({"n", "v"}, "F", "<Cmd>HopChar1CurrentLineBC<CR>", { desc = "Jump to char after in current line" })
-map({"n", "v", "o"}, "ss", "<Cmd>HopChar1<CR>", { desc = "Jump to char" })
-map({"n", "v", "o"}, "sw", "<Cmd>HopWord<CR>", { desc = "Jump to word" })
-map({"n", "v", "o"}, "sj", "<Cmd>HopLineStartAC<CR>", { desc = "Jump to line after" })
-map({"n", "v", "o"}, "sk", "<Cmd>HopLineStartBC<CR>", { desc = "Jump to line before" })
-
 --- Tool: Aerial
 plugin_keymaps.aerial_toggle = {
   { "<leader>s", "<Cmd>AerialToggle<CR>", { desc = "Code Outline" } }
@@ -307,18 +299,6 @@ plugin_keymaps.lsp = function(bufnr)
   --- auto format
   map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
   map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
-
-  --- needs indent_blankline
-  map("n", "gc", function()
-    local ok, start = require("indent_blankline.utils").get_current_context(
-      vim.g.indent_blankline_context_patterns,
-      vim.g.indent_blankline_use_treesitter_scope
-    )
-    if ok then
-      vim.api.nvim_win_set_cursor(vim.api.nvim_get_current_win(), { start, 0 })
-      vim.cmd [[normal! _]]
-    end
-  end, { desc = "Goto current context header" })
 end
 
 --- Tool: GitSigns
@@ -413,6 +393,7 @@ end
 --- - lua/edit/comment.lua
 --- - lua/interface/dressing.lua
 --- - lua/tool/aerial.lua
+--- - lua/interface/mini.lua
 
 return plugin_keymaps
 

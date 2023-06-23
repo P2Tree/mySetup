@@ -199,6 +199,16 @@ lazy.setup({
     dependencies = { "sidebar-nvim/sections-dap" },
   },
 
+  -- HACK: a substitute of leap.nvim
+  {
+    "aznhe21/hop.nvim",
+    config = function()
+      require "tool.hop"
+    end,
+    branch = "fix-some-bugs",
+    event = "VeryLazy",
+  },
+
   -- HACK: a substitute of nvim-tree
   {  "nvim-neo-tree/neo-tree.nvim",
     config = function()
