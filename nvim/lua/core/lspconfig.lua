@@ -46,15 +46,14 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- Add additional capabilities supported by nvim-cmp
-local capabilities = cmp_nvim_lsp.default_capabilities()
+local default_option = {}
+default_option.capabilities = cmp_nvim_lsp.default_capabilities()
 -- Enable LSP foldingRange capability
-capabilities.textDocument.foldingRange = {
+default_option.capabilities.textDocument.foldingRange = {
   dynamicRegistration = false,
   lineFoldingOnly = true,
   offsetEncoding = "utf-8",
 }
-
-local default_option = {}
 default_option.on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -119,7 +118,7 @@ mason_lspconfig.setup_handlers {
   -- Need to install clangd
   clangd = function()
     lspconfig.clangd.setup {
-      capabilities = capabilities,
+      capabilities = default_option.capabilities,
       on_attach = default_option.on_attach,
     }
   end,
@@ -127,7 +126,7 @@ mason_lspconfig.setup_handlers {
   -- Need to install lua-language-server
   lua_ls = function()
     lspconfig.lua_ls.setup {
-      capabilities = capabilities,
+      capabilities = default_option.capabilities,
       on_attach = default_option.on_attach,
       settings = {
         Lua = {
@@ -170,7 +169,7 @@ mason_lspconfig.setup_handlers {
   -- Need to install pyright
   pyright = function()
     lspconfig.pyright.setup {
-      capabilities = capabilities,
+      capabilities = default_option.capabilities,
       on_attach = default_option.on_attach,
       settings = {
         python = {

@@ -3,23 +3,16 @@ if not autopairs then
   return
 end
 
-local Rule = require "nvim-autopairs.rule"
-
 autopairs.setup {
-  check_ts = true,
-  ts_config = {
-    lua = { "string" }, -- it will not add pair on that treesitter node
-    javascript = { "template_string" },
-    java = false, -- don't check treesitter on java
-  },
+  fast_wrap = {}, -- press <alt-e> to use fast_wrap
+  disable_filetype = { "TelescopePrompt", "vim" }
 }
 
+-- use treesitter to check autopairs
 require("nvim-treesitter.configs").setup {
   autopairs = { enable = true },
 }
 
-autopairs.add_rules {
-  Rule("{ ", " ", "-vim"),
-  Rule("{%", "%", "htmldjango"),
-  Rule("{% ", " ", "htmldjango"),
-}
+-- local cmp_autopairs = autopairs.completion.cmp
+local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())

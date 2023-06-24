@@ -20,8 +20,8 @@ lazy.setup({
     end
   },
 
-  -- TEST: don't have any spped improve for me
-  -- {  "nathom/filetype.nvim" },
+  -- TEST: don't have any speed improve for me
+  {  "nathom/filetype.nvim" },
 
   -- TODO: Disable because lots of refactorings needs to be done
   {  "b0o/mapx.nvim" },
@@ -294,6 +294,39 @@ lazy.setup({
 -- end of 4-Tool }}}
 
 -- 5- Debug {{{
+  -- TEST: dont very useful
+  {
+    "mfussenegger/nvim-dap",
+    config = function()
+      require "debug.dap"
+    end,
+    dependencies = {
+      "jay-babu/mason-nvim-dap.nvim",
+    },
+    event = "VeryLazy",
+  },
+
+  -- TEST: dont very useful
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    config = function()
+      require "debug.dap-virtual-text"
+    end,
+    event = "VeryLazy",
+  },
+
+  -- TEST: dont very useful
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require "debug.dap-ui"
+    end,
+    dependencies = {
+      "mfussenegger/nvim-dap",
+    },
+    event = "VeryLazy",
+  },
+
   -- TODO: needs to test
   {  "Civitasv/cmake-tools.nvim",
     enabled = false,

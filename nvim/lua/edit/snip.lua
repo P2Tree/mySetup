@@ -6,6 +6,8 @@ end
 local types = require "luasnip.util.types"
 
 snip.config.setup {
+  history = true,
+  updateevents = "TextChanged,TextChangedI",
   ext_opts = {
     [types.choiceNode] = {
       active = {

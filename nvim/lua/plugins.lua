@@ -9,6 +9,8 @@ Plugins = {
     config = function()
       require "core.mason"
     end,
+    cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
+    build = ":MasonUpdate"
   },
 
   {
@@ -50,6 +52,7 @@ Plugins = {
       { "RRethy/nvim-treesitter-endwise" },
       -- { "nvim-treesitter/nvim-treesitter-textobjects" },
     },
+    cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
   },
 
@@ -77,6 +80,7 @@ Plugins = {
     end,
     dependencies = {
       { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-nvim-lua" },
       { "hrsh7th/cmp-nvim-lsp" },
       { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "hrsh7th/cmp-path" },
@@ -96,7 +100,7 @@ Plugins = {
     -- dependencies = {
     --   "rafamadriz/friendly-snippets",
     -- },
-    event = "VeryLazy",
+    event = "InsertEnter",
   },
 
   {
@@ -259,6 +263,7 @@ Plugins = {
       require "interface.fidget"
     end,
     event = "VeryLazy",
+    tag = "legacy",
   },
 
   {
@@ -338,6 +343,7 @@ Plugins = {
       require "tool.tree"
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
     keys = require("keymaps").nvimtree_toggle,
   },
 
@@ -357,9 +363,9 @@ Plugins = {
       -- { "nvim-telescope/telescope-ui-select.nvim" },  -- similar with dressing.nvim
       -- { "debugloop/telescope-undo.nvim" },
       -- { "nvim-telescope/telescope-project.nvim" },  -- similar with project.nvim
-      -- { "nvim-telescope/telescope-dap.nvim" },
     },
     branch = "0.1.x",
+    cmd = "Telescope",
     keys = require("keymaps").telescope_toggle,
   },
 
@@ -383,6 +389,13 @@ Plugins = {
     config = function()
       require "tool.gitsigns"
     end,
+    enabled = function()
+      -- load only when a git file is opened
+      vim.fn.system("git -C " ..'"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
+      if vim.v.shell_error == 0 then
+        return true
+      end
+    end,
     event = "VeryLazy",
   },
 
@@ -390,6 +403,13 @@ Plugins = {
     "akinsho/git-conflict.nvim",
     config = function()
       require "tool.git-conflict"
+    end,
+    enabled = function()
+      -- load only when a git file is opened
+      vim.fn.system("git -C " ..'"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
+      if vim.v.shell_error == 0 then
+        return true
+      end
     end,
     event = "VeryLazy",
   },
@@ -403,6 +423,13 @@ Plugins = {
       "nvim-lua/plenary.nvim",
       "sindrets/diffview.nvim",
     },
+    enabled = function()
+      -- load only when a git file is opened
+      vim.fn.system("git -C " ..'"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
+      if vim.v.shell_error == 0 then
+        return true
+      end
+    end,
     keys = require("keymaps").neogit_toggle,
   },
 
@@ -415,6 +442,13 @@ Plugins = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons",
     },
+    enabled = function()
+      -- load only when a git file is opened
+      vim.fn.system("git -C " ..'"' .. vim.fn.expand "%:p:h" .. '"' .. " rev-parse")
+      if vim.v.shell_error == 0 then
+        return true
+      end
+    end,
     event = "VeryLazy",
   },
 
@@ -456,36 +490,6 @@ Plugins = {
   -- end of 4-Tool }}}
 
   -- 5-Debug {{{
-  {
-    "mfussenegger/nvim-dap",
-    config = function()
-      require "debug.dap"
-    end,
-    event = "VeryLazy",
-    dependencies = {
-      "jay-babu/mason-nvim-dap.nvim",
-    },
-  },
-
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    config = function()
-      require "debug.dap-virtual-text"
-    end,
-    event = "VeryLazy",
-  },
-
-  {
-    "rcarriga/nvim-dap-ui",
-    config = function()
-      require "debug.dap-ui"
-    end,
-    dependencies = {
-      "mfussenegger/nvim-dap",
-    },
-    event = "VeryLazy",
-  },
-
   -- end of 5-Debug }}}
 
   -- 6-Language {{{
