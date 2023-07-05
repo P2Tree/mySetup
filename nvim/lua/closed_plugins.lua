@@ -199,13 +199,22 @@ lazy.setup({
     dependencies = { "sidebar-nvim/sections-dap" },
   },
 
-  -- HACK: a substitute of leap.nvim
+  -- HACK: a substitute of flush.nvim
   {
     "aznhe21/hop.nvim",
     config = function()
       require "tool.hop"
     end,
     branch = "fix-some-bugs",
+    event = "VeryLazy",
+  },
+
+  -- HACK: a substitute of flush.nvim
+  {
+    "ggandor/leap.nvim",
+    config = function()
+      require "tool.leap"
+    end,
     event = "VeryLazy",
   },
 

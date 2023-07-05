@@ -133,7 +133,6 @@ mason_lspconfig.setup_handlers {
           hint = {
             enable = true,
             setType = true,
-            arrayIndex = "Disable",
           },
           completion = {
             callSnippet = "Replace",

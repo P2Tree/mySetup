@@ -183,6 +183,13 @@ plugin_keymaps.telescope_toggle = {
   -- { "<leader>fu", function() require('telescope').extensions.undo.undo() end, { desc = "Find undo history" } },
 }
 
+plugin_keymaps.flash_toggle = {
+  { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+  { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+  { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+  { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Flash Treesitter Search" },
+}
+
 --- Tool: Aerial
 plugin_keymaps.aerial_toggle = {
   { "<leader>s", "<Cmd>AerialToggle<CR>", { desc = "Code Outline" } }

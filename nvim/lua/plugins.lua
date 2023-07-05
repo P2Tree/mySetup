@@ -370,12 +370,14 @@ Plugins = {
   },
 
   {
-    "ggandor/leap.nvim",
-    config = function()
-      require "tool.leap"
-    end,
+    "folke/flash.nvim",
     event = "VeryLazy",
+    config = function()
+      require "tool.flash"
+    end,
+    keys = require("keymaps").flash_toggle,
   },
+
   {
     "stevearc/aerial.nvim",
     config = function()
