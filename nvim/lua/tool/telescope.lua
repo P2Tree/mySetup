@@ -72,7 +72,7 @@ telescope.setup {
     -- Here can custom themes for each plugins
     -- Themes: leave empty for default | "cursor" | "dropdown" | "ivy"
     symbols = {
-      theme = "cursor",
+      theme = "ivy",
     },
     buffers = {
       sort_lastused = false,
@@ -85,6 +85,14 @@ telescope.setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
+      symbols = {
+        theme = "ivy",
+      },
+      -- side_by_side = false,
+      -- layout_strategy = "horizon",
+      -- layout_config = {
+      --   preview_height = 0.8,
+      -- },
     },
     undo = {
       use_delta = false,

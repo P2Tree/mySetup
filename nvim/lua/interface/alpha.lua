@@ -26,7 +26,7 @@ dashboard.section.buttons.val = {
   dashboard.button("SPC f r", "  Find recently files"),
   dashboard.button("SPC f g", "  Find word"),
   dashboard.button("SPC f m", "  Jump to bookmarks"),
-  dashboard.button("SPC w l", "  Load session"),
+  dashboard.button("SPC w w", "󰬱  Load current workspace"),
   dashboard.button("q", "  Exit NeoVim" , ":qa<CR>"),
 }
 

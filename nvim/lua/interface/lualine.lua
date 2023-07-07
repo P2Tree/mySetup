@@ -55,7 +55,7 @@ lualine.setup {
   },
   options = {
     component_separators = '',
-    section_separators = { left = "", right = " " },
+    section_separators = { left = "▐", right = "▌" },
     theme = 'tokyonight',
     icons_enabled = true,
     disabled_filetypes = {

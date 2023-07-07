@@ -16,7 +16,7 @@ statuscol.setup {
       click = "v:lua.ScLa",
     },
     {
-      sign = { name = { "GitSigns" }, colwidth = 1, warp = true },
+      sign = { name = { "GitSigns" }, colwidth = 1 },
       click = "v:lua.ScSa",
     },
     { text = { builtin.foldfunc }, click = "v:lua.ScFa" },

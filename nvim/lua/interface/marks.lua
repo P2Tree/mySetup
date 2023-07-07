@@ -24,15 +24,12 @@ marks.setup {
   sign_priority = { lower = 10, upper = 15, builtin = 5, bookmark = 20 },
   -- disables mark tracking for specific filetypes. default {}
   excluded_filetypes = {
-    "",
     "lazy",
     "null-ls-info",
     "lspinfo",
     "NvimTree",
-    "Outline",
+    "aerial",
     "notify",
-    "neo-tree",
-    "neo-tree-popup",
     "DressingInput",
     "NeogitCommitMessage",
     "NeogitNotification",
