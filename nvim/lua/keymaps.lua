@@ -29,10 +29,10 @@ map("n", "<PageUp>", "<C-u>", { remap = true, desc = "Screen half step up scroll
 map("n", "<PageDown>", "<C-d>", { remap = true, desc = "Screen half step down scroll" })
 
 --- Window move
-map("n", "<C-left>", "<C-w>h", { desc = "Focus on the left window" })
-map("n", "<C-right>", "<C-w>l", { desc = "Focus on the right window" })
-map("n", "<C-up>", "<C-w>k", { desc = "Focus on the up window" })
-map("n", "<C-down>", "<C-w>j", { desc = "Focus on the down window" })
+-- map("n", "<C-left>", "<C-w>h", { desc = "Focus on the left window" })
+-- map("n", "<C-right>", "<C-w>l", { desc = "Focus on the right window" })
+-- map("n", "<C-up>", "<C-w>k", { desc = "Focus on the up window" })
+-- map("n", "<C-down>", "<C-w>j", { desc = "Focus on the down window" })
 map("n", "<C-h>", "<C-w>h", { desc = "Focus on the left window" })
 map("n", "<C-l>", "<C-w>l", { desc = "Focus on the right window" })
 map("n", "<C-k>", "<C-w>k", { desc = "Focus on the up window" })
@@ -94,6 +94,10 @@ map({"i", "v", "n", "s"}, "<C-s>", "<Cmd>w<CR><Esc>", { desc = "Save file" })
 
 --- open quickfix window
 map("n", "<leader>oq", "<Cmd>copen<CR>", { silent = true, desc = "Open Quickfix List" })
+
+--- mouse scroll
+map({"n", "i", "v"}, "<ScrollWheelUp>", "<C-y>")
+map({"n", "i", "v"}, "<ScrollWheelDown>", "<C-e>")
 
 --- --------------------
 ---    Plugin Keymaps
@@ -195,6 +199,11 @@ plugin_keymaps.aerial_toggle = {
   { "<leader>s", "<Cmd>AerialToggle<CR>", { desc = "Code Outline" } }
 }
 
+--- Tool: ToggleTerm
+map('t', '<esc>', [[<C-\><C-n>]] )
+map('t', '<C-t>', '<Cmd>ToggleTerm<CR>', { desc = "Toggle Terminal"})
+map('n', '<C-t>', '<Cmd>exe v:count1 . "ToggleTerm"<CR>', { desc = "Toggle Terminal" })
+
 --- Tool: Git-Conflict
 map('n', '<leader>gco', '<Plug>(git-conflict-ours)', { desc = "Git Conflict Choose Ours" })
 map('n', '<leader>gct', '<Plug>(git-conflict-theirs)', { desc = "Git Conflict Choose Theirs" })
@@ -216,10 +225,10 @@ map("n", "<leader>gdh", "<Cmd>DiffviewFileHistory<CR>", { desc = "Open History o
 
 --- Tool: Session-Manager
 -- map("n", "<leader>wl", "<cmd>SessionManager load_last_session<CR>", { desc = "Load last session" })
-map("n", "<leader>wd", "<Cmd>SessionManager delete_session<CR>", { desc = "Delete session" })
-map("n", "<leader>wl", "<Cmd>SessionManager load_session<CR>", { desc = "Load selected session" })
-map("n", "<leader>ws", "<Cmd>SessionManager save_current_session<CR>", { desc = "Save current session" })
-map("n", "<leader>ww", "<Cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current session" })
+map("n", "<leader>wd", "<Cmd>SessionManager delete_session<CR>", { desc = "Delete workspace" })
+map("n", "<leader>wl", "<Cmd>SessionManager load_session<CR>", { desc = "Load selected workspace" })
+map("n", "<leader>ws", "<Cmd>SessionManager save_current_session<CR>", { desc = "Save current workspace" })
+map("n", "<leader>ww", "<Cmd>SessionManager load_current_dir_session<CR>", { desc = "Load current workspace" })
 
 --- Tool: Tmux
 map({'n', 'v', 'i', 't'}, "<C-Left>", function() require('tmux').move_left() end, { desc = "Move to left panel" })
@@ -227,22 +236,15 @@ map({'n', 'v', 'i', 't'}, "<C-Right>", function() require('tmux').move_right() e
 map({'n', 'v', 'i', 't'}, "<C-Up>", function() require('tmux').move_top() end, { desc = "Move to up panel" })
 map({'n', 'v', 'i', 't'}, "<C-Down>", function() require('tmux').move_bottom() end, { desc = "Move to down panel" })
 
---- Tool: Package-Info
-map("n", "<localleader>s", function() require('package_info').show() end, { desc = "Show package versions" })
-map("n", "<localleader>c", function() require('package_info').hide() end, { desc = "Hide package versions" })
-map("n", "<localleader>u", function() require('package_info').update() end, { desc = "Update package on line" })
-map("n", "<localleader>d", function() require('package_info').delete() end, { desc = "Delete package on line" })
-map("n", "<localleader>i", function() require('package_info').install() end, { desc = "Install a new package" })
-map("n", "<localleader>p", function() require('package_info').change_version() end, { desc = "Install a different package version" })
-
 --- Debug: DAP
-map("n", "<leader>dc", function() require('dap').continue() end, { desc = "Debug option 'Continue'" })
-map("n", "<leader>dn", function() require('dap').step_over() end, { desc = "Debug option 'Step over'" })
-map("n", "<leader>ds", function() require('dap').step_into() end, { desc = "Debug option 'Step into'" })
-map("n", "<leader>df", function() require('dap').step_out() end, { desc = "Debug option 'Step out'" })
-map("n", "<leader>db", function() require('dap').toggle_breakpoint() end, { desc = "Debug option 'Toggle breakpoint'" })
-map("n", "<leader>dr", function() require('dap').repl.toggle() end, { desc = "Debug option 'Toggle REPL'" })
-map("n", "<leader>dl", function() require('dap').run_last() end, { desc = "Debug option 'Run last'" })
+map("n", "<localleader>c", function() require('dap').continue() end, { desc = "Debug option 'Continue'" })
+map("n", "<localleader>n", function() require('dap').step_over() end, { desc = "Debug option 'Step over'" })
+map("n", "<localleader>s", function() require('dap').step_into() end, { desc = "Debug option 'Step into'" })
+map("n", "<localleader>f", function() require('dap').step_out() end, { desc = "Debug option 'Step out'" })
+map("n", "<localleader>b", function() require('dap').toggle_breakpoint() end, { desc = "Debug option 'Toggle breakpoint'" })
+map("n", "<localleader>r", function() require('dap').restart() end, { desc = "Debug option 'Restart'" })
+map("n", "<localleader>l", function() require('dap').run_last() end, { desc = "Debug option 'Run last'" })
+map("n", "<localleader>t", function() require('dap').terminate() end, { desc = "Debug option 'Terminate'"})
 
 map("n", "<leader>dp", function()
   require('dap').set_breakpoint(vim.fn.input "Breakpoint condition: ")
@@ -261,52 +263,50 @@ map("n", "<leader>du", function() require('dapui').toggle() end, { desc = "Toggl
 
 --- Core: LSP Mappings
 --- See `:help vim.lsp.*` for documentation on any of the below functions
-plugin_keymaps.lsp = function(bufnr)
-  map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Goto definition" })
-  map("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr, desc = "Goto declaration" })
-  map("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr, desc = "Goto implementation" })
-  map("n", "gr", vim.lsp.buf.references, { buffer = bufnr, desc = "Goto references" })
-  map("n", "gt", vim.lsp.buf.type_definition, { buffer = bufnr, desc = "Goto type definition" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition" })
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto declaration" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation" })
+map("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
+map("n", "gt", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
 
-  map("n", "<leader>ls", vim.lsp.buf.signature_help, { buffer = bufnr, desc = "Signature help" })
+map("n", "<leader>ls", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
-  map("n", "<leader>lk", function()
-    local ufo = require_plugin("ufo")
-    if ufo then
-      local winid = ufo.peekFoldedLinesUnderCursor()
-      if not winid then
-        vim.lsp.buf.hover()
-      end
-    else
+map("n", "<leader>lk", function()
+  local ufo = require_plugin("ufo")
+  if ufo then
+    local winid = ufo.peekFoldedLinesUnderCursor()
+    if not winid then
       vim.lsp.buf.hover()
     end
-  end, { buffer = bufnr, desc = "Type hover" })
+  else
+    vim.lsp.buf.hover()
+  end
+end, { desc = "Type hover" })
 
-  map("n", "]l", vim.diagnostic.goto_next, { buffer = bufnr, desc = "Diagnostic" })
-  map("n", "[l", vim.diagnostic.goto_prev, { buffer = bufnr, desc = "Diagnostic" })
+map("n", "]l", vim.diagnostic.goto_next, { desc = "Diagnostic" })
+map("n", "[l", vim.diagnostic.goto_prev, { desc = "Diagnostic" })
 
-  map("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr, desc = "Rename" })
-  map("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr, desc = "Code action" })
-  map("n", "<leader>ll", vim.diagnostic.setloclist, { buffer = bufnr, desc = "Diagnostic list" })
-  map("n", "<leader>ld", vim.diagnostic.open_float, { buffer = bufnr, desc = "Diagnostic float" })
-  map("n", "<leader>lq", ":lclose<cr>", { silent = true, desc = "Close Diagnostic list" })
+map("n", "<leader>ln", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code action" })
+map("n", "<leader>ll", vim.diagnostic.setloclist, { desc = "Diagnostic list" })
+map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Diagnostic float" })
+map("n", "<leader>lq", ":lclose<cr>", { silent = true, desc = "Close Diagnostic list" })
 
-  map( "n", "<leader>lwa", vim.lsp.buf.add_workspace_folder,
-    { buffer = bufnr, desc = "Add workspace folder" })
-  map( "n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder,
-    { buffer = bufnr, desc = "Remove workspace folder" })
-  map("n", "<leader>lwl", function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, { buffer = bufnr, desc = "List workspace folders" })
+map( "n", "<leader>lwa", vim.lsp.buf.add_workspace_folder,
+  { desc = "Add workspace folder" })
+map( "n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder,
+  { desc = "Remove workspace folder" })
+map("n", "<leader>lwl", function()
+  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+end, { desc = "List workspace folders" })
 
-  --- clangd special keymaps
-  map( "n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>",
-    { buffer = bufnr, desc = "Switch between source and header" })
+--- clangd special keymaps
+map( "n", "<leader>a", "<cmd>ClangdSwitchSourceHeader<CR>",
+  { desc = "Switch between source and header" })
 
-  --- auto format
-  map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
-  map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
-end
+--- auto format
+map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
+map("n", "=", function() vim.lsp.buf.format { async = true } end, { desc = "Format code" })
 
 --- Tool: GitSigns
 plugin_keymaps.gitsigns = function(bufnr)

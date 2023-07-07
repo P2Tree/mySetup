@@ -287,11 +287,6 @@ Plugins = {
     config = function()
       require "interface.neoscroll"
     end,
-    cond = function() -- Neovide has native scroll animation
-      if not vim.g.neovide then
-        return true
-      end
-    end,
     event = "VeryLazy",
   },
 
@@ -302,6 +297,7 @@ Plugins = {
       require "interface.bqf"
     end,
     event = "VeryLazy",
+    commit = "1276701",  -- have transparent issue with updated version (not match with color scheme)
   },
 
   {
@@ -384,6 +380,18 @@ Plugins = {
       require "tool.aerial"
     end,
     keys = require("keymaps").aerial_toggle,
+  },
+
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("toggleterm").setup({
+        direction = 'float',
+        autochdir = true,
+      })
+    end,
+    cmd = { "ToggleTerm", "TermExec" },
   },
 
   {
