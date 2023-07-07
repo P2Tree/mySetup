@@ -8,10 +8,14 @@ mason_null_ls.setup {
   -- A list of sources to install if they're not already installed.
   -- This setting has no relation with the `automatic_installation` setting.
   ensure_installed = {
+    -- git
     "gitlint",
-    "shellcheck",
+    -- lua
     "stylua",
+    -- python
     "black",
+    -- shell
+    "shfmt", "shellcheck",
   },
 
   -- Run `require("null-ls").setup`.
@@ -24,13 +28,22 @@ mason_null_ls.setup {
   automatic_setup = true,
 }
 
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
+
 null_ls.setup {
   border = "rounded",
   fallback_severity = vim.diagnostic.severity.INFO,
   sources = {
-    null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.black,
-    null_ls.builtins.diagnostics.gitlint,
-    null_ls.builtins.code_actions.shellcheck,
+    -- git
+    diagnostics.gitlint,
+    -- lua
+    formatting.stylua,
+    -- python
+    formatting.black,
+    -- shell
+    diagnostics.shellcheck,
+    code_actions.shellcheck,
   }
 }

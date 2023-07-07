@@ -68,7 +68,6 @@ mason_lspconfig.setup {
   ensure_installed = {
     "clangd",
     "pyright",
-    "bashls",
     "jsonls",
     "lua_ls",
   },
