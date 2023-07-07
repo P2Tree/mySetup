@@ -1,5 +1,6 @@
 local dapui = require_plugin("dapui")
-if not dapui then
+local dap = require_plugin("dap")
+if not dapui or not dap then
   return
 end
 
@@ -28,24 +29,20 @@ dapui.setup {
   },
   force_buffers = true,
   icons = {
-    collapsed = "",
-    current_frame = "",
-    expanded = "",
+    collapsed = "▶",
+    current_frame = "▶",
+    expanded = "▼",
   },
   layouts = {
     {
       elements = {
         {
-          id = "console",
-          size = 0.2,
-        },
-        {
-          id = "breakpoints",
-          size = 0.2,
+          id = "stacks",
+          size = 0.3,
         },
         {
           id = "scopes",
-          size = 0.4,
+          size = 0.5,
         },
         {
           id = "watches",
@@ -58,12 +55,22 @@ dapui.setup {
     {
       elements = {
         {
-          id = "repl",
-          size = 0.5,
+          id = "breakpoints",
+          size = 0.3,
         },
         {
-          id = "stacks",
-          size = 0.5,
+          id = "repl",
+          size = 0.7,
+        },
+      },
+      position = "right",
+      size = 50,
+    },
+    {
+      elements = {
+        {
+          id = "console",
+          size = 1.0,
         }
       },
       position = "bottom",
@@ -83,3 +90,7 @@ dapui.setup {
     max_value_lines = 100,
   },
 }
+
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
