@@ -109,11 +109,6 @@ map("n", "<leader>ol", "<Cmd>Lazy<CR>", { silent = true, desc = "Open plugin man
 --- Core: Mason
 map("n", "<leader>om", "<Cmd>Mason<CR>", { silent = true, desc = "Open tool manager (Mason)" })
 
---- Edit: Hex
-map("n", "<leader>hd", "<Cmd>HexDump<CR>", { desc = "Convert binary view to hex view" })
-map("n", "<leader>ha", "<Cmd>HexAssemble<CR>", { desc = "Convert hex view to binary view" })
-map("n", "<leader>hh", "<Cmd>HexToggle<CR>", { desc = "Convert between hex view and binary view" })
-
 --- Interface: BufferLine
 -- Default BufferLineGoToBuffer interface is relative buffer(visual buffer), but absolute buffer
 -- The plugin support select buffer kind at go_to_buffer. So I use absolute buffer
@@ -150,20 +145,20 @@ map('n', 'zm', function() require('ufo').closeFoldsWith() end, { desc = "Close s
 
 --- Interface: Nvim-tree
 plugin_keymaps.nvimtree_toggle = {
-  { "<leader>e", "<Cmd>NvimTreeToggle<CR>", { desc = "File Explorer" } }
+  { "<leader>e", "<Cmd>NvimTreeToggle<CR>", desc = "File Explorer" }
 }
 
 --- Tool: Telescope builtin
 plugin_keymaps.telescope_toggle = {
-  { "<leader>ff", ":Telescope find_files<CR>", { desc = "Find files" } },
-  { "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffers" } },
-  { "<leader>fh", ":Telescope help_tags<CR>", { desc = "Find help tags" } },
-  { "<leader>fr", ":Telescope oldfiles<CR>", { desc = "Find recent files" } },
-  { "<leader>fm", ":Telescope marks<CR>", { desc = "Find marks" } },
-  { "<leader>fs", ":Telescope symbols<CR>", { desc = "Find symbols" } },
-  { "<leader>fg", ":Telescope live_grep<CR>", { desc = "Find Live grep" } },  -- exchanged by live_grep_args
-  { "<leader>fk", ":Telescope keymaps<CR>", { desc = "Find keymaps" } },
-  { "<leader>fc", ":Telescope colorscheme<CR>", { desc = "Find colorscheme" } },
+  { "<leader>ff", ":Telescope find_files<CR>", desc = "Find files" },
+  { "<leader>fb", ":Telescope buffers<CR>", desc = "Find buffers" },
+  { "<leader>fh", ":Telescope help_tags<CR>", desc = "Find help tags" },
+  { "<leader>fr", ":Telescope oldfiles<CR>", desc = "Find recent files" },
+  { "<leader>fm", ":Telescope marks<CR>", desc = "Find marks" },
+  { "<leader>fs", ":Telescope symbols<CR>", desc = "Find symbols" },
+  { "<leader>fg", ":Telescope live_grep<CR>", desc = "Find Live grep" },  -- exchanged by live_grep_args
+  { "<leader>fk", ":Telescope keymaps<CR>", desc = "Find keymaps" },
+  { "<leader>fc", ":Telescope colorscheme<CR>", desc = "Find colorscheme" },
 
   --- Tool: Telescope plugins
   --- telescope-project.nvim and project.nvim are the different plugins
@@ -196,7 +191,7 @@ plugin_keymaps.flash_toggle = {
 
 --- Tool: Aerial
 plugin_keymaps.aerial_toggle = {
-  { "<leader>s", "<Cmd>AerialToggle<CR>", { desc = "Code Outline" } }
+  { "<leader>s", "<Cmd>AerialToggle<CR>", desc = "Code Outline" }
 }
 
 --- Tool: ToggleTerm
@@ -215,7 +210,7 @@ map('n', ']x', '<Plug>(git-conflict-next-conflict)', { desc = "Git Conflict Choo
 
 --- Tool: NeoGit
 plugin_keymaps.neogit_toggle = {
-  { "<leader>gg", "<Cmd>Neogit<CR>", { desc = "Open Neogit" } }
+  { "<leader>gg", "<Cmd>Neogit<CR>", desc = "Open Neogit" }
 }
 
 --- Tool: Diffview
