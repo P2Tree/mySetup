@@ -16,4 +16,4 @@ M.add = {
   NvimTreeOpenedFolderName = { fg = "green", bold = true },
 }
 
-return M
+return M  

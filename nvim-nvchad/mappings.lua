@@ -1,54 +1,10 @@
 ---@type MappingsTable
 local M = {}
 
-M.disabled = {
-  n = {
-    --- disable normal mappings
-    ["<leader>b"] = "",   -- use `:e`
-    ["<leader>n"] = "",   -- use `<leader>tn`
-    ["<leader>rn"] = "",  -- use `<leader>tn`
-    ["<leader>ch"] = "",  -- use `<leader>oc`
-    ["<leader>fm"] = "",  -- use `=`
-
-    --- disable lspconfig mappings
-    ["K"] = "",           -- use `<leader>lk`
-    ["<leader>D"] = "",   -- use `gt`
-    ["<leader>ra"] = "",  -- use `<leader>ln`
-    ["<leader>ca"] = "",  -- use `<leader>la`
-    ["<leader>f"] = "",   -- use `<leader>ld`
-    ["<leader>q"] = "",   -- use `<leader>lq`
-
-    --- disable nvimtree mappings
-    ["<C-n>"] = "",       -- use `<leader>e`
-    ["<leader>e"] = "",   -- use `<leader>e`
-
-    --- disable telescope mappings
-    ["<leader>cm"] = "",  -- use `<leader>fgc`
-    ["<leader>gt"] = "",  -- use `<leader>fgt`
-    ["<leader>pt"] = "",  -- use `<leader>ft`
-    ["<leader>th"] = "",  -- use `<leader>fc`
-    ["<leader>ma"] = "",  -- use `<leader>fm`
-
-    --- disable nvterm mappings
-    ["<leader>h"] = "",   -- use `<leader>th`
-    ["<leader>v"] = "",   -- use `<leader>tv`
-
-    --- disable whichkey
-    ["<leader>wK"] = "",  -- no key mapping
-    ["<leader>wk"] = "",  -- no key mapping
-
-    --- disable blankline
-    ["<leader>cc"] = "",
-
-    --- disable gitsigns
-    ["<leader>rh"] = "",  -- use `<leader>gr`
-    ["<leader>ph"] = "",  -- use `<leader>gk`
-    ["<leader>td"] = "",  -- use `<leader>gx`
-  }
-}
-
 M.general = {
   n = {
+    --- clear highlights
+    ["<Esc>"] = { ":noh <CR>", "Clear highlights", opts = { silent = true } },
     --- joint two lines together
     ["T"] = { "J", "Joint two lines together" },
     --- jump to head or tail of the line
@@ -109,6 +65,17 @@ M.general = {
   }
 }
 
+M.interface = {
+  n = {
+    ["<leader>tn"] = { "<Cmd> lua require('custom.ui').change_number() <CR>",
+                       "Change the line number display modes" },
+    ["<leader>tp"] = { function() require("base46").toggle_transparency() end,
+                       "Toggle transparency" },
+    ["<leader>tc"] = { function() require("base46").toggle_theme() end,
+                       "Switch colorschemes" },
+  }
+}
+
 M.lspconfig = {
   plugin = true,
   n = {
@@ -136,7 +103,7 @@ M.lspconfig = {
 M.nvimtree = {
   plugin = true,
   n = {
-    ["<leader>e"] = { "<Cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+    ["<leader>e"] = { "<Cmd> NvimTreeToggle <CR>", "Toggle file manager" },
   }
 }
 
@@ -144,10 +111,13 @@ M.telescope = {
   plugin = true,
   n = {
     ["<leader>ft"] = { "<Cmd> Telescope terms <CR>", "Pick hidden termnial" },
-    ["<leader>fc"] = { "<Cmd> Telescope themes <CR>", "Change themes" },
-    ["<leader>fm"] = { "<Cmd> Telescope marks <CR>", "Find bookmarks" },
+    ["<leader>fc"] = { "<Cmd> Telescope themes <CR>", "Change colorscheme" },
+    ["<leader>fm"] = { "<Cmd> Telescope marks <CR>", "Search bookmarks" },
     ["<leader>fn"] = { function() require("telescope").extensions.notify.notify() end,
                        "List notify items" },
+    ["<leader>fh"] = { "<Cmd> Telescope help_tags <CR>", "Search help tags" },
+    ["<leader>fs"] = { "<Cmd> Telescope symbols <CR>", "Insert icon symbols" },
+    ["<leader>fk"] = { "<Cmd> Telescope keymaps <CR>", "Search key mappings" },
     ["<leader>fgc"] = { "<Cmd> Telescope git_commits <CR>", "Show git commits" },
     ["<leader>fgt"] = { "<Cmd> Telescope git_status <CR>", "Show git status" },
   }
@@ -175,30 +145,108 @@ M.gitsigns = {
   }
 }
 
-M.interface = {
+M.flash = {
   n = {
-    --- toggle line number
-    ["<leader>tn"] = { "<Cmd> lua require('ui').change_number() <CR>",
-                       "Change the line number display modes" },
-    ["<leader>tp"] = { function() require("base46").toggle_transparency() end,
-                       "Toggle transparency" },
+    ["s"] = { function() require("flash").jump() end,
+              "Flash move" },
+    ["S"] = { function() require("flash").treesitter() end,
+              "Flash treesitter move" },
+  },
+  v = {
+    ["s"] = { function() require("flash").jump() end,
+              "Flash move" },
+    ["S"] = { function() require("flash").treesitter() end,
+              "Flash treesitter move" },
+  },
+}
+
+M.aerial = {
+  plugin = true,
+  n = {
+    ["<leader>s"] = { "<Cmd> AerialToggle <CR>", "Code Outline" },
   }
 }
 
--- tabbufline mappings
-local tabbufline_n = {}
+local tabufline_n = {}
 for i = 1, 9, 1 do
-  tabbufline_n[string.format("<leader>b%s", i)] = {
+  tabufline_n[string.format("<M-%s>", i)] = {
     function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end,
     string.format("Switch to buffer %s", i) }
 end
-tabbufline_n["<leader>b>"] = {
+tabufline_n["<leader>b>"] = {
   function() require("nvchad_ui.tabufline").move_buf(1) end,
   "Move buffer to right" }
-tabbufline_n["<leader>b<"] = {
+tabufline_n["<leader>b<"] = {
   function() require("nvchad_ui.tabufline").move_buf(-1) end,
   "Move buffer to left" }
+tabufline_n["<leader>bx"] = {
+  function() require("nvchad_ui.tabufline").close_buffer() end,
+  "Close buffer" }
 
-M.tabbufline = { n = tabbufline_n }
+M.tabufline = {
+  plugin = true,
+  n = tabufline_n
+}
+
+M.persistence = {
+  -- plugin = true,  -- don't put this option to `true`, which will cause which-key don't recognise it
+  n = {
+    ["<leader>wr"] = { function() require("persistence").load() end,
+                       "Restore workspace for the current directory" },
+    ["<leader>wR"] = { function() require("persistence").load() end,
+                       "Restore the last workspace" },
+    ["<leader>wd"] = { function() require("persistence").stop() end,
+                       "Stop save workspace on exit" },
+  }
+}
+
+M.disabled = {
+  n = {
+    --- disable normal mappings
+    ["<leader>b"] = "",   -- use `:e`
+    ["<leader>n"] = "",   -- use `<leader>tn`
+    ["<leader>rn"] = "",  -- use `<leader>tn`
+    ["<leader>ch"] = "",  -- use `<leader>oc`
+    ["<leader>fm"] = "",  -- use `=`
+
+    --- disable lspconfig mappings
+    ["K"] = "",           -- use `<leader>lk`
+    ["<leader>D"] = "",   -- use `gt`
+    ["<leader>ra"] = "",  -- use `<leader>ln`
+    ["<leader>ca"] = "",  -- use `<leader>la`
+    ["<leader>f"] = "",   -- use `<leader>ld`
+    ["<leader>q"] = "",   -- use `<leader>lq`
+
+    --- disable nvimtree mappings
+    ["<C-n>"] = "",       -- use `<leader>e`
+    ["<leader>e"] = "",   -- use `<leader>e`
+
+    --- disable telescope mappings
+    ["<leader>cm"] = "",  -- use `<leader>fgc`
+    ["<leader>gt"] = "",  -- use `<leader>fgt`
+    ["<leader>pt"] = "",  -- use `<leader>ft`
+    ["<leader>th"] = "",  -- use `<leader>fc`
+    ["<leader>ma"] = "",  -- use `<leader>fm`
+
+    --- disable nvterm mappings
+    ["<leader>h"] = "",   -- use `<leader>th`
+    ["<leader>v"] = "",   -- use `<leader>tv`
+
+    --- disable whichkey
+    ["<leader>wK"] = "",  -- no key mapping
+    ["<leader>wk"] = "",  -- no key mapping
+
+    --- disable blankline
+    ["<leader>cc"] = "",
+
+    --- disable gitsigns
+    ["<leader>rh"] = "",  -- use `<leader>gr`
+    ["<leader>ph"] = "",  -- use `<leader>gk`
+    ["<leader>td"] = "",  -- use `<leader>gx`
+
+    --- disable tabufline
+    ["<leader>x"] = "",   -- use `<leader>bx`
+  }
+}
 
 return M

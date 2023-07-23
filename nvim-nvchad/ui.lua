@@ -1,7 +1,5 @@
 local M = {}
 
-local notify = require_plugin("notify")
-
 --- Change the number display modes
 function M.change_number()
   local number = vim.wo.number -- local to window
@@ -14,7 +12,7 @@ function M.change_number()
     vim.wo.number = false
     vim.wo.relativenumber = false
   end
-  notify(string.format("number %s, relativenumber %s", bool2str(vim.wo.number), bool2str(vim.wo.relativenumber)), "info", {
+  vim.notify(string.format("number %s, relativenumber %s", bool2str(vim.wo.number), bool2str(vim.wo.relativenumber)), "info", {
     title = "UI Notice"
   })
 end
