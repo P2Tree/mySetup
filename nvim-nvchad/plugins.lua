@@ -90,12 +90,6 @@ local plugins = {
         inc_rename = true, -- enables an input dialog for inc-rename.nvim
         lsp_doc_border = true, -- add a border to hover docs and signature help
       },
-      cmdline = {
-        format = {
-          search_down = { kind = "search", pattern = "^/", icon = " ", lang = "regex" },
-          search_up = { kind = "search", pattern = "^%?", icon = " ", lang = "regex" },
-        },
-      },
       routes = {
         { -- show record message
           view = "notify",
