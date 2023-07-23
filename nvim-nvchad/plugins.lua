@@ -244,7 +244,12 @@ local plugins = {
   { "ellisonleao/glow.nvim",
     config = true,
     cmd = "Glow"
-  }
+  },
+  -- show reference, defination number count
+  { "VidocqH/lsp-lens.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
   --- 4-Tool }}}
 }
 
@@ -255,7 +260,8 @@ require("which-key").register({
     ["g"] = "+git",
     ["l"] = "+lsp",
     ["o"] = "+open",
-    ["t"] = "+toggle",
+    ["t"] = "+terminal",
+    ["i"] = "+interface",
     ["w"] = "+workspace",
   }
 })

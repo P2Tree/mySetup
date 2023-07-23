@@ -67,11 +67,11 @@ M.general = {
 
 M.interface = {
   n = {
-    ["<leader>tn"] = { "<Cmd> lua require('custom.ui').change_number() <CR>",
+    ["<leader>in"] = { "<Cmd> lua require('custom.ui').change_number() <CR>",
                        "Change the line number display modes" },
-    ["<leader>tp"] = { function() require("base46").toggle_transparency() end,
+    ["<leader>it"] = { function() require("base46").toggle_transparency() end,
                        "Toggle transparency" },
-    ["<leader>tc"] = { function() require("base46").toggle_theme() end,
+    ["<leader>ic"] = { function() require("base46").toggle_theme() end,
                        "Switch colorschemes" },
   }
 }
