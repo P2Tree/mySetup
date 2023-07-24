@@ -111,6 +111,13 @@ local plugins = {
           },
           opts = { skip = true },
         },
+        {
+          filter = {
+            event = "msg_show",
+            kind = "search_count",
+          },
+          opts = { skip = true },
+        },
       },
     },
     dependencies = {
@@ -135,6 +142,11 @@ local plugins = {
     config = true,
   },
   { "kevinhwang91/nvim-bqf",
+    opts = {
+      preview = {
+        winblend = 5,  -- default is 12
+      }
+    },
     ft = "qf",
   },
   { "folke/todo-comments.nvim",
@@ -153,6 +165,16 @@ local plugins = {
 
   --- 4-Tool {{{
   { "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        set_env = { ["COLORTERM"] = "truecolor" },
+        mappings = {
+          i = {
+            ["<ESC>"] = require("telescope.actions").close,
+          }
+        }
+      }
+    },
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
     }

@@ -8,6 +8,8 @@ vim.notify = noice.notify
 vim.lsp.handlers["textDocument/hover"] = noice.hover
 vim.lsp.handlers["textDocument/signatureHelp"] = noice.signature
 
+capabilities.offsetEncoding = { "utf-16" }
+
 -- if you just want default config for the servers then put them in a table
 local servers = { "clangd", "pyright", "jsonls" }
 for _, lsp in ipairs(servers) do
