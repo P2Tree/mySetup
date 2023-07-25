@@ -96,3 +96,21 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   end,
   desc = "Open nvim-tree when open a directory"
 })
+
+-- windows to close
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "git",
+    "help",
+    "lspinfo",
+    "man",
+    "qf",
+    "startuptime",
+    "toggleterm",
+    "vim",
+  },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})

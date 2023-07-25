@@ -34,6 +34,9 @@ M.general = {
     ["<leader>ol"] = { "<Cmd> Lazy <CR>", "Open plugin manager", opts = { silent = true }},
     --- open Mason tool manager
     ["<leader>om"] = { "<Cmd> Mason <CR>", "Open tool manager", opts = { silent = true }},
+    --- exchange lines position
+    ["<M-j>"] = { "<Cmd> m .+1<CR>==" },
+    ["<M-k>"] = { "<Cmd> m .-2<CR>==" },
   },
   v = {
     --- jump to head or tail of the line
@@ -53,6 +56,11 @@ M.general = {
     --- mouse scroll with wheel
     ["<ScrollWheelUp>"] = { "<C-y>" },
     ["<ScrollWheelDown>"] = { "<C-e>" },
+    --- paste over currently selected text without yanking it
+    ["p"] = { "_dP" },
+    --- exchange lines position
+    ["<M-j>"] = { "<Cmd> m '>+1<CR>gv=gv" },
+    ["<M-k>"] = { "<Cmd> m '<+2<CR>gv=gv" },
   },
   i = {
     --- Add undo break-points
@@ -62,6 +70,9 @@ M.general = {
     --- mouse scroll with wheel
     ["<ScrollWheelUp>"] = { "<C-y>" },
     ["<ScrollWheelDown>"] = { "<C-e>" },
+    --- exchange lines position
+    ["<M-j>"] = { "<Cmd> m .+1<CR>==gi" },
+    ["<M-k>"] = { "<Cmd> m .-2<CR>==gi" },
   }
 }
 
