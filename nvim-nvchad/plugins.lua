@@ -29,7 +29,6 @@ local plugins = {
             "shfmt", -- shell
             "prettier", -- json
             --- Linter
-            "gitlint", -- git
             "shellcheck", -- shell
           },
         },
@@ -228,7 +227,6 @@ local plugins = {
         default_direction = "right",
       },
       close_on_select = true,
-      autojump = true,
     },
     dependencies = {
       "nvim-treesitter/nvim-treesitter",

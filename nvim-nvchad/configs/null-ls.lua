@@ -21,7 +21,6 @@ local sources = {
   formatting.black,
   formatting.shfmt,
   formatting.prettier,
-  diagnostics.gitlint,
   code_actions.shellcheck,
   code_actions.refactoring,
   completion.spell,
