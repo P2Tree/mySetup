@@ -127,8 +127,9 @@ vim.opt.splitright = true
 --- timeout of sequence
 vim.opt.timeoutlen = 300
 
---- save swap file time
-vim.opt.updatetime = 200
+--- disable swap file
+vim.opt.swapfile = false
+vim.opt.updatetime = 200   -- swap file save time
 
 --- Used for italic in tmux
 vim.g.t_ZH = "\\e[3m"

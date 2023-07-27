@@ -113,4 +113,12 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
+  desc = "Use `q` key to quit in some window",
+})
+
+-- auto save
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  pattern = { "*" },
+  command = "w",
+  desc = "Auto save when leave insert mode or text changed",
 })
