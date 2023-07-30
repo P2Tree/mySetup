@@ -3,8 +3,10 @@ local M = {}
 
 M.general = {
   n = {
+    --- exit Neovim
+    ["Q"] = { "<Cmd> qa <CR>", "Exit Neovim" },
     --- clear highlights
-    ["<Esc>"] = { ":noh <CR>", "Clear highlights", opts = { silent = true } },
+    ["<Esc>"] = { "<Cmd> noh <CR>", "Clear highlights" },
     --- joint two lines together
     ["T"] = { "J", "Joint two lines together" },
     --- jump to head or tail of the line
@@ -25,15 +27,15 @@ M.general = {
     ["<leader>-"] = { "<C-w>s", "Split window horizontal" },
     ["<leader>\\"] = { "<C-w>v", "Split window vertical" },
     --- switch previous buffer
-    ["<leader>bb"] = { "<Cmd> e # <CR>", "Switch to previous buffer", opts = { silent = true }},
+    ["<leader>bb"] = { "<Cmd> e # <CR>", "Switch to previous buffer" },
     --- open quickfix window
-    ["<leader>oq"] = { "<Cmd> copen <CR>", "Open Quickfix list", opts = { silent = true }},
+    ["<leader>oq"] = { "<Cmd> copen <CR>", "Open Quickfix list" },
     --- open cheat shell
-    ["<leader>oc"] = { "<Cmd> NvCheatsheet <CR>", "Open CheatSheet", opts = { silent = true }},
+    ["<leader>oc"] = { "<Cmd> NvCheatsheet <CR>", "Open CheatSheet" },
     --- open Lazy plugin manager
-    ["<leader>ol"] = { "<Cmd> Lazy <CR>", "Open plugin manager", opts = { silent = true }},
+    ["<leader>ol"] = { "<Cmd> Lazy <CR>", "Open plugin manager" },
     --- open Mason tool manager
-    ["<leader>om"] = { "<Cmd> Mason <CR>", "Open tool manager", opts = { silent = true }},
+    ["<leader>om"] = { "<Cmd> Mason <CR>", "Open tool manager" },
     --- exchange lines position
     ["<M-j>"] = { "<Cmd> m .+1<CR>==" },
     ["<M-k>"] = { "<Cmd> m .-2<CR>==" },
@@ -49,8 +51,8 @@ M.general = {
     ["<PageUp>"] = { "<C-u>", "Screen half step up scroll", opts = { remap = true }},
     ["<PageDown>"] = { "<C-d>", "Screen half step down scroll", opts = { remap = true }},
     --- better indent
-    [">"] = { ">gv", opts = { silent = true }},
-    ["<"] = { "<gv", opts = { silent = true }},
+    [">"] = { ">gv" },
+    ["<"] = { "<gv" },
     --- copy to system clipboard
     ["Y"] = { '"+y', "Copy to system clipboard" },
     --- mouse scroll with wheel

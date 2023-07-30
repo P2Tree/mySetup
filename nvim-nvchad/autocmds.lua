@@ -2,6 +2,22 @@ local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
   clear = true,
 })
 
+local non_main_buftypes = {
+  "git",
+  "help",
+  "lspinfo",
+  "man",
+  "qf",
+  "startuptime",
+  "toggleterm",
+  "vim",
+  "nvdash",
+  "NvimTree",
+}
+local excluded_pattern = table.concat(vim.tbl_map(function(ft)
+  return string.format("[^%s]", ft)
+end, non_main_buftypes))
+
 --- Delete trailing whitespace and tabs at the end of each line
 --- exchanged by formatter.nvim plugin
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -99,16 +115,7 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 
 -- windows to close
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {
-    "git",
-    "help",
-    "lspinfo",
-    "man",
-    "qf",
-    "startuptime",
-    "toggleterm",
-    "vim",
-  },
+  pattern = non_main_buftypes,
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
@@ -118,7 +125,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- auto save
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-  pattern = { "*" },
+  pattern = { string.format("*%s", excluded_pattern) },
   command = "w",
   desc = "Auto save when leave insert mode or text changed",
 })

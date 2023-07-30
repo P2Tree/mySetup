@@ -24,7 +24,6 @@ M.ui = {
       { "󰛳  Recover Workspace", "Spc p l", function() require("persistence").load() end },
       { "  Change Colorscheme", "Spc f c", "Telescope themes" },
       { "גּ  Check Mappings", "Spc t c", "NvCheatsheet" },
-      { "󰿅  Quit", "q", ":q" },
     },
   },
 }
