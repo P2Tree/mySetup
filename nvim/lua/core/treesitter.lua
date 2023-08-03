@@ -50,7 +50,7 @@ treesitter.setup {
       init_selection = "<cr>",
       node_incremental = "<cr>",
       node_decremental = "<bs>",
-    --   scope_incrementnl = "<bs>",
+    --   scope_incremental = "<bs>",
     },
   },
 
