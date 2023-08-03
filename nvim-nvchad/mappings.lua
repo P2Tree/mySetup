@@ -220,6 +220,47 @@ M.persistence = {
   }
 }
 
+M.comment = {
+  plugin = true,
+
+  -- toggle comment in both modes
+  n = {
+    ["<leader>cc"] = {
+      function()
+        require("Comment.api").comment.linewise.current()
+      end,
+      "Comment linewise",
+    },
+    ["<leader>cb"] = {
+      function()
+        require("Comment.api").comment.blockwise.current()
+      end,
+      "Comment blockwise",
+    },
+    ["<leader>cd"] = {
+      function()
+        require("Comment.api").uncomment.linewise.current()
+      end,
+      "Uncomment linewise",
+    },
+  },
+
+  v = {
+    ["<leader>cc"] = {
+      "<ESC><cmd>lua require('Comment.api').comment.linewise(vim.fn.visualmode())<CR>",
+      "Comment linewise",
+    },
+    ["<leader>cb"] = {
+      "<ESC><cmd>lua require('Comment.api').comment.blockwise(vim.fn.visualmode())<CR>",
+      "Comment blockwise",
+    },
+    ["<leader>cd"] = {
+      "<ESC><cmd>lua require('Comment.api').uncomment.linewise(vim.fn.visualmode())<CR>",
+      "Uncomment linewise",
+    },
+  },
+}
+
 M.disabled = {
   n = {
     --- disable normal mappings

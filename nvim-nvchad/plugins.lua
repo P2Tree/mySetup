@@ -58,7 +58,13 @@ local plugins = {
       }
     },
   },
+  { "tpope/vim-sleuth",
+    event = "VeryLazy",
+  },
   --- 1-Core }}}
+
+  --- 2-Edit {{{
+  --- 2-Edit }}}
 
   --- 3-Interface {{{
   { "lewis6991/gitsigns.nvim",
@@ -250,7 +256,14 @@ local plugins = {
   },
   { "rainbowhxch/accelerated-jk.nvim",
     event = "VeryLazy",
-    config = function()
+    opts = {
+      acceleration_motions = { 'w', 'b' },
+      enable_deceleration = true,
+      acceleration_limit = 500,
+      acceleration_table = { 5,7,10,14,19,25,32,40 },
+    },
+    config = function(_, opts)
+      require("accelerated-jk").setup(opts)
       vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
       vim.api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
     end,
