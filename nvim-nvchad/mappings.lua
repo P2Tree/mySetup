@@ -162,6 +162,32 @@ M.gitsigns = {
                        "Git preview hunk" },
     ["<leader>gx"] = { function() require("gitsigns").toggle_deleted() end,
                        "Git toggle deleted "},
+    ["]g"] = {
+      function()
+        if vim.wo.diff then
+          return "]g"
+        end
+        vim.schedule(function()
+          require("gitsigns").next_hunk()
+        end)
+        return "<Ignore>"
+      end,
+      "Jump to next hunk",
+      opts = { expr = true },
+    },
+    ["[g"] = {
+      function()
+        if vim.wo.diff then
+          return "[g"
+        end
+        vim.schedule(function()
+          require("gitsigns").prev_hunk()
+        end)
+        return "<Ignore>"
+      end,
+      "Jump to previous hunk",
+      opts = { expr = true },
+    },
   }
 }
 

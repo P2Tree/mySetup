@@ -50,12 +50,7 @@ local plugins = {
         "diff",
         "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
       },
-      indent = {
-        enable = true,
-        disable = {
-          "python"
-        }
-      },
+      indent = { enable = true, },
       incremental_selection = {
         enable = true,
         keymaps = {
@@ -65,9 +60,7 @@ local plugins = {
           scope_incremental = "<TAB>",
         }
       },
-      endwise = {
-        enable = true,
-      },
+      endwise = { enable = true, },
     },
     dependencies = {
       "RRethy/nvim-treesitter-endwise",
@@ -75,6 +68,18 @@ local plugins = {
   },
   { "tpope/vim-sleuth",
     event = "VeryLazy",
+  },
+  { "ahmedkhalf/project.nvim",
+    event = "VeryLazy",
+    opts = {
+      detection_methods = { "pattern", "lsp" },
+      patterns = { "compile_commands.json", ".git", "package.json" },
+      show_hidden = true,
+      silent_chdir = false,
+    },
+    config = function(_, opts)
+      require("project_nvim").setup(opts)
+    end,
   },
   --- 1-Core }}}
 
@@ -191,12 +196,43 @@ local plugins = {
         mappings = {
           i = {
             ["<ESC>"] = require("telescope.actions").close,
+
+            -- These keymap is only used to fix the issue auto enter the
+            -- insert mode when select item and open buffer from telescope
+            -- prompt
+            -- It may fixed in the new version of neovim.
+            -- Try disable in 0.10
+            ["<CR>"] = function()
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC><CR>", true, false, true), "i", false)
+            end
           }
         }
-      }
+      },
+      extensions_list = { "themes", "terms", "fzf", "ui-select" },  -- NvChad use it
+      extensions = {
+        [ "fzf" ] = {
+          fuzzy = true,
+          override_generic_sorter = true,
+          override_file_sorter = true,
+        },
+        [ "ui-select" ] = {
+          require("telescope.themes").get_cursor()
+        },
+      },
     },
     dependencies = {
       "nvim-telescope/telescope-symbols.nvim",
+      { "nvim-telescope/telescope-ui-select.nvim",
+        config = function()
+          require("telescope").load_extension("ui-select")
+        end,
+      },
+      { "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        config = function ()
+          require("telescope").load_extension("fzf")
+        end,
+      },
     }
   },
   { "nvim-tree/nvim-tree.lua",
@@ -204,6 +240,10 @@ local plugins = {
       sync_root_with_cwd = true,
       reload_on_bufenter = true,
       respect_buf_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_root = true,
+      },
       renderer = {
         highlight_opened_files = "icon",
         indent_markers = {
@@ -271,12 +311,6 @@ local plugins = {
   },
   { "rainbowhxch/accelerated-jk.nvim",
     event = "VeryLazy",
-    opts = {
-      acceleration_motions = { 'w', 'b' },
-      enable_deceleration = true,
-      acceleration_limit = 500,
-      acceleration_table = { 5,7,10,14,19,25,32,40 },
-    },
     config = function(_, opts)
       require("accelerated-jk").setup(opts)
       vim.api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
