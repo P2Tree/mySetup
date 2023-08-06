@@ -23,9 +23,6 @@ M.general = {
     ["<ScrollWheelDown>"] = { "<C-e>" },
     --- search word under cursor
     ["*"] = { "*N", opts = { remap = true }},
-    --- window split
-    ["<leader>-"] = { "<C-w>s", "Split window horizontal" },
-    ["<leader>\\"] = { "<C-w>v", "Split window vertical" },
     --- switch previous buffer
     ["<leader>bb"] = { "<Cmd> e # <CR>", "Switch to previous buffer" },
     --- open quickfix window
@@ -37,8 +34,11 @@ M.general = {
     --- open Mason tool manager
     ["<leader>om"] = { "<Cmd> Mason <CR>", "Open tool manager" },
     --- exchange lines position
-    ["<M-j>"] = { "<Cmd> m .+1<CR>==" },
-    ["<M-k>"] = { "<Cmd> m .-2<CR>==" },
+    ["<Alt-j>"] = { "<Cmd> m .+1<CR>==" },
+    ["<Alt-k>"] = { "<Cmd> m .-2<CR>==" },
+    --- add a new line before/after current line
+    ["oo"] = { "o<ESC>k", "Add new line after current line" },
+    ["OO"] = { "O<ESC>j", "Add new line before current line" },
   },
   v = {
     --- jump to head or tail of the line
@@ -61,8 +61,8 @@ M.general = {
     --- paste over currently selected text without yanking it
     ["p"] = { "_dP" },
     --- exchange lines position
-    ["<M-j>"] = { "<Cmd> m '>+1<CR>gv=gv" },
-    ["<M-k>"] = { "<Cmd> m '<+2<CR>gv=gv" },
+    ["<Alt-j>"] = { "<Cmd> m '>+1<CR>gv=gv" },
+    ["<Alt-k>"] = { "<Cmd> m '<+2<CR>gv=gv" },
   },
   i = {
     --- Add undo break-points
@@ -73,8 +73,8 @@ M.general = {
     ["<ScrollWheelUp>"] = { "<C-y>" },
     ["<ScrollWheelDown>"] = { "<C-e>" },
     --- exchange lines position
-    ["<M-j>"] = { "<Cmd> m .+1<CR>==gi" },
-    ["<M-k>"] = { "<Cmd> m .-2<CR>==gi" },
+    ["<Alt-j>"] = { "<Cmd> m .+1<CR>==gi" },
+    ["<Alt-k>"] = { "<Cmd> m .-2<CR>==gi" },
   }
 }
 
@@ -131,7 +131,7 @@ M.telescope = {
   plugin = true,
   n = {
     ["<leader>ft"] = { "<Cmd> Telescope terms <CR>", "Pick hidden termnial" },
-    ["<leader>fc"] = { "<Cmd> Telescope themes <CR>", "Change colorscheme" },
+    ["<leader>fT"] = { "<Cmd> Telescope themes <CR>", "Change themes" },
     ["<leader>fm"] = { "<Cmd> Telescope marks <CR>", "Search bookmarks" },
     ["<leader>fn"] = { function() require("telescope").extensions.notify.notify() end,
                        "List notify items" },
@@ -140,6 +140,7 @@ M.telescope = {
     ["<leader>fk"] = { "<Cmd> Telescope keymaps <CR>", "Search key mappings" },
     ["<leader>fgc"] = { "<Cmd> Telescope git_commits <CR>", "Show git commits" },
     ["<leader>fgt"] = { "<Cmd> Telescope git_status <CR>", "Show git status" },
+    ["<leader>fc"] = { "<Cmd> Telescope commands <CR>", "Search commands" },
   }
 }
 
@@ -215,7 +216,7 @@ M.aerial = {
 
 local tabufline_n = {}
 for i = 1, 9, 1 do
-  tabufline_n[string.format("<M-%s>", i)] = {
+  tabufline_n[string.format("<Alt-%s>", i)] = {
     function() vim.api.nvim_set_current_buf(vim.t.bufs[i]) end,
     string.format("Switch to buffer %s", i) }
 end
@@ -285,6 +286,20 @@ M.comment = {
       "Uncomment linewise",
     },
   },
+}
+
+M.window = {
+  n = {
+    ["<Ctrl-w>p"] = {
+      function()
+        local window_number = require('window-picker').pick_window()
+        if window_number then vim.api.nvim_set_current_win(window_number) end
+      end,
+      "Pick window"
+    },
+    ["<Ctrl-w>s"] = { "<C-w>s", "Split horizon window" },
+    ["<Ctrl-w>v"] = { "<C-w>v", "Split vertical window" },
+  }
 }
 
 M.disabled = {

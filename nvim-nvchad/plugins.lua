@@ -40,6 +40,7 @@ local plugins = {
     end, -- Override to setup mason-lspconfig
   },
   { "nvim-treesitter/nvim-treesitter",
+    event = "VeryLazy",
     opts = {
       ensure_installed = {
         "vim", "lua",
@@ -195,7 +196,7 @@ local plugins = {
         set_env = { ["COLORTERM"] = "truecolor" },
         mappings = {
           i = {
-            ["<ESC>"] = require("telescope.actions").close,
+            -- ["<ESC>"] = require("telescope.actions").close,
 
             -- These keymap is only used to fix the issue auto enter the
             -- insert mode when select item and open buffer from telescope
@@ -331,6 +332,30 @@ local plugins = {
   { "VidocqH/lsp-lens.nvim",
     event = "VeryLazy",
     config = true,
+  },
+  {
+    "s1n7ax/nvim-window-picker",
+    name = 'window-picker',
+    version = '2.*',
+    config = function()
+      require("window-picker").setup({
+        filter_rules = {
+          include_current_win = true,
+          bo = {
+            filetype = { "fidget" }
+          }
+        }
+      })
+    end,
+    keys = {
+      { "<C-w>p",
+        function()
+          local window_number = require('window-picker').pick_window()
+          if window_number then vim.api.nvim_set_current_win(window_number) end
+        end,
+        "Pick windows"
+      }
+    },
   },
   --- 4-Tool }}}
 }
