@@ -3,8 +3,6 @@ local M = {}
 
 M.general = {
   n = {
-    --- exit Neovim
-    ["Q"] = { "<Cmd> qa <CR>", "Exit Neovim" },
     --- clear highlights
     ["<Esc>"] = { "<Cmd> noh <CR>", "Clear highlights" },
     --- joint two lines together
@@ -36,9 +34,11 @@ M.general = {
     --- exchange lines position
     ["<Alt-j>"] = { "<Cmd> m .+1<CR>==" },
     ["<Alt-k>"] = { "<Cmd> m .-2<CR>==" },
-    --- add a new line before/after current line
-    ["oo"] = { "o<ESC>k", "Add new line after current line" },
-    ["OO"] = { "O<ESC>j", "Add new line before current line" },
+    --- delete not cut
+    ["<leader>x"] = { "\"_x", "Delete and not move to register" },
+    ["<leader>X"] = { "\"_X", "Delete and not move to register" },
+    ["<leader>d"] = { "\"_d", "Delete and not move to register" },
+    ["<leader>D"] = { "\"_D", "Delete and not move to register" },
   },
   v = {
     --- jump to head or tail of the line
@@ -63,6 +63,11 @@ M.general = {
     --- exchange lines position
     ["<Alt-j>"] = { "<Cmd> m '>+1<CR>gv=gv" },
     ["<Alt-k>"] = { "<Cmd> m '<+2<CR>gv=gv" },
+    --- delete not cut
+    ["<leader>x"] = { "\"_x", "Delete and not move to register" },
+    ["<leader>X"] = { "\"_X", "Delete and not move to register" },
+    ["<leader>d"] = { "\"_d", "Delete and not move to register" },
+    ["<leader>D"] = { "\"_D", "Delete and not move to register" },
   },
   i = {
     --- Add undo break-points
@@ -75,7 +80,7 @@ M.general = {
     --- exchange lines position
     ["<Alt-j>"] = { "<Cmd> m .+1<CR>==gi" },
     ["<Alt-k>"] = { "<Cmd> m .-2<CR>==gi" },
-  }
+  },
 }
 
 M.interface = {
@@ -147,11 +152,17 @@ M.telescope = {
 M.nvterm = {
   plugin = true,
   n = {
-    ["<leader>th"] = { function() require("nvterm.terminal").new "horizontal" end,
-                       "New horizontal termianl" },
-    ["<leader>tv"] = { function() require("nvterm.terminal").new "vertical" end,
-                       "New vertical terminal" },
-  }
+    ["<leader>th"] = { function() require("nvterm.terminal").toggle "horizontal" end,
+                       "Toggle horizontal termianl" },
+    ["<leader>tv"] = { function() require("nvterm.terminal").toggle "vertical" end,
+                       "Toggle vertical terminal" },
+    ["<leader>tt"] = { function() require("nvterm.terminal").toggle "float" end, 
+                       "Toggle float terminal" },
+  },
+  t = {
+    ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), 
+                  "Escape terminal mode" },
+  },
 }
 
 M.gitsigns = {
@@ -333,21 +344,33 @@ M.disabled = {
     --- disable nvterm mappings
     ["<leader>h"] = "",   -- use `<leader>th`
     ["<leader>v"] = "",   -- use `<leader>tv`
+    ["<A-i>"] = "",       -- use `<leader>tt`
+    ["<A-h>"] = "",       -- use `<leader>th`
+    ["<A-v>"] = "",       -- use `<leader>tv`
 
-    --- disable whichkey
+    --- disable whichkey mappings
     ["<leader>wK"] = "",  -- no key mapping
     ["<leader>wk"] = "",  -- no key mapping
 
-    --- disable blankline
+    --- disable blankline mappings
     ["<leader>cc"] = "",
 
-    --- disable gitsigns
+    --- disable gitsigns mappings
     ["<leader>rh"] = "",  -- use `<leader>gr`
     ["<leader>ph"] = "",  -- use `<leader>gk`
     ["<leader>td"] = "",  -- use `<leader>gx`
+    ["[c"] = "",          -- use `[g`
+    ["]c"] = "",          -- use `]g`
 
-    --- disable tabufline
+    --- disable tabufline mappings
     ["<leader>x"] = "",   -- use `<leader>bx`
+  },
+  t = {
+    --- disable nvterm mappings
+    ["<C-x>"] = "",       -- use `<Esc>`
+    ["<A-i>"] = "",       -- no key mapping
+    ["<A-h>"] = "",       -- no key mapping
+    ["<A-v>"] = "",       -- no key mapping
   }
 }
 
