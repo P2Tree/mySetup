@@ -91,6 +91,8 @@ M.interface = {
                        "Toggle transparency" },
     ["<leader>ic"] = { function() require("base46").toggle_theme() end,
                        "Switch colorschemes" },
+    ["<leader>ig"] = { "<Cmd> Gitsigns toggle_current_line_blame <CR>",
+                       "Toggle git blame virtual info" },
   }
 }
 
@@ -156,11 +158,11 @@ M.nvterm = {
                        "Toggle horizontal termianl" },
     ["<leader>tv"] = { function() require("nvterm.terminal").toggle "vertical" end,
                        "Toggle vertical terminal" },
-    ["<leader>tt"] = { function() require("nvterm.terminal").toggle "float" end, 
+    ["<leader>tt"] = { function() require("nvterm.terminal").toggle "float" end,
                        "Toggle float terminal" },
   },
   t = {
-    ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true), 
+    ["<Esc>"] = { vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
                   "Escape terminal mode" },
   },
 }
@@ -301,15 +303,23 @@ M.comment = {
 
 M.window = {
   n = {
-    ["<Ctrl-w>p"] = {
+    ["<C-w>p"] = {
       function()
         local window_number = require('window-picker').pick_window()
         if window_number then vim.api.nvim_set_current_win(window_number) end
       end,
       "Pick window"
     },
-    ["<Ctrl-w>s"] = { "<C-w>s", "Split horizon window" },
-    ["<Ctrl-w>v"] = { "<C-w>v", "Split vertical window" },
+    ["<C-w>s"] = { "<C-w>s", "Split horizon window" },
+    ["<C-w>v"] = { "<C-w>v", "Split vertical window" },
+    ["<C-h>"] = { "<Cmd> NvimTmuxNavigateLeft <CR>", "focus move to left window" },
+    ["<C-j>"] = { "<Cmd> NvimTmuxNavigateDown <CR>", "focus move to down window" },
+    ["<C-k>"] = { "<Cmd> NvimTmuxNavigateUp <CR>", "focus move to up window" },
+    ["<C-l>"] = { "<Cmd> NvimTmuxNavigateRight <CR>", "focus move to right window" },
+    ["<C-left>"] = { "<Cmd> NvimTmuxNavigateLeft <CR>", "focus move to left window" },
+    ["<C-down>"] = { "<Cmd> NvimTmuxNavigateDown <CR>", "focus move to down window" },
+    ["<C-up>"] = { "<Cmd> NvimTmuxNavigateUp <CR>", "focus move to up window" },
+    ["<C-right>"] = { "<Cmd> NvimTmuxNavigateRight <CR>", "focus move to right window" },
   }
 }
 
