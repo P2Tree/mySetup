@@ -362,7 +362,11 @@ local plugins = {
 				"Pick windows",
 			},
 		},
-	}
+	},
+  { "stevearc/overseer.nvim",
+    event = "VeryLazy",
+    opts = {},
+  }
 	--- 4-Tool }}}
 }
 

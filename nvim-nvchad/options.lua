@@ -2,10 +2,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "  "
 
---- Encoding
-vim.opt.encoding = "UTF-8"
-vim.opt.fileencoding = "UTF-8"
-
 --- Tab size
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -26,7 +22,6 @@ vim.opt.smartcase = true
 vim.opt.wrapscan = false
 
 --- Auto read and write
-vim.opt.autoread = true
 vim.opt.autowrite = true
 
 --- Undo backup
@@ -103,9 +98,6 @@ vim.opt.grepprg = "rg --vimgrep"
 
 --- preview incremental substitute
 vim.opt.inccommand = "nosplit"
-
---- status line
-vim.opt.laststatus = 2
 
 --- popup menu
 vim.opt.pumheight = 10
