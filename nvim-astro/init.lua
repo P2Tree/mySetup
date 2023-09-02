@@ -50,9 +50,7 @@ return {
       -- end
     },
     -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
+    servers = {},
   },
 
   -- Configure require("lazy").setup() options
@@ -70,7 +68,7 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    require "user.autocmds"
-    require "user.llvm"
+    require "user.autocmds"()
+    require "user.llvm"()
   end,
 }
