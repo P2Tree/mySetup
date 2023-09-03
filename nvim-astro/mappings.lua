@@ -125,6 +125,9 @@ return {
     --- Flash ---
     ["s"] = { function() require("flash").jump() end, desc = "Flash move" },
     ["S"] = { function() require("flash").treesitter() end, desc = "Flash treesitter move" },
+
+    --- Notify ---
+    ["<leader>on"] = { function() require("notify").dismiss() end, desc = "Clean notify messages" },
   },
   v = {
     -- jump to head or tail of the line
