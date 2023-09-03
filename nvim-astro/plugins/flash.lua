@@ -1,7 +1,7 @@
 return {
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    event = "User AstroFile",
     opts = {
       modes = {
         search = { enabled = false },

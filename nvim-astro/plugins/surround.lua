@@ -1,6 +1,7 @@
 return {
   {
-    "karb94/neoscroll.nvim",
+    "kylechui/nvim-surround",
+    version = "*",
     event = "User AstroFile",
     config = true,
   },

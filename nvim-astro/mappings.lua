@@ -25,7 +25,9 @@ return {
     -- search word under cursor
     ["*"] = { "*N" },
     -- open quickfix window
-    ["<leader>uq"] = { "<Cmd> copen <CR>", desc = "Open Quickfix list" },
+    ["<leader>oq"] = { "<Cmd> copen <CR>", desc = "Open Quickfix list" },
+    ["<leader>ol"] = { "<Cmd> Lazy <CR>", desc = "Open Lazy plugin manager" },
+    ["<leader>om"] = { "<Cmd> Mason <CR>", desc = "Open Mason tool manager" },
     -- delete not cut
     ["<leader>x"] = { '"_x', desc = "Delete and not move to register" },
     ["<leader>X"] = { '"_X', desc = "Delete and not move to register" },
@@ -55,7 +57,7 @@ return {
           function(bufnr) require("astronvim.utils.buffer").close(bufnr) end
         )
       end,
-      desc = "Select buffer to close",
+      desc = "Close a selected buffer from tabline",
     },
     ["<leader>bd"] = {
       function() require("astronvim.utils.buffer").close() end,

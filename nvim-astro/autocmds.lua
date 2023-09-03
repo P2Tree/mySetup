@@ -1,6 +1,16 @@
 return function()
+  local options = require "user.options"
   local myAutoGroup = vim.api.nvim_create_augroup("myAutoGroup", {
     clear = true,
+  })
+
+  --- Delete trailing whitespace and tabs at the end of each line
+  --- exchanged by formatter.nvim plugin
+  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = { "*" },
+    group = myAutoGroup,
+    command = [[%s/\s\+$//e]],
+    desc = "Delete trailing whitespace and tabs",
   })
 
   --- Don't insert comment sign automatically by o and O
@@ -35,21 +45,33 @@ return function()
   })
 
   --- Automatically reload the file if it is changed outsize of Neovim
-  vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
-    pattern = { "*" },
-    group = myAutoGroup,
-    callback = function()
-      vim.notify("File changed elsewhere, buffer reloaded", vim.log.levels.INFO, { title = "nvim-config" })
-    end,
-    desc = "Auto reload file if changed elsewhere",
-  })
+  if options.g.auto_reload then
+    vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+      pattern = { "*" },
+      group = myAutoGroup,
+      callback = function()
+        vim.notify("File changed elsewhere, buffer reloaded", vim.log.levels.INFO, { title = "nvim-config" })
+      end,
+      desc = "Auto reload file if changed elsewhere",
+    })
+  end
 
-  -- auto save
-  vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-    pattern = { "*" },
-    callback = function()
-      if vim.bo.buftype == "" then vim.cmd "write" end
-    end,
-    desc = "Auto save when leave insert mode or text changed",
-  })
+  if options.g.auto_save then
+    vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+      pattern = { "*" },
+      callback = function()
+        local disable_file_types = {
+          "",
+          "toggleterm",
+          "translate",
+        }
+        local directory = vim.fn.fnamemodify(vim.fn.expand "%", ":p:h")
+        if vim.fn.isdirectory(directory) == 0 and not vim.tbl_contains(disable_file_types, vim.bo.filetype) then
+          vim.fn.mkdir(directory, "p")
+        end
+        vim.cmd "silent! wall"
+      end,
+      nested = true,
+    })
+  end
 end

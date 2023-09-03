@@ -28,6 +28,9 @@ return {
     -- used for italic in tmux
     t_ZH = "\\e[3m",
     t_ZR = "\\e[23m",
+
+    auto_reload = true, -- auto reload buffer when changed other places
+    auto_save = true, -- auto save buffer
   },
 }
 -- If you need more control, you can use the function()...end notation

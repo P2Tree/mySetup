@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   group = myAutoGroup,
   command = [[%s/\s\+$//e]],
-  desc = "Delete trailing whitespace and tabs"
+  desc = "Delete trailing whitespace and tabs",
 })
 
 --- Highlight on yank
@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
     vim.highlight.on_yank { timeout = 100 }
   end,
-  desc = "Highlight on yank"
+  desc = "Highlight on yank",
 })
 
 --- Don't insert comment sign automatically by o and O
@@ -27,10 +27,10 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
   group = myAutoGroup,
   callback = function()
     vim.opt.formatoptions = vim.opt.formatoptions
-        - "o" -- O and o, don't continue comments
-        + "r" -- but do continue when pressing enter.
+      - "o" -- O and o, don't continue comments
+      + "r" -- but do continue when pressing enter.
   end,
-  desc = "Do not insert comment sign when input o and O"
+  desc = "Do not insert comment sign when input o and O",
 })
 
 --- Display a message when the current file is not in utf-8 format.
@@ -38,11 +38,11 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
   pattern = { "*" },
   group = myAutoGroup,
   callback = function()
-    if vim.bo.fileencoding ~= 'utf-8' then
+    if vim.bo.fileencoding ~= "utf-8" then
       vim.notify("File not in UTF-8 format!", vim.log.levels.WARN, { title = "nvim-config" })
     end
   end,
-  desc = "Notice when the file is not UTF-8 encoding"
+  desc = "Notice when the file is not UTF-8 encoding",
 })
 
 --- Resize all windows when we resie the terminal
@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
   callback = function()
     vim.notify("File changed elsewhere, buffer reloaded", vim.log.levels.INFO, { title = "nvim-config" })
   end,
-  desc = "Auto reload file if changed elsewhere"
+  desc = "Auto reload file if changed elsewhere",
 })
 
 --- If the line number where the cursor was last at exit is greater than 1 and
@@ -84,7 +84,9 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
   callback = function(data)
     local directory = vim.fn.isdirectory(data.file) == 1
 
-    if not directory then return end
+    if not directory then
+      return
+    end
 
     -- create a new empty buffer
     vim.cmd.enew()
@@ -94,5 +96,5 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
     -- open the nvim-tree
     require("nvim-tree.api").tree.open()
   end,
-  desc = "Open nvim-tree when open a directory"
+  desc = "Open nvim-tree when open a directory",
 })
