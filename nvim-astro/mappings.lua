@@ -127,7 +127,10 @@ return {
     ["S"] = { function() require("flash").treesitter() end, desc = "Flash treesitter move" },
 
     --- Notify ---
-    ["<leader>on"] = { function() require("notify").dismiss() end, desc = "Clean notify messages" },
+    ["<leader>oc"] = { function() require("notify").dismiss() end, desc = "Clean notify messages" },
+
+    --- Note Page ---
+    ["<leader>on"] = { function() require("user.utils").open_notes() end, desc = "Open my note page" },
   },
   v = {
     -- jump to head or tail of the line
