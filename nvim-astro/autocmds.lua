@@ -55,4 +55,11 @@ return function()
       desc = "Auto reload file if changed elsewhere",
     })
   end
+
+  vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    pattern = { "*" },
+    group = myAutoGroup,
+    callback = function() require("user.tips").toggle() end,
+    desc = "Show tips when neovim start",
+  })
 end

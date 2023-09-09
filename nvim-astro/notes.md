@@ -1,26 +1,24 @@
-# Neovim 参考手册
+# Neovim Custom Manual
 
-## 实践操作
-- space + on   : 打开本手册
-- space + oc   : 清理屏幕
+## Basic Tips
+- space + on   : open this manual
 
-## 分类操作
+## Operation
 
-### Vim 原生操作
+### Vim Origin Operation
 
-#### text object 操作
-命令为 ABC
-- A 可选 y, d, c 等，表示拷贝、删除、删除并进入插入模式
-- B 可选 i, a，表示仅删除标记 object、删除标记 object 及环绕字符
-- C 可选 w, p, (, { 等各种表示 object 的字符
+#### text object Operation
+- ciw          : delete inside the word and enter insert mode
+- caw          : delete around the word and enter insert mode
+- yi[          : yark inside the [ ]
+- ya[          : yark around the [ ]
 
-示例：
-- ciw          : 删除当前单词，并进入插入模式
-- caw          : 删除当前单词及环绕字符，并进入插入模式
-- yi[          : 复制 [] 内文本
-- ya[          : 复制 [] 及内部文本
+### Plugin Operation
 
-### 插件扩展操作
-
-## 临时记录
+#### function toggle
+- space + ua   : toggle auto pairs
+- space + ub   : toggle dark/light background
+- space + uc   : toggle code auto completion
+- space + ud   : toggle code diagnostic
+- space + ux   : clean all toggle windows
 
