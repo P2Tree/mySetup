@@ -14,7 +14,7 @@ return {
       "vim",
       "markdown",
     })
-    opts.indent = { enable = false } -- have bug in c++ switch case indent
+    opts.indent = { enable = true }
     opts.incremental_selection = {
       enable = true,
       keymaps = {

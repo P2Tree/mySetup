@@ -5,7 +5,7 @@ return {
     relativenumber = true,
     number = true,
     spell = true,
-    signcolumn = "auto",
+    signcolumn = "yes",
     wrap = false,
     shiftround = true,
     wrapscan = false,

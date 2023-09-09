@@ -17,13 +17,13 @@ return {
     ["K"] = { "<C-y>", desc = "Screen tiny step up scroll" },
     ["J"] = { "<C-e>", desc = "Screen tiny step down scroll" },
     -- screen half step up and down scroll
-    ["<PageUp>"] = { "<C-u>", desc = "Screen half step up scroll" },
-    ["<PageDown>"] = { "<C-d>", desc = "Screen half step down scroll" },
+    ["<PageUp>"] = { "<C-u>", desc = "Screen half step up scroll", remap = true },
+    ["<PageDown>"] = { "<C-d>", desc = "Screen half step down scroll", remap = true },
     -- mouse scroll with wheel
     ["<ScrollWheelUp>"] = { "<C-y>" },
     ["<ScrollWheelDown>"] = { "<C-e>" },
-    -- search word under cursor
-    ["*"] = { "*N" },
+    -- search word under cursor without jump to next one
+    ["*"] = { "<Cmd> keepjumps normal! mi*`i <CR>" },
     -- open quickfix window
     ["<leader>oq"] = { "<Cmd> copen <CR>", desc = "Open Quickfix list" },
     ["<leader>ol"] = { "<Cmd> Lazy <CR>", desc = "Open Lazy plugin manager" },
@@ -39,7 +39,7 @@ return {
 
     ["<leader>w"] = false, -- Close: normal save
     ["|"] = false, -- Close: vertical split
-    ["K"] = false, -- This will not exactly close lsp hover, needs to delete in lsp.lua
+    -- ["K"] = false, -- This will not exactly close lsp hover, delete in user/init.lua
 
     --- Buffer Line ---
     ["<tab>"] = {
@@ -141,8 +141,8 @@ return {
     ["K"] = { "<C-y>", desc = "Screen tiny step up scroll" },
     ["J"] = { "<C-e>", desc = "Screen tiny step down scroll" },
     -- screen half step up and down scroll
-    ["<PageUp>"] = { "<C-u>", desc = "Screen half step up scroll" },
-    ["<PageDown>"] = { "<C-d>", desc = "Screen half step down scroll" },
+    ["<PageUp>"] = { "<C-u>", desc = "Screen half step up scroll", remap = true },
+    ["<PageDown>"] = { "<C-d>", desc = "Screen half step down scroll", remap = true },
     -- still in visual mode after indent
     [">"] = { ">gv" },
     ["<"] = { "<gv" },

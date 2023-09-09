@@ -11,7 +11,16 @@ return {
         defaults = {
           mappings = {
             i = {
-              ["<Esc>"] = require("telescope.actions").close,
+              -- ["<Esc>"] = require("telescope.actions").close,
+
+              -- These keymap is only used to fix the issue auto enter the
+              -- insert mode when select item and open buffer from telescope
+              -- prompt.
+              -- It may fixed in the new version of neovim.
+              -- Try disable in neovim 0.10
+              ["<CR>"] = function()
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC><CR>", true, false, true), "i", false)
+              end,
             },
           },
         },
