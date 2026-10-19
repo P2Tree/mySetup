@@ -118,6 +118,9 @@ end
 
 if type -q eza
     abbr_set ls eza
+    abbr_set ll 'eza -lah'
+    abbr_set lt 'eza -l -s modified'
+    abbr_set ltr 'eza -l -s modified -r'
 end
 
 if type -q bat
